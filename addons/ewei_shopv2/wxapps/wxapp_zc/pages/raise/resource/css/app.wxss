@@ -1,0 +1,53 @@
+.container {
+  background: #f2f2f2;
+  font-size: 28rpx;
+  color: #333;     
+  box-sizing: border-box; 
+  position: relative;
+}
+view {box-sizing: border-box;}
+.div_2 > .item {width: 50%; float: left; text-align: center;}
+.div_3 > .item {width: 33.33%; float: left; text-align: center;}
+.div_4 > .item {width: 25%; float: left; text-align: center;}
+.div_5 > .item {width: 20%; float: left; text-align: center;}
+.div_2::after,
+.div_3::after,
+.div_4::after,
+.div_5::after {content: ""; display: block; clear: both;}
+.clear::after {content: ""; display: block; clear: both;}
+.vm::after {content: ""; height: 100%; display: inline-block; vertical-align: middle;}
+.border_bottom::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2rpx;
+  background: #f0f0f0;
+  position: absolute;
+  left: 0;
+  top: auto;
+  bottom: 0;
+}
+.you {width: 16rpx; height: 16rpx; border: 2rpx solid #999; border-top: none; border-left: none; transform: rotate(-45deg); display: inline-block;}
+.r {float: right;}
+.l {float: left;}
+image {vertical-align: top;}
+
+#myVideo {
+  vertical-align: top;
+  width: 100%;
+}
+.green {
+  color: #37b757;
+}
+.green_bg {
+  background: #37b757;
+}
+.orange {
+  color: #ff6749;
+}
+.orange_bg {
+  background: #ff6749;
+}
+
+
+

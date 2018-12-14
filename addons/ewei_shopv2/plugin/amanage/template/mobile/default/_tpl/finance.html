@@ -1,0 +1,390 @@
+
+<script type="text/html" id="tpl_log_0">
+    <%each list as item%>
+       <div class="fui-list-outer container">
+        
+            <!-- <div class="fui-title small"><i class="icon icon-shop"></i> 归海</div> -->
+        
+            <div class="fui-list-group nomargin">
+
+                <a class="fui-list order-list title-b" href="" data-nocache="true">
+                    <div class="fui-list-media">
+                        <%if item.merchapply==0%>
+                            <span class="fui-label fui-label-default round">等待</span>
+                        <%/if%>
+                        <%if item.merchapply==-1%>
+                            <span class="fui-label fui-label-primary round">提交申请</span>
+                        <%/if%>
+                        <%if item.merchapply==1%>
+                            <span class="fui-label fui-label-danger round">拒绝申请</span>
+                        <%/if%>
+                        <%if item.merchapply==2%>
+                            <span class="fui-label fui-label-primary round">通过申请</span>
+                        <%/if%>
+                        <%if item.merchapply==3%>
+                            <span class="fui-label fui-label-primary round">完成打款</span>
+                        <%/if%>
+                    </div>
+                    <div class="fui-list-inner">
+                        <div class="row">
+                            <div class="row-text" style="font-size: 0.7rem; color: #666"><%item.ordersn%></div>
+                        </div>
+                        <div class="row gary">
+                            <div class="row-text"><%item.finishtime%></div>
+                        </div>
+                    </div>
+                    <div class="angle"></div>
+                </a>
+                
+                <div class="fui-list log-list noclick">
+                    <div class="fui-list-inner">
+                        
+                        <div class="row log-row order">
+                            <div class="row-text">商品总额</div>
+                            <div class="row-remark">
+                                <%item.goodsprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">订单总额</div>
+                            <div class="row-remark">
+                                <%item.orderprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">快递金额</div>
+                            <div class="row-remark">
+                                <%item.dispatchprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">订单改价金额</div>
+                            <div class="row-remark">
+                                <%item.changeprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">积分抵扣金额</div>
+                            <div class="row-remark">
+                                <%item.deductprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">余额抵扣金额</div>
+                            <div class="row-remark">
+                                <%item.deductcredit2%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">会员折扣金额</div>
+                            <div class="row-remark">
+                                <%item.discountprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">总促销金额</div>
+                            <div class="row-remark">
+                                <%item.isdiscountprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">满减金额</div>
+                            <div class="row-remark">
+                                <%item.deductenough%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">实际支付金额</div>
+                            <div class="row-remark">
+                                <%item.price%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">商户促销金额</div>
+                            <div class="row-remark">
+                                <%item.merchisdiscountprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">商户满减金额</div>
+                            <div class="row-remark">
+                                <%item.merchdeductenough%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">商户优惠券金额</div>
+                            <div class="row-remark">
+                                <%item.merchcouponprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">分销佣金</div>
+                            <div class="row-remark">
+                                <%item.commission%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">秒杀优惠</div>
+                            <div class="row-remark">
+                                <%item.seckilldiscountprice%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fui-list-group-title text-right">
+                    <small class="status">
+                        可提现<span class="text-primary">￥<%item.realprice%></span> 
+                        抽成:<span class="text-danger"><%item.payrate%>%</span> 
+                        抽成后:<span class="text-success">￥<%item.realpricerate%></span> 
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    <%/each%>
+</script>
+
+<script type="text/html" id="tpl_log_1">
+    <%each list as item%>
+        <div class="fui-list-outer container">
+
+            <div class="fui-list-group nomargin">
+
+                <div class="fui-list log-list noclick">
+                    <div class="fui-list-inner">
+                        
+                        <div class="row log-row order">
+                            <div class="row-text">申请单号</div>
+                            <div class="row-remark">
+                                <%item.applyno%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">申请订单个数</div>
+                            <div class="row-remark">
+                                <%item.ordernum%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">提现方式</div>
+                            <div class="row-remark">
+                                <%item.applytype%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">申请时间</div>
+                            <div class="row-remark">
+                                <%item.applytime%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fui-list-group-title text-right">
+                    <small class="status">
+                        申请金额<span class="text-primary">￥<%item.realprice%></span> 
+                        抽成:<span class="text-danger"><%item.payrate%>%</span> 
+                        抽成后:<span class="text-success">￥<%item.realpricerate%></span> 
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    <%/each%>
+</script>
+
+<script type="text/html" id="tpl_log_2">
+    <%each list as item%>
+        <div class="fui-list-outer container">
+
+            <div class="fui-list-group nomargin">
+
+                <div class="fui-list log-list noclick">
+                    <div class="fui-list-inner">
+                        
+                        <div class="row log-row order">
+                            <div class="row-text">申请单号</div>
+                            <div class="row-remark">
+                                <%item.applyno%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">通过申请金额</div>
+                            <div class="row-remark">
+                                <%item.passrealprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">抽成后金额</div>
+                            <div class="row-remark">
+                                <%item.passrealpricerate%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">申请订单个数</div>
+                            <div class="row-remark">
+                                <%item.ordernum%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">通过申请订单个数</div>
+                            <div class="row-remark">
+                                <%item.passordernum%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">提现方式</div>
+                            <div class="row-remark">
+                                <%item.applytype%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">审核时间</div>
+                            <div class="row-remark">
+                                <%item.checktime%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fui-list-group-title text-right">
+                    <small class="status">
+                        申请金额<span class="text-primary">￥<%item.realprice%></span> 
+                        抽成:<span class="text-danger"><%item.payrate%>%</span> 
+                        抽成后:<span class="text-success">￥<%item.realpricerate%></span> 
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    <%/each%>
+</script>
+
+<script type="text/html" id="tpl_log_3">
+    <%each list as item%>
+        <div class="fui-list-outer container">
+
+            <div class="fui-list-group nomargin">
+
+                <div class="fui-list log-list noclick">
+                    <div class="fui-list-inner">
+                        
+                        <div class="row log-row order">
+                            <div class="row-text">申请单号</div>
+                            <div class="row-remark">
+                                <%item.applyno%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">通过申请金额</div>
+                            <div class="row-remark">
+                                <%item.passrealprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">抽成后金额</div>
+                            <div class="row-remark">
+                                <%item.passrealpricerate%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">实际打款金额</div>
+                            <div class="row-remark">
+                                <%item.finalprice%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">申请订单个数</div>
+                            <div class="row-remark">
+                                <%item.ordernum%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">通过申请订单个数</div>
+                            <div class="row-remark">
+                                <%item.passordernum%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">提现方式</div>
+                            <div class="row-remark">
+                                <%item.applytype%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">打款时间</div>
+                            <div class="row-remark">
+                                <%item.paytime%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fui-list-group-title text-right">
+                    <small class="status">
+                        申请金额<span class="text-primary">￥<%item.realprice%></span> 
+                        抽成:<span class="text-danger"><%item.payrate%>%</span> 
+                        抽成后:<span class="text-success">￥<%item.realpricerate%></span> 
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    <%/each%>
+</script>
+
+<script type="text/html" id="tpl_log_4">
+    <%each list as item%>
+        <div class="fui-list-outer container">
+
+            <div class="fui-list-group nomargin">
+
+                <div class="fui-list log-list noclick">
+                    <div class="fui-list-inner">
+                        
+                        <div class="row log-row order">
+                            <div class="row-text">申请单号</div>
+                            <div class="row-remark">
+                                <%item.applyno%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">申请订单个数</div>
+                            <div class="row-remark">
+                                <%item.ordernum%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">通过申请订单个数</div>
+                            <div class="row-remark">
+                                <%item.passordernum%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">提现方式</div>
+                            <div class="row-remark">
+                                <%item.applytype%>
+                            </div>
+                        </div>
+                        <div class="row log-row order">
+                            <div class="row-text">无效时间</div>
+                            <div class="row-remark">
+                                <%item.invalidtime%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fui-list-group-title text-right">
+                    <small class="status">
+                        申请金额<span class="text-primary">￥<%item.realprice%></span> 
+                        抽成:<span class="text-danger"><%item.payrate%>%</span> 
+                        抽成后:<span class="text-success">￥<%item.realpricerate%></span> 
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    <%/each%>
+</script>

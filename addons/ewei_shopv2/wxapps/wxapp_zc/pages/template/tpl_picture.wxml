@@ -1,0 +1,12 @@
+
+<!-- 单图组 -->
+
+<template name="picture">
+  	<view class="fui-picture" style="padding-bottom: {{diyitem.style.paddingtop}}px; background: {{diyitem.style.background}};">
+        <block wx:for="{{diyitem.data}}" wx:for-item="pictureitem">
+	        <view bindtap="click_location_href" data-url="{{pictureitem.linkurl}}" style="display: block; padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px;" data-nocache="true">
+	            <image mode="widthFix" src="{{pictureitem.imgurl}}" style="width:100%;"></image>
+	        </view>
+        </block>
+    </view>
+</template>

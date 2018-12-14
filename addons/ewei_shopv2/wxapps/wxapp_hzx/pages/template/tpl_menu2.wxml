@@ -1,0 +1,30 @@
+
+<!-- 按钮组2 -->
+
+<template name="menu2">
+
+	<view class="fui-menu-group" style="margin-top: {{diyitem.style.margintop}}px;">
+        <block wx:for="{{diyitem.data}}" wx:for-item="menuitem">
+            <block wx:if="{{menuitem.text != ''}}">
+	            <block wx:if="{{diyitem.style.background != '#ffffff'}}">
+	            	<view class="fui-menu-item" style="color: {{menuitem.textcolor}};" bindtap="click_location_href" data-url="{{menuitem.linkurl}}" data-nocache="true">
+            		 	<block wx:if="{{menuitem.iconclass != ''}}">
+            				<i class="icon {{menuitem.iconclass}}" style="color: {{menuitem.iconcolor}};"></i>
+            			</block>
+                		{{menuitem.text}}
+                	</view>
+	            </block>
+	           	<block wx:else>
+                	<view class="fui-menu-item" style="background:{{diyitem.style.background}}; color: {{menuitem.textcolor}};" bindtap="click_location_href" data-url="{{menuitem.linkurl}}" data-nocache="true">
+                		<block wx:if="{{menuitem.iconclass != ''}}">
+            				<i class="icon {{menuitem.iconclass}}" style="color: {{menuitem.iconcolor}};"></i>
+            			</block>
+                		{{menuitem.text}}
+                	</view>
+	           	</block>
+            </block>
+        </block>
+    </view>
+
+
+</template>

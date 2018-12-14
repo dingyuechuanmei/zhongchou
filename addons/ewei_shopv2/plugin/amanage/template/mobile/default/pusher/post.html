@@ -1,0 +1,95 @@
+{template 'amanage/common'}
+
+<div class='fui-page fui-page-current'>
+    <div class="fui-header fui-header-success">
+        <div class="fui-header-left">
+            <a class="back btn-back">返回</a>
+            <a class="btn-cancel cancel-params">取消</a>
+        </div>
+        <div class="title">{if !empty($item)}众推编辑{else}添加众推{/if}</div>
+        <div class="fui-header-right"></div>
+    </div>
+    <div class='fui-content navbar'>
+
+        <input type="hidden" id="id" value="{$item['id']}" />
+
+        {if !empty($merch_user)}    
+            <div class="fui-title">众推所属: {$merch_user['merchname']}</div>
+        {/if}
+
+        <div class="fui-cell-group">
+            <div class="fui-cell">
+                <div class="fui-cell-label ">众推名称</div>
+                <div class="fui-cell-info">
+                    <input type="text" placeholder="请输入众推民称" class="fui-input" value="{$item['title']}" id="title" />
+                </div>
+            </div>
+        </div>
+
+        <div class="fui-cell-group fui-cell-click">
+            <div class="fui-cell check-param" data-action="member">
+                <div class="fui-cell-label">发起者</div>
+                <div class="fui-cell-info">{$item['member']['nickname']}</div>
+                <div class="fui-cell-remark"></div>
+            </div>
+        </div>
+
+        <div class="fui-cell-group">
+            <div class="fui-cell borderb noactive">
+                <div class="fui-cell-info">
+                    <ul class="fui-images" id="thumbs">
+                        {if !empty($item['video'])}
+                        <li style="background-image:url('../addons/ewei_shopv2/static/images/nopic100.jpg')" class="image" data-filename="{$item['video']}">
+                            <span class="image-remove">×</span>
+                        </li>
+                        {/if}
+                    </ul>
+                    <div class="fui-uploader" data-count="{php echo empty($item['video']) ? 0 : 1;}" data-max="1" data-name="images[]"  {if !empty($item['video'])}style="display:none;"{/if}>
+                        <input type="file" name='imgFile0[]' id='imgFile0' ><!-- multiple="" accept="image/*" -->
+                    </div>
+                </div>
+            </div>
+            <div class="fui-title">众推视频</div>
+        </div>
+
+        <div class="fui-cell-group fui-cell-click" id="thumbs3">
+            <div class="fui-cell check-param" data-action="cate">
+                <div class="fui-cell-label">众推分类</div>
+                <div class="fui-cell-info">{$category_title}</div>
+                <div class="fui-cell-remark"></div>
+            </div>
+        </div>
+
+        <div class="fui-cell-group fui-cell-click">
+            <div class="fui-cell noactive">
+                <div class="fui-cell-label ">是否显示</div>
+                <div class="fui-cell-info"><input type="checkbox" class="fui-switch fui-switch-small fui-switch-success pull-right" id="ifshow" {if !empty($item['ifshow'])}checked="checked"{/if}></div>
+            </div>
+        </div>
+
+        <div class="fui-cell-group">
+            <div class="fui-cell fui-cell-textarea">
+                <div class="fui-cell-label ">众推内容</div>
+                <div class="fui-cell-info">
+                    <textarea rows="3" placeholder="请输入众推内容" id="content">{$item['content']}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="fui-title center">更多设置请至PC端后台</div>
+
+    </div>
+
+    {template 'amanage/_tpl/pusher_params'}
+
+    <div class="fui-navbar">
+        <div class="nav-item btn btn-success btn-submit">保存</div>
+    </div>
+
+    <script language="javascript">
+        require(['../addons/ewei_shopv2/plugin/amanage/static/js/pusher-detail.js'],function(modal){
+            modal.initDetail({category: {$category},pusher:"{$item['pusher']}",lastcateid:{$item['category']}});
+        });
+    </script>
+</div>
+{template '_footer'}

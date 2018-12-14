@@ -1,0 +1,38 @@
+
+<!-- 按钮组 -->
+
+<template name="menu">
+
+    <block wx:if="{{diyitem.style.showtype == '' || diyitem.diyitem_data_len <= diyitem.style.pagenum }}">
+        <view class="fui-icon-group noborder col-{{diyitem.style.rownum}} {{diyitem.style.navstyle}}" style="background: {{diyitem.style.background}}">
+            <block wx:for="{{diyitem.data}}" wx:for-item="menuitem">
+                <view bindtap="click_location_href" data-url="{{menuitem.linkurl}}" class="fui-icon-col">
+                    <view class="icon"><image src="{{menuitem.imgurl}}"></image></view>
+                    <view class="text" style="color: {{menuitem.color}};">{{menuitem.text}}</view>
+                </view>
+            </block>
+        </view>
+    </block>    
+    <block wx:else>
+        <view class="swiper swiper-{{diyitemid}}" data-element=".swiper-{{diyitemid}}" data-view="1">
+            <view class="swiper-container  fui-icon-group noborder col-{{diyitem.style.rownum}} {{diyitem.style.navstyle}}" style="background: {{diyitem.style.background}}">
+                <view class="swiper-wrapper" style="background: none;">
+                    <block wx:for="{{diyitem.data_temp}}" wx:for-item="data_temp">
+                        <view class="swiper-slide">
+                            <block wx:for="{{data_temp}}" wx:for-item="menuitem">
+                                <view class="fui-icon-col" bindtap="click_location_href" data-url="{{menuitem.linkurl}}" style="background: {{diyitem.style.background}}">
+                                    <view class="icon"><image src="{{menuitem.imgurl}}"></image></view>
+                                    <view class="text" style="color: {{menuitem.color}};">{{menuitem.text}}</view>
+                                </view>
+                            </block>
+                        </view>
+                    </block> 
+                </view>
+            	<block wx:if="{{diyitem.style.showdot != ''}}">
+            		<view class="swiper-pagination"></view>
+                </block> 
+            </view>
+        </view>
+	</block>
+
+</template>

@@ -1,0 +1,40 @@
+<view class='container'>
+  <!--个人信息  -->
+  <view class='personalinformation {{displayArray[0]}}'>
+    <view class='item' wx:for='{{itemArray}}' wx:for-item='item' wx:for-index='idx' data-index='{{idx}}' bindtap='item'>
+      <view class='title'>{{item.title}}</view>
+      <view class='r'>
+        <image class='avater' src='{{item.imagesrc}}'></image>
+        <view class='text'>{{item.text}}</view>        
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+  </view>
+<!--昵称部分  -->
+  <view class='idx2 {{displayArray[1]}}'>
+    <view class='inputbox'>
+      <input type='text' placeholder='请输入昵称' bindinput='idx2input' value='{{idx2value}}'></input>
+      <image class='x' src='{{approot}}wxapp_attr/x.png' bindtap='idx2x'></image>
+    </view>
+    <view class='save'>
+      <view bindtap='idx2save'>保存</view>
+    </view>
+  </view>
+<!--绑定手机号  -->
+  <view class='idx3 {{displayArray[2]}}'>
+    <view class='item'>
+      <image src='{{approot}}wxapp_attr/12@3x.png'></image>
+      <input type='number' placeholder='请输入手机号' bindinput='idx3phoneinput' value='{{idx3phone}}'></input>
+      <view class='code' bindtap='sendcode' wx:if="{{btncode}}">{{btn_code_val}}</view>
+      <view class='code' wx:if="{{!btncode}}">{{count}}</view>
+    </view>
+    <view class='item'>
+      <image src='{{approot}}wxapp_attr/13@3x.png'></image>
+      <input type='number' placeholder='请输入验证码' bindinput='idx3codeinput'></input>
+    </view>
+    <view class='save'>
+      <view bindtap='idx3save'>提交</view>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,92 @@
+{template '_header'}
+<div class="page-heading"> <h2>基础设置</h2> </div>
+<form action="{php echo webUrl('raise/set/post')}" method="post" class="form-horizontal form-validate" enctype="multipart/form-data">
+   	 <div class="form-group">
+	     <label class="col-sm-2 control-label">众筹协议</label>
+	     <div class="col-sm-9 col-xs-12">
+	     	 <textarea name="protocol" class="form-control valid" aria-invalid="false" rows="10">{$protocol}</textarea>
+	     </div>
+     </div>
+    <div class="panel-heading">
+        基本配置
+    </div>
+    <div class='panel-body'>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">提现手续费</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group">
+                    <input type="text" name="data[raise_service]" class="form-control" value="{$data['raise_service']}" />
+                    <div class="input-group-addon">%</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">客服电话</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[customer_service_number]" class="form-control" value="{$data['customer_service_number']}" />
+            </div>
+        </div>
+    </div>
+    <div class="panel-heading">
+        短信配置
+    </div>
+    <div class='panel-body'>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">用户名</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[lexin_username]" class="form-control" value="{$data['lexin_username']}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">密码</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[lexin_password]" class="form-control" value="{$data['lexin_password']}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">签名</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[lexin_key]" class="form-control" value="{$data['lexin_key']}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">产品编号</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[lexin_verify]" class="form-control" value="{$data['lexin_verify']}" />
+                <span class="help-block">触发类验证码</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">产品编号</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[lexin_notice]" class="form-control" value="{$data['lexin_notice']}" />
+                <span class="help-block">行业通知类短信</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">短信模板</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="data[lexin_content]" class="form-control" value="{$data['lexin_content']}" />
+                <span class="help-block">短信通知内容( 变量1:[sign] 短信签名 变量2:[code] 验证码) 注意:短信内必须包含 [sign] 变量</span>
+            </div>
+        </div>
+        <div class="form-group">
+
+            <label class="col-sm-2 control-label">关闭众筹</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class="radio-inline">
+                    <input type="radio" name="data[zhongchou]" value="0" {if $data['zhongchou']==0}checked=""{/if}> 关闭
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="data[zhongchou]" value="1" {if $data['zhongchou']==1}checked=""{/if}> 开启
+                </label>
+            </div>
+        </div>
+     <div class="form-group">
+         <label class="col-sm-2 control-label"></label>
+         <div class="col-sm-9">
+             <input type="submit" value="提交" class="btn btn-primary" />
+         </div>
+     </div>
+</form>
+{template '_footer'}

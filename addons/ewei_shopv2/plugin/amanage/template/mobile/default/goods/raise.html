@@ -1,0 +1,120 @@
+{template 'amanage/common'}
+
+<div class='fui-page fui-page-current'>
+    <div class="fui-header fui-header-success">
+        <div class="fui-header-left">
+            <a class="back btn-back">返回</a>
+            <a class="btn-cancel cancel-params">取消</a>
+        </div>
+        <div class="title">添加众推</div>
+        <div class="fui-header-right"></div>
+    </div>
+    <div class='fui-content navbar'>
+        <input type="hidden" id="id" value="{$item['id']}" />
+        <input type="hidden" id="type" value="{$item['type']}" />
+        <input type="hidden" id="cates" value="{$item['cates']}" />
+        <input type="hidden" id="hasoption" value="{$item['hasoption']}" />
+        <input type="hidden" id="totalcnf" value="{$item['totalcnf']}" />
+        <input type="hidden" id="showlevels" value="{$item['showlevels']}" />
+        <input type="hidden" id="showgroups" value="{$item['showgroups']}" />
+        <input type="hidden" id="buylevels" value="{$item['buylevels']}" />
+        <input type="hidden" id="buygroups" value="{$item['buygroups']}" />
+
+        <input type="hidden" id="diypage" value="{$item['diypage']}" />
+        <input type="hidden" id="diyformid" value="{$item['diyformid']}" />
+
+        <div class="fui-cell-group">
+            <div class="fui-cell">
+                <div class="fui-cell-label">众推标题</div>
+                <div class="fui-cell-info">
+                    <input type="text" placeholder="请输入众推标题" class="fui-input" id="title" />
+                </div>
+            </div>
+            <div class="fui-cell-group">
+                <div class="fui-cell borderb noactive">
+                    <div class="fui-cell-info">
+                        <span style=" font-size: 0.68rem; color: #333;">上传视频</span>
+                        <input type="file" name="file" accept="video/*" id="nnn" style="opacity: 0;position: relative;left: -3rem;" />
+                        <input type="hidden" name="video" id="video" value="" />
+                        <video width="320" height="240"  controls class="video_i" style="display:none;">
+                            <source class="" src="" type="video/mp4" id="kkk">
+                        </video>
+                    </div>
+                </div>
+
+            </div>
+            <div class="fui-cell fui-cell-textarea">
+                <div class="fui-cell-label ">众推内容</div>
+                <div class="fui-cell-info">
+                    <textarea rows="3" placeholder="请输入众推内容" id="content"></textarea>
+                </div>
+            </div>
+            <div class="fui-cell-group fui-cell-click" style="padding: 10px;">
+                <div class="fui-cell-label" style="float: left">众推分类</div>
+                <div class="fui-cell-info"  style="float: left;margin-left: 5%;">
+                    <select name='category' id="category" class="form-control select3">
+                        {loop $category $k $c}
+                        <option value="{$c['id']}" {if $k == 0}selected{/if}>{$c['category']}</option>
+                        {/loop}
+                    </select>
+                </div>
+            </div>
+            <div class="fui-cell-group fui-cell-click">
+                <div class="fui-cell noactive">
+                    <div class="fui-cell-label ">是否显示</div>
+                    <div class="fui-cell-info"><input type="checkbox" class="fui-switch fui-switch-small fui-switch-success pull-right" id="ifshow" checked="checked"></div>
+                </div>
+            </div>
+        </div>
+        <div class="fui-title center">更多设置请至PC端后台</div>
+    </div>
+    <div class="fui-navbar">
+        <div class="nav-item btn btn-success btn-submit">保存</div>
+    </div>
+    <script language="javascript">
+        require(['../addons/ewei_shopv2/plugin/amanage/static/js/raise-detail.js'],function(modal){
+            modal.initDetail();
+        });
+    </script>
+	<script>
+$(function(){
+    $('#nnn').bind('change', function (evt) {
+        var viedosize=document.getElementById('nnn').files[0].size
+        var url = "<?php echo $_W['siteroot'] ?>web/index.php?c=utility&a=file&do=upload&type=video";
+        var fd = new FormData();
+        fd.append("id","WU_FILE_0")
+        fd.append("name",document.getElementById('nnn').files[0].name)
+        fd.append("type",document.getElementById('nnn').files[0].type)
+        fd.append("lastModifiedDate","Wed Aug 08 2018 15:11:07")
+        fd.append("size",document.getElementById('nnn').files[0].size)
+        fd.append("file",document.getElementById('nnn').files[0])
+
+        setTimeout(function(){
+            $.ajax({
+                url:url,
+                type:"POST",
+                processData: false,
+                contentType: false,
+                data:fd,
+                success: function (res) {
+                    var ress=JSON.parse(res)
+                    if (ress.error != 1) {
+                        $(".video_i").css("display", "block").attr("src", ress.url)
+                        $("#kkk").attr("src", ress.url)
+                        $("#video").val(ress.filename)
+                    } else {
+                         FoxUI.toast.show(ress.message)
+                    }
+                }
+            })
+        },100)
+    });
+});
+	</script>
+    <script language="javascript">
+        require(['../addons/ewei_shopv2/plugin/amanage/static/js/raise-detail.js'],function(modal){
+            modal.initDetail({category: {$category_json}});
+        });
+    </script>
+</div>
+{template '_footer'}

@@ -1,0 +1,11 @@
+<!--轮播图  -->
+<template name="swiper">
+  <swiper indicator-dots="{{swiper.indicatorDots}}" indicator-active-color="{{swiper.indicatorActiveColor}}"
+    autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}">
+    <block wx:for="{{swiper.imgUrls}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image"/>
+      </swiper-item>
+    </block>
+  </swiper>
+</template>

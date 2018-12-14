@@ -1,0 +1,26 @@
+
+<!-- 列表导航 -->
+
+<template name="listmenu">
+
+	<view class="fui-cell-group fui-cell-click" style="margin-top: {{diyitem.style.margintop}}px; background-color: {{diyitem.style.background}};">
+        <block wx:for="{{diyitem.data}}" wx:for-item="listmenuitem">
+            <view class="fui-cell" bindtap="click_location_href" data-url="{{listmenuitem.linkurl}}" data-nocache="true">
+            	<block wx:if="listmenuitem.iconclass != ''">
+                    <view class="fui-cell-icon" style="color: {{diyitem.style.iconcolor}};"><i class="icon {{listmenuitem.iconclass}}"></i></view>
+                </block>
+            
+                <view class="fui-cell-text" style="color: {{diyitem.style.textcolor}};">{{listmenuitem.text}}</view>
+                <view class="fui-cell-remark" style="color: {{diyitem.style.remarkcolor}};">
+                	<block wx:if="{{listmenuitem.dotnum > 0}}">
+                        <text class="badge">{{listmenuitem.dotnum}}</text>
+                	</block>
+                    <block wx:else>
+                        {{listmenuitem.remark}}
+                    </block>
+                </view>
+            </view>
+        </block>
+    </view>
+	
+</template>

@@ -1,0 +1,9 @@
+<!--pages/member/withdraw/zongcou.wxml-->
+<view class='saa'>
+    <view class='title_s'>当前可提现金额:</view>
+    <view class='money'>{{keti}}</view>
+    <view class='fangshi'>提现方式   <text>提现到微信钱包</text></view>
+    <view class="tishi" wx:if="{{raise_service > 0}}">提现手续费为 {{raise_service}}%</view>
+    <view class='tishi'>小提示：<text style='padding:0;'>可提现金额是<text style='color:red;padding:0;'>筹款已完成</text>或者<text style='color:red;padding:0;'>筹款已到期</text>的金额。</text></view>
+    <view class='submi' bindtap='tixian'>立即提现</view>
+</view>

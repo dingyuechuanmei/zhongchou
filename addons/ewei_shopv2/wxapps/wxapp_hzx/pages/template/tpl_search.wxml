@@ -1,0 +1,25 @@
+<!-- 搜索框 -->
+
+<template name="search">
+  <view class="fui-searchbar bar" style="z-index: 0;">
+
+      <view class="searchbar" style="background: {{diyitem.style.background}}; padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px;">
+
+              <view bindtap='click_location_href' data-url="/pages/goods/index/index" type="0" style="position: relative;left:0;top:0;">
+
+                  <input type="submit" class="searchbar-cancel searchbtn" value="搜索" style="top: 0; right: 0" />
+
+                  <view class="search-input {{diyitem.style.searchstyle}}" style="background: {{diyitem.style.inputbackground}};">
+
+                      <i class="icon icon-search" style="color: {{diyitem.style.iconcolor}};"></i>
+
+                      <input type="search" disabled="true" placeholder="{{diyitem.params.placeholder}}" class="search" name="keywords" style="text-align: {{diyitem.style.textalign}}; color: {{diyitem.style.color}}; background: none;" />
+
+                  </view>
+
+              </view>
+
+      </view>
+
+  </view>
+</template>

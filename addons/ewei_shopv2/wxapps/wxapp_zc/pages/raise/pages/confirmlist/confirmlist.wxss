@@ -1,0 +1,66 @@
+@import "../../resource/css/app.wxss";
+
+.title {
+  height: 110rpx;
+  line-height: 110rpx;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+  background: #fff;
+}
+.list {}
+.item {
+  background: #fff;
+  padding: 30rpx 0;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+.item image {
+  width: 70rpx;
+  height: 70rpx;
+  margin-left: 30rpx;
+  border-radius: 50%;
+  background: #eee;
+}
+.item .content {
+  width: 82.6%;
+  float: right;
+}
+.item .content .name {
+  display: inline-block;
+  font-size: 30rpx;
+}
+.item .content .state {
+  float: right;
+  margin-right: 30rpx;
+  font-size: 24rpx;
+}
+.item .content .guanxi view {
+  margin-top: 20rpx;
+  padding: 4rpx 20rpx;
+  border-radius: 20rpx;
+  background: #37b757;
+  display: inline-block;
+  color: #fff;
+  font-size: 24rpx;
+}
+.item .content .text {
+  margin-top: 25rpx;
+  color: #777;
+  padding-right: 30rpx;
+}
+/*此处颜色为不同关系不同背景色  */
+.item .content .guanxi view.blue_bg {
+  background: #80bcec;
+}
+.item .content .guanxi view.pink_bg {
+  background: #ff8383;
+}
+.item .content .guanxi view.orange_bg {
+  background: #F3b744;
+}
+.item .content .guanxi view.cyan_bg {
+  background: aquamarine;  
+}
+
+

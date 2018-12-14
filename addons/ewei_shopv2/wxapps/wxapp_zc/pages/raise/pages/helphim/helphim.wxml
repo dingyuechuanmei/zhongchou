@@ -1,0 +1,17 @@
+<view class='container'>
+  <view class='helpconfirm'>
+    <view class='border_bottom'>
+      <view>帮助金额</view>
+      <input type='digit' placeholder='输入帮助金额'  placeholder-style='color:#999;font-size:26rpx;' bindinput='amount' ></input>
+    </view>
+    <view class='text'>
+      <textarea placeholder='说一句鼓励Ta的话吧~'   placeholder-style='color:#999' bindinput='meg'></textarea>
+    </view>
+  </view>
+  <view class='bottom'>
+    <view>合计：
+      <text class='orange'>{{amount}}</text>元
+     </view>
+    <view class='btn' bindtap='helphim'>帮助Ta</view>
+  </view>
+</view>

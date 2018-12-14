@@ -1,0 +1,92 @@
+<view class='container'>
+  <view class='bg-avatar'>
+    <view class='blur' style='background-image: url({{member.avatar}})'></view>
+    <view class='box'>
+      <!-- <image class='meg' src='../../resource/image/meg.png'></image> -->
+       <view class='focus' wx:if='{{!isme}}' data-id='{{member.id}}' bindtap='focus'>{{member.is_follow}}</view>
+      <image class='heading' src='{{member.avatar}}'></image>
+      <view>{{member.nickname}}</view>
+      <view>
+        <text data-id='{{member.id}}' bindtap='tofocus'>关注 {{member.follow_count}}</text>
+        <view class='line'></view>
+        <text data-id='{{member.id}}' bindtap='tofans'>粉丝 {{member.fans_count}}</text>
+      </view>
+      <view wx:if='{{!issign}}'>
+        <text>{{member.signature}}</text>
+        <image class='qian-img' src='../../resource/image/edit.png' wx:if='{{isme}}' bindtap='changeSign'></image>
+      </view>
+      <view wx:if='{{isme && issign }}'>
+        <input placeholder='更换前面点击这里' bindconfirm='signend'></input>
+      </view>
+    </view>
+  </view>
+  <view class='div_3'>
+    <view class='item {{itemon[0]}}' data-idx='0' bindtap='nav'>
+      <text>{{member.total_posts}}</text>
+      <text>帖子</text>
+    </view>
+    <view class='item {{itemon[1]}}' data-idx='1' bindtap='nav'>
+      <text>{{member.total_review}}</text>
+      <text>评论</text>
+    </view>
+    <view class='item {{itemon[2]}}' data-idx='2' bindtap='nav'>
+      <text>{{member.total_favorite}}</text>
+      <text>收藏</text>
+    </view>
+  </view>
+  <!--帖子  -->
+  <view class='item1' wx:if='{{itemon[0]}}'>
+    <view class='hot-list'>
+      <view class='item' wx:for='{{list0}}' data-id='{{item.id}}' bindtap='todetail'>
+        <view class='title'>{{item.title}}</view>
+        <view class='browse-comment'>
+          <image src='../../resource/image/star.png'></image>
+          <text>{{item.favorite}}</text>
+          <image src='../../resource/image/comment.png'></image>
+          <text>{{item.comment_count}}</text>
+          <image src='../../resource/image/del2.png' data-id='{{item.id}}' catchtap='del'></image>
+        </view>
+        <image class='r' src='{{item.img}}'></image>
+      </view>
+      <view class='wu' wx:if='{{!list0.length}}'>您还没有发帖哦!</view>
+    </view>
+  </view>
+
+  <!--评论  -->
+  <view class='item2' wx:if='{{itemon[1]}}'>
+    <view class='hot-list'>
+      <view class='item' wx:for='{{list1}}' data-id='{{item.id}}' bindtap='todetail'>
+        <view class='title'>{{item.title}}</view>
+        <view class='browse-comment'>
+          <image src='../../resource/image/star.png'></image>
+          <text>{{item.favorite}}</text>
+          <image src='../../resource/image/comment.png'></image>
+          <text>{{item.review_count}}</text>
+        </view>
+        <image class='r' src='{{item.img}}'></image>
+      </view>
+      <view class='wu' wx:if='{{!list1.length}}'>您还没有评论哦!</view>
+    </view>
+  </view>
+
+  <!--收藏  -->
+  <view class='item3' wx:if='{{itemon[2]}}'>
+    <view class='hot-list'>
+      <view class='item' wx:for='{{list2}}' data-id='{{item.id}}' bindtap='todetail'>
+        <view class='title'>{{item.title}}</view>
+        <view class='browse-comment'>
+          <image src='../../resource/image/star.png'></image>
+          <text>{{item.favorite}}</text>
+          <image src='../../resource/image/comment.png'></image>
+          <text>{{item.review_count}}</text>
+          <image src='../../resource/image/del2.png' data-id='{{item.id}}' catchtap='del'></image>
+        </view>
+        <image class='r' src='{{item.img}}'></image>
+      </view>
+      <view class='wu' wx:if='{{!list2.length}}'>您还没有收藏哦!</view>
+    </view>
+  </view>
+
+</view>
+
+  

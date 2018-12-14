@@ -1,0 +1,32 @@
+<view class='container'>
+  <view class='zhongtuiitemdetail'>
+    <view class='zhongtui_item'>
+      <view class='video'>
+          <video id="myVideo" initial-time="1" src="{{pusher.video}}" controls></video> 
+      </view>
+      <view class='title border_bottom'>{{pusher.title}}</view>
+      <view class='author border_bottom'>
+        <image src='{{pusher.avatar}}'></image>
+        <view class='name'>{{pusher.nickname}}</view>
+        <view class='time'>{{pusher.createtime}}</view>
+      </view>
+      <view class='content'>
+      {{pusher.content}}
+      </view>
+
+    </view>
+    <view class='support'>
+      <view class='div_2'>
+        <view class='item' bindtap='redToMerchShop'>
+          <image src='{{approot}}wxapp_attr/6@3x.png'></image>
+          <view class='text'>店铺</view>
+        </view>
+        <view class='item' bindtap='supportimg'>
+          <image src='{{supportimgsrc}}'></image>
+          <view class='text'>{{like_count}}</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

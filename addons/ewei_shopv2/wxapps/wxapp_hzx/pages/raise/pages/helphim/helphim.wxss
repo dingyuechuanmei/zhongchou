@@ -1,0 +1,69 @@
+@import "../../resource/css/app.wxss";
+
+page {
+  background: #f2f2f2;
+}
+.helpconfirm {  background: #fff;}
+.helpconfirm > view:nth-child(1) {
+  position: relative;
+} 
+.helpconfirm > view:nth-child(1) view {
+  display: inline-block;
+  width: 25%;
+  height: 110rpx;
+  line-height: 110rpx;
+  padding-left: 30rpx; 
+  box-sizing: border-box;
+  
+}
+.helpconfirm > view:nth-child(1) input {
+  width: 75%;
+  height: 110rpx;
+  line-height: 110rpx;
+  position: absolute;
+  left: auto;
+  right: 0;
+  top: 0;
+}
+.helpconfirm .text {
+  padding: 30rpx;
+}
+.helpconfirm .text textarea {
+  width: 100%;
+  padding: 10rpx;
+  height: 160rpx;
+}
+.bottom {
+  background: #fff;
+  font-size: 32rpx;
+  position: fixed;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+  border-top: 2rpx solid #f0f0f0;
+}
+.bottom > view:nth-child(1) {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  box-sizing: border-box;
+  padding-left: 30rpx;
+}
+.bottom .btn {
+   position: absolute;
+  left: auto;
+  right: 0;
+  top: 0;
+  width: 36%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #fff;
+  background: #ff6749; 
+  margin: 0;
+  border-radius: 0rpx;
+  
+}
+

@@ -1,0 +1,8 @@
+
+<!-- 辅助线 -->
+
+<template name="line">
+	<view class="fui-line-diy" style="background: {{diyitem.style.background}}; padding: {{diyitem.style.padding}}px 0;">
+	    <view class="line" style="border-top: {{diyitem.style.height}}px {{diyitem.style.linestyle}} {{diyitem.style.bordercolor}}"></view>
+	</view>
+</template>

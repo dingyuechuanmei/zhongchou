@@ -1,0 +1,248 @@
+@import "../../resource/css/app.wxss";
+
+.container {
+  background: #fff;
+}
+.title {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+.item {
+  padding: 30rpx;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #f0f0f0;
+  position: relative;
+}
+.item1 .price {
+  margin-top: 30rpx;
+}
+.item1 .price input {
+  display: inline-block;
+  width: 80%;
+  vertical-align: top;
+  color: #FF6749;
+  font-size: 38rpx;
+}
+.item1 .price .inputprice {
+  font-size: 36rpx;
+  color: #999;
+}
+.item1 .price .r {
+  font-size: 32rpx;
+  vertical-align: bottom;
+  margin-top: 6rpx;
+}
+.item2 .title {
+  display: inline-block;
+}
+.item2 .section {
+  position: absolute;
+  left: 0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  box-sizing: border-box;
+  text-align: right;
+  padding-right: 70rpx;
+}
+.item2 .section .opcity {
+  opacity: 0;
+  display: inline-block;
+}
+.item2 .section .picker {
+  margin-top: 2rpx;
+}
+.item2 .r {
+  position: absolute;
+  left: auto;
+  right: 30rpx;
+  top: 0;
+  height: 100%;
+}
+.item2 .r .you {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4rpx;
+}
+.item3 input {
+  margin-top: 30rpx;
+}
+.item3 .inputtitle {
+  color: #999;
+  font-size: 24rpx;
+}
+.item4 .title {
+  display: inline-block;
+}
+.item4 image {
+  width: 42rpx;
+  height: 35rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.item4 .video {
+  position: relative;
+  margin-top: 30rpx;
+  width: 100%;
+}
+.item4 .video .x {
+  position: absolute;
+  left: auto;
+  top: 0;
+  right: 0;
+  width: 40rpx;
+  height: 40rpx;
+  z-index: 99;
+}
+.item4 video {
+  width: 100%;
+}
+.item5 .inputtextarea {
+  font-size: 24rpx;
+  color: #999;
+}
+.item5 textarea {
+  margin-top: 30rpx;
+  height: 140rpx;
+}
+.item6 {
+  border-bottom: none;
+}
+.item6 .upload{
+  margin-top: 30rpx;
+  box-sizing: border-box;
+  border:3rpx dashed #ddd;
+  height: 150rpx;
+  line-height: 150rpx;
+  text-align: center;
+  color: #FF6749;
+}
+.item6 .upload .text {
+  display: inline-block;
+  font-size: 32rpx;
+}
+.item6 .upload .add {
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  vertical-align: top;
+  margin-top: 55rpx;
+  margin-right: 20rpx;
+}
+
+.item6 .upload .add .col {
+  width: 40rpx;
+  height: 4rpx;
+  background: #FF6749;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -2rpx;
+  border-radius: 4rpx;
+  
+} 
+.item6 .upload .add .row {
+  width: 4rpx;
+  height: 40rpx;
+  background: #FF6749;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -2rpx;
+  border-radius: 4rpx;
+}
+.item6 .imagelist .image {
+  display: inline-block;
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 30rpx;
+  margin-top: 30rpx;
+  position: relative;
+  vertical-align: top;
+}
+.item6 .imagelist image {
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+}
+.item6 .imagelist .x {
+  position: absolute;
+  left: auto;
+  top: 0;
+  right: 0;
+  width: 40rpx;
+  height: 40rpx;
+}
+.item6 .imagelist .addimage {
+  width: 150rpx;
+  height: 150rpx;
+  box-sizing: border-box;
+  border: 2rpx dashed #ddd;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 30rpx;
+}
+.item6 .imagelist .addimage .add {
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+.item6 .imagelist .add .col {
+  width: 40rpx;
+  height: 4rpx;
+  background: #ddd;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -2rpx;
+  border-radius: 4rpx;
+  
+} 
+.item6 .imagelist .add .row {
+  width: 4rpx;
+  height: 40rpx;
+  background: #ddd;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -2rpx;
+  border-radius: 4rpx;
+}
+.item6 .imagelist .image:nth-child(4n) {
+  margin-right: 0;
+}
+.sure {
+  padding: 30rpx;
+}
+.sure view {
+  background: #FF6749;
+  color: #fff;
+  font-size: 32rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #FF6749;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.copy {
+  text-align: center;
+  margin-top: 10rpx;
+  margin-bottom: 30rpx;
+}
+.copy image {
+  width: 35rpx;
+  height: 35rpx;
+  vertical-align: top;
+  margin-right: 20rpx;
+}
+.copy view {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: -2rpx;
+}

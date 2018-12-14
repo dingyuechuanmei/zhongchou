@@ -1,0 +1,55 @@
+<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	            <button data-dismiss="modal" class="close" type="button">×</button>
+	            <h4 class="modal-title">{if !empty($item['id'])}编辑{else}添加{/if}论坛类型</h4>
+	        </div>
+	        <div class="modal-body">
+	            <div class="form-group">
+	                <label class="col-sm-2 control-label must">类型名称</label>
+	                <div class="col-sm-9 col-xs-12">
+	                    <input type="text" name="title" class="form-control" value="{$item['title']}" data-rule-required="true" />
+	                </div>
+	            </div>
+	            <div class="form-group">
+			        <label class="col-sm-2 control-label">是否显示</label>
+			        <div class="col-sm-9 col-xs-12">
+		        		<label class='radio-inline'>
+		                	<input type='radio' name='enabled' value=1' {if $item['is_show']==1}checked{/if} /> 显示
+		                </label>
+		            	<label class='radio-inline'>
+		            		<input type='radio' name='enabled' value=0' {if $item['is_show']==0}checked{/if} /> 隐藏
+		            	</label>
+			        </div>
+			    </div>
+			    <!-- <div class="form-group">
+	                <label class="col-sm-2 control-label must">内容</label>
+	                <div class="col-sm-9 col-xs-12">
+	                    <input type="text" name="context" class="form-control" value="{$item['context']}" data-rule-required="true" />
+	                </div>
+	            </div> -->
+	            <div class="form-group">
+			        <label class="col-sm-2 control-label must">图标</label>
+			        <div class="col-sm-9 col-xs-12">
+		             	{php echo tpl_form_field_image('ico', $item['ico'])}
+		             	<span class='help-block'>建议尺寸:120 * 120 , 建议上传正方形图片</span>
+			        </div>
+			    </div>
+	            <div class="form-group">
+			        <label class="col-sm-2 control-label must">背景图</label>
+			        <div class="col-sm-9 col-xs-12">
+		             	{php echo tpl_form_field_image('thumb', $item['thumb'])}
+		             	<span class='help-block'>建议尺寸:640 * 200 , 建议上传长方形图片</span>
+			        </div>
+			    </div>
+	        </div>
+	        <div class="modal-footer">
+	        	<input type="hidden" name="id" value="{$id}" />
+				<input type="hidden" name="r" value="raise.forum_cate.post" />
+	            <button class="btn btn-primary" type="submit">提交</button>
+	            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+	        </div>
+	    </div>
+    </div>
+</form>

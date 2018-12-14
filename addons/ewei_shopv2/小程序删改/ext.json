@@ -1,0 +1,9 @@
+{
+  "extEnable": true,
+  "extAppid": "wx2c2d379a1806d40f",
+  "ext": {
+    "appid" : "wx2c2d379a1806d40f",
+    "api" : "https://xiaochengxu.bmwtech.cn/app/ewei_shopv2_api.php?i=73",
+    "approot" : "https://xiaochengxu.bmwtech.cn/addons/ewei_shopv2/"
+  }
+}

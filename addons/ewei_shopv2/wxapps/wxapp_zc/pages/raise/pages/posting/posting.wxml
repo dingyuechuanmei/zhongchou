@@ -1,0 +1,29 @@
+<view class='container'>
+  <input maxlength='30' placeholder='帖子标题在3~30个字之内' bindinput='inputTitle'></input>
+  <textarea auto-height maxlength='5000' placeholder='帖子内容在5~5000个字之内' bindinput='inputContent'></textarea>
+  
+  <view class='upimg' wx:for="{{detail.imagelist}}">
+    <image class='img' src='{{item}}'></image>
+    <view class='del' data-idx='{{index}}' bindtap='removeimage'>
+      <image src='../../resource/image/del.png'></image>
+    </view>
+  </view>
+  <image class='add-img' src='../../resource/image/add-img.png' bindtap='chooseImg'></image>
+  <view class='bg-line'></view>
+  <view class='title'>推荐商品</view>
+  <view class='upimg' wx:for="{{goods_list}}">
+    <image class='img' src='{{item[1]}}'></image>
+    <view class='del' data-idx='{{index}}' bindtap='removegoods'>
+      <image src='../../resource/image/del.png'></image>
+    </view>
+  </view>
+  <image class='add-img' src='../../resource/image/add-img.png' bindtap='addGood'></image>
+  <view class='bg-line'></view>
+  <view class='title'>添加到版块</view>
+  <view class='model-list'>
+    <text class='{{item.state}}' wx:for='{{cate_list}}' data-id='{{item.id}}' bindtap='chooseModel'>{{item.title}}</text>
+  </view>
+  <view class='div1' bindtap='surebtn'>
+    <view class='item'>发布</view>
+  </view>
+</view>

@@ -1,0 +1,107 @@
+{template '_header'}
+<div class="page-heading"> 
+	<span class='pull-right'>
+		<a class="btn btn-default  btn-sm" href="{php echo webUrl('shop/raise/pusher')}">返回列表</a>
+	</span>
+	<h2>{if !empty($item['id'])}编辑{else}添加{/if}众推 <small>{if !empty($item['id'])}修改【{$item['bannername']}】{/if}</small></h2> 
+</div>
+<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data">
+	<div class="form-group">
+        <label class="col-sm-2 control-label must">众推标题</label>
+        <div class="col-sm-9 col-xs-12">
+           	<input type="text" id="title" name="title" class="form-control" value="{$pusher['title']}" />
+           	<span class="help-block">此项必须填写</span>
+        </div>
+    </div>
+<!--    <div class="form-group">
+        <label class="col-sm-2 control-label must">发起者</label>
+        <div class="col-sm-9 col-xs-12">
+        	{php echo tpl_selector('pusher',array('key'=>'openid','text'=>'nickname','multi'=>0,'thumb'=>'avatar','placeholder'=>'昵称/姓名/手机号','buttontext'=>'选择通知人', 'items'=>$push_arr,'url'=>webUrl('member/query') ))}
+        </div>
+    </div>-->
+    <div class="form-group">
+	    <label class="col-sm-2 control-label must">众推分类</label>
+	    <div class="col-sm-8 col-xs-12">
+	        <select id="cates" name='category' class="form-control select2" style='width:605px;'>
+	            {loop $category $c}
+	            	<option value="{$c['id']}" {if $pusher['category'] == $c['id']}selected{/if} >{$c['category']}</option>
+	            {/loop}
+	        </select>
+	    </div>
+	</div>
+	<div class="form-group">
+        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">是否显示</label>
+        <div class="col-sm-10 col-lg-9 col-xs-12">
+            <label class="radio-inline">
+                <input type="radio" name="ifshow" value="1" {if !empty($pusher['ifshow'])}checked="checked"{/if} /> 是
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="ifshow" value="0" {if empty($pusher['ifshow'])}checked="checked"{/if}/> 否
+            </label>
+        </div>
+    </div>
+    <!-- <div class="form-group">
+        <label class="col-sm-2 control-label must">店铺链接</label>
+        <div class="col-sm-9 col-xs-12">
+           	<input type="text" id="title" name="shop_url" class="form-control" value="{$pusher['shop_url']}" />
+           	<span class="help-block">此项必须填写</span>
+        </div>
+    </div> -->
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label must">众推视频</label>
+		<div class="col-sm-10 col-lg-9 col-xs-12">
+			{php echo tpl_form_field_video('video',$pusher['video'])}
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label must">众推内容</label>
+		<div class="col-sm-10 col-lg-9 col-xs-12">
+			<textarea cols="86" rows="12" name="content">{$pusher['content']}</textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-1 col-xs-12 col-sm-10 col-md-10 col-lg-11">
+			<input type="hidden" name="id" value="{$id}" />
+			<input type="hidden" name="token" value="{$_W['token']}">
+			<input type="submit" class="btn btn-primary span3" value="提 交">
+		</div>
+	</div>
+</form>
+<script>
+	$(function(){
+ 		$('form').submit(function(){
+ 			if ($('input[name="title"]').isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请填写众推名称!');
+	            return false;
+	        }
+ 			/*if ($('input[name="pusher"]').isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请选择发起者!');
+	            return false;
+	        }*/
+ 			if ($('select[name="category"]').isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请选择众推类型!');
+	            return false;
+	        }
+ 			if ($('input[name="video"]').isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请上传视频文件!');
+	            return false;
+	        }
+ 			// if ($('input[name="shop_url"]').isEmpty()) {
+				// $('form').attr('stop',1);
+	   //          $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请填写店铺链接!');
+	   //          return false;
+	   //      }
+ 			if ($('textarea[name="content"]').isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请填写内容!');
+	            return false;
+	        }
+			return true;
+		});
+	});
+</script>
+{template '_footer'}

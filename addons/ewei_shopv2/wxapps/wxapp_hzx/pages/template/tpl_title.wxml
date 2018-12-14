@@ -1,0 +1,15 @@
+
+<!-- 标题栏 -->
+
+<template name="title">
+
+  	<view class="fui-title" style="background: {{diyitem.style.background}}; color: {{diyitem.style.color}}; font-size: {{diyitem.style.fontsize}}px; text-align: {{diyitem.style.textalign}}; padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; margin: 0;">
+	    <view bindtap="click_location_href" data-url="{{diyitem.params.link}}" style="color: {{diyitem.style.color}}" data-nocache="true">
+	        <block wx:if="{{diyitem.params.icon != ''}}">
+	        	<text class="icon {{diyitem.params.icon}}"></text>
+	        </block>
+	        {{diyitem.params.title}}
+	    </view>
+	</view>
+  
+</template>

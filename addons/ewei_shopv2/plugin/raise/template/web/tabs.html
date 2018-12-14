@@ -1,0 +1,33 @@
+<div class='menu-header'>{php echo $this->plugintitle}</div>
+<ul>
+    <li {if $_W['action']=='' || $_W['action']=='index'}class="active"{/if}><a href="{php echo webUrl('raise/index')}">首页管理</a></li>
+    <li {if $_W['action']=='pusher' || $_W['action']=='pusher.add' || $_W['action']=='pusher.edit' }class="active"{/if}><a href="{php echo webUrl('raise/pusher')}">微客优选</a></li><!-- 创匠众推 修改 为 微客优选 zhaoxin 20180413 -->
+    <li {if $_W['action']=='pusher.category'}class="active"{/if}><a href="{php echo webUrl('raise/pusher/category')}">众推类型</a></li>
+    <li {if $_W['action']=='pusher.banner' || $_W['action']=='pusher.banner_add' || $_W['action']=='pusher.banner_edit' }class="active"{/if}><a href="{php echo webUrl('raise/pusher/banner')}">众推横幅</a></li>
+    <li {if $_W['action']=='starter' || $_W['action']=='starter.detail'}class="active"{/if}><a href="{php echo webUrl('raise/starter')}">微客众筹</a></li><!-- 柴火众筹 修改 为 微客众筹 zhaoxin 20180413 -->
+    <li {if $_W['action']=='starter.category'}class="active"{/if}><a href="{php echo webUrl('raise/starter/category')}">众筹类型</a></li>
+    <li {if $_W['action']=='relation'}class="active"{/if}><a href="{php echo webUrl('raise/relation')}">关系列表</a></li>
+    <li {if $_W['action']=='verify'}class="active"{/if}><a href="{php echo webUrl('raise/verify')}">证实列表</a></li>
+    <li {if $_W['action']=='help'}class="active"{/if}><a href="{php echo webUrl('raise/help')}">帮助列表</a></li>
+</ul>
+{php $totals = p('raise')->getTotals()}
+<div class='menu-header'>提现申请</div>
+<ul class='commission-list'>
+    <li {if $_W['routes']=='raise.apply' && $_GPC['status']==0}class="active"{/if}><a href="{php echo webUrl('raise/apply',array('status'=>0))}">待打款的<span>&nbsp;&nbsp;{$totals['total0']}</span></a></li>
+    <li {if $_W['routes']=='raise.apply' && $_GPC['status']==1}class="active"{/if}><a href="{php echo webUrl('raise/apply',array('status'=>1))}">已打款的<span class='text-success'>&nbsp;&nbsp;{$totals['total1']}</span></a></li>
+    <li {if $_W['routes']=='raise.apply' && $_GPC['status']==2}class="active"{/if}><a href="{php echo webUrl('raise/apply',array('status'=>2))}">已拒绝的<span class='text-default'>&nbsp;&nbsp;{$totals['total2']}</span></a></li>
+    <li {if $_W['routes']=='raise.apply' && $_GPC['status']==3}class="active"{/if}><a href="{php echo webUrl('raise/apply',array('status'=>3))}">无效的<span class='text-default'>&nbsp;&nbsp;{$totals['total3']}</span></a></li>
+</ul>
+<div class='menu-header'>论坛管理</div>
+<ul class='commission-list'>
+    <li {if $_W['action']=='forum' || $_W['action']=='forum.detail'}class="active"{/if}><a href="{php echo webUrl('raise/forum')}">论坛列表</a></li>
+    <li {if $_W['action']=='forum_cate'}class="active"{/if}><a href="{php echo webUrl('raise/forum_cate')}">论坛类型</a></li>
+    <li {if $_W['action']=='streamer' || $_W['action']=='streamer.add' || $_W['action']=='streamer.edit'}class="active"{/if}><a href="{php echo webUrl('raise/streamer')}">论坛横幅</a></li>
+    <li {if $_W['action']=='review'}class="active"{/if}><a href="{php echo webUrl('raise/review')}">论坛评论</a></li>
+    <li {if $_W['action']=='report'}class="active"{/if}><a href="{php echo webUrl('raise/report')}">举报列表</a></li>
+    <li {if $_W['action']=='report_cate'}class="active"{/if}><a href="{php echo webUrl('raise/report_cate')}">举报类型</a></li>
+</ul>
+<div class='menu-header'>系统设置</div>
+<ul>
+    <li {if $_W['action']=='raise.set'}class="active"{/if}><a href="{php echo webUrl('raise/set')}">基本设置</a></li>
+</ul>

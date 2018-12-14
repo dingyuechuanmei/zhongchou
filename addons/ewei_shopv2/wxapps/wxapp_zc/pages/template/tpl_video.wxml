@@ -1,0 +1,12 @@
+
+<!-- 视频显示 -->
+
+<template name="video">
+	
+	<div class="fui-video" style="background: {{diyitem.style.background}}; margin: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; border-color: {{diyitem.style.bordercolor}};">
+		<div class="center" style="width:100%">
+    		<video src="{{diyitem.params.audiourl}}" style="width:100%;height: 13.3rem;" controls loop="{{diyitem.params.loopplay}}" autoplay="{{diyitem.params.autoplay}}" muted="{{diyitem.params.mutedplay}}" ></video>
+       	</div>
+	</div>
+
+</template>

@@ -1,0 +1,68 @@
+
+
+<!-- <view wx:for="{{category}}">
+
+  <view class="{{item.checked == 1 ? 'on' : '0'}}" bindtap="changeParent" data-parentid="{{item.id}}">
+    {{item.name}}{{item.checked}}
+  </view>
+
+</view>
+
+<view wx:for="{{child}}" style="margin-left:30px;">
+
+  <view class="{{item.checked == 1 ? 'on' : '0'}}" bindtap="changeChild" data-childid="{{item.id}}">
+    {{item.name}}{{item.checked}}
+  </view>
+
+</view>
+
+<view wx:for="{{goods}}" style="margin-left:60px;">
+
+  <view bindtap='buy' data-goodsid="{{item.id}}">
+    {{item.title}}{{item.id}}
+  </view>
+
+</view> -->
+
+<view class='contanter'>
+  <view class='top_nav'>
+    <scroll-view scroll-x="true">
+      <view class="topWrap" scroll-x="true">  
+        <view class="top_Item" wx:for='{{category}}' data-parentid='{{item.id}}' bindtap='changeParent' data-index="{{index}}">  
+          <view class="{{item.checked == 1 ? 'on' : ''}}">{{item.name}}</view>
+        </view>  
+      </view> 
+    </scroll-view> 
+  </view>
+
+  <view class='content'>
+    <view class='left_nav'>
+      <scroll-view scroll-y="true" class='topWrap'>
+        <view class="top_Item" wx:for='{{child}}' data-childid="{{item.id}}" bindtap='changeChild'>  
+          <view class="{{item.checked == 1 ? 'on' : ''}}">{{item.name}}</view>
+        </view>  
+      </scroll-view> 
+    </view>
+    <scroll-view class='goods' scroll-y bindscrolltolower="getGoodsLists" >
+      <view class='item' wx:for="{{goods}}">
+        <image src="{{item.thumb}}" bindtap="click_location_href" data-url="/pages/goods/detail/index?id={{item.id}}"></image>
+        <view class='info'>
+          <view class='name'>{{item.title}}</view>
+          <view class='price'>
+            <!-- <text class='down'>降</text> -->
+            <text class='xpri'>￥{{item.minprice}}</text>{{item.unit != '' && item.unit != undefined ? '/' +  item.unit : ''}}
+            <!-- <text class='opri'>￥129.00<text class='xian'></text></text> -->
+          </view>
+        </view>
+        <view class='my-add-btn' bindtap='buy' data-goodsid="{{item.id}}">
+          <text></text>
+          <text></text>
+        </view>
+      </view>
+
+    </scroll-view>
+  </view>
+</view>
+
+<import src="../../template/tpl_footer_tabbar.wxml"/>
+<template is="tabBar" data="{{menu:menus.data,diymenu:menus,menus_length:menus_length,cartcount:cartcount,cur_page:cur_page}}"/>

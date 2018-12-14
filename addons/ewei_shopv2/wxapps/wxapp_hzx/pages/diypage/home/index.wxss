@@ -1,0 +1,14 @@
+@import '/static/css/iconfont.wxss';
+@import '/resource/css/foxui.wxss';
+@import '/resource/css/style.wxss';
+@import '/resource/css/foxui.diy.wxss';
+@import '/resource/css/swiper.min.wxss';
+@import '/resource/css/fontawesome.min.wxss';
+
+
+@import '/resource/css/template.wxss';
+
+image {
+  width:100%;
+  height: 5.8em
+}

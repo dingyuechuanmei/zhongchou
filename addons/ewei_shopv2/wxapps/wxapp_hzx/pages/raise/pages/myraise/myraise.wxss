@@ -1,0 +1,443 @@
+@import "../../resource/css/app.wxss";
+
+page {
+  background: #f2f2f2;
+}
+.ib {
+  display: inline-block;
+}
+.myraise_myAssistance {
+  padding: 30rpx;
+  display: none;
+}
+.myraise_myAssistance.on {
+  display: block;
+}
+.myraise_myAssistance .item {
+  background: #fff;
+  border-radius: 5px;
+  margin-top: 20rpx;
+  overflow: hidden;
+  height: 240rpx;
+}
+.myraise_myAssistance .item .item_bar{
+  position: relative;
+  height: 100%;
+  transition: all .2s;
+}
+.myraise_myAssistance .item .item_content{
+  padding: 30rpx;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.delete_content{
+  position: absolute;
+  top: 0;
+  right: -75px;
+  width: 75px;
+  height: 100%;
+  background-color: #ff6749;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  color: #fff;
+  font-weight: bold;
+}
+.myraise_myAssistance .item:nth-child(1) {
+  margin-top: 0;
+}
+.myraise_myAssistance .item .top {
+  height: 48rpx;
+}
+.myraise_myAssistance .item .top> view:nth-child(1) {
+  vertical-align: top;
+  display: inline-block;
+  color: #999;
+  font-size: 24rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+}
+.myraise_myAssistance .item .top> view:nth-child(2) {
+  font-size: 34rpx;
+  color: red;
+  background: #fff;
+  vertical-align: top;
+  display: inline-block;
+  margin-left: 20rpx;
+  height: 48rpx;
+} 
+.item-delete{
+  margin-top: 20rpx;
+  width: 150rpx;
+}
+
+.myraise_myAssistance .item .top .r view {
+  padding: 6rpx 0;
+  color: #ff6749;
+}
+.myraise_myAssistance .item .top .r view.end {
+  color: #999;
+}
+
+.myraise_myAssistance .item .midder {
+  margin-top: 30rpx;
+  color: #999;
+}
+.myraise_myAssistance .item .midder text {
+  color: #333;
+  font-size: 30rpx;
+  margin-right: 30rpx;
+}
+.myraise_myAssistance .item .midder .title {
+  display: inline-block;
+}
+.myraise_myAssistance .item .time {
+  margin-top: 20rpx;
+  color: #999;
+}
+.myraise_myAssistance .item .time text {
+  color: #333;
+  font-size: 30rpx;
+  margin-right: 30rpx;
+}
+.my_wallet {
+  position: relative;
+  display: none; 
+}
+.my_wallet.on {
+  display: block;
+}
+.my_wallet .balance {
+  position: relative;
+  display: none;
+}
+.my_wallet .balance.on {
+  display: block;
+}
+.my_wallet .balance .title {
+  position: absolute;
+  left: 30rpx;
+  top: 40rpx;
+  font-size: 32rpx;
+}
+.my_wallet .balance .money {
+  width: 100%;
+  height: 380rpx;
+  line-height: 380rpx;
+  text-align: center;
+  background: #fff;
+  font-size: 60rpx;
+  color: red;
+}
+.my_wallet .apply_withdrawal {
+  padding: 30rpx;
+  display: none;
+}
+.my_wallet .apply_withdrawal.on {
+  display: block;
+}
+.my_wallet .apply_withdrawal .box {
+  background: #fff;
+}
+.my_wallet .apply_withdrawal .title {
+  padding: 0 30rpx;
+  height: 130rpx;
+  line-height: 130rpx;
+  font-size: 32rpx;
+  background: #f9f9f9;
+}
+.my_wallet .apply_withdrawal .clwithdrawal {
+  padding: 0 30rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+  font-size: 32rpx;
+}
+.my_wallet .apply_withdrawal .money {
+  padding: 0 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+.my_wallet .apply_withdrawal .money .fuhao {
+  font-size: 50rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+.my_wallet .apply_withdrawal .money input {
+  font-size: 60rpx;
+  display: inline-block;
+  width: 80%;
+  vertical-align: top;
+  margin-left: 10rpx;
+}
+.my_wallet .apply_withdrawal .balancenum {
+  padding: 0 30rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+  color: #777;
+}
+.my_wallet .apply_withdrawal .balancenum text {
+  display: inline-block;
+  margin-left: 30rpx;
+  color: #4c78a8;
+}
+.my_wallet .apply_withdrawal .save {
+  margin-top: 20rpx;
+}
+.my_wallet .apply_withdrawal .time {
+  height: 110rpx;
+  line-height: 110rpx;
+  text-align: center;
+  color: #999;
+}
+.tenants {display: none;}
+.tenants.on {display: block;}
+.placeholderinput {
+
+}
+.tenants .item {
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #f0f0f0;
+  padding: 30rpx;
+  background: #fff;
+  position: relative;
+}
+.tenants .item:nth-child(5) {
+  margin-top: 20rpx;
+}
+.tenants .item .title {
+  width: 160rpx;
+  height: 53rpx;
+  line-height: 53rpx;
+  font-size: 32rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+.tenants .item .inputbox {
+  width: 527rpx;
+  height: 53rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.tenants .item .inputbox input {
+    height: 100%;
+   display: none;
+}
+.tenants .item .inputbox input.on {display: block;}
+.tenants .item .inputbox image.logo {
+  width: 70rpx;
+  height: 70rpx;
+  vertical-align: top;
+  display: none;
+}
+.tenants .item .inputbox image.logo.on {display: block;}
+ .tenants .item .inputbox .textarea {
+  width: 100%;
+  display: none;
+}
+.tenants .item .inputbox .textarea.on {display: block;} 
+.tenants .item .youimage {
+  width: 16.6rpx;
+  height: 30rpx;
+  position: absolute;
+  left: auto;
+  right: 30rpx;
+  top: 30rpx;
+  margin-top: 12rpx;
+  display: none;
+
+  
+}
+.tenants .item  .youimage.on {display: block;}
+.tenants .item  .sendCode {
+  box-sizing: border-box;
+  height: 100%;
+  padding-top: 30rpx;
+  position: absolute;
+  left: auto;
+  top: 0rpx;
+  z-index: 99;
+  right: 30rpx;
+  color: #ff6749;
+  font-size: 32rpx;
+  display: none;
+}
+.tenants .item  .sendCode.on {display: block;}
+
+.save {
+  margin-top: 60rpx;
+  padding: 0 30rpx;
+}
+.save view {
+  background: #ff6749;
+  color: #fff;
+  font-size: 32rpx;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+}
+.wu {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  text-align: center;
+  display: none;
+}
+.wu.on {
+  display: block;
+}
+.wu .box {
+  display: inline-block;
+  margin-top: 40%;
+}
+.wu image {
+  width: 420rpx;
+  height: 329rpx;
+}
+.wu .text {
+  color: #999;
+}
+
+
+
+.zhongchou .topbar {
+  background: #fff;
+}
+.zhongchou .topbar .item view {
+  display: inline-block;
+  height: 110rpx;
+  line-height: 110rpx;
+  position: relative;
+}
+.zhongchou .topbar .item view::after {
+  content: "";
+  width: 100%;
+  height: 6rpx;
+  background: transparent;
+  position: absolute;
+  left: 0;
+  top: auto;
+  bottom: 0;
+}
+.zhongchou .topbar .item.on {
+  color: #ff6749;
+}
+.zhongchou .topbar .item.on view::after {
+  background: #ff6749;
+}
+
+
+
+.item6 {
+  border-bottom: none;
+}
+.item6 .upload{
+  margin-top: 30rpx;
+  box-sizing: border-box;
+  border:3rpx dashed #ddd;
+  height: 150rpx;
+  line-height: 150rpx;
+  text-align: center;
+  color: #FF6749;
+}
+.item6 .upload .text {
+  display: inline-block;
+  font-size: 32rpx;
+}
+.item6 .upload .add {
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  vertical-align: top;
+  margin-top: 55rpx;
+  margin-right: 20rpx;
+}
+
+.item6 .upload .add .col {
+  width: 40rpx;
+  height: 4rpx;
+  background: #FF6749;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -2rpx;
+  border-radius: 4rpx;
+  
+} 
+.item6 .upload .add .row {
+  width: 4rpx;
+  height: 40rpx;
+  background: #FF6749;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -2rpx;
+  border-radius: 4rpx;
+}
+.item6 .imagelist .image {
+  display: inline-block;
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 30rpx;
+  margin-top: 30rpx;
+  position: relative;
+  vertical-align: top;
+}
+.item6 .imagelist image {
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+}
+.item6 .imagelist .x {
+  position: absolute;
+  left: auto;
+  top: 0;
+  right: 0;
+  width: 40rpx;
+  height: 40rpx;
+}
+.item6 .imagelist .addimage {
+  width: 150rpx;
+  height: 150rpx;
+  box-sizing: border-box;
+  border: 2rpx dashed #ddd;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 30rpx;
+}
+.item6 .imagelist .addimage .add {
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+.item6 .imagelist .add .col {
+  width: 40rpx;
+  height: 4rpx;
+  background: #ddd;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -2rpx;
+  border-radius: 4rpx;
+  
+} 
+.item6 .imagelist .add .row {
+  width: 4rpx;
+  height: 40rpx;
+  background: #ddd;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -2rpx;
+  border-radius: 4rpx;
+}

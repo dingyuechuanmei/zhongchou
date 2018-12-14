@@ -1,0 +1,119 @@
+{template '_header'}
+<div class="page-heading"> 
+    <h2>参团瞰图</h2> 
+</div>
+<form action="./index.php" method="get" class="form-horizontal form-search" role="form">
+    <input type="hidden" name="c" value="site" />
+    <input type="hidden" name="a" value="entry" />
+    <input type="hidden" name="m" value="ewei_shopv2" />
+    <input type="hidden" name="do" value="web" />
+    <input type="hidden" name="r"  value="raise.apply" />
+    <input type="hidden" name="status"  value="{$status}" />
+    <div class="page-toolbar row m-b-sm m-t-sm">
+        <div class="col-sm-7">
+            <div class="btn-group btn-group-sm" style='float:left'>
+                <button class="btn btn-default btn-sm" type="button" data-toggle='refresh'><i class='fa fa-refresh'></i></button>
+            </div>
+            <div class='input-group input-group-sm'>
+            	{if $status == 0 }
+            		{php echo tpl_daterange('time', array('sm'=>true,'placeholder'=>'申请时间'),true)}
+            	{elseif $status == 1}
+            		{php echo tpl_daterange('time', array('sm'=>true,'placeholder'=>'打款时间'),true)}
+            	{elseif $status == 2}
+            		{php echo tpl_daterange('time', array('sm'=>true,'placeholder'=>'拒绝时间'),true)}
+            	{/if}
+            </div>
+        </div>	
+        <div class="col-sm-5 pull-right">
+            <div class="input-group">				 
+                <input type="text" class="input-sm form-control" name='keyword' value="{$keyword}" placeholder="请输入关键字"> 
+                <span class="input-group-btn">
+                	<button class="btn btn-sm btn-primary" type="submit"> 搜索</button> 
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+{if count($list)>0}
+	<table class="table table-hover table-responsive"> 
+	    <thead class="navbar-inner">
+	        <tr>
+	            <th style="width:45px;">头像</th>
+	            <th style="width:100px;">昵称</th>
+	            <th style="width:80px;">真实姓名</th>
+	            <th style="width:100px;">手机号</th>
+	            <th style="width:80px;">申请金额</th>
+				<th style="width:80px;">手续费比例</th>
+				<th style="width:80px;">实际打款金额</th>
+	            <th style="width:80px;">状态</th>
+	            <th style="width:190px;">操作</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        {loop $list $item}
+		        <tr>
+		            <td><img src="{$item['avatar']}" width="40" height="40" /></td>
+		            <td>{php echo $item['nickname'] ? $item['nickname'] : '暂无'}</td>
+		            <td>{php echo $item['realname'] ? $item['realname']: '暂无'}</td>
+		            <td>{php echo $item['mobile'] ? $item['mobile']: '15505710459'}</td>
+		            <td>{$item['money']}</td>
+					<td>{$item['service']}%</td>
+					<td>{$item['actual_money']}</td>
+		            <td>
+						{if $status == 0 }
+		            		<span class='text-muted'>申请打款</span>
+		            	{elseif $status == 1}
+		            		<span class='text-navy'>打款成功</span>
+		            	{elseif $status == 2}
+		            		<span class='text-danger'>拒绝打款</span>
+		            		<input type="hidden" id="detail" value="{$item['reject_reason']}" />
+        					<a href="javascript:preview_html('#detail')"><i class="fa fa-question-circle"></i></a>
+		            	{elseif $status == 3}
+		            		<span class='text-warning'>无效打款</span>
+		            		<input type="hidden" id="detail" value="{$item['reject_reason']}" />
+        					<a href="javascript:preview_html('#detail')"><i class="fa fa-question-circle"></i></a>
+		            	{/if}
+					</td>
+		            <td>
+						{if $status == 0 }
+                       	<a class='btn btn-link btn-sm'data-toggle='ajaxRemove' href="{php echo webUrl('raise/apply/pay', array('id' => $item['id'],'status'=>1))}" data-confirm='确认之后提现金额将转入到申请人的微信余额中,是否确认？' title="确 认 打 款">打款</a>
+						<a class='btn btn-link btn-sm'data-toggle='ajaxRemove' href="{php echo webUrl('raise/apply/manualpay', array('id' => $item['id'],'status'=>1))}" data-confirm='确认之后订单状态将改为已完成,是否确认？' title="确 认 打 款">手动打款</a>
+						<a class='btn btn-link btn-sm' data-toggle="ajaxModal" href="{php echo webUrl('raise/apply/reject', array('id' => $item['id']))}" title="拒 绝 打 款">拒绝</a>
+						{/if}
+                    </td>
+		        </tr>
+		        <tr>
+			        <td colspan='8' style='text-align: right;border-top:none;padding:5px 0;' class='aops'>
+                        <a class="text-default" >创建日期</a>
+                        <a class="text-default" >{if !empty($item['createtime'])}{php echo date('Y-m-d H:i',$item['createtime'])}{else}暂无{/if}</a>
+			            <a class="text-default" >申请日期</a>
+                        <a class="text-default" >{if !empty($item['apply_time'])}{php echo date('Y-m-d H:i',$item['apply_time'])}{else}暂无{/if}</a>
+                        {if !empty($item['pay_time'])}
+	                        <a class="text-default" >打款日期</a>
+	                        <a class="text-default" >{php echo date('Y-m-d H:i',$item['pay_time'])}</a>
+                        {/if}
+                        {if !empty($item['reject_time'])}
+			            	<a class="text-default" >{if $status == 2}拒绝日期{elseif $status == 3}无效时间{/if}</a>
+	                        <a class="text-default" >{php echo date('Y-m-d H:i',$item['reject_time'])}</a>
+                        {/if}
+		            </td>
+		        </tr>
+	        {/loop}
+	        <tr>
+                <td colspan='8'>
+                    <div class='pagers' style='float:right;'>
+                        {$pager}			
+                    </div>
+                </td>
+            </tr>
+	    </tbody>
+	</table>
+	{$pager}
+{else}
+  	<div class='panel panel-default'>
+	  	<div class='panel-body' style='text-align: center;padding:30px;'>
+	  		{if $status == 0}暂时没有申请打款单子!{elseif $status == 1}暂时没有打款成功单子!{elseif $status == 2}暂时没有无效打款单子!{/if}
+	  	</div>
+  	</div>
+{/if}
+{template '_footer'}

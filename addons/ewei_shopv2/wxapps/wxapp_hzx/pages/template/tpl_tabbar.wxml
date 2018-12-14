@@ -1,0 +1,25 @@
+
+<!-- 选项卡 -->
+
+<template name="tabbar">
+  	
+  	<block wx:if="{{diyitem.diyitem_data_len <= 3}}">
+        <div class="fui-tab fui-tab-success">
+            <block wx:for="{{diyitem.data}}" wx:for-item="tabitem">
+                <view class="tab_a" bindtap="click_location_href" data-url="{{tabitem.linkurl}}" style="{{tabitem.style}}">{{tabitem.text == ''?"未设置":tabitem.text}}</view>
+            </block>
+        </div>
+    </block>
+    <block wx:else>
+        <scroll-view class="swiper swiper-{{diyitemid}}" scroll-x data-element=".swiper-{{diyitemid}}" data-view="3" data-slideto="{{diyitem.params.slideto}}">
+            <div class="fui-tab fui-tab-success swiper-container">
+                <div class="swiper-wrapper">
+                    <block wx:for="{{diyitem.data}}" wx:for-item="tabitem">
+                        <view class="swiper-slide item tab_a" bindtap="click_location_href" data-url="{{tabitem.linkurl}}" style="{{tabitem.style}}">{{tabitem.text == ''?"未设置":tabitem.text}}</view>
+                    </block>
+                </div>
+            </div>
+        </scroll-view>
+    </block>
+  
+</template>

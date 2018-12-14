@@ -1,0 +1,9 @@
+/* pages/shop/merch/user/index.wxss */
+
+@import '/static/css/foxui.min.wxss';
+@import '/static/css/iconfont.wxss';
+@import '/static/css/style.wxss';
+
+.fui-list-group{
+    margin-top: 0;
+}

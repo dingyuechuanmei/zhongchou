@@ -1,0 +1,26 @@
+<view class='container'>
+  <view class='item border_bottom'>
+    <image src='{{approot}}/wxapp_attr/9@3x.png'></image>
+    <input type='text' placeholder='填写真实姓名' placeholder-class='pinput' bindinput='nameinput'></input>
+  </view>
+  <view class='item border_bottom'>
+    <image src='{{approot}}/wxapp_attr/10@3x.png'></image>
+    <input type='text' placeholder='填写身份证号' placeholder-class='pinput' bindinput='cardinput'></input>
+  </view>
+  <view class='item border_bottom'>
+    <view class="section">
+      <picker bindchange="bindPickerChange" range="{{relation_list}}">
+        <view class="picker">
+          <view>与受助人关系</view>{{user.relation}}
+        </view>
+      </picker>
+    </view>
+    <view class='you'></view>
+  </view>
+  <view class='textareabox'>
+    <textarea placeholder='请介绍一些详细情况' bindinput='detail'></textarea>
+  </view>
+  <view class='bottom'>
+    <view class='btn' bindtap='btn'>提交</view>
+  </view>
+</view>

@@ -1,0 +1,150 @@
+{template '_header'}
+
+<div class="page-heading"> <h2>首页设置</h2> </div>
+
+<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+    <div class="form-group">
+        <label class="col-sm-2 control-label">轮播图一</label>
+        <div class="col-sm-9 col-xs-12">
+            {ifp 'sysset.shop.edit'}
+            {php echo tpl_form_field_image('banner1',$item['banner1'],'../addons/ewei_shopv2/static/images/nopic.jpg',array('dest_dir'=>'merch/'.$_W['merchid']))}
+            <span class="help-block">首页轮播图 建议尺寸 300 * 300</span>
+            {else}
+            {if empty($item['banner1'])}
+            <img src="../addons/ewei_shopv2/static/images/nopic.jpg" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+            {else}
+            <img src="{php echo tomedia($item['banner1'])}" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+            {/if}
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">链接</label>
+        <div class="col-sm-9">
+            {ifp 'sysset.shop.edit'}
+            <div class="input-group">
+                <input type="text" id="cubelink_banner1" class="form-control" name="banner1_url" value="{$item['banner1_url']}"/>
+                <span data-input="#cubelink_banner1" data-toggle="selectUrl" data-platform="wxapp" class="input-group-addon btn btn-default">选择链接</span>
+            </div>
+            {else}
+            <div class="form-control-static">{$item['banner1_url']}</div>
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">轮播图二</label>
+        <div class="col-sm-9 col-xs-12">
+            {ifp 'sysset.shop.edit'}
+            {php echo tpl_form_field_image('banner2',$item['banner2'],'../addons/ewei_shopv2/static/images/nopic.jpg',array('dest_dir'=>'merch/'.$_W['merchid']))}
+            <span class="help-block">首页轮播图 建议尺寸 300 * 300</span>
+            {else}
+            {if empty($item['banner2'])}
+            <img src="../addons/ewei_shopv2/static/images/nopic.jpg" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+            {else}
+            <img src="{php echo tomedia($item['banner2'])}" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+            {/if}
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">链接</label>
+        <div class="col-sm-9">
+            {ifp 'sysset.shop.edit'}
+            <div class="input-group">
+                <input type="text" id="cubelink_banner2" class="form-control" name="banner2_url" value="{$item['banner2_url']}"/>
+                <span data-input="#cubelink_banner2" data-toggle="selectUrl" data-platform="wxapp" class="input-group-addon btn btn-default">选择链接</span>
+            </div>
+            {else}
+            <div class="form-control-static">{$item['banner2_url']}</div>
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">轮播图三</label>
+        <div class="col-sm-9 col-xs-12">
+            {ifp 'sysset.shop.edit'}
+            {php echo tpl_form_field_image('banner3',$item['banner3'],'../addons/ewei_shopv2/static/images/nopic.jpg',array('dest_dir'=>'merch/'.$_W['merchid']))}
+            <span class="help-block">首页轮播图 建议尺寸 300 * 300</span>
+            {else}
+            {if empty($item['banner3'])}
+            <img src="../addons/ewei_shopv2/static/images/nopic.jpg" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+            {else}
+            <img src="{php echo tomedia($item['banner3'])}" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+            {/if}
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">链接</label>
+        <div class="col-sm-9">
+            {ifp 'sysset.shop.edit'}
+            <div class="input-group">
+                <input type="text" id="cubelink_banner3" class="form-control" name="banner3_url" value="{$item['banner3_url']}"/>
+                <span data-input="#cubelink_banner3" data-toggle="selectUrl" data-platform="wxapp" class="input-group-addon btn btn-default">选择链接</span>
+            </div>
+            {else}
+            <div class="form-control-static">{$item['banner3_url']}</div>
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">首页公告</label>
+        <div class="col-sm-8">
+            {ifp 'sysset.shop.edit'}
+            <input type="text" class="form-control" name="notice" value="{$item['notice']}"/>
+            {else}
+            <div class="form-control-static">{$item['notice']}</div>
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">公告内容</label>
+        <div class="col-sm-9 col-xs-12">
+            {ifp 'sysset.shop.edit'}
+            <textarea name="notice_detail" class="form-control richtext" cols="70">{$item['notice_detail']}</textarea>
+            {else}
+            <div class='form-control-static'>{$data['description']}</div>
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">魔方</label>
+        <div class="col-sm-9 col-xs-12">
+            {ifp 'sysset.shop.edit'}
+            {php echo tpl_form_field_image('mofang',$item['mofang'],'../addons/ewei_shopv2/static/images/nopic.jpg',array('dest_dir'=>'merch/'.$_W['merchid']))}
+            <span class="help-block">首页轮播图 建议尺寸 300 * 300</span>
+            {else}
+            {if empty($item['mofang'])}
+            <img src="../addons/ewei_shopv2/static/images/nopic.jpg" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+            {else}
+            <img src="{php echo tomedia($item['mofang'])}" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+            {/if}
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">魔方链接</label>
+        <div class="col-sm-9">
+            {ifp 'sysset.shop.edit'}
+            <div class="input-group">
+                <input type="text" id="cubelink_mofang" class="form-control" name="mofang_url" value="{$item['mofang_url']}"/>
+                <span data-input="#cubelink_mofang" data-toggle="selectUrl" data-platform="wxapp" class="input-group-addon btn btn-default">选择链接</span>
+            </div>
+            {else}
+            <div class="form-control-static">{$item['mofang_url']}</div>
+            {/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-9 col-xs-12">
+            {ifp 'sysset.shop.edit'}
+            <input type="submit" value="提交" class="btn btn-primary"  />
+            {/if}
+        </div>
+    </div>
+
+
+</form>
+
+{template '_footer'}     

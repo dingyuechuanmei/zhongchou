@@ -1,0 +1,3 @@
+/* pages/shop/merch/category/index.wxss */
+@import '/static/css/foxui.min.wxss';
+@import '/static/css/iconfont.wxss';

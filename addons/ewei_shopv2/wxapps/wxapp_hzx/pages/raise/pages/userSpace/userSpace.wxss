@@ -1,0 +1,44 @@
+@import "../../resource/css/app.wxss";
+
+.bg-avatar {height: 370rpx; position: relative;}
+.bg-avatar .blur {position: absolute; left: 0; top: 0; width: 100%; height: 100%;  background: no-repeat center / cover;
+  animation:mymove 40s infinite; filter: blur(2px);}
+.bg-avatar .box {position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 1; padding-top: .1px; text-align: center; color: #fff;}  
+.bg-avatar .box .meg {position: absolute; left: auto; top: 20rpx; left: auto; right: 20rpx; width: 40rpx; height: 40rpx;}
+.bg-avatar .box .heading {margin-top: 40rpx; width: 150rpx; height: 150rpx; 
+border-radius: 50%;}
+.bg-avatar .box > view {margin-top: 10rpx;}
+.bg-avatar .box > view .line {display: inline-block; width: 4rpx; height: 26rpx; background: #fff; vertical-align: top; margin-top: 6rpx; margin-left: 20rpx; margin-right: 20rpx;}
+.bg-avatar .box > view text {display: inline-block; vertical-align: top;}
+.bg-avatar .box > view .qian-img {width: 35rpx; height: 35rpx; margin-left: 20rpx;}
+
+.bg-avatar .box .focus {width: 144rpx;line-height: 58rpx; text-align: center; color: #fff; background: #db384d; border-radius: 29rpx; position: absolute; left: auto; top: 20rpx; left: auto; right: 20rpx; margin: 0;}
+.bg-avatar .box input {border-radius: 0.7rem; border: 1px solid #fff; display: inline-block; text-align: center;}
+
+.div_3 {background: #fff;}
+.div_3 text {display: block; line-height: 60rpx; font-size: 32rpx;}
+.div_3 .item {box-sizing: border-box; border-right: 1px solid #f0f0f0;}
+.div_3 .item:nth-child(3) {border-right: none;}
+.div_3 .item.on {border-bottom: 6rpx solid #db384d;}
+
+
+/*item1,item2,item3  */
+.hot-list {margin-top: 20rpx; background: #fff;}
+.hot-list .item {position: relative; height: 180rpx;}
+.hot-list .item::after {content: ""; display: block; width: 690rpx; height: 1px; background: #f0f0f0; position: absolute; top: auto; bottom: 0; left: 30rpx;}
+.hot-list .item .title {display: inline-block; padding-left: 30rpx; font-size: 32rpx; margin-top: 20rpx;}
+.hot-list .item .browse-comment {padding-right: 30rpx; margin-top: 20rpx; margin-bottom: 20rpx; color: #777; position: absolute; left: 0; top: auto; bottom: 0rpx;}
+.hot-list .item .browse-comment image {width: 35rpx; height: 35rpx; margin-left: 30rpx;}
+.hot-list .item .browse-comment text {display: inline-block; line-height: 35rpx;font-size: 24rpx; margin-left: 5rpx;}
+.hot-list .item .browse-comment .r {line-height: 35rpx;}
+.hot-list .item > .r {position: absolute; left: auto; right: 30rpx; top: 20rpx; width: 140rpx; height: 140rpx;}
+.hot-list .wu {text-align: center; padding-top: 50rpx; color: #999;}
+
+
+
+@keyframes mymove
+{
+  0%   {background-position-y: top;}
+  50%   {background-position-y: bottom;}
+  100%   {background-position-y: top;}
+}

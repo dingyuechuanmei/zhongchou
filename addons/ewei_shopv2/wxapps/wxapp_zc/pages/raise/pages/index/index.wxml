@@ -1,0 +1,89 @@
+<import src="/utils/wxParse/wxParse.wxml" />
+<view class="container">
+  <view class='index'>
+    <import src="../components/cpt_swiper.wxml" />
+    <template is="swiper" data="{{swiper:swiper}}" />
+    <view class='bigtitle div_4'>
+      <form class='item' bindsubmit="formSubmit" data-classify='zhongtui' data-appid="{{index_info.left_appid}}" data-path="{{index_info.left_path}}" report-submit='true' style='padding:20rpx {{index_info.center_appid!=undefined? "0":"31rpx"}};'>
+        <view>
+          <view class='image' bindtap='formSubmit' data-classify='zhongtui' data-appid="{{index_info.left_appid}}" data-path="{{index_info.left_path}}">
+            <image src='{{index_info.left_icon}}'></image>
+          </view>
+          <view class='text'>
+            <button form-type='submit' type="btn">{{index_info.left_name}}</button>
+            <button form-type='submit' type="btn">{{index_info.left_intro}}</button>
+          </view>
+        </view>
+      </form>
+      <form class='item' bindsubmit="formSubmit" data-classify='zhongtui' data-appid="{{index_info.middle_appid}}" data-path="{{index_info.middle_path}}" report-submit='true'style='padding:20rpx {{index_info.center_appid!=undefined? "0":"31rpx"}};'>
+        <view>
+          <view class='image' bindtap='formSubmit' data-classify='zhongtui' data-appid="{{index_info.middle_appid}}" data-path="{{index_info.middle_path}}">
+            <image src='{{index_info.middle_icon}}'></image>
+          </view>
+          <view class='text'>
+            <button form-type='submit' type="btn">{{index_info.middle_name}}</button>
+            <button form-type='submit' type="btn">{{index_info.middle_intro}}</button>
+          </view>
+        </view>
+      </form>
+      <form class='item' bindsubmit="formSubmit" data-classify='zhongtui' data-appid="{{index_info.center_appid}}" data-path="{{index_info.center_path}}" report-submit='true' style='display:{{index_info.center_appid!=undefined? "block":"none"}};'>
+        <view>
+          <view class='image' bindtap='formSubmit' data-classify='zhongtui' data-appid="{{index_info.center_appid}}" data-path="{{index_info.center_path}}">
+            <image src='{{index_info.center_icon}}'></image>
+          </view>
+          <view class='text'>
+            <button form-type='submit' type="btn">{{index_info.center_name}}</button>
+            <button form-type='submit' type="btn">{{index_info.center_intro}}</button>
+          </view>
+        </view>
+      </form>
+      <form class='item' bindsubmit="formSubmit" data-classify='zhongchou' data-appid="{{index_info.right_appid}}" data-path="{{index_info.right_path}}" report-submit='true'style='padding:20rpx {{index_info.center_appid!=undefined? "0":"31rpx"}};' >
+        <view>
+          <view class='image' bindtap='formSubmit' data-classify='zhongchou' data-appid="{{index_info.right_appid}}" data-path="{{index_info.right_path}}">
+            <image src='{{index_info.right_icon}}'></image>
+          </view>
+          <view class='text'>
+            <button form-type='submit' type="btn">{{index_info.right_name}}</button>
+            <button form-type='submit' type="btn">{{index_info.right_intro}}</button>
+          </view>
+        </view>
+      </form>
+    </view>
+    <view class='introducetheraise'>
+      <view class='title'>微客介绍</view>
+      <view class='video'>
+        <video id="myVideo" wx:if="{{index_info.video_url != ''}}" src="{{index_info.video_url}}" initial-time='1' controls></video>
+      </view>
+      <view class='info' style='text-indent: 30rpx;'>
+        <view class="wxParse">
+          <template is="wxParse" data="{{wxParseData:wxParseData.nodes}}" />
+        </view>
+      </view>
+    </view>
+    <view class='zhongtui'>
+      <view class='zhongtui_list'>
+        <view class='zhongtui_item' wx:for='{{pusher_list}}'>
+          <view class='posterimg'>
+            <video id="myVideo" src="{{item.video}}" initial-time='1' controls></video>
+            <view class='title'>{{item.title}}</view>
+          </view>
+          <view class='author' bindtap='zhongtuiitemdetail' data-id='{{item.id}}'>
+            <image src='{{item.avatar}}'></image>
+            <view class='name'>{{item.nickname}}</view>
+            <view class='support'>
+              <image src='{{approot}}wxapp_attr/support.png'></image>
+              <view class='supportnum'>{{item.like_count}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 修改页面的授权 -->
+
+    <view  wx:if="{{!hasUserInfo}}" class='mask'>
+          <label class='mask' id='onder'>
+               <button name="onder"open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='Choice' bindtap='navs' data-index='2'>  </button>
+          </label>
+    </view>

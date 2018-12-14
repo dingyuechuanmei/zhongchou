@@ -1,0 +1,55 @@
+{template '_header'}
+<div class="page-heading">
+    <h2>众推类型列表</h2>
+</div>
+<form action="./index.php" method="get" class="form-horizontal form-search" role="form">
+    <input type="hidden" name="c" value="site" />
+    <input type="hidden" name="a" value="entry" />
+    <input type="hidden" name="m" value="ewei_shopv2" />
+    <input type="hidden" name="do" value="web" />
+    <input type="hidden" name="r"  value="raise.pusher.category" />
+    <div class="page-toolbar row m-b-sm m-t-sm">
+        <div class="col-sm-4">
+            <div class="input-group-btn">
+                <button class="btn btn-default btn-sm"  type="button" data-toggle='refresh'><i class='fa fa-refresh'></i></button>
+                <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo webUrl('raise/pusher/categorydelete')}"><i class='fa fa-trash'></i> 删除</button>
+                <a class='btn btn-primary btn-sm' data-toggle="ajaxModal" href="{php echo webUrl('raise/pusher/categoryadd')}"><i class='fa fa-plus'></i> 添加众推类型</a>
+            </div> 
+        </div>	
+        <div class="col-sm-6 pull-right">
+            <div class="input-group">				 
+                <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="请输入关键词"> <span class="input-group-btn">
+                 <button class="btn btn-sm btn-primary" type="submit"> 搜索</button> </span>
+            </div>
+        </div>
+    </div>
+</form>
+<form action="" method="post">
+    <table class="table table-hover table-responsive">
+        <thead>
+            <tr>
+                <th style="width:25px;"><input type='checkbox' /></th>
+                <th>类型名称</th>
+                <th>众推数</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {loop $list $row}
+            	<tr>
+	                <td>
+                    	<input type='checkbox' value="{$row['id']}"/>
+	                </td>
+	                <td>{$row['category']}</td>
+	                <td class="text-success"><a class="btn btn-link btn-sm" href="{php echo webUrl('raise/pusher',array('category'=>$row['id']))}" title="众推数">{$row['pushercount']}</a></td>
+	                <td>
+	                   	<a class='btn btn-default btn-sm' href="{php echo webUrl('raise/pusher',array('category'=>$row['id']))}"><i class='fa fa-arrow-down'></i>该类众推</a>
+	                   	<a data-toggle="ajaxModal" href="{php echo webUrl('raise/pusher/categoryedit', array('id' => $row['id']))}" class="btn btn-default btn-sm" ><i class='fa fa-edit'></i> 修改</a>
+	                   	<a data-toggle='ajaxRemove' href="{php echo webUrl('raise/pusher/categorydelete', array('id' => $row['id']))}"class="btn btn-default btn-sm" data-confirm='确认要删除此众推类型吗?'><i class="fa fa-trash"></i> 删除</a>
+         			</td>
+         		</tr>
+            {/loop}
+        </tbody>
+    </table>
+</form>
+{template '_footer'}

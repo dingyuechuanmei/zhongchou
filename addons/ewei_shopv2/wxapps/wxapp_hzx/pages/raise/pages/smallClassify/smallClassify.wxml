@@ -1,0 +1,19 @@
+<view class='container'>
+  <view class='top' style='background-image: url({{forum_cate.thumb}})'>
+    <image src='{{forum_cate.ico}}'></image>
+    <view class='info'>
+      <view class='title'>{{forum_cate.title}}</view>
+      <view class='num'>帖子：{{forum_cate.forum_count}}</view>
+    </view>
+  </view>
+
+  <!--动态  -->
+  <import src="../components/cpt_dynamic_list.wxml"/>
+  <template is="dynamic_list" data="{{forum_list:forum_list,imglist:imglist}}"/>
+
+  <!--置顶，发帖  -->
+  <view class='float'>
+    <image bindtap='posting' src='../../resource/image/poste.png'></image>
+    <image bindtap='backTop' src='../../resource/image/totop.png'></image>
+  </view>
+</view>

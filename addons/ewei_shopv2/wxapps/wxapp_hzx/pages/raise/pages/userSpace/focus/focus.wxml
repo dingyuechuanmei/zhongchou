@@ -1,0 +1,29 @@
+<view class='container'>
+  <view class='list' wx:if='{{title == 1}}'>
+    <view class='item' wx:for='{{focus_list}}'>
+      <image src='{{item.avatar}}'></image>
+      <text class='nick'>{{item.nickname}}</text>
+      <text class='focus-btn'>已关注</text>
+    </view>
+    <view class='wu' wx:if='{{item}}'>您还没有关注的人哦！</view>
+  </view>
+
+  <view class='list' wx:if='{{title == 2}}'>
+    <view class='item'  wx:for='{{fans_list}}'>
+      <image src='{{item.avatar}}'></image>
+      <text class='nick'>{{item.nickname}}</text>
+    </view>
+    <view class='wu' wx:if='{{!fans_list.length}}'>您还没有粉丝哦！</view>
+  </view>
+
+  <view class='list' wx:if='{{title == 3}}'>
+    <view class='item'>
+      <image src='../../../resource/image/avatar.jpg'></image>
+      <text class='nick'>司白评论了您的帖子</text>
+      <view class='tosee'>
+        <text>去看看</text>
+        <view class='you'></view>
+      </view>
+    </view>
+  </view>
+</view>

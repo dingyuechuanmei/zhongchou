@@ -1,0 +1,49 @@
+
+
+<template name="comment_list">
+  <view class='comment_list'>
+    <view class='comment_item'>
+      <view class='avater'>
+        <image src='../../resource/images/1@3x.png'></image>
+        <view class='username_time'>
+          <view class='username'>刘烨</view>
+          <view class='time'>2017/10/12</view>
+        </view>
+      </view>
+      <view class='comment_detail'>
+      是南宋都城临安铺设的一条主要街道。《咸淳临安志》等文献记载，铺设南宋御街一共使用了一万多块石板，但此前的考古发掘却只发现过香糕砖。
+      </view>
+    </view>
+  </view> 
+</template>
+
+
+
+<template name="collect_list">
+  <view class='collect_list'>
+    <view class='collect_item clear'>
+      <image src='../../resource/images/1@3x.png'></image>
+      <view class='text'>
+        <view class='title'>等文献记载，铺设南宋御街一共使用了一万多块石板</view>
+        <view class='content'>是南宋都城临安铺设的一条主要街道。《咸淳临安志》等文献记载，铺设南宋御街一共使用了一万多块石板，但此前的考古发掘却只发现过香糕砖。是南宋都城临安铺设的一条主要街道。《咸淳临安志》等文献记载，铺设南宋御街一共使用了一万多块石板，但此前的考古发掘却只发现过香糕砖。</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<template name="comment_bar">
+  <view class='comment_bar clear'>
+    <input type="text" placeholder='说些什么吧'/>
+    <text>评论</text>
+  </view>
+</template>
+
+
+<template name="collect_star">
+  <view class='collect_star'>
+    <view class='{{staron}}'>
+      <view class='fa fa-star'></view>
+    </view>
+  </view>
+</template>
+

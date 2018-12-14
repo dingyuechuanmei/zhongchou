@@ -1,0 +1,21 @@
+<view class='container'>
+  <view class='title'>
+    <text class='green'>{{total}}</text>人已证实
+  </view>
+  <view class='list'>
+    <view class='item clear' wx:for='{{verify_list}}'>
+      <image src='{{item.avatar}}'></image>
+      <view class='content'>
+        <view class='name'>{{item.realname}}</view>
+        <view class='state green'>已实名</view>
+        <view class='guanxi'>
+          <view>{{item.relation}}</view>
+        </view>
+        <view class='text'>
+          {{item.intro}}
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

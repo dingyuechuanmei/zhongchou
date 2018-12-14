@@ -1,0 +1,88 @@
+{template '_header'}
+<div class="page-heading">
+    <h2>论坛类型列表</h2>
+</div>
+<form action="./index.php" method="get" class="form-horizontal form-search" role="form">
+    <input type="hidden" name="c" value="site" />
+    <input type="hidden" name="a" value="entry" />
+    <input type="hidden" name="m" value="ewei_shopv2" />
+    <input type="hidden" name="do" value="web" />
+    <input type="hidden" name="r"  value="raise.report" />
+    <div class="page-toolbar row m-b-sm m-t-sm">
+        <div class="col-sm-4">
+            <div class="input-group-btn">
+                <button class="btn btn-default btn-sm"  type="button" data-toggle='refresh'><i class='fa fa-refresh'></i></button>
+                <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo webUrl('raise/report/delete')}"><i class='fa fa-trash'></i> 删除</button>
+            </div> 
+        </div>	
+        <div class="col-sm-6 pull-right">
+            <div class="input-group">
+                <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="请输入关键词"> <span class="input-group-btn">
+                 <button class="btn btn-sm btn-primary" type="submit"> 搜索</button> </span>
+            </div>
+        </div>
+    </div>
+</form>
+<form action="" method="post">
+	{if count($list)>0}
+	    <table class="table table-hover table-responsive">
+	        <thead>
+	            <tr>
+	                <th style="width:25px;"><input type='checkbox' /></th>
+	                <th style="width:40px;"></th>			
+	                <th style="width:170px;">举报人信息</th>
+	                <th>举报内容</th>
+	                <th>举报来源</th>
+	                <th>查看对应信息</th>
+	                <th width="130px">举报时间</th>
+	                <th>操作</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            {loop $list $row}
+	            	<tr>
+		                <td>
+	                    	<input type='checkbox' value="{$row['id']}"/>
+		                </td>
+		                <td><img src='{php echo tomedia($row['avatar'])}' style='width:30px;height:30px;padding1px;border:1px solid #ccc' /></td>
+		                <td class="text-muted">
+							<span><a class='text-muted' href="{php echo webUrl('member/list',array('mid'=>$row['mid']))}">{$row['nickname']}</a></span><br/>
+							<span><a class='text-muted' href="{php echo webUrl('member/list',array('mid'=>$row['mid']))}">{$row['mobile']}</a></span>
+						</td>
+		                <td>{$row['category']}</td>
+		                <td>
+		                	{if $row['type'] == 0}
+			                	<span>帖子</span>
+		                	{else}
+			                	<span>评论</span>
+		                	{/if}
+	                	</td>
+		                <td>
+		                	{if $row['type'] == 0}
+			                	<a href="{php echo webUrl('raise/forum', array('f_id' => $row['detch_id']))}" class="btn btn-default btn-sm" ><i class='fa fa-info'></i>查看举报信箱</a>
+		                	{else}
+			                	<a href="{php echo webUrl('raise/review', array('r_id' => $row['detch_id']))}" class="btn btn-default btn-sm" ><i class='fa fa-info'></i>查看举报信箱</a>
+		                	{/if}
+		                </td>
+		                <td>{php echo date('Y-m-d H:i',$row['createtime'])}</td>
+		                <td>
+		                   	<a data-toggle='ajaxRemove' href="{php echo webUrl('raise/report/delete', array('id' => $row['id']))}"class="btn btn-default btn-sm" data-confirm='确认要删除此举报吗?'><i class="fa fa-trash"></i> 删除</a>
+	         			</td>
+	         		</tr>
+	            {/loop}
+	            <tr>
+                    <td colspan='8'>
+                        <div class='pagers' style='float:right;'>
+                            {$pager}			
+                        </div>
+                    </td>
+                </tr>
+	        </tbody>
+	    </table>
+    {else}
+        <div class='panel panel-default'>
+            <div class='panel-body' style='text-align: center;padding:30px;'>暂时没有任何举报!</div>
+        </div>
+    {/if}
+</form>
+{template '_footer'}

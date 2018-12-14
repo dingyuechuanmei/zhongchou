@@ -1,0 +1,130 @@
+{template '_header'}
+<div class="page-heading">
+	<span class='pull-right'>
+		<a class="btn btn-default  btn-sm" href="{php echo webUrl('raise/forum')}">返回列表</a>
+	</span>
+    <h2>论坛详情展示</h2>
+</div>
+<form class="form-horizontal form-search" role="form">
+	<div class="form-group">
+        <label class="col-sm-2 control-label">论坛标题</label>
+        <div class="col-sm-9 col-xs-12 ">
+           	<div class='form-control-static'>{$item['title']}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">论坛来源</label>
+        <div class="col-sm-4 col-xs-12 ">
+           	<div class='form-control-static'>
+          		<span class="text-navy">{$item['cate']}</span>
+          	</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">发帖人信息:</label>
+        <div class="col-sm-1">
+           	<div class='form-control-static'>
+           		<img src="{$item['avatar']}" width="40" height="40">
+           	</div>
+        </div>
+        <label class="col-sm-1 control-label">昵称</label>
+        <div class="col-sm-1">
+           	<div class='form-control-static'>{$item['nickname']}</div>
+        </div>
+        <label class="col-sm-2 control-label">真实姓名</label>
+        <div class="col-sm-2">
+           	<div class='form-control-static'>{php echo $item['realname'] ? $item['realname'] :'匿名' }</div>
+        </div>
+        <label class="col-sm-1 control-label">手机号</label>
+        <div class="col-sm-2">
+           	<div class='form-control-static'>{php echo $item['mobile'] ? $item['mobile'] : '暂无'}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">观看数</label>
+        <div class="col-sm-1">
+           	<div class='form-control-static'>{$item['view_count']}</div>
+        </div>
+        <label class="col-sm-1 control-label">评论数</label>
+        <div class="col-sm-1">
+           	<div class='form-control-static'>{$item['review_count']}</div>
+        </div>
+    </div>
+    <div class="form-group">
+       <label class="col-sm-2 control-label">置顶</label>
+        <div class="col-sm-2">
+           	<div class='form-control-static'>
+				{if $item['is_top'] == 0}
+           			<span class="text-muted">正常</span>
+           		{elseif $item['is_top'] == 1}
+           			<span class="text-navy">置顶</span>
+         		{/if}
+			</div>
+        </div>
+        <label class="col-sm-1 control-label">状态</label>
+        <div class="col-sm-2">
+           	<div class='form-control-static'>
+           		{if $item['is_show'] == 0}
+           			<span class="text-muted">隐藏</span>
+           		{elseif $item['is_show'] == 1}
+           			<span class="text-navy">显示</span>
+         		{/if}
+			</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">点赞人数</label>
+        <div class="col-sm-9">
+           	<div class='form-control-static'>
+           		{loop $item['praise_list'] $img}
+           			<img src="{$img['avatar']}" alt="{$img['nickname']}" width="30px" height="30px" style="border-radius:30px;"/>
+           		{/loop}
+           		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共<span class="text-danger"> {$item['praise_count']} </span> 人
+           	</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">发帖时间</label>
+        <div class="col-sm-4">
+           	<div class='form-control-static'>
+           		<span class="text-success">{php echo $item['createtime'] ? date('Y-m-d H:i',$item['createtime']) : '暂无'}</span>
+           	</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">展示图</label>
+        <div class="col-sm-9">
+           	<div class='form-control-static'>
+           		{loop $item['thumbs'] $img}
+           			<img src="{$img}" width="80px" height="60px"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           		{/loop}
+           	</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">分享商品</label>
+        <div class="col-sm-9">
+           	<div class="feed-activity-list">
+           		{loop $item['recom_list'] $good}
+					<div class="feed-element">
+						<span class="pull-left">
+							<img src="{$good['img']}" class="img-circle" alt="image">
+						</span>
+						<div class="media-body ">
+							<span class="title">{$good['name']}</span>
+							<br>
+							￥<small class="text-danger">{$good['price']}</small> 元
+						</div>
+					</div>
+				{/loop}
+		    </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">发帖内容</label>
+        <div class="col-sm-9 col-xs-12 ">
+           	<div class='form-control-static'>{$item['context']}</div>
+        </div>
+    </div>
+</form>
+{template '_footer'}

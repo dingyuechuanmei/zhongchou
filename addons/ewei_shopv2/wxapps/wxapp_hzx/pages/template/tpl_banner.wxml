@@ -1,0 +1,17 @@
+
+<!-- 轮播图 -->
+
+<template name="banner">
+  
+  	<swiper class="fui-swipe" indicator-dots="true" autoplay="true" interval="2000" duration="500" indicator-active-color="{{diyitem.style.background}}">
+	  	<block wx:for="{{diyitem.data}}" wx:for-item="banneritem">
+		    <swiper-item class="fui-swipe-wrapper">
+		    	<view class="fui-swipe-item" bindtap="click_location_href" data-url="{{banneritem.linkurl}}" >
+		      		<image mode="widthFix" src="{{banneritem.imgurl}}" class="slide-image" style="display: block; width: 100%; height:100%;"/>
+		    	</view>
+		    </swiper-item>
+	  	</block>
+        <div class="fui-swipe-page {{diyitem.style.dotalign}} {{diyitem.style.dotstyle}}" style="padding: 0 {{diyitem.style.leftright}}px; bottom: {{diyitem.style.bottom}}px; "></div>
+	</swiper>
+  
+</template>

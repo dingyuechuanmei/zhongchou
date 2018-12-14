@@ -1,0 +1,91 @@
+{template '_header'}
+<div class="page-heading">
+    <h2>柴火众筹证实列表</h2>
+</div>
+<form action="./index.php" method="get" class="form-horizontal form-search" role="form">
+    <input type="hidden" name="c" value="site" />
+    <input type="hidden" name="a" value="entry" />
+    <input type="hidden" name="m" value="ewei_shopv2" />
+    <input type="hidden" name="do" value="web" />
+    <input type="hidden" name="r"  value="raise.verify" />
+    <div class="page-toolbar item m-b-sm m-t-sm">
+        <div class="col-sm-6">
+            <div class="btn-group btn-group-sm" style='float:left'>
+                <button class="btn btn-default btn-sm" type="button" data-toggle='refresh'><i class='fa fa-refresh'></i></button>
+            </div>
+            <div class='input-group input-group-sm'>
+            	 {php echo tpl_daterange('time', array('sm'=>true,'placeholder'=>'创建时间'),true)}
+            </div>
+        </div>
+        <div class="col-sm-6 pull-right">
+        	<select name="realname" class='form-control input-sm' style="width:120px;">
+                <option value="" {if $_GPC['realname'] == ''}selected{/if}>实名认证</option>
+                <option value="0" {if $_GPC['realname'] == '0'}selected{/if}>未实名</option>
+                <option value="1" {if $_GPC['realname'] == '1'}selected{/if}>已实名</option>
+            </select>
+            <div class="input-group">
+                <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="请输入关键词"> 
+                <span class="input-group-btn">
+                	<button class="btn btn-sm btn-primary" type="submit"> 搜索</button> 
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+<form action="" method="post">
+    {if count($list)>0}
+    	<table class="table table-responsive table-hover" >
+	        <thead class="navbar-inner">
+	            <tr>
+	                <th style="width:25px;"><input type='checkbox' /></th>
+	                <th style='width:100px'>筹款标题</th>
+	                <th style='width:30px'></th>
+	                <th style="width:120px;">证实人信息</th>
+	                <th style='width:100px'>是否实名</th>
+	                <th style='width:160px'>身份证</th>
+	                <th style='width:60px'>关系</th>
+	                <th style='width:110px'>详细介绍</th>
+	                <th style='width:130px'>创建时间</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            {loop $list $item}
+		            <tr>
+		                <td>
+		                    <input type='checkbox' value="{$item['id']}"/>
+		                </td>
+		                <td><a class='text-muted' href="{php echo webUrl('raise/starter',array('starter_id'=>$item['sid']))}">{$item['title']}</a></td>
+		                <td>
+							<img src="{$item['avatar']}" width="30" height="30" />
+						</td>
+		                <td>
+							<span><a class='text-muted' href="{php echo webUrl('member/list',array('mid'=>$item['mid']))}">{$item['nickname']}</a></span><br/>
+							<span><a class='text-muted' href="{php echo webUrl('member/list',array('mid'=>$item['mid']))}">{$item['mobile']}</a></span>
+						</td>
+						<td class="{php echo $item['realname'] ? 'text-navy':'text-warning'}">{php echo $item['realname'] ? '已实名':'未实名'}</td>
+						<td class="text-warning">{$item['card']}</td>
+						<td><a class='text-info' href="{php echo webUrl('raise/relation',array('r_id'=>$item['rid']))}">{$item['relation']}</a></td>
+						<td class="text-muted">
+							<input type="hidden" id="detail" value="{$item['intro']}" />
+        					<a href="javascript:preview_html('#detail')" class="btn btn-link"><i class="fa fa-info"></i>&nbsp;&nbsp;查看介绍</a>
+						</td>
+						<td class="text-danger">{php echo date('Y-m-d H:i',$item['createtime'])}</td>
+		            </tr>
+                {/loop}
+                <tr>
+                    <td colspan='9'>
+                        <div class='pagers' style='float:right;'>
+                            {$pager}			
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {$pager}
+    {else}
+        <div class='panel panel-default'>
+            <div class='panel-body' style='text-align: center;padding:30px;'>暂时没有任何柴火众筹证实数据!</div>
+        </div>
+    {/if}
+</form>
+{template '_footer'}

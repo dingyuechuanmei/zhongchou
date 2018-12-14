@@ -1,0 +1,95 @@
+
+<!-- 图片橱窗 -->
+
+<template name="picturew">
+
+	<block wx:if="diyitem.params.row == 1">
+        
+        <view class="fui-cube" style="background: {{diyitem.style.background}}; {{diyitem.style.fui_cube_padding}}">
+        
+            <block wx:if="{{diyitem.diyitem_data_len == 1}}">
+                <view bindtap="click_location_href" data-url="{{diyitem.data[0].linkurl}}" data-nocache="true"><image src="{{diyitem.data[0].imgurl}}"></image></view>
+            </block>    
+            <block wx:elif="{{diyitem.diyitem_data_len > 1}}">    
+                <view class="fui-cube-left" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; padding-right: 0;">
+                    <image bindtap="click_location_href" data-url="{{diyitem.data[0].linkurl}}" src="{{diyitem.data[0].imgurl}}" />
+                </view>
+                <view class="fui-cube-right" style="{{diyitem.style.fui_cube_right_padding}}">
+                    <block wx:if="{{diyitem.diyitem_data_len == 2}}">
+                        <image bindtap="click_location_href" data-url="{{diyitem.data[1].linkurl}}" src="{{diyitem.data[1].imgurl}}" />
+                	</block>        
+                	<block wx:elif="{{diyitem.diyitem_data_len > 2}}">
+                        <view class="fui-cube-right1" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; padding-bottom: 0;">
+                            <image bindtap="click_location_href" data-url="{{diyitem.data[1].linkurl}}" src="{{diyitem.data[1].imgurl}}" />
+                        </view>
+                        <view class="fui-cube-right2" style="{{diyitem.style.fui_cube_right2_padding}}">
+                             <block wx:if="{{diyitem.diyitem_data_len == 3}}">
+                                <image bindtap="click_location_href" data-url="{{diyitem.data[2].linkurl}}" src="{{diyitem.data[2].imgurl}}" />
+                             </block>         
+                             <block wx:elif="{{diyitem.diyitem_data_len > 3}}">
+                                <view class="left" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; padding-right: 0;">
+                                    <image bindtap="click_location_href" data-url="{{diyitem.data[2].linkurl}}" src="{{diyitem.data[2].imgurl}}" />
+                                </view>
+                             </block>
+                             <block wx:if="{{diyitem.diyitem_data_len >= 4}}">
+                                <view class="right" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px;">
+                                    <image bindtap="click_location_href" data-url="{{diyitem.data[3].linkurl}}" src="{{diyitem.data[3].imgurl}}" />
+                                </view>
+                             </block>
+                        </view>
+                    </block>
+                 </view>
+            </block>
+        </view>
+    </block>    
+    
+    <block wx:elif="{{diyitem.params.row > 1}}">
+    	<block wx:if="{{diyitem.params.showtype == '' || diyitem.diyitem_data_len <= diyitem.style.pagenum}}">
+            <view class="fui-picturew row-{{diyitem.params.row}}" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; background: {{diyitem.style.background}};">
+            	<block wx:for="{{diyitem.data}}" wx:for-item="pictureitem">
+                    <view class="item" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px;">
+                        <image bindtap="click_location_href" data-url="{{pictureitem.linkurl}}"  src="{{pictureitem.imgurl}}"></image>
+                    </view>
+                </block>
+            </view>
+        </block>    
+        <block wx:elif="{{diyitem.style.showdot == 1}}">
+            <view class="swiper swiper-{{diyitemid}}" data-element=".swiper-{{diyitemid}}" data-view="1" data-btn="true">
+                <view class="swiper-container fui-picturew row-{{diyitem.params.row}}" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; background: {{diyitem.style.background}};">
+                    <view class="swiper-wrapper">
+                    	<block wx:for="{{diyitem.data_temp}}" wx:for-item="data_temp">
+                            <view class="swiper-slide">
+                                    <block wx:for="{{data_temp}}" wx:for-item="pictureitem">
+                                    <view class="item" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px;">
+                                        <image bindtap="click_location_href" data-url="{{pictureitem.linkurl}}"  src="{{pictureitem.imgurl}}"></image>
+                                    </view>
+                                </block>
+                            </view>
+                        </block>
+                    </view>
+                    <view class="swiper-pagination" style="position: absolute; bottom: 0;"></view>
+                    <view class="swiper-button-next swiper-button-white"></view>
+                    <view class="swiper-button-prev swiper-button-white"></view>
+                </view>
+            </view>
+        </block>
+        <block wx:else>
+        	<view class="swiper swiper-{{diyitemid}}" data-element=".swiper-{{diyitemid}}" data-view="1" data-btn="true">
+                <view class="swiper-container fui-picturew row-{{diyitem.params.row}}" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; background: {{diyitem.style.background}};">
+                    <view class="swiper-wrapper">
+                    	<block wx:for="{{diyitem.data_temp}}" wx:for-item="data_temp">
+                            <view class="swiper-slide">
+                                    <block wx:for="{{data_temp}}" wx:for-item="pictureitem">
+                                    <view class="item" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px;">
+                                        <image bindtap="click_location_href" data-url="{{pictureitem.linkurl}}"  src="{{pictureitem.imgurl}}"></image>
+                                    </view>
+                                </block>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </block>
+
+</template>

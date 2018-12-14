@@ -1,0 +1,118 @@
+		<!-- 模板引用 -->
+		
+		<template name="template">
+	        <!-- audio 音频 -->
+			<block wx:if="{{diyitem.id == 'audio'}}">
+				<import src="../template/tpl_audio.wxml"/>
+				<template is="audio" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- video 视频 -->
+			<block wx:if="{{diyitem.id == 'video'}}">
+				<import src="../template/tpl_video.wxml"/>
+				<template is="video" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- notice 公告 -->
+	        <block wx:if="{{diyitem.id == 'notice'}}">
+		        <import src="../template/tpl_notice.wxml"/>
+				<template is="notice" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- tabbar 选项卡 -->
+	        <block wx:if="{{diyitem.id == 'tabbar'}}">
+		        <import src="../template/tpl_tabbar.wxml"/>
+				<template is="tabbar" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- listmenu 列表导航 -->
+	        <block wx:if="{{diyitem.id == 'listmenu'}}">
+		        <import src="../template/tpl_listmenu.wxml"/>
+				<template is="listmenu" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- richtext 富文本 -->
+	        <block wx:if="{{diyitem.id == 'richtext'}}">
+		        <import src="../template/tpl_richtext.wxml"/>
+				<template is="richtext" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- title 标题栏 -->
+	        <block wx:if="{{diyitem.id == 'title'}}">
+		        <import src="../template/tpl_title.wxml"/>
+				<template is="title" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- line 辅助线 -->
+	        <block wx:if="{{diyitem.id == 'line'}}">
+		        <import src="../template/tpl_line.wxml"/>
+				<template is="line" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- blank 辅助空白 -->
+	        <block wx:if="{{diyitem.id == 'blank'}}">
+		        <import src="../template/tpl_blank.wxml"/>
+				<template is="blank" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- menu 按钮组1 -->
+	        <block wx:if="{{diyitem.id == 'menu'}}">
+		        <import src="../template/tpl_menu.wxml"/>
+				<template is="menu" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- menu2 按钮组2 -->
+	        <block wx:if="{{diyitem.id == 'menu2'}}">
+		        <import src="../template/tpl_menu2.wxml"/>
+				<template is="menu2" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- picture 单图组 -->
+	        <block wx:if="{{diyitem.id == 'picture'}}">
+		        <import src="../template/tpl_picture.wxml"/>
+				<template is="picture" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- banner 图片轮播 -->
+	        <block wx:if="{{diyitem.id == 'banner'}}">
+		        <import src="../template/tpl_banner.wxml"/>
+				<template is="banner" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- picturew 图片橱窗 -->
+	        <block wx:if="{{diyitem.id == 'picturew'}}">
+		        <import src="../template/tpl_picturew.wxml"/>
+				<template is="picturew" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	        
+	        <!-- pictures 图片展播 -->
+	        <block wx:if="{{diyitem.id == 'pictures'}}">
+		        <import src="../template/tpl_pictures.wxml"/>
+				<template is="pictures" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+	
+	        <!-- icongroup 图标组 -->
+	        <block wx:if="{{diyitem.id == 'icongroup'}}">
+		        <import src="../template/tpl_icongroup.wxml"/>
+				<template is="icongroup" data="{{diyitemid:diyitemid,diyitem: diyitem}}"/>
+	        </block>
+
+	        <!-- goods 商品组 -->
+	        <block wx:if="{{diyitem.id == 'goods'}}">
+		        <import src="../template/tpl_goods.wxml"/>
+				    <template is="goods" data="{{diyitemid:diyitemid,diyitem: diyitem,shopset:shopset,siteurl:siteurl}}"/>
+	        </block>
+	        
+          <!-- search 搜索框 -->
+	        <block wx:if="{{diyitem.id == 'search'}}">
+		        <import src="../template/tpl_search.wxml"/>
+				    <template is="search" data="{{diyitemid:diyitemid,diyitem: diyitem,shopset:shopset,siteurl:siteurl}}"/>
+	        </block>
+
+          <!-- fixedsearch 固定搜索框 -->
+	        <block wx:if="{{diyitem.id == 'fixedsearch'}}">
+		        <import src="../template/tpl_fixedsearch.wxml"/>
+				    <template is="fixedsearch" data="{{diyitemid:diyitemid,diyitem: diyitem,shopset:shopset,siteurl:siteurl}}"/>
+	        </block>
+        </template>
+

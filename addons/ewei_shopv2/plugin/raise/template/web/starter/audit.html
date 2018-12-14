@@ -1,0 +1,84 @@
+<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h4 class="modal-title">柴火众筹审核信息</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">众筹标题</label>
+                <div class="col-sm-9 col-xs-12">
+                    <input type="text" readonly="readonly" class="form-control" value="{$item['title']}"/>
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-sm-2 control-label">救助说明</label>
+                <div class="col-sm-9 col-xs-12">
+                    <textarea rows="6" cols="53" readonly="readonly">{$item['content']}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label must">状态</label>
+                <div class="col-sm-9 col-xs-12">
+                    <label class='radio-inline'>
+	                	<input type='radio' name='status' value='1' {if empty($item['status']) || $item['status']==1}checked{/if} />通过
+	                </label>
+	            	<label class='radio-inline'>
+	            		<input type='radio' name='status' value='2' {if $item['status']==2}checked{/if} />拒绝
+	            	</label>
+                </div>
+            </div>
+            <div class="form-group abort_time {if empty($item['status']) || $item['status']==1}show{else}hide{/if}">
+            	<label class="col-sm-2 control-label must">截止时间</label>
+                <div class="col-sm-7 col-xs-12">
+                    {php echo tpl_form_field_date('aborttime',$item['aborttime'],true)}
+                </div>
+            </div>
+            <div class="form-group rejectreason {if $item['status']==2}show{else}hide{/if}">
+            	<label class="col-sm-2 control-label must">拒绝理由</label>
+                <div class="col-sm-7 col-xs-12">
+                    <textarea rows="6" cols="53" name="rejectreason">{$item['rejectreason']}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">提交</button>
+            <input type="hidden" name="id" value="{$id}" />
+			<input type="hidden" name="r" value="raise.starter.audit" />
+            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+        </div>
+    </div>
+</div>
+<script language='javascript'>
+$(function(){
+	$("input[name='status']").click(function(){
+		if($(this).val() == 1){
+			$('.abort_time').removeClass('hide').addClass('show');
+			$('.rejectreason').removeClass('show').addClass('hide');
+		}else{
+			$('.abort_time').removeClass('show').addClass('hide');	
+			$('.rejectreason').removeClass('hide').addClass('show');	
+		}
+	})
+	$('form').submit(function(){
+		if($("input[name='status']").isEmpty()){
+			$('form').attr('stop',1);           
+	    	$(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请选择审核状态!');	
+	    	return false;	
+		}
+		if ($("input[name='status']:checked").val() == 1 && $("input[name='aborttime']").isEmpty()) {			
+			$('form').attr('stop',1);           
+	    	$(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请选择截止时间!');	
+	    	return false;		
+	    }
+		if ($("input[name='status']:checked").val() == 2 && $("textarea[name='refuse_reason']").isEmpty()) {			
+			$('form').attr('stop',1);           
+	    	$(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请填写拒绝理由!');	
+	    	return false;		
+	    }
+		return true;
+	});
+})
+</script>
+</form>

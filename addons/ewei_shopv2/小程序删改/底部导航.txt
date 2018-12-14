@@ -1,0 +1,30 @@
+"tabBar": {
+    "color": "#999999",
+    "selectedColor": "#ff0011",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/images/icon/home.png",
+        "selectedIconPath": "static/images/icon-red/home.png"
+      },
+      {
+        "pagePath": "pages/shop/caregory/index",
+        "text": "全部分类",
+        "iconPath": "static/images/icon/cate.png",
+        "selectedIconPath": "static/images/icon-red/cate.png"
+      },
+      {
+        "pagePath": "pages/member/cart/index",
+        "text": "购物车",
+        "iconPath": "static/images/icon/cart.png",
+        "selectedIconPath": "static/images/icon-red/cart.png"
+      },
+      {
+        "pagePath": "pages/member/index/index",
+        "text": "会员中心",
+        "iconPath": "static/images/icon/people.png",
+        "selectedIconPath": "static/images/icon-red/people.png"
+      }
+    ]
+  },

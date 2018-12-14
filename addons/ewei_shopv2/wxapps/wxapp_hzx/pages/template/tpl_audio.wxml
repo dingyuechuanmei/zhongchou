@@ -1,0 +1,19 @@
+
+<!-- 音频文件 -->
+
+<template name="audio">
+ 	
+		<block wx:if="{{diyitem.params.audiourl != ''}}">
+		 	<view class="fui-chat-item {{diyitem.params.headalign}} play-audio" style="background: {{diyitem.style.background}}; margin: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; border-color: {{diyitem.style.bordercolor}};">
+				
+		        <block wx:if="{{diyitem.params.loopplay == 0}}">
+		            <audio poster="{{diyitem.params.headurl}}" name="{{diyitem.params.title != ''?diyitem.params.title:'未定义标题'}}" author="{{diyitem.params.subtitle?diyitem.params.subtitle:'未知'}}" src="{{diyitem.params.audiourl}}" class="center" controls></audio>
+		        </block>
+		        <block wx:else>
+		            <audio poster="{{diyitem.params.headurl}}" name="{{diyitem.params.title != ''?diyitem.params.title:'未定义标题'}}" author="{{diyitem.params.subtitle?diyitem.params.subtitle:'未知'}}" src="{{diyitem.params.audiourl}}" class="center" controls loop></audio>
+		        </block>
+			    
+		  	</view>
+		</block>
+  
+</template>

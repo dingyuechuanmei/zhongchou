@@ -1,0 +1,55 @@
+
+
+
+-- 1.增加多商户手机端管理中心
+INSERT  INTO `ims_ewei_shop_plugin`(`id`,`displayorder`,`identity`,`category`,`name`,`version`,`author`,`status`,`thumb`,`desc`,`iscom`,`deprecated`,`isv2`) VALUES (NULL,48,'amanage','tool','手机端商户管理中心','1.0','二开',1,'../addons/ewei_shopv2/static/images/mmanage.jpg',NULL,0,0,0);
+
+
+
+-- 2.安装插件amanage
+
+	/addons/ewei_shopv2/core/com/perm.php
+		// allPerms 方法下加上
+		$perms = array_merge($perms,array('amanage'=>$this->perm_amanage()));
+
+		// 权限配置
+		protected function perm_amanage() 
+		{
+			return ($this->isopen('amanage') && $this->is_perm_plugin('amanage') ? array('text' => m('plugin')->getName('amanage'), 'setting' => array('text' => '基本设置', 'main' => '查看', 'save' => '保存-log') ) : array());
+		}
+
+	/addons/ewei_shopv2/core/inc/page_mobile.php
+		// 分配菜单
+		if ($controller == 'amanage') 
+		{
+			include $this->template('amanage/_menu');
+			return;
+		}
+
+	/addons/ewei_shopv2/core/model/shop.php
+		// checkClose 方法内加入
+		if ($_W['plugin'] == 'amanage') 
+		{
+			return;
+		}
+
+	/addons/ewei_shopv2/core/model/order.php
+		// getTotals 方法加入
+		if ($merch <= 0) {
+            $condition.= ' and merchid=0';
+        }else{
+            $condition.= ' and merchid='.$merch;
+        }
+
+	/addons/ewei_shopv2/core/model/goods.php
+		// getTotals($merch = 0) 方法加到判断条件后边
+		$condition = "";
+		if ($merch <= 0) {
+            $condition.= ' and merchid=0';
+        }else{
+            $condition.= ' and merchid='.$merch;
+        }
+
+-- 3.补全字段
+
+    ALTER TABLE ims_ewei_shop_merch_user ADD `bindrole`  tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否绑定微信';

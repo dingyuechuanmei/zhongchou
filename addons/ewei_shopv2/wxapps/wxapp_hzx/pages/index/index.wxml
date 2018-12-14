@@ -1,0 +1,81 @@
+<block wx:if="{{isdiypage == 0}}">
+  <loading hidden="{{show}}">正在加载</loading>
+  <view class="page" wx:if="{{show}}">
+    <block wx:for="{{shop.sorts}}">
+      <include src="adv.wxml" wx:if="{{item.type == 'adv'}}" />
+      <include src="search.wxml" wx:if="{{item.type == 'search'}}" />
+      <include src="nav.wxml" wx:if="{{item.type == 'nav'}}" />
+      <include src="notice.wxml" wx:if="{{item.type == 'notice'}}" />
+      <include src="cube.wxml" wx:if="{{item.type == 'cube'}}" />
+      <include src="banner.wxml" wx:if="{{item.type == 'banner'}}" />
+      <!-- <include src="recommand.wxml" wx:if="{{item.type == 'recommand'}}" /> -->
+
+        <include src='listmenu.wxml' wx:if="{{item.id == 'listmenu'}}" />
+        <include src='richtext.wxml' wx:if="{{item.id == 'richtext'}}" />
+        <include src='title.wxml' wx:if="{{item.id == 'title'}}" />
+        <include src='line.wxml' wx:if="{{item.id == 'line'}}" />
+        <include src='blank.wxml' wx:if="{{item.id == 'blank'}}" />
+        <include src='fixedsearch.wxml' wx:if="{{item.id == 'fixedsearch'}}" />
+        <include src='menu2.wxml' wx:if="{{item.id == 'menu2'}}" />
+        <include src='picture.wxml' wx:if="{{item.id == 'picture'}}" />
+        <include src='coupon.wxml' wx:if="{{item.id == 'coupon'}}" />
+        <include src='video.wxml' wx:if="{{item.id == 'video'}}" />
+
+    </block>
+
+    <view id="recommand" wx:if="{{storeRecommand}}">
+      <view class="fui-line" style="background: #f2f2f2;">
+        <view class="text text-danger">店铺推荐</view>
+      </view>
+      <view class="fui-goods-group block border">
+        <block wx:for="{{storeRecommand}}" wx:for-index="idx">
+          <view class="fui-goods-item" data-goodsid="{{item.id}}" data-type="{{item.type}}">
+            <navigator url="/pages/goods/detail/index?id={{item.id}}">
+              <view class="image" style="background-image:url('{{item.thumb}}');"></view>
+              <view class="salez" style="background-image: url('{{shop.saleout}}'); " wx:if="{{item.total <= 0}}"></view>
+            </navigator>
+            <view class="detail">
+              <navigator url="/pages/goods/detail/index?id={{item.id}}">
+                <view class="name">
+                  <text class="fui-tag fui-tag-danger" wx:if="{{item.ispresell==1}}">预售</text> {{item.title}}
+                </view>
+              </navigator>
+              <view class="index_price price">
+                <text class="text">￥{{item.minprice}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="fui-loading" wx:if="{{loading}}">
+      <view class="icon"></view>
+      <view class="text">正在加载</view>
+    </view>
+    <!-- <navigator hover-class="none" url="/pages/shop/merch/index/index" class="fui-dot">
+      <image src="/static/images/icon/store.png"></image>
+    </navigator> -->
+    <view class="fui-loading empty" wx:if="{{storeRecommand.length == total && total > 0}}">
+      <view class="text">没有更多了</view>
+    </view>
+    <include src="/pages/common/copyright.wxml" />
+  </view>
+</block>
+
+<block wx:else>
+  <view class="fui-content {{page.navbar}}" id="container" style="background-color: {{page.background_color}}; {{page.padding_bottom}}">
+    <block wx:if="{{diyitems_length > 0}}" wx:for-items="{{diyitems}}" wx:key="{{index}}" wx:for-item="item">
+      <import src="../template/tpl_template.wxml" />
+      <template is="template" data="{{diyitemid:index,diyitem:item,shopset:shopset,siteurl:siteurl}}" />
+    </block>
+
+    <import src="../../wxParse/wxParse.wxml" />
+    <template is="wxParse" data="{{wxParseData:template.nodes}}" />
+
+    <view style="{{index_bottom}}" class="333"> </view>
+
+  </view>
+</block>
+
+<import src="/pages/template/tpl_footer_tabbar.wxml" />
+<template is="tabBar" data="{{menu:menus.data,diymenu:menus,menus_length:menus_length,cartcount:cartcount,cur_page:cur_page}}" />

@@ -1,0 +1,18 @@
+
+<!-- 通知 -->
+
+<template name="notice">
+    <view class="fui-notice" style="background: {{diyitem.style.background}}" data-speed="{{diyitem.params.speed}}">
+        <view class="image"><image src="{{diyitem.params.iconurl}}"></image></view>
+        <view class="icon">
+        	<text class="icon icon-notification1" style="font-size: 0.7rem; color: {{diyitem.style.iconcolor}};"></text>
+        </view>
+        <view class="text" style="color: {{diyitem.style.color}};">
+        	<scroll-view scroll-y style="height: 20px;">
+	            <block wx:for="{{diyitem.data}}" wx:for-item="noticeitem">
+					<view bindtap="click_location_href" data-url="{{noticeitem.linkurl}}" id="{{index}}" class="scroll-view-item" style="color: {{diyitem.style.color}};">{{noticeitem.title}}</view>
+	            </block>
+			</scroll-view>
+        </view>
+    </view>
+</template>

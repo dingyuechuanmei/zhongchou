@@ -1,0 +1,24 @@
+<!--pages/shop/oneShops.wxml-->
+<swiper indicator-dots="{{indicatorDots}}"autoplay="true" interval="3000" duration="{{duration}}"indicator-color="red"indicator-dots="true">
+  <block wx:for="1">
+    <swiper-item>
+      <view class='oneBanner' style='background:red;'>
+          <image src=''></image>
+      </view>
+    </swiper-item>
+  </block>
+    <block wx:for="1">
+    <swiper-item>
+      <view class='oneBanner' style='background:black;'>
+          <image src=''></image>
+      </view>
+    </swiper-item>
+  </block> 
+   <block wx:for="1">
+    <swiper-item>
+      <view class='oneBanner' style='background:yellow;'>
+          <image src=''></image>
+      </view>
+    </swiper-item>
+  </block>
+</swiper>

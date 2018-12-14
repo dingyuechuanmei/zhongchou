@@ -1,0 +1,28 @@
+<!-- 底部菜单 -->
+<template name="tabBar">  
+  <block wx:if="{{menus_length > 0}}">
+    <view class="diymenu" style="position: fixed; height: 50px; background:#fff; z-index:999;">
+      <block wx:for-items="{{menu}}" wx:key="{{index}}" wx:for-item="item" >
+        <view class="item item-col-{{menus_length}}" bindtap="click_location_href" data-url="{{item.linkurl}}" data-isswitch="{{item.isswitch}}" data-type="{{item.linkurl == '/pages/member/cart/index'?0:((item.linkurl != '/pages/member/index/index' && item.linkurl != '/pages/shop/caregory/index' && item.linkurl != '/pages/index/index' && item.linkurl != '/pages/goods/list/index')?0:2)}}" >
+          <view class="inner image {{diymenu.params.navfloat}} {{item.checked}}" style="background: {{diymenu.style.bgcolor}};">
+            <block wx:if="{{item.linkurl == '/pages/member/cart/index' && cartcount>0 && diymenu.params.cartnum == 1}}">
+              <span class="badge" style="background: {{diymenu.style.cartbgcolor}};">{{cartcount}}</span>
+            </block>
+            <block wx:if="{{diymenu.params.navstyle == 0}}">
+              <block wx:if="{{item.iconclass != ''}}" >     
+                <span class="icon {{item.iconclass}} {{diymenu.params.navfloat}} {{item.checked}}" style="font-size:20px;color: {{item.linkurl == cur_page?'red':diymenu.style.iconcolor}};"></span>
+                <span class="text {{diymenu.params.navfloat}} {{item.checked}}" style="font-size:12px;color: {{item.linkurl == cur_page?'red':diymenu.style.textcolor}};">{{item.text}}</span>
+              </block>
+              <block wx:else>
+                <span class="text {{diymenu.params.navfloat}} {{item.checked}}" style="margin-top: 10px; font-size: 15px;color: {{item.linkurl == cur_page?'red':diymenu.style.textcolor}};">{{item.text}}               </span>
+              </block>    
+            </block>    
+            <block wx:else>
+              <image src="{{item.imgurl}}"></image>
+            </block>
+          </view>
+        </view>
+    </block>
+    </view>
+  </block>
+</template>

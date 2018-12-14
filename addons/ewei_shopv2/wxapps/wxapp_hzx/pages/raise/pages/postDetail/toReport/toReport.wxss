@@ -1,0 +1,6 @@
+@import "../../../resource/css/app.wxss";
+
+.title {line-height: 80rpx; border: 1px solid #f0f0f0; padding-left: 20rpx;}
+radio-group {padding: 0 20rpx; background: #fff;}
+label {display: block; padding: 20rpx 0; border-bottom: 1px solid #f0f0f0;}
+.btn {background: red; color: #fff; margin-top: 60rpx; margin-left: 40rpx; margin-right: 40rpx;}

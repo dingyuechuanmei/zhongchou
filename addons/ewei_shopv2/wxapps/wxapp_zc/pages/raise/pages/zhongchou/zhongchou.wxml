@@ -1,0 +1,48 @@
+<view class='container'>
+  <view class='zhongchou'>
+    <view class='topbar'>
+      <view class='div_3'>
+        <view class='item {{item.state}}' wx:for='{{topitem}}' wx:for-index="idx" data-idx = '{{idx}}' bindtap='topitem'>
+          <view>{{item.name}}</view>
+         </view>
+      </view>
+    </view>
+    <view class='zhongchou_list'>
+      <view class='zhongchou_item' bindtap='zhongchouitemdetail' wx:for='{{starter_list}}' data-id='{{item.id}}'>
+        <view class='person'>
+          <image src='{{item.avatar}}'></image>
+          <view class='name'>{{item.nickname}}</view>
+          <view class='state'>
+            <view class='num'> 
+              <text class='green'>{{item.verify_count}}</text>人已证实
+            </view>
+            <view class='check green_bg'>
+              已审核
+            </view>
+          </view>
+        </view>
+          <view class='posterimg'>
+            <!-- <image src='{{approot}}wxapp_attr/3@3x.png'></image> -->
+            <image src='{{item.thumb}}' mode="aspectFill"></image>
+            <view class='title'>{{item.title}}</view>
+          </view>
+          
+        <view class='progress' wx:if='{{cur_id != 20}}'>
+          <progress percent="{{item.per}}" stroke-width='4' color='#ff6749' show-info />
+          <view class='div_3'>
+            <view class='item'>目标
+            {{item.target_money}}元</view>
+            <view class='item'>已筹
+            {{item.refer_money}}元</view>
+            <view class='item'>{{item.support_count}}
+            次支持</view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+
+    <view class='startzhongchou' bindtap='startzhongchou'>发起微客</view>
+  
+  </view>
+</view>

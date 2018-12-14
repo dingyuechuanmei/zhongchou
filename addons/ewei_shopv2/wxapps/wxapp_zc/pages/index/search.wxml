@@ -1,0 +1,12 @@
+  <view class="fui-searchbar bar">
+    <view class="searchbar">
+      <navigator hover-class="none" class="weui-search-bar__form" url="/pages/goods/index/index?fromsearch=1">
+        <view class="search-input">
+          <view class="flex-icon-search">
+            <image src="{{icons.search}}"></image>
+          </view>
+          <view class="input search">输入关键字进行搜索</view>
+        </view>
+      </navigator>
+    </view>
+  </view>

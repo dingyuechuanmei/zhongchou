@@ -1,0 +1,99 @@
+{template 'amanage/common'}
+
+    <form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data">
+		<div class='fui-page fui-page-current order-detail-page'>
+		    <div class="fui-header fui-header-success">
+		        <div class="fui-header-left">
+		            <a class="back btn-back"></a>
+		        </div>
+		        <div class="title">提现申请</div>
+		        <div class="fui-header-right"></div>
+		    </div>
+
+		    <div class='fui-content navbar'>
+		    	{if $item['realprice'] > 0}
+			    	<div class="fui-title">提现方式</div>
+			        
+			    	<div class="fui-cell-group">
+				    	<div class="fui-cell">
+				            <div class="fui-cell-label">提现方式</div>
+				            <div class="fui-cell-info">
+				            	<select name="applytype" id="applytype">
+				            		{loop $type_array $key $value}
+						            	<option value="{$key}" {if !empty($value['checked'])}selected{/if}>{$value['title']}</option>
+					            	{/loop}
+				            	</select>
+				            </div>
+				        </div>
+
+				        {if !empty($type_array[2]) || !empty($type_array[3])}
+					        <div class="fui-cell ab-group" {if empty($type_array[2]['checked']) || empty($type_array[3]['checked']) }style="display: none;"{/if}>
+					            <div class="fui-cell-label">姓名</div>
+					            <div class="fui-cell-info">
+					            	<input type="text" id="realname" name="realname" placeholder="请输入姓名" class="fui-input" value="{$last_data['applyrealname']}">
+					            </div>
+					        </div>
+				        {/if}
+
+				        {if !empty($type_array[2])}
+					        <div class="fui-cell alipay-group" {if empty($type_array[2]['checked'])}style="display: none;"{/if}>
+					            <div class="fui-cell-label">支付宝帐号</div>
+					            <div class="fui-cell-info">
+					            	<input type="text" id="alipay" name="alipay" placeholder="" class="fui-input" value="{$last_data['alipay']}">
+					            </div>
+					        </div>
+					        <div class="fui-cell alipay-group" {if empty($type_array[2]['checked'])}style="display: none;"{/if}>
+					            <div class="fui-cell-label">确认帐号</div>
+					            <div class="fui-cell-info">
+					            	<input type="text" id="alipay1" name="alipay1" placeholder="" class="fui-input" value="{$last_data['alipay']}">
+					            </div>
+					        </div>
+				        {/if}
+
+				        {if !empty($type_array[3])}
+					        <div class="fui-cell bank-group" {if empty($type_array[3]['checked'])}style="display: none;"{/if}>
+					            <div class="fui-cell-label">选择银行</div>
+					            <div class="fui-cell-info">
+					            	<select name='bankname' id="bankname">
+								        {loop $banklist $key $value}
+								        <option value="{$value['bankname']}" {if !empty($last_data) && $last_data['bankname'] == $value['bankname']}selected{/if}>{$value['bankname']}</option>
+								        {/loop}
+								    </select>
+					            </div>
+					        </div>
+					        <div class="fui-cell bank-group" {if empty($type_array[3]['checked'])}style="display: none;"{/if}>
+					            <div class="fui-cell-label">确认帐号</div>
+					            <div class="fui-cell-info">
+					            	<input type="text" id="bankcard" name="bankcard" placeholder="" class="fui-input" value="{$last_data['bankcard']}">
+					            </div>
+					        </div>
+					        <div class="fui-cell bank-group" {if empty($type_array[3]['checked'])}style="display: none;"{/if}>
+					            <div class="fui-cell-label">确认卡号</div>
+					            <div class="fui-cell-info">
+					            	<input type="text" id="bankcard1" name="bankcard1" placeholder="" class="fui-input" value="{$last_data['bankcard']}">
+					            </div>
+					        </div>
+				        {/if}
+				    {/if}
+			    </div>
+
+		    </div>
+		    <div class="fui-navbar">
+		        <div class="nav-item btn btn-gray cancel-params back btn-back">取消</div>
+		        {if $item['realprice'] > 0}
+		        	<div class="nav-item btn btn-success submit-params">提交申请</div>
+		        	<input style="display: none;" type="submit" value="提交申请" class="nav-item btn btn-success submit-params-input"  />
+		        {/if}
+		    </div>
+
+		    <div id="div2"></div>
+
+		    <script language="javascript">
+		        require(['../addons/ewei_shopv2/plugin/amanage/static/js/finance-withdrow.js'],function(modal){
+		            modal.init({url:"{php echo mobileUrl('amanage/finance/finance-withdrow')}"});
+		        });
+		    </script>
+
+		</div>
+	</form>
+{template '_footer'}

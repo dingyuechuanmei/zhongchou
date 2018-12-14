@@ -1,0 +1,31 @@
+{template '_header'}
+<script>document.title = "商户定位"; </script>
+<link rel="stylesheet" href="../addons/ewei_shopv2/static/js/dist/swiper/swiper.min.css">
+<link href="../addons/ewei_shopv2/plugin/diypage/static/css/foxui.diy.css?v=201612121750"rel="stylesheet"type="text/css"/>
+<style type="text/css">
+    {if is_h5app()&&is_ios()}
+        .fui-header ~ .diy-fixedsearch {top: 3.2rem;}
+    {/if}
+</style>
+<div class='fui-page  fui-page-current'>
+
+<div class="fui-header">
+    <div class="fui-header-left">
+        <a class="back"></a>
+    </div>
+    <div class="title">商户定位</div>
+</div>
+
+<div class="fui-content" id="container">
+    
+</div>
+
+<script language="javascript">
+    require(['../addons/ewei_shopv2/plugin/diypage/static/js/mobile.js'], function(modal){
+        modal.init();
+    });
+</script>
+
+</div>
+
+{template '_footer'}

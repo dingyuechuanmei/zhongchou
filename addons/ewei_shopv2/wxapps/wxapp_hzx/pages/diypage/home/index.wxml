@@ -1,0 +1,15 @@
+
+<view class="fui-content {{page.navbar}}" id="container" style="background-color: {{page.background_color}}; {{page.padding_bottom}}">
+    <block wx:if="{{diyitems_length > 0}}" wx:for-items="{{diyitems}}" wx:key="{{index}}" wx:for-item="item">
+        <import src="../../template/tpl_template.wxml"/>
+		    <template is="template" data="{{diyitemid:index,diyitem:item,shopset:shopset,siteurl:siteurl}}"/>
+    </block>
+    
+    <import src="../../../wxParse/wxParse.wxml"/> 
+    <template is="wxParse" data="{{wxParseData:template.nodes}}"/>
+    
+  <import src="../../template/tpl_footer_tabbar.wxml"/>
+	<template is="tabBar" data="{{menu:pageinfo.menus.data,diymenu:pageinfo.menus,menus_length:menus_length,id:pageinfo.id,cartcount:cartcount,cur_page:cur_page}}"/>
+
+	<view style="{{index_bottom}}"> </view>
+</view>

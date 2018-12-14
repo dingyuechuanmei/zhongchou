@@ -1,0 +1,6 @@
+
+<!-- 辅助空白 -->
+
+<template name="blank">
+  <view class="fui-blank" style="height: {{diyitem.style.height}}px; background: {{diyitem.style.background}};"></view>
+</template>

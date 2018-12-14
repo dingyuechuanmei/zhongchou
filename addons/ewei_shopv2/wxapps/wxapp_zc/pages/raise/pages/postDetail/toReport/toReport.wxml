@@ -1,0 +1,9 @@
+<view class='container'>
+  <view class='title'>请选择投诉举报内容：</view>
+  <radio-group class="radio-group" bindchange="radioChange">
+    <label class="radio" wx:for="{{cate_list}}">
+      <radio color='red' value="{{item.id}}" checked="{{item.checked}}"/>{{item.category}}
+    </label>
+  </radio-group>
+  <view class='btn' bindtap='submit'>提交</view>
+</view>

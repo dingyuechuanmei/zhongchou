@@ -1,0 +1,45 @@
+/* pages/member/withdraw/zongcou.wxss */
+.saa{
+  width:100%;
+  padding:20rpx 30rpx;
+  box-sizing: border-box;
+}
+.title_s{
+  border-bottom:2rpx solid #eeeeee;
+  font-size:32rpx;
+  padding:20rpx 0;
+  box-sizing: border-box;
+}
+.money{
+  width:100%;
+  padding:120rpx 0;
+  text-align: center;
+  font-size:38rpx;
+  color:red;
+
+}
+.fangshi{
+
+ border-top:2rpx solid #eeeeee;
+ font-size:32rpx;
+  padding:20rpx 0;
+  box-sizing:border-box;
+}
+.submi{
+  width:90%;
+  margin:0 auto;
+  background:#5CC6BA;
+  color:white;
+  padding:14rpx 0;
+  text-align:center;
+  border-radius:8rpx;
+  margin-top:40rpx;
+}
+text{
+  color:#797676a6;
+    padding-left: 20rpx;
+}
+.tishi{
+  font-size:26rpx;
+  margin-top:20rpx;
+}

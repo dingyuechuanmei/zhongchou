@@ -1,0 +1,130 @@
+@import "../../resource/css/app.wxss";
+
+.zhongchou {
+}
+.zhongchou .topbar {
+  background: #fff;
+}
+.zhongchou .topbar .item view {
+  display: inline-block;
+  height: 110rpx;
+  line-height: 110rpx;
+  position: relative;
+}
+.zhongchou .topbar .item view::after {
+  content: "";
+  width: 100%;
+  height: 6rpx;
+  background: transparent;
+  position: absolute;
+  left: 0;
+  top: auto;
+  bottom: 0;
+}
+.zhongchou .topbar .item.on {
+  color: #ff6749;
+}
+.zhongchou .topbar .item.on view::after {
+  background: #ff6749;
+}
+.zhongchou .zhongchou_list {
+  padding-bottom: 120rpx;
+}
+.zhongchou .zhongchou_item {
+  margin-top: 20rpx;
+  background: #fff;
+}
+.zhongchou .zhongchou_item .person {
+  height: 110rpx;
+}
+.zhongchou .zhongchou_item .person image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  margin-top: 20rpx;
+  margin-left: 30rpx;  
+}
+.zhongchou .zhongchou_item .person > view {
+  display: inline-block;
+  vertical-align: top;
+}
+.zhongchou .zhongchou_item .person  .name {
+  height: 100%;
+  line-height: 110rpx;
+  margin-left: 20rpx;
+}
+.zhongchou .zhongchou_item .person .state {
+  float: right;
+  margin-right: 30rpx;
+  font-size: 24rpx;
+
+}
+.zhongchou .zhongchou_item .person .state > view {
+  display: inline-block;
+}
+.zhongchou .zhongchou_item .person .state .num {
+  height: 110rpx;
+  line-height: 110rpx; 
+  color: #999;
+  margin-right: 30rpx;
+}
+.zhongchou .zhongchou_item .person .state .check {
+  color: #fff;
+  padding: 4rpx 10rpx;
+  border-radius: 4rpx;
+}
+.zhongchou .zhongchou_item .posterimg {
+  position: relative;
+}
+.zhongchou .zhongchou_item .posterimg image {
+  width: 100%;
+  height: 400rpx;
+}
+.zhongchou .zhongchou_item .posterimg::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .4);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.zhongchou .zhongchou_item .posterimg .title {
+  position: absolute;
+  left: 30rpx;
+  top: auto;
+  bottom: 30rpx;
+  color: #fff;
+  z-index: 99;
+}
+.zhongchou .zhongchou_item .progress {
+  padding: 30rpx;
+}
+.zhongchou .zhongchou_item .div_3 {
+  margin-top: 30rpx;
+  font-size: 24rpx;
+}
+.zhongchou .zhongchou_item .div_3 .item:nth-child(1) {
+  text-align: left;
+}
+.zhongchou .zhongchou_item .div_3 .item:nth-child(2) {
+  text-align: center;
+}
+.zhongchou .zhongchou_item .div_3 .item:nth-child(3) {
+  text-align: right;
+}
+.zhongchou .startzhongchou {
+  position: fixed;
+  left: 0;
+  top: auto;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #fff;
+  text-align: center;
+  font-size: 32rpx;
+  background: #ff6749;
+  z-index: 9999;
+}

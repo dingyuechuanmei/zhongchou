@@ -1,0 +1,77 @@
+<view class='container'>
+  <view class='item1 item'>
+    <view class='title'>发起微客</view>
+    <view class='price'>
+      <input type='number' placeholder='请填写目标金额' placeholder-class='inputprice' bindinput='inputprice'></input>
+      <text class='r'>元</text>
+    </view>
+  </view>
+  <view class='item2 item'>
+    <view class='title'>筹款类型</view>
+    <view class="section">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{category_list}}">
+        <view class="picker">
+          <view class='opcity'>o</view>
+          {{detail.pickerChange}}
+        </view>
+      </picker>
+    </view>
+    <view class='r vm'>
+      <view class='you'></view>
+    </view>
+  </view>
+  <view class='item3 item'>
+    <view class='title'>筹款标题</view>
+    <input type='text' placeholder='请填写筹款标题' placeholder-class='inputtitle' bindinput='inputtitle'></input>
+  </view>
+  <view class='item4 item'>
+    <view class='title'>上传小视频</view>
+    <view class='r vm' bindtap='uploadvideo'>
+      <image src='{{approot}}wxapp_attr/11@3x.png'></image>
+    </view>
+    <view class='video' wx:if='{{detail.videosrc}}'>
+      <video src='{{detail.videosrc}}'></video>
+      <image class='x' src='{{approot}}wxapp_attr/x.png' bindtap='removevideo'></image>
+    </view>
+  </view>
+  <view class='item5 item'>
+    <view class='title'>求助说明</view>
+    <textarea placeholder='请详细填写求助原因，求助目的，自身状况等信息' placeholder-class='inputtextarea' bindinput='inputtextarea'></textarea>
+  </view>
+  
+  <view class='item6 item'>
+    <view class='title'>添加照片
+      <text style='font-size:24rpx;color:#FF6749;'>(第一张图片请上传横版作为封面)</text>
+    </view>
+    <view wx:if='{{detail.imagelist.length == 0}}' class='upload' bindtap='uploadimage'>
+      <view class='add'>
+        <view class='col'></view>
+        <view class='row'></view>
+      </view>
+      <view class='text'>点击上传图片(0~8张)</view>
+    </view>
+    <view class='imagelist'>
+      <view class='image' wx:for='{{detail.imagelist}}' wx:for-index="idx">
+        <image src='{{item}}'></image>
+        <image class='x' src='{{approot}}wxapp_attr/x.png' data-idx='{{idx}}' bindtap='removeimage'></image>
+      </view>
+      <view wx:if='{{detail.imagelist.length != 8 && detail.imagelist.length != 0}}' class='addimage vm' bindtap='uploadimage'>
+        <view class='add'>
+          <view class='row'></view>
+          <view class='col'></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='sure' bindtap='sure'>
+    <view>提交</view>
+  </view>
+
+  <view class='copy'>
+    <image src='{{approot}}wxapp_attr/copy.png'></image>
+    <view class='orange'>10101015</view>
+  </view>
+
+
+</view>

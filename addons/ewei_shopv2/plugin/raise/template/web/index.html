@@ -1,0 +1,161 @@
+{template '_header'}
+<div class="page-heading"> 
+    <h2>首页设置</h2>
+</div>
+<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" novalidate="novalidate">
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label must">幻灯片展示</label>
+		<div class="col-sm-10 col-lg-9 col-xs-12">
+			{php echo tpl_form_field_multi_image('banner_list', $raise_index['banner_list'])}
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label must">左图标</label>
+		<div class="col-sm-5 col-lg-3 col-xs-3">
+			{php echo tpl_form_field_image('left_icon', $raise_index['left_icon'])}
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">左标注</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="left_name" type="text" class="form-control" value="{$raise_index['left_name']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">左详注</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="left_intro" type="text" class="form-control" value="{$raise_index['left_intro']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">跳转路径</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="left_path" type="text" class="form-control" value="{$raise_index['left_path']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">appid</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="left_appid" type="text" class="form-control" value="{$raise_index['left_appid']}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label must">中图标</label>
+		<div class="col-sm-5 col-lg-3 col-xs-3">
+			{php echo tpl_form_field_image('center_icon', $raise_index['center_icon'])}
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">中标注</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="center_name" type="text" class="form-control" value="{$raise_index['center_name']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">中详注</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="center_intro" type="text" class="form-control" value="{$raise_index['center_intro']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">跳转路径</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="center_path" type="text" class="form-control" value="{$raise_index['center_path']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">appid</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="center_appid" type="text" class="form-control" value="{$raise_index['center_appid']}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label must">中图标</label>
+		<div class="col-sm-5 col-lg-3 col-xs-3">
+			{php echo tpl_form_field_image('middle_icon', $raise_index['middle_icon'])}
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">中标注</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="middle_name" type="text" class="form-control" value="{$raise_index['middle_name']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">中详注</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="middle_intro" type="text" class="form-control" value="{$raise_index['middle_intro']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">跳转路径</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="middle_path" type="text" class="form-control" value="{$raise_index['middle_path']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">appid</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="middle_appid" type="text" class="form-control" value="{$raise_index['middle_appid']}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label must">右图标</label>
+		<div class="col-sm-5 col-lg-3 col-xs-3">
+			{php echo tpl_form_field_image('right_icon', $raise_index['right_icon'])}
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">右标注</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="right_name" type="text" class="form-control" value="{$raise_index['right_name']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">右详注</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="right_intro" type="text" class="form-control" value="{$raise_index['right_intro']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">跳转路径</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="right_path" type="text" class="form-control" value="{$raise_index['right_path']}">
+		</div>
+		<label class="col-xs-6 col-sm-1 col-md-1 col-lg-1 control-label must">appid</label>
+		<div class="col-sm-3 col-lg-2 col-xs-3">
+			<input name="right_appid" type="text" class="form-control" value="{$raise_index['right_appid']}">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label must">前端视频</label>
+		<div class="col-sm-10 col-lg-9 col-xs-12">
+			{php echo tpl_form_field_video('video_url',$raise_index['video_url'])}
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label must">众筹介绍</label>
+		<div class="col-sm-10 col-lg-9 col-xs-12">
+			{php echo tpl_ueditor('raise_intro',$raise_index['raise_intro'],array('height'=>'300'))}
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-1 col-xs-12 col-sm-10 col-md-10 col-lg-11">
+			<input type="submit" class="btn btn-primary span3" value="提 交">
+			<input type="hidden" name="token" value="{$_W['token']}">
+		</div>
+	</div>
+</form>
+<script>
+	$(function(){
+ 		$('form').submit(function(){
+ 			if($("input[name='left_icon']").isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请上传左图标!');
+				return false;
+			}
+			if($("input[name='left_name']").isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请填写左标注!');
+				return false;
+			}
+			if($("input[name='left_intro']").isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请填写左详注!');
+				return false;
+			}
+			if($("input[name='right_icon']").isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请上传右图标!');
+				return false;
+			}
+			if($("input[name='right_name']").isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请填写右标注!');
+				return false;
+			}
+			if($("input[name='right_intro']").isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请填写右详注!');
+				return false;
+			}
+			if($("textarea[name='raise_intro']").isEmpty()) {
+				$('form').attr('stop',1);
+	            $(this).focus(),$('form').attr('stop',1),tip.msgbox.err('请填写众筹介绍!');
+				return false;
+			}
+			return true;
+		});
+	});
+</script>
+{template '_footer'}

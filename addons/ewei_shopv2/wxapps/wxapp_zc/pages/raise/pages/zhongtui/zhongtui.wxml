@@ -1,0 +1,48 @@
+<view class='container'>
+
+  <view class='top'>
+    <view class='box'>
+      <scroll-view scroll-x="true">
+        <view class="topWrap" scroll-x="true">  
+          <view class="top_Item" wx:for='{{topitem}}' wx:for-index='idx' data-idx='{{idx}}' bindtap='topitem'>  
+            <view class='{{item.state}}'>{{item.name}}</view>
+          </view>  
+        </view> 
+      </scroll-view> 
+    </view>
+  </view>
+
+
+  <view class='zhongtui'>
+     <view class='kong'></view> 
+  
+    <import src="../components/cpt_swiper.wxml"/>
+    <template is="swiper" data="{{swiper:swiper}}"/> 
+
+    <view class='alltitle'>茶道：简约的力量</view>
+
+    <view class='game'>
+      <image src='{{approot}}wxapp_attr/4@3x.png'></image>
+    </view>
+
+    <view class='zhongtui_list'>
+      <view class='zhongtui_item' bindtap='zhongtuiitemdetail' wx:for='{{pusher_list}}' data-id='{{item.id}}'>
+        <view class='posterimg'>
+            <image src='{{approot}}wxapp_attr/3@3x.png'></image>
+            <view class='title'>{{item.title}}</view>
+        </view>
+        <view class='author'>
+          <image src='{{item.avatar}}'></image>
+          <view class='name'>{{item.nickname}}</view>
+          <view class='support'>
+            <image src='{{approot}}wxapp_attr/support.png'></image>
+            <view class='supportnum'>{{item.like_count}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+
+</view>
+

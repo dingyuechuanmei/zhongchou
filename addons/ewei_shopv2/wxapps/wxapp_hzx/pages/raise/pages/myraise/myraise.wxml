@@ -1,0 +1,152 @@
+<view class='container'>
+
+  <view class='zhongchou'>
+    <view class='topbar'>
+      <view class='div_3'>
+        <view class='item {{item.state}}' wx:for='{{topitem}}' data-id='{{item.id}}' bindtap='topitem'>
+          <view>{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='myraise_myAssistance myraise {{item[0]}}'>
+    <view class='list'>
+      <view class='item' wx:for='{{verify_list}}'>
+        <view class='item_bar' bindtouchmove='touchM' bindtouchstart='touchS' bindtouchend='touchE' data-id="{{item.id}}" data-index="{{index}}" style='{{item.style}}'>
+          <!-- 内容区域 -->
+          <view class='item_content'>
+            <view class='top'>
+              <view>支持了</view>
+              <view>{{item.money}}</view>
+              <view class='r'>
+                <view class="{{item.status == '3' ? 'end': ''}}">{{item.state}}</view>
+              </view>
+            </view>
+            <view class='item-box'>
+              <view class='midder' bindtap='urlZhongchoudetail' data-id='{{item.id}}'>
+                <text>项目名称</text>
+                <view class='title'>{{item.title}}</view>
+              </view>
+              <view class='time' bindtap='urlZhongchoudetail' data-id='{{item.id}}'>
+                <text>支持时间</text> {{item.createtime}}
+              </view>
+            </view>
+          </view>
+          <!-- 删除区域 -->
+          <view class='delete_content' bindtap='deleteItem' data-id='{{item.id}}'>删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='myraise_myAssistance myAssistance {{item[1]}}'>
+    <view class='list'>
+      <view class='item' bindtap='urlHelpdetail' wx:for='{{starter_list}}' data-id='{{item.id}}'>
+        <view class='top'>
+          <view>累计筹款</view>
+          <view>{{item.target_money}}</view>
+          <view class='r'>
+            <view class="{{item.status == '3' ? 'end': ''}}">{{item.state}}</view>
+          </view>
+        </view>
+        <view class='midder'>
+          <text>项目名称</text>
+          <view class='title'>{{item.title}}</view>
+        </view>
+        <view class='time'>
+          <text>支持时间</text> {{item.audittime}}~{{item.aborttime}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='my_wallet {{item[4]}}'>
+    <view class='balance {{my_wallet.balance}}'>
+      <view class='title'>账户余额(元)</view>
+      <view class='money'>{{balance}}</view>
+      <view class='save'>
+        <view bindtap='applyWithdrawal'>申请提现</view>
+      </view>
+    </view>
+    <view class='apply_withdrawal {{my_wallet.apply_withdrawal}}' style="display:none;">
+      <view class='box'>
+        <view class='title'>提现到微信</view>
+        <view class='clwithdrawal'>提现金额</view>
+        <view class='money'>
+          <view class='fuhao'>￥</view>
+          <input type='number' step="0.01" bindinput='withdrawalMonayInput' value='{{withdrawalMonay}}'></input>
+        </view>
+        <view class='balancenum'>
+          账户余额￥{{balance}}
+          <text bindtap='allWithdrawal'>全部提现</text>
+        </view>
+        <view class='save'>
+          <view bindtap='withdrawal'>提现</view>
+        </view>
+        <view class='time'>2小时到账</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='tenants {{item[5]}}'>
+    <view class='item' wx:for='{{business_information}}' wx:for-index='idx'>
+      <view class='title'>{{item.title}}</view>
+      <view class='inputbox' bindtap='tenantsItembox{{idx}}'>
+        <input class='{{item.input.state}}' type='{{item.input.inputtype}}' placeholder='{{item.input.inputplaceholder}}' disabled='{{item.input.disabled}}' value='{{item.value}}' bindinput='tenantsItem' data-idx="{{idx}}"></input>
+        <image class='logo {{item.image.logostate}}' src='{{item.image.logo}}'></image>
+        <input class='{{item.textarea.state}}  textarea' placeholder='{{item.textarea.textareaplaceholder}}' value='{{item.value}}' bindinput='tenantsItem{{idx}}'></input>
+      </view>
+      <image class='youimage {{item.image.youimage}}' src='{{approot}}wxapp_attr/you.png'></image>
+      <view class='sendCode {{item.sendCode}}' bindtap='sendCode'>获取验证码</view>
+    </view>
+
+    <view class='item6 item'>
+      <view class='title' style='width:100%;'>营业执照
+        <text style='font-size:24rpx;color:#FF6749;'>(电子版的营业执照)</text>
+      </view>
+      <view class='imagelist'>
+
+        <block wx:if="{{ (tmpchooseImage!='' && tmpchooseImage!=undefined) || (reg.license_img!='' && reg.license_img!=undefined) }}">
+          <view class='image'>
+
+            <block wx:if="{{(tmpchooseImage!='' && tmpchooseImage!=undefined) || reg.status == 0 }}">
+              <image src='{{tmpchooseImage || reg.license_img }}'></image>
+              <image class='x' src='{{approot}}wxapp_attr/x.png' data-idx='{{idx}}' bindtap='removeimage'></image>
+            </block>
+
+            <block wx:else>
+              <image src='{{reg.license_img}}'></image>
+            </block>
+
+          </view>
+        </block>
+
+        <block wx:else>
+
+          <view class='addimage vm' bindtap='uploadimage'>
+            <view class='add'>
+              <view class='row'></view>
+              <view class='col'></view>
+            </view>
+          </view>
+
+        </block>
+
+      </view>
+
+    </view>
+
+    <view class='save'>
+      <view bindtap='tenantsSave'>保存</view>
+    </view>
+  </view>
+
+
+  <view class='wu {{wu.classname}}'>
+    <view class='box'>
+      <image src='{{approot}}wxapp_attr/wu.png'></image>
+      <view class='text'>{{wu.text}}</view>
+    </view>
+  </view>
+</view>

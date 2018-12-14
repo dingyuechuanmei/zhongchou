@@ -1,0 +1,21 @@
+ <form action="{php echo webUrl('raise/apply/audit', array('id' => $id,'status'=>2))}" class="form-horizontal form-validate" enctype="multipart/form-data">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h4 class="modal-title">拒 绝 打 款</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label must">拒 绝 理 由</label>
+                <div class="col-sm-9 col-xs-12">
+                    <input type="text" name="reject_reason" class="form-control" value="" data-rule-required="true" />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">确 认</button>
+            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+        </div>
+    </div>
+</form>

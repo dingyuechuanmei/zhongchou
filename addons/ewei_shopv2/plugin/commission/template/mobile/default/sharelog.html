@@ -1,0 +1,58 @@
+{template '_header'}
+<script>document.title = "分享访问({$_W['account']['name']})"; </script>
+{template 'commission/common'}
+<style>
+#container{
+	padding: 0px; 
+	margin: 0px;
+}
+.fui-according-header .fui-list-media img{	
+	height: 2.5rem;
+	width: 2.5rem;
+	border-radius: 2.5rem;  
+	border: 2px solid #fff;
+}
+.fui-according-header .fui-list-text{
+	margin-top: .2rem;	
+	width: 100%;
+}
+.fui-according-header .fui-list-text .text{
+	word-wrap:break-word;	
+	white-space:normal;	
+	font-size: .7rem;
+}
+.fui-according-header .fui-list-text .time{
+	font-size: .6rem;
+}
+#context_box{
+	width:100%;
+}
+</style>
+<div class="fui-page fui-page-current fui-according-group" id="container">
+	<div class="fui-content">
+		<div id="context_box"></div>
+		<div class="content-empty" style="display:none;">
+			<i class="icon icon-list"></i><br>暂无记录
+		</div>
+		<div class='infinite-loading'><span class='fui-preloader'></span><span class='text'> 正在加载...</span></div>
+	</div>
+</div>
+<script id="tpl_commission_sharelog_list" type="text/html">
+<%each list as item%>
+	<div class="fui-according-header">
+		<div class="fui-list-media">
+			<img src="<%item.avatar%>"/>
+		</div>
+		<div class="fui-list-text">
+			<div class="text"><%item.showtext%></div>
+			<div class="time"><%item.createtime%></div>
+		</div>
+	</div>
+<%/each%>
+</script>
+<script language='javascript'>
+	require(['../addons/ewei_shopv2/plugin/commission/static/js/sharelog.js'], function (modal) {
+	modal.init({fromDetail:false});
+});
+</script>
+{template '_footer'}

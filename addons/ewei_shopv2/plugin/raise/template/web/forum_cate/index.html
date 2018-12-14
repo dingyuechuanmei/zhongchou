@@ -1,0 +1,83 @@
+{template '_header'}
+<div class="page-heading">
+    <h2>论坛类型列表</h2>
+</div>
+<form action="./index.php" method="get" class="form-horizontal form-search" role="form">
+    <input type="hidden" name="c" value="site" />
+    <input type="hidden" name="a" value="entry" />
+    <input type="hidden" name="m" value="ewei_shopv2" />
+    <input type="hidden" name="do" value="web" />
+    <input type="hidden" name="r"  value="raise.forum_cate" />
+    <div class="page-toolbar row m-b-sm m-t-sm">
+        <div class="col-sm-4">
+            <div class="input-group-btn">
+                <button class="btn btn-default btn-sm"  type="button" data-toggle='refresh'><i class='fa fa-refresh'></i></button>
+                <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle='batch-remove' data-confirm="确认要删除?" data-href="{php echo webUrl('raise/forum_cate/delete')}"><i class='fa fa-trash'></i> 删除</button>
+                <a class='btn btn-primary btn-sm' data-toggle="ajaxModal" href="{php echo webUrl('raise/forum_cate/post')}"><i class='fa fa-plus'></i>添加论坛类型</a>
+            </div> 
+        </div>	
+        <div class="col-sm-6 pull-right">
+            <div class="input-group">
+                <input type="text" class="input-sm form-control" name='keyword' value="{$_GPC['keyword']}" placeholder="请输入关键词"> <span class="input-group-btn">
+                 <button class="btn btn-sm btn-primary" type="submit"> 搜索</button> </span>
+            </div>
+        </div>
+    </div>
+</form>
+<form action="" method="post">
+	{if count($list)>0}
+	    <table class="table table-hover table-responsive">
+	        <thead>
+	            <tr>
+	                <th style="width:25px;"><input type='checkbox' /></th>
+	                <th width="5%">图标</th>
+	                <th width="10%">名称</th>
+	                <!-- <th>内容</th> -->
+	                <th width="10%">背景图</th>
+	                <th width="10%">帖子数</th>
+	                <th width="8%">显示</th>
+	                <th width="15%">操作</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            {loop $list $row}
+	            	<tr>
+		                <td>
+	                    	<input type='checkbox' value="{$row['id']}"/>
+		                </td>
+		                <td><img src='{php echo tomedia($row['ico'])}' style='width:30px;height:30px;padding1px;border:1px solid #ccc' /></td>
+		                <td>{$row['title']}</td>
+		                <!-- <td>{$row['context']}</td> -->
+		                <td><img src='{php echo tomedia($row['thumb'])}' style='width:60px;height:30px;padding1px;border:1px solid #ccc' /></td>
+		                <td class="text-success"><a class="btn btn-link btn-sm" href="{php echo webUrl('raise/forum',array('cate'=>$row['id']))}" title="帖子数">{$row['forum_count']}</a></td>
+		                <td>
+		                	<span class='label {if $row['is_show']==1}label-success{else}label-default{/if}'
+			                          data-toggle='ajaxSwitch'
+			                          data-switch-value='{$row['is_show']}'
+			                          data-switch-value0='0|隐藏|label label-default|{php echo webUrl('raise/forum_cate/is_show',array('is_show'=>1,'id'=>$row['id']))}'  
+			                          data-switch-value1='1|显示|label label-success|{php echo webUrl('raise/forum_cate/is_show',array('is_show'=>0,'id'=>$row['id']))}'>
+		                          {if $row['is_show']==1}显示{else}隐藏{/if}
+		                    </span>
+		                </td>
+		                <td>
+		                   	<a data-toggle="ajaxModal" href="{php echo webUrl('raise/forum_cate/post', array('id' => $row['id']))}" class="btn btn-default btn-sm" ><i class='fa fa-edit'></i> 修改</a>
+		                   	<a data-toggle='ajaxRemove' href="{php echo webUrl('raise/forum_cate/delete', array('id' => $row['id']))}"class="btn btn-default btn-sm" data-confirm='确认要删除此论坛类型吗?'><i class="fa fa-trash"></i> 删除</a>
+	         			</td>
+	         		</tr>
+	            {/loop}
+	            <tr>
+                    <td colspan='7'>
+                        <div class='pagers' style='float:right;'>
+                            {$pager}			
+                        </div>
+                    </td>
+                </tr>
+	        </tbody>
+	    </table>
+    {else}
+        <div class='panel panel-default'>
+            <div class='panel-body' style='text-align: center;padding:30px;'>暂时没有任何论坛类型!</div>
+        </div>
+    {/if}
+</form>
+{template '_footer'}

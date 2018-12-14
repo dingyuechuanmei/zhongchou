@@ -1,0 +1,23 @@
+.fui-list-inner .subtitle {
+  font-size: 28rpx;
+  color: #444;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 32rpx;
+}
+.fui-list-group .add-img {
+  width: 44rpx;
+  height: 44rpx;
+  position: absolute;
+  left: auto;
+  right: 30rpx;
+  top: 50%;
+  margin-top: -22rpx;
+}
+.btns .my-btn-1 {
+  display: inline-block;
+}
+.btns .my-btn-2 {
+  display: inline-block;
+}

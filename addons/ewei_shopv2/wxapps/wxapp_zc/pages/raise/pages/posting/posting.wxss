@@ -1,0 +1,21 @@
+@import "../../resource/css/app.wxss";
+
+.container {padding: 0 30rpx; background: #fff; padding-bottom: 100rpx;}
+input {padding: 20rpx 0; border-bottom: 1px solid #f0f0f0;}
+textarea {padding: 20rpx 0;}
+image {width: 116rpx; height: 116rpx;}
+.upimg {position: relative; display: inline-block; margin-right: 20rpx; margin-bottom: 20rpx;}
+.upimg .del {position: absolute; left: 0; top: auto; bottom: 0rpx; background: rgba(0, 0, 0, .6); width: 100%; text-align: center;}
+.upimg .del image {width: 30rpx; height: 30rpx; margin: 10rpx auto;}
+ .add-img {margin-bottom: 20rpx;} 
+.bg-line {height: 20rpx; background: #f2f2f2; width: 200%; margin-left: -50%;}
+.title {padding: 20rpx 0; font-size: 32rpx; color: #777;}
+.model-list text {display: inline-block; padding: 0rpx 10rpx; border: 1px solid #999; line-height: 40rpx; border-radius: 20rpx; margin-right: 20rpx;margin-bottom: 20rpx; color: #999;}
+.model-list text.on {background: #e73533; color: #fff; border: none;}
+.div1 {position: fixed; top: auto; bottom: 0; left: 0; width: 100%; height: 76rpx; line-height: 76rpx; text-align: center; color: #fff; font-size: 32rpx; background: #e73533;}
+
+
+
+
+
+

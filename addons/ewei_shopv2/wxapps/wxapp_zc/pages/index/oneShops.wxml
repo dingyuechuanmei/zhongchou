@@ -1,0 +1,66 @@
+<!--pages/index/oneShops .wxml-->
+
+<swiper indicator-dots="{{indicatorDots}}"autoplay="true" interval="3000" duration="{{duration}}"indicator-color="#C2C2C2"indicator-dots="true" style='height:400rpx;'>
+  <block wx:for="1">
+    <swiper-item>
+      <view class='oneBanner' bindtap='navigato' data-url='{{shop.indexset.banner1_url}}'data-index="1">
+          <image src='{{shop.indexset.banner1}}'></image>
+      </view>
+    </swiper-item>
+  </block>
+    <block wx:for="1">
+    <swiper-item>
+      <view class='oneBanner'bindtap='navigato' data-url='{{shop.indexset.banner2_url}}' data-index="2" >
+          <image src='{{shop.indexset.banner2}}'></image>
+      </view>
+    </swiper-item>
+  </block> 
+   <block wx:for="1">
+    <swiper-item>
+      <view class='oneBanner'bindtap='navigato' data-url='{{shop.indexset.banner3_url}}' data-index="3">
+          <image src='{{shop.indexset.banner3}}'></image>
+      </view>
+    </swiper-item>
+  </block>
+</swiper>
+    <block wx:for="{{shop.sorts}}" wx:key="" >
+      <!-- <include src="notice.wxml" wx:if="{{item.type == 'notice'}}" /> -->
+     
+      <include  src="search.wxml" wx:if="{{item.type == 'search'}}" />
+    
+    </block>
+
+ <view> 
+    <view id="recommand" wx:if="{{storeRecommand}}">
+      <view class="fui-line" style="background: #f2f2f2;">
+        <view class="text text-danger">店铺推荐</view>
+      </view>
+      <view class="fui-goods-group block border">
+        <block wx:for="{{storeRecommand}}" wx:for-index="idx"  wx:key="">
+          <view class="fui-goods-item" data-goodsid="{{item.id}}" data-type="{{item.type}}">
+            <navigator url="/pages/goods/detail/index?id={{item.id}}">
+              <view class="image" style="background-image:url('{{item.thumb}}');"></view>
+              <view class="salez" style="background-image: url('{{shop.saleout}}'); " wx:if="{{item.total <= 0}}"></view>
+            </navigator>
+            <view class="detail">
+              <navigator url="/pages/goods/detail/index?id={{item.id}}">
+                <view class="name">
+                  <text class="fui-tag fui-tag-danger" wx:if="{{item.ispresell==1}}">预售</text> {{item.title}}
+                </view>
+              </navigator>
+              <view class="index_price price">
+                <text class="text">￥{{item.minprice}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view wx:if="{{storeRecommand.length<=0}}" class='shopTitle'>
+      <view>该商户未入住</view>
+      <view>尽情期待</view>
+    </view>
+ </view >
+
+ <import src="/pages/template/tpl_footer_tabbar.wxml"/>
+<template is="tabBar" data="{{menu:menus.data,diymenu:menus,menus_length:menus_length,cartcount:cartcount,cur_page:cur_page}}"/>

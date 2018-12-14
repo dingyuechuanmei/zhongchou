@@ -1,0 +1,194 @@
+{template '_header'}
+<style type="text/css">
+  .multi-img-details, .multi-audio-details{
+    overflow:hidden;
+  }
+</style>
+<style>
+  .store_list_img{border-radius: 5px; cursor: pointer; transition: 0.3s;}
+  .store_list_img:hover{opacity: 0.7;}
+  /* The Modal (background) */
+  .modal{display: none; /* Hidden by default */ position: fixed; /* Stay in place */ z-index: 999; /* Sit on top */ padding-top: 100px; /* Location of the box */ left: 0; top: 0; width: 100%; /* Full width */ height: 100%; /* Full height */ overflow: auto; /* Enable scroll if needed */ background-color: rgb(0,0,0); /* Fallback color */ background-color: rgba(0,0,0,0.9); /* Black w/ opacity */}
+  /* Modal Content (image) */
+  .modal-content{margin: auto; display: block; width: 80%; max-width: 700px;}
+  /* Caption of Modal Image */
+  #caption{margin: auto; display: block; width: 80%; max-width: 700px; text-align: center; color: #ccc; padding: 10px 0; height: 150px;}
+  /* Add Animation */
+  .modal-content, #caption{-webkit-animation-name: zoom; -webkit-animation-duration: 0.6s; animation-name: zoom; animation-duration: 0.6s;}
+  @-webkit-keyframes zoom{from{-webkit-transform: scale(0)} to{-webkit-transform: scale(1)}}
+  @keyframes zoom{from{transform: scale(0.1)} to{transform: scale(1)}}
+  /* The Close Button */
+  .close{position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s;}
+  .close:hover,
+  .close:focus{color: #bbb; text-decoration: none; cursor: pointer;}
+  /* 100% Image Width on Smaller Screens */
+  @media only screen and (max-width: 700px){.modal-content{width: 100%;}}
+</style>
+<div class="page-heading">
+	<span class='pull-right'>
+		<a class="btn btn-default  btn-sm" href="{php echo webUrl('raise/starter')}">返回列表</a>
+	</span>
+    <h2>柴火众筹详情展示</h2>
+</div>
+<form class="form-horizontal form-search" role="form">
+	<div class="form-group">
+        <label class="col-sm-2 control-label">柴火众筹标题</label>
+        <div class="col-sm-9 col-xs-12 ">
+           	<div class='form-control-static'>{$item['title']}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">柴火众筹类型</label>
+        <div class="col-sm-4 col-xs-12 ">
+           	<div class='form-control-static'>{$item['category']}</div>
+        </div>
+        <label class="col-sm-2 control-label">柴火众筹状态</label>
+        <div class="col-sm-4 col-xs-12 ">
+           	<div class='form-control-static'>
+           		{if $item['status'] == 0}
+           			<span class="text-muted">申请中</span>
+           		{elseif $item['status'] == 1}
+           			<span class="text-navy">筹款中</span>
+           		{elseif $item['status'] == 2}
+           			<span class="text-warning">已拒绝</span>
+           		{elseif $item['status'] == 3}
+           			<span class="text-danger">已结束</span>
+         		{/if}
+          	</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">发起人信息</label>
+        <div class="col-sm-1">
+           	<div class='form-control-static'>
+           		<img src="{$item['avatar']}" width="40" height="40">
+           	</div>
+        </div>
+        <label class="col-sm-1 control-label">昵称</label>
+        <div class="col-sm-1">
+           	<div class='form-control-static'>{$item['nickname']}</div>
+        </div>
+        <label class="col-sm-2 control-label">真实姓名</label>
+        <div class="col-sm-2">
+           	<div class='form-control-static'>{php echo $item['realname'] ? $item['realname'] :'匿名' }</div>
+        </div>
+        <label class="col-sm-1 control-label">手机号</label>
+        <div class="col-sm-2">
+           	<div class='form-control-static'>{php echo $item['mobile'] ? $item['mobile'] : '暂无'}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">目标金额</label>
+        <div class="col-sm-4">
+           	<div class='form-control-static'>
+           		<span class="text-danger"> ￥ </span><span class="text-warning">{$item['target_money']}</span> 元
+           	</div>
+        </div>
+        <label class="col-sm-2 control-label">已筹金额</label>
+        <div class="col-sm-4">
+           	<div class='form-control-static'>
+           		<span class="text-danger"> ￥</span> <span class="text-warning">{$item['refer_money']}</span> 元
+           	</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">支持数</label>
+        <div class="col-sm-4">
+           	<div class='form-control-static'>
+           		<span class="text-navy">{php echo $item['support_count'] ? $item['support_count']: 0}</span>
+           	</div>
+        </div>
+        <label class="col-sm-2 control-label">证实数</label>
+        <div class="col-sm-4">
+           	<div class='form-control-static'>
+           		<span class="text-navy">{php echo $item['verify_count'] ? $item['verify_count'] : 0}</span>
+           	</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">申请时间</label>
+        <div class="col-sm-4">
+           	<div class='form-control-static'>
+           		<span class="text-success">{php echo $item['createtime'] ? date('Y-m-d H:i',$item['createtime']) : '暂无'}</span>
+           	</div>
+        </div>
+        <label class="col-sm-2 control-label">审核时间</label>
+        <div class="col-sm-4">
+           	<div class='form-control-static'>
+           		<span class="text-success">{php echo $item['audittime'] ? date('Y-m-d H:i',$item['audittime']) : '暂无'}</span>
+           	</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">拒绝时间</label>
+        <div class="col-sm-4">
+           	<div class='form-control-static'>
+           		<span class="text-danger">{php echo $item['rejecttime'] ? date('Y-m-d H:i',$item['rejecttime']) : '暂无'}</span>
+           	</div>
+        </div>
+        <label class="col-sm-2 control-label">截止时间</label>
+        <div class="col-sm-4">
+           	<div class='form-control-static'>
+           		<span class="text-danger">{php echo $item['aborttime'] ? date('Y-m-d H:i',$item['aborttime']) : '暂无'}</span>
+           	</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">上传图片</label>
+        <div class="col-sm-9 col-xs-12 ">
+           	<div class='form-control-static'>
+           		<div class="input-group multi-img-details">
+           			{if $item['thumbs']}
+           				{loop $item['thumbs'] $t}
+							<div class="multi-item">
+								<img src="{$t}" onerror="this.src='./resource/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail">
+							</div>
+						{/loop}
+					{/if}
+				</div>
+          	</div>
+            <span class="help-block">第一张图片将被选择为封面</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">求助说明</label>
+        <div class="col-sm-9 col-xs-12 ">
+           	<div class='form-control-static'>{$item['content']}</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">上传视频</label>
+        <div class="col-sm-9 col-xs-12">
+           	<div class='form-control-static'>
+           		<video src="{$item['video']}" controls="controls"></video>
+			</div>
+        </div>
+    </div>
+</form>
+
+<div id="myModal" class="modal">
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+<script type="text/javascript">
+  $(".img-thumbnail").click(function(){
+
+    // 获取模态窗口
+    var modal = document.getElementById('myModal');
+
+    // 获取图片模态框，alt 属性作为图片弹出中文本描述
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+
+    modal.style.display = "block";
+    modalImg.src = $(this).get(0).src;
+
+    $("#myModal").click(function(){
+      modal.style.display = "none";
+    });
+
+  });
+</script>
+
+{template '_footer'}

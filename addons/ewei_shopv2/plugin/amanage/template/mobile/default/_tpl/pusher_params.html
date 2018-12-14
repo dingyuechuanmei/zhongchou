@@ -1,0 +1,54 @@
+<style type="text/css">
+    .cate-list,.cate-list .item{
+        height: auto;
+    }
+</style>
+<div class='fui-content params-block'>
+   <!-- 搜索框 -->
+   
+   <!--  <div class="fui-searchbar bar">
+        <div class="searchbar center">
+            <input type="submit" class="searchbar-cancel searchbtn" value="搜索" />
+            <div class="search-input">
+                <i class="icon icon-search"></i>
+                <input type="search" placeholder="输入关键字..." class="search" id="keywords" />
+            </div>
+        </div>
+    </div>  -->
+
+    <div class="inner">
+
+        <div class="param-item param-cate">
+            <div class="fui-title">众推分类</div>
+            <div class="cate-list" data-catlevel="{$catlevel}">
+                <div class="item" data-level="1">
+                    {loop $category $category_item}
+                        <nav data-id="{$category_item['id']}" {if $item['category'] == $category_item['id']}class="active"{/if}>{$category_item['category']}</nav>
+                    {/loop}
+                </div>
+            </div>
+        </div>
+
+        <div class="param-item param-member">
+            <div class="fui-title">发起者</div>
+            <div class="fui-list-group">
+                {loop $member $row}
+                <div class="fui-list bindclick">
+                    <div class="fui-list-media">
+                        <input type="radio" class="param-child fui-radio fui-radio-success" name="member" value="{$row['openid']}" data-text="{$row['nickname']}" {if $item['pusher'] == $row['openid']}checked="checked"{/if} />
+                    </div>
+                    <div class="fui-list-inner">
+                        <div class="subtitle">{$row['nickname']}</div>
+                    </div>
+                </div>
+                {/loop}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="fui-navbar">
+        <div class="nav-item btn btn-success submit-params">确定</div>
+        <div class="nav-item btn btn-gray cancel-params">取消</div>
+    </div>
+</div>

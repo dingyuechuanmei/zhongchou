@@ -1,0 +1,24 @@
+@import "../../../resource/css/app.wxss";
+
+.container {padding-bottom: 80rpx; background: #fff;}
+.sou-box {background: #f2f2f2; padding-top: .1px; padding-bottom: 20rpx; color: #777;}
+.sou {width: 690rpx;  background: #fff; border: 1px solid #f0f0f0;
+margin: 20rpx auto; margin-bottom: 0;}
+.sou icon {position: absolute; z-index: 9; top: 32rpx; left: 52rpx;}
+.sou input {width: 600rpx; height: 58rpx; padding-left: 80rpx; box-sizing: border-box;}
+.sou .sou-btn {width: 90rpx; line-height: 58rpx; text-align: center; position: absolute; left: auto; top: 20rpx; right: 30rpx; border: 1px solid #f0f0f0; box-sizing: border-box;}
+
+/*产品列表  */
+.good-list {background: #fff;}
+.good-list .item {border-bottom: 1px solid #f0f0f0; padding: 20rpx 30rpx;}
+.good-list .item image {width: 150rpx; height: 150rpx; margin-left: 30rpx; margin-right: 40rpx;}
+.good-list .item checkbox {margin-top: 52rpx;}
+.good-list .item > view {display: inline-block; vertical-align: top;}
+.good-list .item .title {line-height: 60rpx;}
+.good-list .item .red {color: #e73533; margin-top: 30rpx;}
+
+.good-list label {display: block;}
+.good-list checkbox .wx-checkbox-input {border-radius: 50%;}
+.good-list checkbox .wx-checkbox-input.wx-checkbox-input-checked {background: red; border-color: transparent;}
+
+.btn {margin: 0; background: #e73533; color: #fff; position: fixed; top: auto; left: 0; bottom: 0; width: 100%; border-radius: 0;}

@@ -1,0 +1,194 @@
+<template name="goods">
+<block wx:if="{{diyitem.data != '' && diyitem.data != undefined}}">
+    <block wx:if="{{diyitem.params.goodsscroll == '' || diyitem.params.goodsscroll == undefined}}">
+        <view class="fui-goods-group {{diyitem.style.liststyle}}" style="background: {{diyitem.style.background}};">
+            <a class="fui-goods-item" wx:for="{{diyitem.data}}" wx:for-item="goodsitem" data-goodsid="{{goodsitem.gid}}" data-href="/pages/goods/detail/index?id={{goodsitem.gid}}" data-creditshop="/pages/creditshop/detail/index?id={{goodsitem.gid}}" data-nocache="true" style="position: relative;">
+
+                <view bindtap="click_location_href" data-url="/pages/goods/detail/index?id={{goodsitem.gid}}" class="image {{diyitem.style.liststyle=='block one'?'auto':''}}" style="background:url({{goodsitem.thumb}});background-size:100% 100%; min-height: 50px;">
+
+                    <block wx:if="{{diyitem.style.liststyle=='block one'}}">
+                        <image class="exclude" src="{{shopset.shop.loading}}" data-lazy="{{goodsitem.thumb}}"></image>
+                    </block>
+
+                    <block wx:if="{{diyitem.params.showicon==1 || diyitem.params.showicon==2}}">
+
+                        <block wx:if="{{diyitem.params.iconposition=='left top'}}">
+                            <view class="goodsicon {{diyitem.params.iconposition}}" style="top: {{diyitem.style.iconpaddingtop}}px; left: {{diyitem.style.iconpaddingleft}}px; text-align: left;">
+                                <block wx:if="{{diyitem.params.showicon==1}}">
+                                    <image class="exclude" src="{{siteurl}}addons/ewei_shopv2/plugin/diypage/static/images/default/goodsicon-{{diyitem.style.goodsicon}}.png" style="width: {{diyitem.style.iconzoom}}%;"></image>
+                                </block>
+                                <block wx:if="{{diyitem.params.showicon == 2 && (diyitem.params.goodsiconsrc != '' && diyitem.params.goodsiconsrc != undefined)}}">
+                                    <image class="exclude" src="{{diyitem.params.goodsiconsrc}}" onerror="this.src=''" style="width: {{diyitem.style.iconzoom}}%;"></image>
+                                </block>
+                            </view>
+                        </block>
+
+                        <block wx:if="{{diyitem.params.iconposition=='right top'}}">
+                            <view class="goodsicon {{diyitem.params.iconposition}}" style="top: {{diyitem.style.iconpaddingtop}}px; right: {{diyitem.style.iconpaddingleft}}px; text-align: right;">
+                                <block wx:if="{{diyitem.params.showicon==1}}">
+                                    <image class="exclude" src="{{siteurl}}addons/ewei_shopv2/plugin/diypage/static/images/default/goodsicon-{{diyitem.style.goodsicon}}.png" style="width: {{diyitem.style.iconzoom}}%;"></image>
+                                </block>
+                                <block wx:if="{{diyitem.params.showicon==2 && (diyitem.params.goodsiconsrc != '' && diyitem.params.goodsiconsrc != undefined)}}">
+                                    <image class="exclude" src="{{diyitem.params.goodsiconsrc}}" onerror="this.src=''" style="width: {{diyitem.style.iconzoom}}%;"></image>
+                                </block>
+                            </view>
+                        </block>
+
+                        <block wx:if="{{diyitem.params.iconposition=='left bottom'}}">
+                            <view class="goodsicon {{diyitem.params.iconposition}}" style="bottom: {{diyitem.style.iconpaddingtop}}px; left: {{diyitem.style.iconpaddingleft}}px; text-align: left;">
+                                <block wx:if="{{diyitem.params.showicon==1}}">
+                                    <image class="exclude" src="{{siteurl}}addons/ewei_shopv2/plugin/diypage/static/images/default/goodsicon-{{diyitem.style.goodsicon}}.png" style="width: {{diyitem.style.iconzoom}}%;"></image>
+                                </block>
+                                <block wx:if="{{diyitem.params.showicon==2 && (diyitem.params.goodsiconsrc != '' && diyitem.params.goodsiconsrc != undefined)}}">
+                                    <image class="exclude" src="{{diyitem.params.goodsiconsrc}}" onerror="this.src=''" style="width: {{diyitem.style.iconzoom}}%;"></image>
+                                </block>
+                            </view>
+                        </block>
+
+                        <block wx:if="{{diyitem.params.iconposition=='right bottom'}}">
+                            <view class="goodsicon {{diyitem.params.iconposition}}" style="bottom: {{diyitem.style.iconpaddingtop}}px; right: {{diyitem.style.iconpaddingleft}}px; text-align: right;">
+                            <block wx:if="{{diyitem.params.showicon==1}}">
+                                <image class="exclude" src="{{siteurl}}addons/ewei_shopv2/plugin/diypage/static/images/default/goodsicon-{{diyitem.style.goodsicon}}.png" style="width: {{diyitem.style.iconzoom}}%;"></image>
+                            </block>
+                            <block wx:if="{{diyitem.params.showicon==2 && (diyitem.params.goodsiconsrc != '' && diyitem.params.goodsiconsrc != undefined)}}">
+                                <image class="exclude" src="{{diyitem.params.goodsiconsrc}}" onerror="this.src=''" style="width: {{diyitem.style.iconzoom}}%;"></image>
+                            </block>
+                            </view>
+                        </block>
+                        
+                    </block>
+
+                </view>
+                
+
+                <block wx:if="{{diyitem.params.showtitle==1 || diyitem.params.showprice==1}}">
+
+                    <view class="detail">
+
+                        <block wx:if="{{diyitem.params.showtitle==1}}">
+                            <view class="name" style="color: {{diyitem.style.titlecolor}};">
+                                
+                                <block wx:if="{{goodsitem.bargain>0}}">
+                                    <label style="background-color: {{diyitem.style.buybtncolor}}; padding: 0px 2px; color: #fff; font-size: 0.6rem">砍价</label>
+                                </block>
+                                <block wx:if="{{diyitem.params.showtag>0 && (diyitem.params.goodstype != '' && diyitem.params.goodstype != undefined)}}">
+                                    <label style="background-color: {{diyitem.style.tagbackground}}; padding: 0px 2px; color: #fff; font-size: 0.6rem">
+                                        <block wx:if="{{diyitem.params.showtag==1 && goodsitem.productprice>0}}">
+                                            ￥{{goodsitem.productprice}}
+                                        </block>
+                                        <block wx:if="{{diyitem.params.showtag==2}}">
+                                            <block wx:if="{{goodsitem.gtype==0}}">
+                                            商品
+                                            </block>
+                                            <block wx:elif="{{goodsitem.gtype==1}}">
+                                            优惠券
+                                            </block>
+                                            <block wx:elif="{{goodsitem.gtype==2}}">
+                                            余额
+                                            </block>
+                                            <block wx:elif="{{goodsitem.gtype==3}}">
+                                            红包
+                                            </block>
+                                        </block>
+                                        <block wx:elif="{{diyitem.params.showtag==3}}">
+                                            <block wx:if="{{goodsitem.ctype==1}}">
+                                            抽奖
+                                            </block>
+                                            <block wx:else>
+                                            兑换
+                                            </block>
+                                        </block>
+                                    </label>
+                                </block>
+                                {{goodsitem.title}}
+
+                            </view>
+                        </block>
+                        
+                        <block wx:if="{{diyitem.params.showprice==1}}">
+                            <view class="price" style="{{diyitem.params.showtag==3 ? 'border-top: 1px dashed #eee;' : ''}}">
+
+                                <span class="text" style="color: {{diyitem.style.pricecolor}};">
+                                    <block wx:if="{{diyitem.params.goodstype == '' || diyitem.params.goodstype == undefined || diyitem.params.goodstype == 0}}">
+                                        <view class="minprice">￥{{goodsitem.price}}</view>
+                                    </block>
+                                    <block wx:else>
+                                        <view>
+                                            <block wx:if="{{goodsitem.price==0&&goodsitem.credit==0}}">免费</block>
+                                            <block wx:elif="{{goodsitem.price>0&&goodsitem.credit==0}}">
+                                                {{goodsitem.price}}<small>
+                                                {{shopset.commission.texts.yuan?shopset.commission.texts.yuan:'元'}}</small>
+                                            </block>
+                                            <block wx:elif="{{goodsitem.price==0&&goodsitem.credit>0}}">
+                                                {{goodsitem.credit}}
+                                                <small>{{shopset.trade.credittext?shopset.trade.credittext:'积分'}}</small>
+                                            </block>
+                                            <block wx:elif="{{goodsitem.price>0&&goodsitem.credit>0}}">
+                                                {{goodsitem.credit}}
+                                                <small>{{shopset.trade.credittext?shopset.trade.credittext:'积分'}}</small>
+                                                +{{goodsitem.price}}
+                                                <small>{{shopset.commission.texts.yuan?shopset.commission.texts.yuan:'元'}}</small>
+                                            </block>
+                                        </view>
+                                    </block>
+                                    <block wx:if="{{(diyitem.params.showproductprice && goodsitem.productprice>0 && goodsitem.productprice>goodsitem.price) || diyitem.params.showsales==1}}">
+
+                                        <view class="productprice">
+                                            <block wx:if="{{(diyitem.params.showproductprice != '' && diyitem.params.showproductprice != undefined) && goodsitem.productprice>0 && goodsitem.productprice>goodsitem.price}}">
+                                                <span style="color: {{diyitem.style.productpricecolor}};">
+                                                    {{diyitem.params.productpricetext?diyitem.params.productpricetext:'原价'}}:
+                                                    <block wx:if="diyitem.params.productpriceline != '' && diyitem.params.productpriceline != undefined">
+                                                        <span style="text-decoration: line-through;">￥{{goodsitem.productprice}}</span>
+                                                    </block>
+                                                    <block wx:else>
+                                                        <span>￥{{goodsitem.productprice}}</span>
+                                                    </block>
+                                                </span>
+                                            </block>
+                                            <block wx:elif="{{diyitem.params.showsales==1}}">
+                                                <span style="color: {{diyitem.style.salescolor}};">
+                                                {{diyitem.params.salestext?diyitem.params.salestext:'销量'}}:{{goodsitem.sales}}
+                                                </span>
+                                            </block>
+                                        </view>
+
+                                    </block>
+                                </span>
+                                <block wx:if="{{(diyitem.style.buystyle != '' && diyitem.style.buystyle != undefined) && (goodsitem.bargain == '' || goodsitem.bargain == undefined || goodsitem.bargain == 0) && (diyitem.params.goodstype == '' || diyitem.params.goodstype == undefined || diyitem.params.goodstype == 0)}}">
+                                    <block wx:if="{{diyitem.style.buystyle=='buybtn-1'}}">
+                                        <span class="buy" bindtap="buy" data-goodsid="{{goodsitem.gid}}" style="background-color: {{diyitem.style.buybtncolor}};"><i class="icon icon-cart"></i></span>
+                                    </block>
+                                    <block wx:elif="{{diyitem.style.buystyle=='buybtn-2'}}">
+                                        <span class="buy" bindtap="buy" data-goodsid="{{goodsitem.gid}}"  style="background-color: {{diyitem.style.buybtncolor}};"><i class="icon icon-add"></i></span>
+                                    </block>
+                                    <block wx:elif="{{diyitem.style.buystyle=='buybtn-3'}}">
+                                        <span class="buy buybtn-3" bindtap="buy" data-goodsid="{{goodsitem.gid}}" style="background-color: {{diyitem.style.buybtncolor}};">购买</span>
+                                    </block>
+                                </block>
+                                <block wx:elif="{{goodsitem.bargain != '' && goodsitem.bargain != undefined && goodsitem.bargain != 0}}" >
+                                    <span class="buy" style="background-color: {{diyitem.style.buybtncolor}};">砍</span>
+                                </block>
+                                <block wx:elif="{{diyitem.params.goodstype != '' && diyitem.params.goodstype != undefined && diyitem.params.goodstype !=  0 }}">
+                                    <span class="buy buybtn-3" style="background-color: {{diyitem.style.buybtncolor}};">
+                                        <block wx:if="{{goodsitem.ctype != '' && goodsitem.ctype != undefined}}">
+                                        抽奖
+                                        </block>
+                                        <block wx:else>
+                                        兑换
+                                        </block>
+                                    </span>
+                                </block>
+                            </view>
+                        </block>
+
+                    </view>
+                </block>
+                <block wx:if="{{goodsitem.total<=0 && (diyitem.params.goodstype == '' || diyitem.params.goodstype == undefined)}}">
+                    <view class="salez" style="background-image: url('{{shopset.shop.saleout}}'); "></view>
+                </block>  
+
+            </a>
+        </view>
+    </block>
+</block>
+</template>

@@ -1,0 +1,3 @@
+@import "../../components/components.wxss";
+@import "../../../resource/css/app.wxss";
+

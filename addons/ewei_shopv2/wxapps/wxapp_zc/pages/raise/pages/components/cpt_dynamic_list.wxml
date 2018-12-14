@@ -1,0 +1,38 @@
+<!--动态列表  -->
+<template name="dynamic_list">
+  <view class='dynamic-list'>
+    <view class='item' wx:for='{{forum_list}}' data-id='{{item.id}}'>
+      <view class='info'>
+        <image src='{{item.avatar}}' data-id='{{item.id}}' bindtap='toPostDetail'></image>
+        <text data-id='{{item.id}}' bindtap='toPostDetail'>{{item.nickname}}</text>
+        <view class='r'>{{item.is_top}}</view>
+        <view class='r'bindtap='call_phone' data-mobile='{{item.mobile}}'>联系他</view>
+      </view>
+      <view class='title' data-id='{{item.id}}' bindtap='toPostDetail'>{{item.title}}</view>
+      <view>
+        <view class='img-list'>
+          <image wx:for='{{item.thumbs}}' wx:for-item='thumbs_item' src='{{thumbs_item}}' data-imgs="{{item.thumbs}}" data-img="{{thumbs_item}}" bindtap='bro_imgs'></image>
+        </view>
+      </view>
+
+      <view class='browse-comment'>
+        <image src='{{imglist[0]}}'></image>
+        <text>{{item.view_count}}</text>
+        <image data-id='{{item.id}}' bindtap='toPostDetail' src='{{imglist[1]}}'></image>
+        <text>{{item.review_count}}</text>
+        <button class="forward" open-type="share" data-title="{{item.title}}" data-id="{{item.id}}">
+          <image  src='{{imglist[2]}}'></image>
+        </button>
+        <view class='r'>来自：{{item.source}}</view>
+      </view>
+
+      <!-- 显示两条评论 -->
+      <view class='comment_replys' wx:for="{{item.review_list}}"  style='padding-left:30rpx;margin-top:20rpx;margin-bottom:20rpx;'>
+        <text class='author'>{{item.nickname}}：</text>
+        <text class='description'>{{item.context}}</text>
+      </view>
+      
+    </view>
+    <view class='wu' style='display: {{forum_list.length ? "none" : "block"}}'>暂无数据...</view> 
+  </view>
+</template>

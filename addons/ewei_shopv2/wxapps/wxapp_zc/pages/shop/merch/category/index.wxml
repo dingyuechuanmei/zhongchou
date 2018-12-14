@@ -1,0 +1,36 @@
+<view class="fui-page page-merch-list">
+    <!-- <view class="fui-header">
+        <view class="fui-header-left">
+            <view class="back" data-href="{php echo mobileUrl('merch/list')}"></view>
+        </view>
+        <view class="title">全部分类</view>
+        <view class="fui-header-right"></view>
+    </view> -->
+    <view class="fui-content">
+        <view class="fui-searchbar bar">
+            <view class="searchbar center">
+                <input type="submit" class="searchbar-cancel searchbtn" value="搜索" bindtap='btn_serch' />
+                <view class="search-input">
+                    <i class="icon icon-search"></i>
+                    <input type="search" placeholder="输入关键字..." class="search" bindinput='bindinput' name="keyword" />
+                </view>
+            </view>
+        </view>
+
+        <block wx:if="{{category.length > 0}}">
+	        <view class="fui-cell-group qa-title">
+	            <view class="fui-cell">
+	                <view class="fui-cell-text">全部分类</view>
+	            </view>
+	        </view>
+	        <view class="fui-icon-group col-4 noborder">
+	            <view class="fui-icon-col" wx:for="{{category}}" wx:for-item="item" bindtap='location_href' data-href="/pages/shop/merch/user/index?cate={{item.id}}">
+	                <view class="icon">
+	                    <image src="{{item.thumb}}"></image>
+	                </view>
+	                <view class="text">{{item.catename}}</view>
+	            </view>
+	        </view>
+	    </block>    
+    </view>
+</view>
