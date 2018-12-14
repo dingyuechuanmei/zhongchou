@@ -30,10 +30,10 @@ class Pusher_EweiShopV2Page extends PluginWebPage
         }
         if ($_GPC['keyword']){
             $_GPC['keyword'] = trim($_GPC['keyword']);
-            $condition .= ' and (title like :keyword1 or m.nickname like :keyword2)';
+            $condition .= ' and (title like :keyword1 or m.merchname like :keyword2)';
             $params[':keyword1'] = $params[':keyword2'] = '%' . $_GPC['keyword'] . '%';
         }
-        $sql = 'select p.id,p.title,p.pusher,p.like_count,p.ifshow,p.createtime,m.merchname AS nickname,m.logo from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id)';
+        $sql = 'select p.id,p.title,p.pusher,p.like_count,p.ifshow,p.createtime,p.video,m.id as mid,m.merchname AS nickname,m.logo from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id)';
         $list = pdo_fetchall($sql . $condition . ' order by id desc limit ' . (($pindex - 1) * $psize) . ',' . $psize, $params);
         $total = pdo_fetchcolumn('select count(*) from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id)' . $condition, $params);
         $pager = pagination($total, $pindex, $psize);

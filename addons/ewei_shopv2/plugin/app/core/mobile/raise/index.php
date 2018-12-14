@@ -594,7 +594,7 @@ class Index_EweiShopV2Page extends AppMobilePage
     //分页获取创匠众推页面
     public function get_pusher_list(){
         $this->deal_data();
-        $condition = ' where p.uniacid=:uniacid';
+        $condition = ' where p.uniacid=:uniacid AND p.ifshow=1 ';
         $params = array(':uniacid'=>$this->uniacid);
         $category = intval($this->params['category']);
         if($category){
