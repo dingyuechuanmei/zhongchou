@@ -1425,5 +1425,69 @@ class Common_EweiShopV2Model
 
         return $rs;
     }
+
+	/**
+	 * 处理图片,返回标准图片
+	 * @param string $final_path
+	 * @param int $biao_width
+	 * @param int $biao_height
+	 * @param int $r
+	 * @param int $g
+	 * @param int $b
+	 * @return string
+	 */
+	function suoImg($final_path='',$biao_width=0,$biao_height=0,$r=255,$g=255,$b=255){
+		global $_W;
+		$filename=$final_path;
+		list($srcc_width,$srcc_height,$src_mime)=getimagesize($filename);
+		$mime_type=image_type_to_extension($src_mime,false);
+		$fun='imagecreatefrom'.$mime_type;
+		$src_im=$fun($filename);
+		$go='image'.$mime_type;
+		$thumb_path = IA_ROOT.'/attachment/images/'.$_W['uniacid'].'/forumlist/'.md5($final_path).'.'.$mime_type;
+		if (!(is_dir(IA_ROOT.'/attachment/images/'.$_W['uniacid'].'/forumlist/'))) {
+			load()->func('file');
+			mkdirs(IA_ROOT.'/attachment/images/'.$_W['uniacid'].'/forumlist/');
+		}
+		if (is_file($thumb_path)) {
+			return $_W['siteroot'].'attachment/images/'.$_W['uniacid'].'/forumlist/'.md5($final_path).'.'.$mime_type;
+		}
+		//缩略
+		$compare=$srcc_width/$srcc_height;
+		if($biao_height==0){
+			if($biao_width==0){
+				$biao_width=750;
+			}
+			$biao_height=$srcc_height/$srcc_width*$biao_width;
+		}elseif($biao_width==0){
+			$biao_width=$srcc_width/$srcc_height*$biao_height;
+		}
+		$my_percent=$biao_width/$biao_height;
+		$wcompare=$srcc_width/$biao_width;
+		$hcompare=$srcc_height/$biao_height;
+
+		if($compare>=$my_percent){
+			$src_width=$srcc_width/$wcompare;
+			$src_height=$srcc_height/$wcompare;
+			$hh=round($biao_height-$src_height)/2;
+			$ww=0;
+		}else{
+			$src_width	=$srcc_width/$hcompare;
+			$src_height	= $srcc_height/$hcompare;
+			$ww=round($biao_width-$src_width)/2;
+			$hh=0;
+		}
+		$ddd_im=imagecreatetruecolor($src_width,$src_height);
+		$dst_im=imagecreatetruecolor($biao_width,$biao_height);
+		$bg=imagecolorallocate($dst_im,$r,$g,$b);
+		imagefill($dst_im,0,0,$bg);
+		imagecopyresampled($ddd_im,$src_im,0,0,0,0,$src_width,$src_height,$srcc_width,$srcc_height);
+		imagecopymerge($dst_im,$ddd_im,$ww,$hh,0,0,$src_width,$src_height,100);
+		$go($dst_im,$thumb_path);
+		imagedestroy($dst_im);
+		imagedestroy($ddd_im);
+		//缩略完
+		return $_W['siteroot'].'attachment/images/'.$_W['uniacid'].'/forumlist/'.md5($final_path).'.'.$mime_type;
+	}
 }
 ?>

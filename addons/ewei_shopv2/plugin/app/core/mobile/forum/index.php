@@ -697,7 +697,9 @@ class Index_EweiShopV2Page extends AppMobilePage
         if($forum_list){
             foreach($forum_list as &$item){
                 $item['thumbs'] = $item['thumbs'] ? iunserializer($item['thumbs']) : array();
-
+                foreach ($item['thumbs'] as $v) {
+                    $item['standard_thumbs'][] = m('common')->suoImg($v,220,230);
+                }
                 $params = array(':fid'=>$item['id'],':uniacid'=>$this->uniacid);
                 $item['review_list'] = pdo_fetchall('select r.id,r.context,r.prase_count,r.prase_list,r.createtime,m.avatar,m.nickname from '.tablename($this->tb_forum_review).' r left join '.tablename($this->tb_member).' m on(r.openid = m.openid) where forum_id=:fid and r.uniacid = :uniacid and reply_id = 0 order by id desc limit 2',$params);
             }
