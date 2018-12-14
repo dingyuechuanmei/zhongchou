@@ -1,0 +1,126 @@
+2018-12-07 09:15:03 SQL Error :
+------------
+String:
+SQL: <br/>select s.id,title,thumbs,video,m.nickname,avatar,support_count,verify_count,target_money,refer_money,s.status from `ims_ewei_shop_raise_starter` s inner join `ims_ewei_shop_member` m on(s.pusher = m.openid) where s.uniacid =:uniacid and s.status = 1 and s.del != 1 and s.aborttime > :time and s.refer_money < s.target_money and s.category = :category order by s.id desc limit 0,5<hr/>Params: <br/>array (
+  ':uniacid' => 73,
+  ':time' => 1544145303,
+  ':category' => 20,
+)<hr/>SQL Error: <br/>Unknown column 's.del' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/raise/index.php; line: 493; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 15:11:43 SQL Error :
+------------
+String:
+SQL: <br/>select count(distinct forum_id) from `ims_ewei_shop_raise_forum_review` where reply_id in () and forum_id in (19,20) <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and forum_id in (19,20)' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 140; <br />file: /framework/function/pdo.func.php; line: 36; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 175; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 15:25:10 SQL Error :
+------------
+String:
+SQL: <br/>select count(distinct forum_id) from `ims_ewei_shop_raise_forum_review` where reply_id in () and forum_id in (19,20) <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and forum_id in (19,20)' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 140; <br />file: /framework/function/pdo.func.php; line: 36; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 175; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 15:37:46 SQL Error :
+------------
+String:
+SQL: <br/>select s.id,title,thumbs,video,m.nickname,avatar,support_count,verify_count,target_money,refer_money,s.status from `ims_ewei_shop_raise_starter` s inner join `ims_ewei_shop_member` m on(s.pusher = m.openid) where s.uniacid =:uniacid and s.status = 1 and s.del != 1 and s.aborttime > :time and s.refer_money < s.target_money and s.category = :category order by s.id desc limit 0,5<hr/>Params: <br/>array (
+  ':uniacid' => 73,
+  ':time' => 1544168266,
+  ':category' => 20,
+)<hr/>SQL Error: <br/>Unknown column 's.del' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/raise/index.php; line: 493; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 15:37:55 SQL Error :
+------------
+String:
+SQL: <br/>select s.id,title,thumbs,video,m.nickname,avatar,support_count,verify_count,target_money,refer_money,s.status from `ims_ewei_shop_raise_starter` s inner join `ims_ewei_shop_member` m on(s.pusher = m.openid) where s.uniacid =:uniacid and s.status = 1 and s.del != 1 and s.aborttime > :time and s.refer_money < s.target_money and s.category = :category order by s.id desc limit 0,5<hr/>Params: <br/>array (
+  ':uniacid' => 73,
+  ':time' => 1544168275,
+  ':category' => 22,
+)<hr/>SQL Error: <br/>Unknown column 's.del' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/raise/index.php; line: 493; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 15:38:22 SQL Error :
+------------
+String:
+SQL: <br/>select count(distinct forum_id) from `ims_ewei_shop_raise_forum_review` where reply_id in () and forum_id in (19,20) <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and forum_id in (19,20)' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 140; <br />file: /framework/function/pdo.func.php; line: 36; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 175; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 15:41:52 SQL Error :
+------------
+String:
+SQL: <br/>select s.id,title,thumbs,video,m.nickname,avatar,support_count,verify_count,target_money,refer_money,s.status from `ims_ewei_shop_raise_starter` s inner join `ims_ewei_shop_member` m on(s.pusher = m.openid) where s.uniacid =:uniacid and s.status = 1 and s.del != 1 and s.aborttime > :time and s.refer_money < s.target_money and s.category = :category order by s.id desc limit 0,5<hr/>Params: <br/>array (
+  ':uniacid' => 73,
+  ':time' => 1544168512,
+  ':category' => 20,
+)<hr/>SQL Error: <br/>Unknown column 's.del' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/raise/index.php; line: 493; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 15:41:54 SQL Error :
+------------
+String:
+SQL: <br/>select s.id,title,thumbs,video,m.nickname,avatar,support_count,verify_count,target_money,refer_money,s.status from `ims_ewei_shop_raise_starter` s inner join `ims_ewei_shop_member` m on(s.pusher = m.openid) where s.uniacid =:uniacid and s.status = 1 and s.del != 1 and s.aborttime > :time and s.refer_money < s.target_money and s.category = :category order by s.id desc limit 0,5<hr/>Params: <br/>array (
+  ':uniacid' => 73,
+  ':time' => 1544168514,
+  ':category' => 22,
+)<hr/>SQL Error: <br/>Unknown column 's.del' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/raise/index.php; line: 493; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 15:41:56 SQL Error :
+------------
+String:
+SQL: <br/>select s.id,title,thumbs,video,m.nickname,avatar,support_count,verify_count,target_money,refer_money,s.status from `ims_ewei_shop_raise_starter` s inner join `ims_ewei_shop_member` m on(s.pusher = m.openid) where s.uniacid =:uniacid and s.status = 1 and s.del != 1 and s.aborttime > :time and s.refer_money < s.target_money and s.category = :category order by s.id desc limit 0,5<hr/>Params: <br/>array (
+  ':uniacid' => 73,
+  ':time' => 1544168516,
+  ':category' => 22,
+)<hr/>SQL Error: <br/>Unknown column 's.del' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/raise/index.php; line: 493; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 19:17:43 SQL Error :
+------------
+String:
+SQL: <br/>select id from `ims_ewei_shop_raise_forum_review` where reply_id = 0 and forum_id in () <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 172; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 19:17:43 SQL Error :
+------------
+String:
+SQL: <br/>select count(distinct forum_id) from `ims_ewei_shop_raise_forum_review` where reply_id in () and forum_id in () <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and forum_id in ()' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 140; <br />file: /framework/function/pdo.func.php; line: 36; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 175; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 19:17:52 SQL Error :
+------------
+String:
+SQL: <br/>select id from `ims_ewei_shop_raise_forum_review` where reply_id = 0 and forum_id in () <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 172; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 19:17:52 SQL Error :
+------------
+String:
+SQL: <br/>select count(distinct forum_id) from `ims_ewei_shop_raise_forum_review` where reply_id in () and forum_id in () <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and forum_id in ()' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 140; <br />file: /framework/function/pdo.func.php; line: 36; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 175; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 19:18:05 SQL Error :
+------------
+String:
+SQL: <br/>select id from `ims_ewei_shop_raise_forum_review` where reply_id = 0 and forum_id in () <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 172; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 19:18:05 SQL Error :
+------------
+String:
+SQL: <br/>select count(distinct forum_id) from `ims_ewei_shop_raise_forum_review` where reply_id in () and forum_id in () <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and forum_id in ()' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 140; <br />file: /framework/function/pdo.func.php; line: 36; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 175; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 19:19:17 SQL Error :
+------------
+String:
+SQL: <br/>select s.id,title,thumbs,video,m.nickname,avatar,support_count,verify_count,target_money,refer_money,s.status from `ims_ewei_shop_raise_starter` s inner join `ims_ewei_shop_member` m on(s.pusher = m.openid) where s.uniacid =:uniacid and s.status = 1 and s.del != 1 and s.aborttime > :time and s.refer_money < s.target_money and s.category = :category order by s.id desc limit 0,5<hr/>Params: <br/>array (
+  ':uniacid' => 73,
+  ':time' => 1544181557,
+  ':category' => 20,
+)<hr/>SQL Error: <br/>Unknown column 's.del' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/raise/index.php; line: 493; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-12-07 19:23:24 SQL Error :
+------------
+String:
+SQL: <br/>select s.id,title,thumbs,video,m.nickname,avatar,support_count,verify_count,target_money,refer_money,s.status from `ims_ewei_shop_raise_starter` s inner join `ims_ewei_shop_member` m on(s.pusher = m.openid) where s.uniacid =:uniacid and s.status = 1 and s.del != 1 and s.aborttime > :time and s.refer_money < s.target_money and s.category = :category order by s.id desc limit 0,5<hr/>Params: <br/>array (
+  ':uniacid' => 73,
+  ':time' => 1544181804,
+  ':category' => 20,
+)<hr/>SQL Error: <br/>Unknown column 's.del' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/raise/index.php; line: 493; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+

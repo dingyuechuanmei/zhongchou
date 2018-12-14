@@ -1,0 +1,533 @@
+{template 'common/header'}
+<style>
+	table{border: dashed 1px #ccc;}
+	th,td{text-align: center; border: dashed 1px #ccc;}
+</style>
+<div class="we7-page-title">小程序管理</div>
+<ul class="we7-page-tab">
+	<li class="active" style="width: 100%;">
+		<a href="{php echo url ('account/manage', array('account_type' => '4'))}">小程序列表</a>
+		<a style="float: right;" href="./index.php?c=account&amp;a=post-step&amp;&auth_type=2" class="btn btn-primary we7-padding-horizontal">添加小程序</a>
+	</li>
+</ul>
+<table class="table we7-table table-hover vertical-middle table-manage ng-scope" id="js-system-account-display" ng-controller="SystemAccountDisplay">
+	<colgroup><col width="120px">
+		<col>
+		<col width="200px">
+		<col width="100px">
+		<col width="260px">
+	</colgroup><tbody><tr>
+	<th class="text-left">帐号</th>
+	<th colspan="2">返回信息</th>
+	<th class="text-right">操作</th>
+</tr>
+<?php foreach($list as $v){ ?>
+<?php if($v['level'] == 5){ ?>
+<tr class="color-gray ng-scope" ng-repeat="list in lists">
+	<td class="text-left">
+		<img ng-src="" class="img-responsive icon" src="<?php echo $v['logo']; ?>">
+		<p class="color-dark ng-binding" ng-bind="list.name"><?php echo $v['name']; ?></p>
+		<?php if($v['level'] == 3){ ?><span class="color-gray ng-scope" ng-if="list.level == 3">类型：认证订阅号</span><?php } ?>
+	</td>
+	<td colspan="2" class="text-left rs_wrap"><p ng-bind="list.sms" class="ng-binding">无</p></td>
+	<td class="text-right">
+		<div class="link-group">
+			<select class="select_1">
+				<option value="0">无操作</option>
+				<option value="1">修改服务器地址</option>
+				<option value="2">获取草稿箱</option>
+				<option value="3">获取模版库</option>
+				<option value="4">获取可选类目</option>
+				<option value="5">获取页面配置</option>
+				<option value="6">提交审核</option>
+				<option value="7">查询审核状态</option>
+				<option value="8">发布此小程序</option>
+				<option value="9">获取体验二维码</option>
+			</select>
+			<br/>
+			<button uniacid="<?php echo $v['uniacid'] ?>" appid="<?php echo $v['key'] ?>" class="btn_1">发起请求</button>
+			<select class="select_2" onchange="setWechat(this)" style="display: none;">
+				<option value="0">选择绑定公众号</option>
+				<?php foreach ($accont_list_w as $v){ ?>
+				<option value="<?php echo $v['uniacid'] ?>"><?php echo $v['name'] ?></option>
+				<?php } ?>
+			</select>
+			<input class="file_1" style="display: none;" onchange="processFiles_1(this.files)" type="file" />
+		</div>
+	</td>
+</tr>
+<?php }} ?>
+</tbody>
+</table>
+<div>
+	<table>
+		<tr><th>说明</th><th>配置</th></tr>
+		
+		<tr>
+			<td>审核配置文件示范（如果审核不通过时，需要自定义配置，可以在这里选择上传）:</td>
+			<td>
+				{
+				"item_list": [
+				{
+				"address":"index",
+				"tag":"tagvalue",
+				"first_class": "first_class",
+				"second_class": "second_class",
+				"first_id":1,
+				"second_id":2,
+				"title": "index"
+				},
+				{
+				"address":"page/logs/logs",
+				"tag":"tag",
+				"first_class": "first_class",
+				"second_class": "second_class",
+				"third_class": "third_class",
+				"first_id":3,
+				"second_id":4,
+				"third_id":5,
+				"title": "title"
+				}
+				]
+				}
+			</td>
+		</tr>
+	</table>
+	<br/>
+
+</div>
+<script>
+	// 上传审核自定义配置
+	var iUpdatedata = '';
+  //  自定义配置
+  var iUserData = {};
+//  当前上传的uniacid
+  var iUniacid = '';
+  var bCurUniacid = true;
+  // 请求服务器
+	$('.btn_1').click(function () {
+	  var eInowClick = $(this);
+	  var iType = $(this).siblings('.select_1').val();
+	  var iAppid = eInowClick.attr('appid');
+	  if(bCurUniacid == true){
+	  	iUniacid = eInowClick.attr('uniacid');
+      bCurUniacid = false;
+    }
+	  var iNowRquUrl = window.location.href;
+    showresult(eInowClick,'请求中');
+	  switch (iType){
+			case '0':
+				alert('请选择请求类型');
+        showresult(eInowClick,'请选择请求类型');
+				return false;
+			break;
+			case '1':
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+						'reqwechat':1,
+					},
+          success : function(data) {
+            data = JSON.parse(data);
+            if(data.errcode == 0){
+            	showresult(eInowClick,data.errmsg+'，服务器地址已经设置成功，当小程序通过第三方发布代码上线后，小程序原先自己配置的服务器域名将被删除，只保当前网址作为小程序的服务器地址。');
+            }else{
+              showresult(eInowClick,'设置失败，错误信息：'+data.errmsg + '。如果多次请求失败，请重新进入公众号，如果仍然失败，请重新授权公众号，并授权所有权限。');
+						}
+          },
+          error : function(data) {
+            showresult(eInowClick,data);
+          }
+        });
+			  break;
+      case '2':
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat':2,
+          },
+          success : function(data) {
+            data = JSON.parse(data);
+            if(data.errcode == 0){
+              var str = '';
+              str += '<table><tr><th>草稿ID</th><th>草稿版本号</th><th>开发者上传草稿时间</th><th>描述</th><th>执行</th></tr>';
+              for(var i in data['draft_list']){
+                str += '<tr>';
+                str += '<td>' + data['draft_list'][i]['draft_id'] + '</td>';
+                str += '<td>' + data['draft_list'][i]['user_version'] + '</td>';
+                var timestamp = data['draft_list'][i]['create_time'];
+                timestamp = timestamp * 1000;
+                var date =  new Date(timestamp);
+                str += '<td>' + date.getFullYear()+'年'+ (date.getMonth() + 1) + '月' + date.getDate() + '日'+ date.getHours() + '时'+ date.getMinutes() + '分'+ date.getSeconds() + '秒' + '</td>';
+                str += '<td>' + data['draft_list'][i]['user_desc'] + '</td>';
+                str += '<td><button draft_id="'+ data['draft_list'][i]['draft_id'] + '" appid="' + iAppid + '" class="btn_3">转储至模板</button></td>';
+                str += '</tr>';
+              }
+              str += '</table>';
+              showresult(eInowClick,str);
+              bindSetTem();
+            }else{
+              showresult(eInowClick,'请求失败，错误信息：'+data.errmsg + '。如果多次请求失败，请重新进入公众号，如果仍然失败，请重新授权公众号，并授权所有权限。');
+            }
+          },
+          error : function(data) {
+            showresult(eInowClick,data);
+          }
+        });
+        break;
+      case '3':
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat':3,
+          },
+          success : function(data) {
+            data = JSON.parse(data);
+            if(data.errcode == 0){
+              var str = '';
+              str += '<table><tr><th>模版ID</th><th>模版版本号</th><th>开发者上传模版时间</th><th>描述</th><th>执行</th></tr>';
+              for(var i in data['template_list']){
+                str += '<tr>';
+                str += '<td>' + data['template_list'][i]['template_id'] + '</td>';
+                str += '<td>' + data['template_list'][i]['user_version'] + '</td>';
+                var timestamp = data['template_list'][i]['create_time'];
+                timestamp = timestamp * 1000;
+                var date =  new Date(timestamp);
+                str += '<td>' + date.getFullYear()+'年'+ (date.getMonth() + 1) + '月' + date.getDate() + '日'+ date.getHours() + '时'+ date.getMinutes() + '分'+ date.getSeconds() + '秒' + '</td>';
+                ;
+                str += '<td>' + data['template_list'][i]['user_desc'] + '</td>';
+                str += '<td><button template_id="'+ data['template_list'][i]['template_id'] +'" user_version="'+ data['template_list'][i]['user_version'] +'" user_desc="'+ data['template_list'][i]['user_desc'] +'" appid="' + iAppid + '" class="btn_2">上传</button><input style="display: none;" onchange="processFiles(this.files)" type="file" /></td>';
+                str += '</tr>';
+              }
+              str += '</table>';
+              showresult(eInowClick,str);
+              bindUpdate();
+            }else{
+              showresult(eInowClick,'请求失败，错误信息：'+data.errmsg + '。如果多次请求失败，请重新进入公众号，如果仍然失败，请重新授权公众号，并授权所有权限。');
+            }
+          },
+          error : function(data) {
+            showresult(eInowClick,data);
+          }
+        });
+        break;
+      case '4':
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat':4,
+          },
+          success : function(data) {
+            data = JSON.parse(data);
+            if(data.errcode == 0){
+              var str = '';
+              str += '<table><tr><th>一级类目</th><th>二级类目</th><th> 三级类目</th></tr>';
+              for(var i in data['category_list']){
+                str += '<tr>';
+                str += '<td>' + data['category_list'][i]['first_class'] + '</td>';
+                str += '<td>' + data['category_list'][i]['second_class'] + '</td>';
+                str += '<td>' + data['category_list'][i]['third_class'] + '</td>';
+                str += '</tr>';
+              }
+              str += '</table>';
+              showresult(eInowClick,str);
+              bindUpdate();
+            }else{
+              showresult(eInowClick,'请求失败，错误信息：'+data.errmsg + '。如果多次请求失败，请重新进入公众号，如果仍然失败，请重新授权公众号，并授权所有权限。');
+            }
+          },
+          error : function(data) {
+            showresult(eInowClick,data);
+          }
+        });
+        break;
+      case '5':
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat':5,
+          },
+          success : function(data) {
+            data = JSON.parse(data);
+            if(data.errcode == 0){
+              var str = '';
+              str += '<table><tr><th>页面配置列表</th></tr>';
+							str += '<tr>';
+							var pglist = JSON.stringify(data['page_list']).replace(/,/g,'<br/><hr/>').replace(/\[/g,'<br/><hr/>').replace(/\]/g,'<br/><hr/>');
+							str += '<td>' + pglist + '</td>';
+							str += '</tr>';
+              str += '</table>';
+              showresult(eInowClick,str);
+              bindUpdate();
+            }else{
+              showresult(eInowClick,'请求失败，错误信息：'+data.errmsg);
+            }
+          },
+          error : function(data) {
+            showresult(eInowClick,data);
+          }
+        });
+        break;
+      case '6':
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat':6,
+						'item_list': iUpdatedata
+          },
+          success : function(data) {
+            data = JSON.parse(data);
+            if(data.errcode == 0){
+							var str = data.errmsg;
+							str += ',小程序已经提交审核，请记住你的审核编号为：'+data.auditid +'查询审核结果需要凭借审核编号。';
+              showresult(eInowClick,str);
+            }else{
+              showresult(eInowClick,'请求失败，错误信息：'+data.errmsg);
+            }
+          },
+          error : function(data) {
+            showresult(eInowClick,data);
+          }
+        });
+        break;
+      case '7':
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat':7,
+          },
+          success : function(data) {
+            data = JSON.parse(data);
+            if(data.errcode == 0){
+              var str = data.errmsg;
+              if(data.status == 0){
+								str += ',小程序已经审核通过。';
+              }
+              if(data.status == 1){
+                str += ',审核未通过'+ data.reason;
+              }
+              if(data.status == 2){
+                str += ',正在审核中。';
+              }
+              showresult(eInowClick,str);
+            }else{
+              showresult(eInowClick,'通信错误：'+data.errmsg);
+            }
+          },
+          error : function(data) {
+            showresult(eInowClick,data);
+          }
+        });
+        break;
+      case '8':
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat': 8,
+          },
+          success : function(data) {
+            data = JSON.parse(data);
+            if(data.errcode == 0){
+              var str = data.errmsg;
+              str += ',小程序已成功发布。';
+              showresult(eInowClick,str);
+            }else{
+              showresult(eInowClick,'发布失败：审核状态未满足发布');
+            }
+          },
+          error : function(data) {
+            showresult(eInowClick,data);
+          }
+        });
+        break;
+      case '9':
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat':9,
+          },
+          success : function(data) {
+            data = '<img src="data:image/jpg;base64,'+ data + '" />'
+            showresult(eInowClick,data);
+          },
+          error : function(data) {
+            showresult(eInowClick,data);
+          }
+        });
+        break;
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat':9,
+          },
+          success : function(data) {
+            data = '<img src="data:image/jpg;base64,'+ data + '" />'
+            showresult(eInowClick,data);
+          },
+          error : function(data) {
+            showresult(eInowClick,data);
+          }
+        });
+        break;
+		}
+		return false;
+  });
+	/*
+	* 获得并显示请求结果
+	* */
+	function showresult(ele,rs) {
+    ele.parents('td').siblings('.rs_wrap').html(rs);
+  }
+
+  /*
+  * 用户选择自定义文件配置
+  * */
+  function processFiles(files){
+    var file = files[0];
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      // 这个事件发生，意为着数据准备好了
+      iUserData = e.target.result;
+    };
+    reader.readAsText(file);
+	}
+  /*
+	* 用户选择审核文件配置
+	* */
+  function processFiles_1(files){
+    var file = files[0];
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      // 这个事件发生，意为着数据准备好了
+      iUpdatedata = e.target.result;
+    };
+    reader.readAsText(file);
+  }
+
+  /*
+  * 绑定模板上传事件
+  * */
+  function bindUpdate() {
+    $('.btn_2').each(function () {
+			$(this).bind('click',function () {
+        var eInowClick = $(this);
+        var iNowRquUrl = window.location.href;
+        var iAppid = eInowClick.attr('appid');
+        var iUserVersion = eInowClick.attr('iuser_version');
+        var iUserDesc = eInowClick.attr('user_desc');
+        var iTemplateId = eInowClick.attr('template_id');
+//        用户自定义的参数文件
+        $(this).html('请求中');
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat':100,
+            'template_id': iTemplateId,
+//            "ext_json": iUserData,
+            'uniacid': iUniacid,
+            'user_version': iUserVersion,
+            'user_desc': iUserDesc,
+          },
+          success : function(data) {
+            data = JSON.parse(data);
+            if(data.errcode == 0){
+              eInowClick.html('上传成功。');
+              alert('上传成功。');
+						}else{
+              eInowClick.html('上传失败。');
+              alert(data.errmsg);
+						}
+          },
+          error : function(data) {
+            showresult(alert(data.errmsg));
+          }
+        });
+      });
+    });
+  }
+
+  /*
+  * 绑定草稿转储至模板事件
+  * */
+  function bindSetTem(){
+    $('.btn_3').each(function () {
+      $(this).bind('click',function () {
+        var eInowClick = $(this);
+        var iNowRquUrl = window.location.href;
+        var iAppid = eInowClick.attr('appid');
+        var iDraftId = eInowClick.attr('draft_id');
+//        用户自定义的参数文件
+        $(this).html('请求中');
+        $.ajax({
+          url : iNowRquUrl,
+          type : 'POST',
+          data : {
+            'appid' : iAppid,
+            'reqwechat':101,
+            'draft_id': iDraftId,
+          },
+          success : function(data) {
+            data = JSON.parse(data);
+            if(data.errcode == 0){
+              eInowClick.html('上传成功。');
+              alert('上传成功。');
+            }else{
+              eInowClick.html('上传失败。');
+              alert(data.errmsg);
+            }
+          },
+          error : function(data) {
+            showresult(alert(data.errmsg));
+          }
+        });
+      });
+    });
+	}
+	/*
+	* 监听提交审核自定义配置
+	* */
+	(function () {
+		$('.select_1').change(function () {
+		  if($(this).val() == 3){
+        $('.select_2').show();
+        $('.file_1').hide();
+			}
+		  else if($(this).val() == 6){
+				$('.file_1').show();
+        $('.select_2').hide();
+			}else{
+        $('.select_2').hide();
+        $('.file_1').hide();
+			}
+    });
+  })();
+	/*
+	* 选择公众号
+	* */
+	function setWechat(e){
+    iUniacid = e.value;
+	}
+</script>
+{template 'common/footer'}

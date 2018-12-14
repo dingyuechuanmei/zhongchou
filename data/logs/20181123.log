@@ -1,0 +1,12 @@
+2018-11-23 16:12:34 SQL Error :
+------------
+String:
+SQL: <br/>select id from `ims_ewei_shop_raise_forum_review` where reply_id = 0 and forum_id in () <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 172; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+
+2018-11-23 16:12:34 SQL Error :
+------------
+String:
+SQL: <br/>select count(distinct forum_id) from `ims_ewei_shop_raise_forum_review` where reply_id in () and forum_id in () <hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and forum_id in ()' at line 1<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 140; <br />file: /framework/function/pdo.func.php; line: 36; <br />file: /addons/ewei_shopv2/plugin/app/core/mobile/forum/index.php; line: 175; <br />file: /addons/ewei_shopv2/core/model/route.php; line: 202; <br />file: /addons/ewei_shopv2/site.php; line: 49; <br />file: /app/ewei_shopv2_api.php; line: 30; <br />
+

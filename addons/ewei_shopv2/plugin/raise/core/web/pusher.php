@@ -10,6 +10,7 @@ class Pusher_EweiShopV2Page extends PluginWebPage
     public $tb_pusher_category = 'ewei_shop_raise_category';
     
     public $tb_member = 'ewei_shop_member';
+    public $tb_merch = 'ewei_shop_merch_user';
     public $uniacid;
     
     /**
@@ -32,9 +33,9 @@ class Pusher_EweiShopV2Page extends PluginWebPage
             $condition .= ' and (title like :keyword1 or m.nickname like :keyword2)';
             $params[':keyword1'] = $params[':keyword2'] = '%' . $_GPC['keyword'] . '%';
         }
-        $sql = 'select p.id,p.title,p.pusher,p.like_count,p.ifshow,p.createtime from '.tablename($this->tb_pusher).' p ';
+        $sql = 'select p.id,p.title,p.pusher,p.like_count,p.ifshow,p.createtime,m.merchname AS nickname,m.logo from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id)';
         $list = pdo_fetchall($sql . $condition . ' order by id desc limit ' . (($pindex - 1) * $psize) . ',' . $psize, $params);
-        $total = pdo_fetchcolumn('select count(*) from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_member).' m on(p.pusher = m.openid)' . $condition, $params);
+        $total = pdo_fetchcolumn('select count(*) from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id)' . $condition, $params);
         $pager = pagination($total, $pindex, $psize);
         include $this->template();
     }
