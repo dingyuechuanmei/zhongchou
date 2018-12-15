@@ -1,0 +1,152 @@
+<view class='container'>
+  <view class='my'>
+    <view class='me' bindtap='personalinformation'>
+      <image class='bigimage' src='{{member.avatar}}'></image>
+      <view class='text'>
+        <view class='name'>{{member.nickname}}</view>
+        <view class='phone'>{{member.mobile}}</view>
+      </view>
+      <view class='r vm'>
+        <text style='color:red;margin-right:15px;'>会员资料</text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+
+    <!-- <view class='item {{item.classname}}' wx:for='{{itemArray}}' wx:for-item='item' bindtap='{{item.classname}}'>
+      <image src='{{item.imagesrc}}'></image>
+      <text class='title'>{{item.title}}</text>
+      <view class='r'>
+        <text class='num' wx:if='{{item.num}}'>{{item.num}}</text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>   -->
+
+    <view class='item item5' bindtap='item5'>
+      <image src='{{approot}}wxapp_attr/05@3x.png'></image>
+      <text class='title'>我的钱包</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+    <view class='item item3' bindtap='item3'>
+      <image src='{{approot}}wxapp_attr/03@3x.png'></image>
+      <text class='title'>我的订单</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+    <view class='item item4' bindtap='item4'>
+      <image src='{{approot}}wxapp_attr/04@3x.png'></image>
+      <text class='title'>我的优惠券</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+    <view class='item item21' bindtap='item21'>
+      <image src='/static/images/icon/like.png'></image>
+      <text class='title'>我的关注</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+      <view class='item item21' bindtap='item215'>
+      <image src='/static/images/icon/like.png'></image>
+      <text class='title'>充值记录</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+    <view class='item item22' bindtap='item22'>
+      <image src='/static/images/icon/footprint.png'></image>
+      <text class='title'>我的足迹</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+
+
+
+    <view class='item item11' bindtap='item11'>
+      <image src='../../resource/image/fabu.png'></image>
+      <text class='title'>我的发布</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+    <view class='item item12' bindtap='item12' data-id='{{member.id}}'>
+      <image src='../../resource/image/comment.png'></image>
+      <text class='title'>我的评论</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+
+<block wx:if="{{isopen==1}}">
+    <view class='item item1' bindtap='item1'>
+      <image src='{{approot}}wxapp_attr/01@3x.png'></image>
+      <text class='title'>我参与的微客</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+    <view class='item item2' bindtap='item2'>
+      <image src='{{approot}}wxapp_attr/02@3x.png'></image>
+      <text class='title'>我发起的救助</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+</block>
+  
+    <view class='item item6' bindtap='item6'>
+      <image src='{{approot}}wxapp_attr/06@3x.png'></image>
+      <text class='title'>商家入驻</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+		
+		<view class='item item6' bindtap='my_shop' wx:if="{{merch}}">
+      <image src='{{approot}}wxapp_attr/06@3x.png'></image>
+      <text class='title'>我的店铺</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+
+    <view class='item item23' bindtap='item23'>
+      <image src='{{approot}}wxapp_attr/06@3x.png'></image>
+      <text class='title'>商家登录</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+    <view class='item'>
+      <image src='{{approot}}wxapp_attr/kefu.png'></image>
+      <button class='title' open-type="contact"><text style='font-size:26rpx;'>平台客服</text></button>
+      <view class='r'>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+    <view  wx:if="{{!hasUserInfo}}" class='mask'>
+          <label class='mask' id='onder'>
+               <button name="onder"open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='Choice' bindtap='navs' data-index='2'>  </button>
+          </label>
+    </view>

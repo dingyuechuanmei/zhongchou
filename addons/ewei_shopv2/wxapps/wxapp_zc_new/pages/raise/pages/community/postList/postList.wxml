@@ -1,0 +1,5 @@
+<view class='container'>
+  <!--动态  -->
+  <import src="../../components/cpt_dynamic_list.wxml"/>
+  <template is="dynamic_list" data="{{forum_list:forum_list,imglist:imglist}}"/> 
+</view>

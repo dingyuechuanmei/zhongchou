@@ -1,0 +1,11 @@
+@import "../../../resource/css/app.wxss";
+
+.container {background: #fff;}
+.container .list {padding: 0 30rpx; font-size: 32rpx;}
+.container .item {padding: 40rpx 0; border-bottom: 1px solid #f0f0f0;}
+.container .item image {width: 71rpx; height: 72rpx;}
+.container .item .nick {line-height: 72rpx; margin-left: 10rpx;}
+.container .item .focus-btn {width: 140rpx; line-height: 60rpx; text-align: center; border-radius: 10rpx; border: 1px solid #999; display: block; float: right; margin-top: 6rpx; color: #999;}
+.container .item .tosee {float: right; font-size: 24rpx; color: #999; margin-top: 20rpx;}
+.container .item .tosee .you {margin-left: 5rpx; width: 14rpx; height: 14rpx;}
+.wu {padding-top: 100rpx; text-align: center; color: #999;}

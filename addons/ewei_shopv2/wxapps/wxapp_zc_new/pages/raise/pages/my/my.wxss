@@ -1,0 +1,138 @@
+@import "../components/components.wxss";
+@import "../../resource/css/app.wxss";
+
+.my .me {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 50rpx 30rpx;
+  background: #fff;
+  position: relative;
+}
+
+.my .me .bigimage {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  vertical-align: top;
+}
+
+.my .me .text {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20rpx;
+}
+
+.my .me .name {
+  font-size: 32rpx;
+}
+
+.my .me .phone {
+  color: #999;
+  margin-top: 10rpx;
+}
+
+.my .me .r {
+  box-sizing: border-box;
+  padding: 0.1rpx;
+  position: absolute;
+  left: auto;
+  top: 0;
+  right: 30rpx;
+  height: 100%;
+}
+
+.my .me .r .youimage {
+  width: 16.6rpx;
+  height: 30rpx;
+  position: absolute;
+  left: auto;
+  right: 0;
+  top: 50%;
+  margin-top: -15rpx;
+}
+
+.my .item {
+  height: 110rpx;
+  line-height: 110rpx;
+  background: #fff;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #f0f0f0;
+  font-size: 26rpx;
+  position: relative;
+}
+
+.item.item11, .item.item1, .item.item6, .item.item5 {
+  margin-top: 20rpx;
+}
+
+.my .item image {
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: top;
+  margin-top: 35rpx;
+  margin-right: 30rpx;
+}
+
+.my .item .title {
+  display: inline-block;
+  height: 100%;
+}
+
+.my .item .r {
+  box-sizing: border-box;
+  padding: 0.1rpx;
+  position: absolute;
+  left: auto;
+  top: 0;
+  right: 0;
+}
+
+.my .item .r .num {
+  margin-right: 15rpx;
+  height: 110rpx;
+  display: inline-block;
+  color: red;
+}
+
+.my .item .r .youimage {
+  width: 16.6rpx;
+  height: 30rpx;
+  vertical-align: top;
+  margin-top: 40rpx;
+}
+
+.contact {
+  padding: 0;
+  margin: 0;
+  line-height: normal;
+  border: 0;
+  position: relative;
+  display: block;
+  background: #fff;
+  color: #333;
+}
+
+button::after {
+  display: none;
+}
+
+.button-hover {
+  background: #fff;
+}
+
+button {
+  color: #333;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  line-height: 110rpx;
+	background: transparent;
+}
+
+.mask{
+  height:110%;width:100%;
+  position:absolute;
+  top: 0;
+  opacity:0;
+}

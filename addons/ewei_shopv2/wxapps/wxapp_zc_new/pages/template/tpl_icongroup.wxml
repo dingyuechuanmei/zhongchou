@@ -1,0 +1,25 @@
+
+<!-- 图标组 -->
+
+<template name="icongroup">
+
+	<view class="fui-icon-group noborder col-{{diyitem.params.rownum}} selecter" style="background-color: {{diyitem.style.background}}; {{diyitem.params.bordertop}} {{diyitem.params.borderbottom}}">
+        <block wx:for="{{diyitem.data}}" wx:key="index" wx:for-item="iconitem">
+        	<block wx:if="diyitem.params.border == 1 && index > 0">
+            	<view class="fui-icon-col" style="border-left: 1px solid {{diyitem.style.bordercolor}};" bindtap="click_location_href" data-url="{{iconitem.linkurl}}" data-nocache="true">
+	                <view class="icon icon-green radius"><i class="icon {{iconitem.iconclass}}" style="color: {{diyitem.style.iconcolor}};"></i></view>
+	                <view class="text" style="color: {{diyitem.style.textcolor}};">{{iconitem.text}}</view>
+	            </view>
+            </block>
+            <block wx:else>
+            	<view class="fui-icon-col" style="border-left: none;" bindtap="click_location_href" data-url="{{iconitem.linkurl}}" data-nocache="true">
+	                <view class="icon icon-green radius"><i class="icon {{iconitem.iconclass}}" style="color: {{diyitem.style.iconcolor}};"></i></view>
+	                <view class="text" style="color: {{diyitem.style.textcolor}};">{{iconitem.text}}</view>
+	            </view>
+            </block>
+        </block>
+        
+    </view>
+
+
+</template>

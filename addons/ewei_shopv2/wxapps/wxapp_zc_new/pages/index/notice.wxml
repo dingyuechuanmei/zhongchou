@@ -1,0 +1,24 @@
+<block wx:if="{{item.data.length > 0}}">
+<view class="index-hot">
+    <view class="weui-flex">
+      <view class="flex-head-item item-hotdot">
+        <image class="hotdot" src="{{hotimg}}"></image>
+        <image class="notification" src="{{notification}}"></image>
+      </view>
+      <view class="weui-flex__item">
+        <swiper autoplay="{{autoplayHot}}" circular="{{circularHot}}" class="index-adcs-sqiper index-notification-swiper" duration="{{durationHot}}" indicator-dots="{{indicatorDotsHot}}" interval="{{intervalHot}}">
+          <block wx:for="{{item.data}}" wx:for-index="idx"  wx:key="">
+            <swiper-item>
+              <view wx:if="{{item.link}}">
+              <navigator hover-class="none" class="notification-navigoter" url="{{item.link}}">{{item.title}}</navigator>
+              </view>
+              <view wx:else>
+              <navigator hover-class="none" class="notification-navigoter" url="/pages/shop/notice/detail/detail?id={{item.id}}&merchid={{merchid}}">{{item.title}}</navigator>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+  </view>
+</block>

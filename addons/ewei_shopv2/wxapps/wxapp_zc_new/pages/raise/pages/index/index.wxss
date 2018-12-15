@@ -1,0 +1,246 @@
+@import "../components/components.wxss";
+@import "../../resource/css/app.wxss";
+
+.index .bigimage {
+  width: 100%;
+  height: 400rpx;
+  display: block;
+  vertical-align: top;
+}
+.index .bigtitle {
+  width: 100%;
+  background: #fff;
+  margin-top: 20rpx;
+}
+.index .bigtitle .item {
+  position: relative;
+  padding: 20rpx 0;
+}
+.index .bigtitle .item::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: auto;
+  right: 0;
+  top: 0;
+  width: 4rpx;
+  height: 210rpx;
+  background: #f2f2f2;
+}
+
+.index .bigtitle .image {
+  width: 88rpx;
+  height: 88rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+.index .bigtitle .image image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  vertical-align: top;
+}
+.index .bigtitle .item .text {
+  margin-top: 8rpx;
+}
+.index .bigtitle .item .text view {
+  width: 90%;
+  margin: 0 auto;
+  word-spacing: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.index .bigtitle .text button{
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  line-height: 1.5;
+  background-color:#fff;
+}
+.index .bigtitle .text button:nth-child(1) {
+  font-size: 24rpx;
+}
+.index .bigtitle .text button:nth-child(2) {
+  color: #999;
+  font-size: 22rpx;
+}
+.index .introducetheraise {
+  margin-top: 20rpx;
+  background: #fff;
+  padding: 0 30rpx;
+  /* padding-bottom: 120rpx; */
+}
+.index .introducetheraise .title {
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 28rpx;
+}
+.index .introducetheraise .video {
+  position: relative;
+  z-index: 1;
+}
+.index .introducetheraise .video #myVideo {
+  vertical-align: top;
+  width: 100%;
+  /* position: absolute;
+  z-index: 9999;  */
+}
+.index .introducetheraise .info {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  color: #999;
+  font-size:26rpx;
+}
+
+
+
+
+/* 众推 */
+
+@import "../components/components.wxss";
+@import "../../resource/css/app.wxss";
+
+ .top {
+  position: fixed;
+  top: 0;
+  left: 0; 
+  width: 100%; 
+  padding: 0 30rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+  background: #fff;
+  box-sizing: border-box;
+  z-index: 9999;
+
+} 
+.topWrap{height:160rpx; width:100%; display: flex; display: -webkit-box; flex-direction: column;}  
+.top_Item{ width: 160rpx; height: 160rpx;  flex: 1;}  
+.top_Item view {
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+}
+.top_Item view.on {
+  color: #ff6749;
+}
+.top_Item view.on::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 6rpx;
+  background: #ff6749;
+  position: absolute;
+  left: 0;
+  top: auto;
+  bottom: 0;
+  z-index: 999; 
+}
+
+
+.kong {
+  width: 100%;
+  height: 110rpx;
+}
+.zhongtui .alltitle {
+  position: absolute;
+  top: 290rpx;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 32rpx;
+  color: #fff;
+}
+.zhongtui .game {
+  width: 100%;
+  height: 220rpx;
+  background: #fff;
+  text-align: center;
+}
+.zhongtui .game image {
+  width: 92%;
+  height: 200rpx;
+  margin-top: 10rpx;
+}
+.zhongtui .zhongtui_list {
+  padding-bottom: 20rpx;
+}
+.zhongtui .zhongtui_item {
+  background: #fff;
+  margin-top: 20rpx;
+}
+.zhongtui .zhongtui_item .posterimg {
+  position: relative;
+}
+.zhongtui .zhongtui_item .posterimg::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .4);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.zhongtui .zhongtui_item .posterimg image {
+  width: 100%;
+  height: 400rpx;
+}
+.zhongtui .zhongtui_item .posterimg .title {
+  position: absolute;
+  left: 30rpx;
+  top: auto;
+  bottom: 30rpx;
+  z-index: 99;
+  color: #fff;
+}
+.zhongtui .zhongtui_item .author {
+  height: 130rpx;
+}
+.zhongtui .zhongtui_item .author > image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  background: #eee;
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+}
+.zhongtui .zhongtui_item .author .name {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20rpx;
+  font-size: 32rpx;  
+  margin-top: 37rpx;
+}
+.zhongtui .zhongtui_item .author .support {
+  display: inline-block;
+  float: right;
+  margin-right: 30rpx;
+  padding: .1rpx;
+  margin-top: 35rpx;
+}
+.zhongtui .zhongtui_item .author .support image {
+  width: 34rpx;
+  height: 34rpx;
+  vertical-align: top;
+  margin-top: 4rpx;
+}
+.zhongtui .zhongtui_item .author .support .supportnum {
+  display: inline-block;
+  font-size: 32rpx;
+  color: #999;
+  margin-left: 15rpx; 
+  vertical-align: top;
+} 
+
+button::after{
+  content: none;
+}
+
+
+
+.mask{
+  height:100%;width:100%;
+  position:absolute;
+  top: 0;
+  opacity:0;
+}

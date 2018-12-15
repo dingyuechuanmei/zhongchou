@@ -1,0 +1,32 @@
+<!-- 搜索框 -->
+
+<template name="fixedsearch">
+    <view class="diy-fixedsearch fixed">
+        <view class="background" style="background: {{diyitem.style.background}}; opacity: {{diyitem.style.opacity}};"></view>
+        <view action="{php echo mobileUrl('goods', array('merchid'=>$page.merch']))}" method="post" class="inner">
+            <block wx:if="{{diyitem.params.leftnav != '' && diyitem.params.leftnav != undefined}}">
+                <view class="leftnav" bindtap='click_location_href' data-url="{{diyitem.params.leftnavlink}}">
+                    <block wx:if="{{diyitem.params.leftnav == 1 && (diyitem.params.leftnavicon != '' && diyitem.params.leftnavicon != undefined)}}">
+                        <i class="icon {{diyitem.params.leftnavicon}}"style="color: {php echo !empty($diyitem.style.leftnavcolor'])?$diyitem.style.leftnavcolor']:'#fff'};"></i>
+                    </block>
+                    <block wx:if="{{diyitem.params.leftnav == 2 && (diyitem.params.leftnavimg != '' && diyitem.params.leftnavimg != undefined)}}">
+                        <image src="{{diyitem.params.leftnavimg}}" ></image>
+                    </block>
+                </view>
+            </block>
+            <view class="center {{diyitem.params.searchstyle}}">
+                <input type="search" value="" bindtap='click_location_href' data-url="/pages/goods/index/index" disabled="true" placeholder="{{diyitem.params.placeholder}}" style="color: {{diyitem.style.searchtextcolor}}; opacity: {{diyitem.style.opacityinput}}; background: {{diyitem.style.searchbackground}};" name="keywords" />
+            </view>
+            <block wx:if="{{diyitem.params.rightnav != '' && diyitem.params.rightnav != undefined}}">
+                <view class="rightnav" bindtap='click_location_href' data-url="{{diyitem.params.rightnavlink}}">
+                    <block wx:if="{{diyitem.params.rightnav == 1 && (diyitem.params.rightnavicon != '' && diyitem.params.rightnavicon != undefined)}}">
+                        <i class="icon {{diyitem.params.rightnavicon}}"style="color: {php echo !empty($diyitem.style.rightnavcolor'])?$diyitem.style.rightnavcolor']:'#fff'};"></i>
+                    </block>
+                    <block wx:if="{{diyitem.params.rightnav == 2 && (diyitem.params.rightnavimg != '' && diyitem.params.rightnavimg != undefined)}}">
+                        <image src="{{diyitem.params.rightnavimg}}"></image>
+                    </block>
+                </view>
+            </block>
+        </view>
+    </view>
+</template>

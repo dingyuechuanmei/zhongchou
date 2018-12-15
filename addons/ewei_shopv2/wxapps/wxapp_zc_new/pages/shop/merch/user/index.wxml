@@ -1,0 +1,121 @@
+<view class="fui-page page-merch-list">
+    <!--<view class="fui-header">
+        <view class="fui-header-left">
+            <view class="back" data-href="{php echo mobileUrl('merch/list')}"></view>
+        </view>
+        <view class="title">全部商户</view>
+        <view class="fui-header-right"></view>
+    </view>-->
+    <view class="fui-content">
+        <view class="fui-searchbar bar">
+            <view class="searchbar center">
+                <input type="submit" class="searchbar-cancel searchbtn" bindtap='btn_serch' value="搜索" />
+                <view class="search-input">
+                    <i class="icon icon-search"></i>
+                    <input type="search" placeholder="输入关键字..." bindinput='bindinput' class="search" name="keyword" />
+                </view>
+            </view>
+        </view>
+
+        <view class="sortMenu fui-list">
+            <view class="fui-list-inner li" id="sortmenu_rule" bindtap='click_type' data-class="sortmenu_rule"><span id="sortmenu_rule_text">附近</span><i class="icon icon-down"></i></view>
+            <view class="fui-list-inner li" id="sortmenu_cate" bindtap='click_type'  data-class="sortmenu_cate"><span id="sortmenu_cate_text">分类</span><i class="icon icon-down"></i></view>
+            <view class="fui-list-inner li" id="sortmenu_sort" bindtap='click_type'  data-class="sortmenu_sort"><span id="sortmenu_sort_text">智能排序</span><i class="icon icon-down"></i></view>
+            <view class="sortmenu_rule" wx:if="{{type == 'sortmenu_rule' ? true : false}}">
+                <view>
+                    <view class="li" bindtap='change_range' data-range="500" text="附近">附近</view>
+                    <view class="li" bindtap='change_range' data-range="0.5" text="500米">500米</view>
+                    <view class="li" bindtap='change_range' data-range="1" text="1000米">1000米</view>
+                    <view class="li" bindtap='change_range' data-range="2" text="2000米">2000米</view>
+                    <view class="li" bindtap='change_range' data-range="5" text="5000米">5000米</view>
+                    <view class="li" bindtap='change_range' data-range="10000" text="5000米以上">5000米以上</view>
+                </view>
+            </view>
+            <view class="sortmenu_cate" wx:if="{{type == 'sortmenu_cate' ? true : false}}">
+                <view>
+                    <view cateid="0" text="全部分类" class="li on">
+                    <i class="fa fa-th-large"></i>全部分类</view>
+
+                    <view class="li" bindtap='change_cate' data-cateid="{{item.id}}" text="{{item.catename}}" wx:for="{{category}}">
+                        <span class="imgWrap">
+                        <image src="{{item.thumb}}" class="thumb_url"></image>
+                        </span>
+                        {{item.catename}}
+                    </view>
+
+                </view>
+            </view>
+            <view class="sortmenu_sort" wx:if="{{type == 'sortmenu_sort' ? true : false}}">
+                <view>
+                    <view class="li" bindtap="change_sorttype" data-sorttype="0" text=" 距离最近">距离最近</view>
+                    <view class="li" bindtap="change_sorttype" data-sorttype="1" text="最新入驻">最新入驻</view>
+                 </view>
+            </view>
+        </view>
+
+        <view class="fui-mask-m sort-mask" wx:if="{{sortmenu_sort}}"></view>
+
+        <view class="fui-cell-group qa-title">
+            <view class="fui-cell">
+                <view class="fui-cell-text">推荐商家</view>
+            </view>
+        </view>
+
+        <view class='fui-content-inner'>
+            <block wx:if="{{list.length == 0}}">
+              <view class='content-empty'>
+                  <i class='icon icon-lights'></i><br/>暂时没有商家<br/>
+                  <view bindtap='location_href' data-href="/pages/index/index" class='btn btn-default-o'>到处逛逛</view>
+              </view>
+            </block>
+
+            <view class='fui-list-group container'>
+
+              <view class="fui-list store-item" wx:for="{{list}}" data-lng="{{item.lng}}" data-lat="{{item.lat}}">
+
+                <view class="fui-list-media">
+                    <view class="fui-list-media">
+                        <view bindtap='location_href' data-href="/pages/index/index?merchid={{item.id}}">
+                            <image src="{{item.logo}}" class="round"></image>
+                        </view>
+                     </view>
+                </view>
+
+                <view class="fui-list-inner store-inner">
+                    <view bindtap='location_href' data-href="/pages/index/index?merchid={{item.id}}">
+                        <view class="title"> <span class="storename">{{item.merchname}}</span></view>
+                        
+                        <view class="text">
+                            地址: <span class="realname">{{item.address}}</span>
+                        </view>
+                        
+                        <view class="text">
+                            电话: <span class="address">{{item.tel}}</span>
+                        </view>
+                        
+                        <view class="text">
+                            分类: <span class="address">{{item.catename}}</span>
+                        </view>
+
+                        <view class="text location" style="color:green;">
+                            距离您:{{item.distance}}km
+                        </view>
+                    </view>
+                </view>
+
+                <view class="fui-list-angle ">
+                    <view bindtap='click_phone' data-href="{{item.tel}}">
+                      <i class="icon icon-phone" style="color:green"></i>
+                    </view>
+                    <view bindtap="get_location_bind">
+                        <i class="icon icon-location" style="color:#f90"></i>
+                    </view>
+                </view>
+
+            </view>
+            
+            </view>
+            <!-- <view class='infinite-loading'><span class='fui-preloader'></span><span class='text'> 正在加载...</span></view> -->
+        </view>
+    </view>
+</view>

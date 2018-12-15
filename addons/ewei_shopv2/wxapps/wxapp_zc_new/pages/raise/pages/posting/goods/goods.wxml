@@ -1,0 +1,20 @@
+<view class='container'>
+  <view class='sou-box'>
+    <view class='sou'>
+      <icon type='search' color='#333'></icon>
+      <input placeholder='搜索你想看到的内容' bindconfirm='bindSearch' ></input>
+      <!-- <view class='sou-btn' bindconfirm='bindSearch'>搜索</view> -->
+    </view>
+  </view>
+  <checkbox-group class='good-list' bindchange="checkboxChange">
+    <label class="checkbox item" wx:for="{{goods_list}}">
+      <checkbox color='#fff' value="{{[item.id,item.thumb]}}" checked="{{item.checked}}"/>
+      <image src='{{item.thumb}}'></image>    
+      <view>
+        <view class='title'>{{item.title}}</view>
+        <view class='red'>{{item.marketprice}}元</view>
+      </view>
+    </label>
+  </checkbox-group>
+  <view class='btn' bindtap='sure'>确定</view>
+</view>

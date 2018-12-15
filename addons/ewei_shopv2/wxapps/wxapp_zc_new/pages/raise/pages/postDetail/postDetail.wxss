@@ -1,0 +1,107 @@
+@import "../components/components.wxss";
+@import "../../resource/css/app.wxss";
+
+image {vertical-align: top;}
+.hide {display: none;}
+.container {padding-bottom: 100rpx;}
+.container > .info {padding: 30rpx; background: #fff; position: relative;}
+.container > .info::after {content: ""; display: block; position: absolute; left: 30rxp;top: auto; bottom: 0; right: 30rpx; width: 690rpx; height: 1px; background: #f0f0f0;}
+.container > .info image {width: 72rpx; height: 72rpx; border-radius: 50%; vertical-align: top; margin-right: 20rpx;}
+.container > .info .user {display: inline-block;}
+.container > .info .user .nick {font-size: 32rpx; display: inline-block; line-height: 42rpx; max-width: 240rpx;text-overflow:ellipsis; white-space:nowrap; overflow:hidden;}
+.container > .info .user .time {font-size: 24rpx; color: #999; line-height: 42rpx;}
+.container > .info .user .level {display: inline-block; margin: 0 20rpx; font-size: 24rpx; color: #db384d; border: 2rpx solid 
+#db384d;line-height: 38rpx;padding: 0 15rpx; border-radius: 21rpx; box-sizing: border-box; vertical-align: top;}
+.container > .info .user .istop {vertical-align: top; color: #db384d; display: inline-block;}
+.container > .info .r {padding: 0rpx 20rpx; line-height: 46rpx; text-align: center; color: #fff; background: #db384d; border-radius: 23rpx;margin-top: 7rpx; font-size: 24rpx;}
+.container > .title {padding: 30rpx; font-size: 32rpx; background: #fff;}
+.container > .text {padding: 0 30rpx 30rpx 30rpx; color: #777; background: #fff;}
+.container > .img-list {background: #fff; padding-left: 15rpx;}
+.container > .img-list image {width: 220rpx; height: 230rpx; margin-left: 15rpx; margin-bottom: 20rpx;}
+.container > .report {padding: 10rpx 30rpx 30rpx 30rpx; text-align: right; background: #fff; color: #777; position: relative;}
+.container > .report::after {content: ''; position: absolute; width: 690rpx; height: 1px; background: #f0f0f0; left: 30rpx; top: auto; bottom: 0;}
+
+/*热门商品  */
+.hot-goods {background: #fff; padding: 0 30rpx; padding-bottom: 30rpx; position: relative; }
+.hot-goods > .title {padding: 20rpx 0;}
+.hot-goods > .title image {width: 40rpx; height: 40rpx;}
+.hot-goods > .title text {display: inline-block; line-height: 40rpx; color: #db384d;}
+.hot-goods .item {position: relative; margin-bottom: 30rpx;}
+.hot-goods .item:last-child {margin-bottom: 0;}
+.hot-goods .item > view {background: #f5f5f5;}
+.hot-goods .item image {width: 160rpx; height: 160rpx;}
+.hot-goods .item text.title {position: absolute; top: 0; padding-left: 20rpx; font-size: 32rpx; line-height: 60rpx;}
+.hot-goods .item text.price {position: absolute; padding-left: 20rpx; font-size: 32rpx;top: auto; bottom: 0; color: #db384d; line-height: 50rpx;}
+
+/*赞  */
+.container > .agree {padding: 30rpx 30rpx 30rpx 44rpx; background: #fff; position: relative;}
+.container > .agree .save {display: inline-block; vertical-align: top;}
+.container > .agree .save.no {padding-left: 160rpx;}
+.container > .agree::after {content: ""; display: block; width: 690rpx; height: 1px; background: #f0f0f0; position: absolute; left: 30rpx; top: 0;}
+.container > .agree image {width: 54rpx; height: 54rpx; border-radius: 50%; margin-left: -13rpx; border: 4rpx solid #fff;}
+.container > .agree text {display: inline-block; line-height: 54rpx; margin-left: 30rpx;}
+.container > .agree .agree-img {width: 36rpx; height: 36rpx; }
+
+/*热门帖子  */
+.hot-list {margin-top: 20rpx; background: #fff;}
+.hot-list .big-title {text-align: center; padding: 30rpx;}
+.hot-list .big-title .line {width: 140rpx; height: 30rpx; display: inline-block; position: relative;}
+.hot-list .big-title .line::after {content: ""; display: block; width: 100%; height: 1px; background: #c84348; position: absolute; left: 0; top: 60%; margin-top: -0.5px;}
+.hot-list .big-title image {width: 30rpx; height: 30rpx; margin-top: 4rpx; margin-left: 10rpx;}
+.hot-list .big-title text {line-height: 30rpx; color: #c84348; vertical-align: top; margin-right: 10rpx;}
+.hot-list .item {position: relative; height: 180rpx;}
+.hot-list .item::after {content: ""; display: block; width: 690rpx; height: 1px; background: #f0f0f0; position: absolute; top: auto; bottom: 0; left: 30rpx;}
+.hot-list .item .title {display: inline-block; padding-left: 30rpx; font-size: 32rpx; margin-top: 20rpx;}
+.hot-list .item .browse-comment {padding-right: 30rpx; margin-top: 20rpx; margin-bottom: 20rpx; color: #777; position: absolute; left: 0; top: auto; bottom: 0rpx;}
+.hot-list .item .browse-comment image {width: 35rpx; height: 35rpx; margin-left: 30rpx;}
+.hot-list .item .browse-comment text {display: inline-block; line-height: 35rpx;font-size: 24rpx; margin-left: 5rpx;}
+.hot-list .item .browse-comment .r {line-height: 35rpx;}
+.hot-list .item > .r {position: absolute; left: auto; right: 30rpx; top: 20rpx; width: 140rpx; height: 140rpx;}
+
+/*帖子评论  */
+.comment-box { margin-top: 20rpx; background: #fff;}
+.comment-box .title {line-height: 80rpx; position: relative; font-size: 32rpx; color: #c84348; padding: 0 30rpx; padding-left: 60rpx;}
+.comment-box .title::before {content: ""; display: block; position: absolute; width: 4rpx; height: 38rpx; background: #c84348; left: 30rpx; top: 21rpx;}
+.comment-box .title::after {content: ""; display: block; width: 690rpx; height: 1px; background: #f0f0f0; position: absolute; left: 30rpx; top: auto; bottom: 0;}
+.comment-box .title text {color: #333; float: right;}
+.comment-box .item {padding: 20rpx 30rpx;}
+.comment-box .item::after {content: ""; display: block; clear: both;}
+.comment-box .item > image {width: 60rpx; height: 60rpx; border-radius: 50%; float: left;}
+.comment-box .item .detail {width: 615rpx; float: left; margin-left: 15rpx;}
+.comment-box .item .detail .nick {color: #777; line-height: 60rpx;}
+.comment-box .item .detail .nick2 {margin-left: 20rpx;}
+.comment-box .item .detail .text {color: #333; font-size: 32rpx;}
+.comment-box .item .detail .time {color: #999; font-size: 24rpx;}
+.comment-box .item .detail .r {font-size: 24rpx; color: #999; position: relative;}
+.comment-box .item .detail .r .num {line-height: 36rpx; margin-right: 65rpx;}
+.comment-box .item .detail .r .zan {width: 36rpx; height: 36rpx;}
+.comment-box .item .detail .r .share {width: 36rpx; height: 8rpx;}
+.morestyle {width: 40rpx;height: 40rpx;position: relative;top: -42rpx;left: 72rpx;padding-top: 20rpx;}
+.comment-box .item .detail .r .pop {background: #495050; color: #fff; padding: 10rpx 0; width: 200rpx; position: absolute; top: 0; left: auto; right:50rpx; text-align: center;}
+.comment-box .item .detail .r .pop text {display: inline-block; line-height: 38rpx; margin: 0 20rpx;}
+.comment-box .item .detail .r .pop .line {width: 4rpx; height: 38rpx; background: #fff; display: inline-block; vertical-align: top;}
+
+.comment-box .item .detail .more-reply {background: #f4fbf8; padding: 20rpx; padding-right: 0;}
+.comment-box .item .detail .more-reply > image {width: 56rpx; height: 56rpx; border-radius: 50%;}
+.comment-box .item .detail .more-title {background: #f4fbf8; padding: 20rpx; color: #777;}
+.comment-box .item .detail .more-title text {color: #0072ca;}
+.comment-box .item .detail .take-back {text-align: center; background: #f4fbf8; font-size: 24rpx; color: #999; padding: 20rpx;}
+.comment-box .item .detail .take-back .you {
+  transform: rotate(-135deg); margin-top: 10rpx; margin-left: 10rpx;vertical-align: top;
+}
+.comment-box .kong {color: #999; text-align: center; padding-top: 40rpx; padding-bottom: 50rpx;}
+.comment-box .all {padding-top: 40rpx; padding-bottom: 50rpx; text-align: center; color: #999;}
+
+/*分享，返回主页  */
+.float {position: fixed; left: auto; right: 0; top: auto; bottom: 120rpx; width: 100rpx; z-index: 99; }
+.float image {width: 100rpx; height: 100rpx;}
+
+/* 评论 */
+.comment-back {position: fixed; left: 0; top: auto; bottom: 0; width: 100%; background: #fff; border-top: 1px solid #f0f0f0;}
+.comment-back .input1 {padding: 10rpx 30rpx; color: #999;}
+.comment-back .input1 .box {width: 586rpx; height: 80rpx; background: #f2f2f2; border-radius: 10rpx; padding: 15rpx 0; box-sizing: border-box;}
+.comment-back .input1 image {width: 50rpx; height: 50rpx; margin-right:20rpx; margin-left: 20rpx;}
+.comment-back .input1 view {display: inline-block; line-height: 50rpx;}
+.comment-back .input1 view.r {margin-right: 40rpx;}
+.comment-back .input1 > image {margin-top: 15rpx; margin-left: 40rpx; margin-right: 0;}
+.comment-back .theinput input {width: 710rpx; height: 60rpx; border: 1px solid #f0f0f0; border-radius: 10rpx; margin: 20rpx auto; padding-left: 10rpx;}

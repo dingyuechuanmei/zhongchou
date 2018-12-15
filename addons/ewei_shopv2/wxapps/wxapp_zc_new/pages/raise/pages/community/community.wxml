@@ -1,0 +1,25 @@
+<view class='container'>
+  <import src="../components/cpt_swiper.wxml"/>
+  <template is="swiper" data="{{swiper:swiper}}"/>
+  <view class='sou'>
+    <icon bindtap='soubtn' type='search' color='#333'></icon>
+    <input bindinput='souinput' placeholder='搜索你想看到的内容' bindconfirm='soubtn'></input>
+  </view>
+  <image class='my2' src='../../resource/image/my2.png' bindtap='tomy'></image>
+  <view class='div_4'>
+    <view class='item' wx:for='{{cate_list}}' data-id='{{item.id}}' bindtap='getCate'>
+      <image src='{{item.ico}}'></image>
+      <text>{{item.title}}</text>
+    </view>
+  </view>
+
+  <!--动态  -->
+  <import src="../components/cpt_dynamic_list.wxml"/>
+  <template is="dynamic_list" data="{{forum_list:forum_list,imglist:imglist}}"/>
+  
+  <!--置顶，发帖  -->
+  <view class='float'>
+    <image bindtap='posting' src='../../resource/image/poste.png'></image>
+    <image bindtap='backTop' src='../../resource/image/totop.png'></image>
+  </view>
+</view>

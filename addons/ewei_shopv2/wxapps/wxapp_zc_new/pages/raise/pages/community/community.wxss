@@ -1,0 +1,60 @@
+@import "../components/components.wxss";
+@import "../../resource/css/app.wxss";
+
+
+.sou {width: 448rpx; height: 58rpx; position: absolute; top: 30rpx;left: 96rpx; background: rgba(255, 255, 255, .5); border-radius: 29rpx;
+}
+.sou icon {position: absolute; z-index: 9; top: 12rpx; left: 12rpx;}
+.sou input {min-width: auto; height: 100%; padding-left: 70rpx; color: #fff;}
+.my2 {position: absolute; left: auto; right: 30rpx; top: 39rpx; width: 40rpx; height: 44rpx;}
+.div_4 {background: #fff; padding-bottom: 40rpx;}
+.div_4 .item {margin-top: 40rpx;}
+.div_4 .item text {display: block; width: 100%; text-align: center; margin-top: 20rpx;}
+.div_4 .item img {width: 66rpx; height: 66rpx;}
+
+/*置顶  */
+.float {position: fixed; left: auto; right: 0; top: auto; bottom: 190rpx; width: 100rpx; z-index: 99;}
+.float image {width: 100rpx; height: 100rpx;}
+
+
+button::after{
+	display: none;
+}
+.button-hover{
+	background: #ffffff;
+}
+.forward {
+  margin: 0;
+  padding: 0;
+  position:absolute;
+  display:inline-block;
+  margin-left:auto;
+  margin-right:auto;
+  box-sizing:border-box;
+  text-align:center;
+  text-decoration:none;
+  line-height:2.55555556;
+  border-radius:5px;
+  -webkit-tap-highlight-color:transparent;
+  overflow:hidden;
+  color:#000000;
+  background-color:transparent;
+  border: none;
+}
+
+
+/* 回复 */
+.comment_replys{
+  width: 100%;
+  position: relative;
+  font-size: 12px;
+  padding: 0 15px;
+}
+
+.comment_replys .author{
+  color: #6D7392;
+}
+
+.comment_replys .description{
+  color: #6B6B6B;
+}

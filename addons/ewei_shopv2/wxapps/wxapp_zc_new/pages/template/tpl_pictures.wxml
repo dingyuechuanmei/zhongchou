@@ -1,0 +1,50 @@
+
+<!-- 图片展播 -->
+
+<template name="pictures">
+
+	<block wx:if="{{diyitem.params.showtype == '' || diyitem.diyitem_data_len <= diyitem.params.rownum}}">
+        <view class="fui-picturew row-{{diyitem.params.rownum}}" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; background: {{diyitem.style.background}};">
+            
+            <block wx:for="{{diyitem.data}}" wx:for-item="pictureitem">
+                <view class="item" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px;" bindtap="click_location_href" data-url="{{pictureitem.linkurl}}">
+                    <view class="image">
+                        <image mode="aspectFill" src="{{pictureitem.imgurl}}"></image>
+                        <block wx:if="{{pictureitem.title != ''}}">
+                            <view class="title" style="color: {{diyitem.style.titlecolor}}; text-align: {{diyitem.style.titlealign}};">{{pictureitem.title}}</view>
+                        </block>
+                    </view>
+                    <view class="text center" style="color: {{diyitem.style.textcolor}}; text-align: {{diyitem.style.textalign}};">{{pictureitem.text}}</view>
+                </view>
+	    	</block>
+            
+        </view>
+    </block>
+    
+    <block wx:else>
+        <view class="swiper swiper-{{diyitemid}}" data-element=".swiper-{{diyitemid}}" data-view="{{diyitem.params.rownum}}" data-btn="true">
+            <view class="swiper-container fui-picturew row-{{diyitem.params.rownum}}" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px; background: {{diyitem.style.background}};">
+                <view class="swiper-wrapper">
+                	<block wx:for="{{diyitem.data}}" wx:for-item="pictureitem">
+                        <view class="swiper-slide item" style="padding: {{diyitem.style.paddingtop}}px {{diyitem.style.paddingleft}}px;" bindtap="click_location_href" data-url="{{pictureitem.linkurl}}">
+                            <view class="image">
+                                <image src="{{pictureitem.imgurl}}"></image>
+                                <block wx:if="{{pictureitem.title != ''}}">
+                                    <view class="title" style="color: {{diyitem.style.titlecolor}}; text-align: {{diyitem.style.titlealign}};">{{pictureitem.title}}</view>
+                                </block>
+                            </view>
+                            <view class="text center" style="color: {{diyitem.style.textcolor}}; text-align: {{diyitem.style.textalign}};">{{pictureitem.text}}</view>
+                        </view>
+                    </block>
+                    
+                </view>
+                <block wx:if="{{diyitem.params.showbtn != ''}}">
+                    <view class="swiper-button-next swiper-button-white"></view>
+                    <view class="swiper-button-prev swiper-button-white"></view>
+                </block>
+            </view>
+        </view>
+    </block>
+
+
+</template>

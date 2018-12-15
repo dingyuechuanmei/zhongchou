@@ -1,0 +1,150 @@
+<view class='container'>
+  <view class='info'>
+    <image src='{{forum_info.avatar}}' data-id='{{forum_info.mid}}' bindtap='tomy'></image>
+    <view class='user'>
+      <view class='nick'>{{forum_info.nickname}}</view>
+      <view class='level'>楼主</view>
+      <!-- <view class='istop'>{{forum_info.is_top}}</view> -->
+      <view class='time'>{{forum_info.createtime}}</view>
+    </view>
+    <view class='r' bindtap='isfocus' data-mid='{{forum_info.mid}}'>{{forum_info.is_follow}}</view>
+  </view>
+  <view class='title'>{{forum_info.title}}</view>
+  <view class='text'>{{forum_info.context}}</view>
+  <view class='img-list'>
+    <image wx:for="{{forum_info.thumbs}}" src='{{item}}' data-src="{{item}}" bindtap='picshow'></image>
+  </view>
+  <view class='report' bindtap='report'>举报</view>
+  <!--热门商品  -->
+  <view class='hot-goods' wx:if='{{forum_info.recom_list.length}}'>
+    <view class='title'>
+      <image src='../../resource/image/hot.png'></image>
+      <text>热门商品</text>
+    </view>
+    <view class='list'>
+      <view class='item' wx:for="{{forum_info.recom_list}}" data-id='{{item.id}}'>
+      
+        <view>
+        <navigator url='../../../goods/detail/index?id={{item.id}}'>
+          <image src='{{item.img}}'></image>
+          <text class='title'>{{item.name}}</text>
+          <text class='price'>{{item.price}}元</text>
+          </navigator>
+        </view>
+        
+      </view>
+    </view>
+  </view>
+  <!--赞  -->
+  <view class='agree'>
+    <view class='save yes' wx:if='{{forum_info.praise_count > 0}}'>
+      <image wx:for="{{forum_info.praise_list}}" src='{{item.avatar}}'></image>
+      <text>{{forum_info.praise_count}}个赞</text>
+    </view>
+    <view class='save no' wx:else>
+      <text>暂时还没有赞哦！</text>
+    </view>
+    <view class='r'>
+      <image class='agree-img' src='{{agree_img}}' bindtap='agreetap'></image>
+    </view>
+  </view>
+  <!--热门帖子  -->
+  <view class='hot-list'>
+    <view class='big-title'>
+      <view class='line'></view>
+      <image src='../../resource/image/popular.png'></image>
+      <text>热门帖子</text>
+      <view class='line'></view>
+    </view>
+    <view class='item' wx:for="{{hot_list}}" data-id='{{item.id}}' bindtap='toPostDetail'>
+      <view class='title'>{{item.title}}</view>
+      <view class='browse-comment'>
+        <image src='../../resource/image/browse.png'></image>
+        <text>{{item.view_count}}</text>
+        <image src='../../resource/image/comment.png'></image>
+        <text>{{item.review_count}}</text>
+      </view>
+      <image class='r' src='{{item.thumbs[0]}}'></image>
+    </view>
+  </view>
+  <!--帖子评论  -->
+  <view class='comment-box'>
+    <view class='title'>
+      帖子评论
+      <text>共{{review_list.length}}条评论</text>
+    </view>
+    <view class='kong hide'>此帖子暂时还没有评论哦！</view>
+    <view class='list'>
+      <view class='item' wx:for="{{review_list}}">
+        <image src='{{item.avatar}}'></image>
+        <view class='detail'>
+          <view class='nick'>{{item.nickname}}</view>
+          <view class='text'>{{item.context}}</view>
+          <view class='bottom'>
+            <text class='time'>{{item.createtime}}</text>
+            <view class='r'>
+              <image class='zan' src='{{item.is_prase}}' data-review_id='{{item.id}}' bindtap='agreecomment'></image>
+              <text class='num'> {{item.prase_count}}</text>
+              <view class='morestyle' data-idx='{{item.id}}' data-pop='{{item.pop}}' bindtap='back_report'>
+                <image class='share' src='../../resource/image/more.png' ></image>
+              </view>
+              <view class='pop' wx:if='{{item.pop}}'>
+                <text bindtap='replyPost2' data-id='{{item.id}}' data-idx='{{index}}'>回复</text>
+                <view class='line'></view>
+                <text bindtap='report' data-id='{{item.id}}'>举报</text>
+              </view>
+            </view>
+          </view>
+          <view class='more-title' data-idx='{{index}}' wx:if='{{item.child_review.length && child_index == item.child_review.length -1 }}' wx:for="{{item.child_review}}" wx:for-item='child_item' wx:for-index='child_index' bindtap='lookmore'>{{child_item.nickname}}等人<text>共有{{item.child_review.length}}条回复</text> </view>
+          <view class='more {{item.isdis ? "":"hide"}}'>
+            <view class='more-reply' wx:for="{{item.child_review}}" wx:for-item='child_item' wx:for-index='child_index'>
+              <image src='{{child_item.avatar}}'></image>
+              <text class='nick nick2'>{{child_item.nickname}}</text>
+              <view class='text'>
+                {{child_item.context}}
+              </view>
+              <view class='bottom'>
+                <text class='time'>{{child_item.createtime}}</text>
+                <!-- <view class='r'>
+                    <image class='zan' src='{{child_item.is_prase}}' data-review_id='{{child_item.id}}' bindtap='agreecomment'></image>
+                  <text class='num'> {{child_item.prase_count}}</text>
+                  <view class='morestyle' data-id='{{child_item.id}}' bindtap='report'>
+                    <image class='share' src='../../resource/image/more.png'></image>
+                  </view>
+                </view> -->
+              </view>
+            </view>
+            <view class='take-back' data-idx='{{index}}' bindtap='upmore'> 
+              <text>收回所有回复</text>
+              <view class='you'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='all'>查看全部{{review_list.length}}条评论</view>
+  </view>
+  <!--评论  -->
+  <view class='comment-back'>
+    <view class='input1' wx:if='{{inputdis[0]}}'>
+      <view class='box' bindtap='replyPost'>
+        <image src='../../resource/image/edit.png'></image>
+        <view>请输入评论内容</view>
+        <view class='r'>{{review_list.length}}人已评论</view>
+      </view>
+      <image src='{{collect_img}}' bindtap='collectionPost'></image>
+    </view>
+    <!--input输入  -->
+    <view class='theinput' wx:if='{{inputdis[1]}}'>
+      <input placeholder='{{placeholder}}' auto-focus bindconfirm='reply1'></input>
+    </view>
+    <view class='theinput' wx:if='{{inputdis[2]}}'>
+      <input placeholder='{{placeholder}}' auto-focus bindconfirm='reply1'></input>
+    </view>
+  </view>
+  <!--分享，返回主页  -->
+   <view class='float'>
+    <!-- <image src='../../resource/image/share.png'></image> -->
+    <image bindtap='backhome' src='../../resource/image/home.png'></image>
+  </view> 
+</view>

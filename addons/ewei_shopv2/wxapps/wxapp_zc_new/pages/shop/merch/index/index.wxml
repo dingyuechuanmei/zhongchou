@@ -1,0 +1,81 @@
+<view class="fui-page page-merch-list">
+    <!-- <view class="fui-header">
+        <view class="fui-header-left"></view>
+        <view class="title">入驻商户</view>
+        <view class="fui-header-right"></view>
+    </view> -->
+    <view class="fui-content">
+
+        <view class="fui-searchbar bar">
+            <view class="searchbar center">
+                <input type="submit" class="searchbar-cancel searchbtn" bindtap='btn_serch' value="搜索" />
+                <view class="search-input">
+                    <i class="icon icon-search"></i>
+                    <input type="search" placeholder="输入关键字..." bindinput='bindinput' class="search" name="keyword" />
+                </view>
+            </view>
+        </view>
+
+        <swiper class='fui-swipe'>
+          <block wx:for="{{category_swipe}}" wx:for-item="swipe">
+            <swiper-item class="fui-swipe-item">
+              <image src="{{swipe.thumb}}" class="slide-image" width="100%" height="150"/>
+            </swiper-item>
+          </block>
+        </swiper>
+
+        <!-- <view class='fui-swipe' >
+            <view class='fui-swipe-wrapper'>
+                <view class='fui-swipe-item' wx:for="{{category_swipe}}" wx:for-item="swipe">
+                	<image src="{{swipe.thumb}}"></image>
+                </view>
+            </view>
+            <view class='fui-swipe-page'></view>
+        </view> -->
+
+        <block wx:if="{{category.length > 0}}">
+	        <view class="fui-cell-group qa-title">
+	            <view class="fui-cell">
+	                <view class="fui-cell-text">推荐分类</view>
+	                <view class="fui-cell-remark" bindtap='location_href' data-href="/pages/shop/merch/category/index" data-type='1'>全部</view>
+	            </view>
+	        </view>
+	        <view class="fui-icon-group col-4 noborder">
+	            <view class="fui-icon-col" wx:for="{{category}}" wx:for-item="item" bindtap='location_href' data-href="/pages/shop/merch/user/index?cateid={{item.id}}">
+	                <view class="icon">
+	                    <image src="{{item.thumb}}"></image>
+	                </view>
+	                <view class="text">{{item.catename}}</view>
+	            </view>
+	        </view>
+	    </block>    	
+
+        <view class="fui-cell-group qa-title">
+            <view class="fui-cell">
+                <view class="fui-cell-text">推荐商家</view>
+                <view class="fui-cell-remark" bindtap='location_href' data-href="/pages/shop/merch/user/index" data-type='1'>全部</view>
+            </view>
+        </view>
+
+        <view class="fui-list-group">
+        	<block wx:if="{{merchuser.length > 0}}">
+          <navigator url="/pages/index/index?merchid={{value.id}}" open-type="switchTab" hover-class="other-navigator-hover">
+	            <view class="fui-list" wx:for="{{merchuser}}" wx:for-item="value" bindtap='location_href' data-type="0" data-href="/pages/index/index?merchid={{value.id}}">
+	                <view class="fui-list-media">
+	                    <image src="{{value.logo}}" class="round"></image>
+	                    <!--<view class="badge">1</view>-->
+	                </view>
+	                <view class="fui-list-inner">
+	                    <view class="row">
+	                        <view class="row-text">{{value.merchname}}</view>
+	                        <!--<view class="row-remark">11:11</view>-->
+	                        <view class="angle"></view>
+	                    </view>
+	                    <view class="subtitle">{{value.desc}}</view>
+	                </view>
+	            </view>
+          </navigator>
+            </block>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,96 @@
+<view class='container'>
+  <view class='zhongchouitemdetail'>
+    <view class='video'>
+      <video id="myVideo" src='{{starter.video}}' initial-time="1" controls></video>
+    </view>
+    <view class='person'>
+      <image src='{{starter.avatar}}'></image>
+      <view class='name'>{{starter.nickname}}</view>
+      <view class='time'>剩余
+        <text class='orange'>{{starter.short_time}}</text>天
+      </view>
+    </view>
+    <view class='bigtitle'>{{starter.title}}</view>
+    <view class='progressbox'>
+      <view class='progress'>
+        <view class='div_3'>
+          <view class='item'>
+            <view>目标金额（元）</view>
+            <view class='num'>{{starter.target_money}}</view> 
+          </view>
+          <view class='item'>
+            <view>已筹金额（元）</view>
+             <view class='num'>{{starter.refer_money}}</view> 
+          </view>
+          <view class='item'>
+            <view>支持次数</view>
+            <view class='num'>{{starter.support_count}}</view> 
+          </view>
+        </view>
+        <view class='progressline'>
+          <progress percent="{{starter.per}}" stroke-width='4' color='#ff6749' show-info />
+        </view>
+      </view>
+    </view>
+    
+    <view class='program_detail'>
+      <view class='title border_bottom'>项目详情<navigator wx:if="{{starter.category == 20}}" url='/pages/index/index?merchid={{starter.merchid}}' style='position:absolute;right:10px;display:inline;'><text class="dianpucolor">购物支持</text></navigator></view>
+      <view class='text' style='max-height:{{afull}};'>
+      {{starter.content}}
+      </view>
+    </view>
+    <view class='afull' bindtap='afull'>展开全文</view>
+    <view class='scroll_img'>
+      <view class='box'>
+        <scroll-view scroll-x="true">
+          <view class="topWrap" scroll-x="true">  
+            <view class="top_Item" wx:for='{{starter.thumbs}}' wx:for-index='idx' data-idx='{{idx}}' bindtap='topitem' wx:key=""> 
+              <image src='{{item}}' bindtap='bro_img' data-img="{{item}}"></image> 
+            </view>  
+          </view> 
+        </scroll-view> 
+      </view>
+    </view>
+
+
+    <view class='confirmhim'>
+      <view class='title border_bottom'>
+        有<text class='green'>{{total || 0}}</text>人实名为Ta证实
+        <view class='r orange' bindtap='confirm' data-id='{{starter.id}}'>帮Ta证实</view>
+      </view>
+      <view class='user' wx:if='{{verify_list}}'>
+        <view class='imglist'>
+          <image  wx:for='{{verify_list}}' src='{{item.avatar}}' wx:for-index="idx" data-idx='{{idx}}' bindtap='imagetext' wx:key=""></image>
+        </view>
+        <view class='you'></view>
+        <view class='youbox' bindtap='confirmlist' data-id='{{starter.id}}'></view>
+        <view class='text'>
+          <view>{{verify_list[imgtextidx].intro}}</view>
+        </view>
+      </view>
+    </view>
+
+     <view class='helphim' data-id='{{starter.id}}'> 
+      <view class='title border_bottom'>
+        <text class='green'>{{help_list.length || 0}}</text>次帮助他
+      </view>
+      <view class='list'>
+        <view class='item' wx:for='{{help_list}}' wx:key="">
+          <view>
+            <image src='{{approot}}wxapp_attr/2@3x.png'></image>
+            <view class='name'>{{item.nickname}}</view>
+            <view class='price'>
+            支持了<text class='orange'>{{item.money}}</text>
+            </view>
+            <view class='time'>{{item.createtime}}</view>
+          </view>
+          <view wx:if='{{item.hearten}}'>
+            {{item.hearten}}
+          </view>
+        </view>
+      </view>
+    </view> 
+
+    <view class='confirm' bindtap='helpconfirm' data-id='{{starter.id}}' wx:if="{{starter.short_time!=0}}">为TA筹款</view>
+  </view>
+</view>
