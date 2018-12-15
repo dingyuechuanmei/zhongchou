@@ -603,7 +603,7 @@ class Index_EweiShopV2Page extends AppMobilePage
         }
         $page = $this->params['page'] ? intval($this->params['page']) : 1;
         //$pusher_list = pdo_fetchall('select p.id,title,p.video,p.like_count,m.nickname,m.avatar from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_member).' m on(p.pusher = m.openid) '.$condition.' order by p.like_count desc limit '.(($page-1) * $this->psize).','.$this->psize,$params);
-        $pusher_list = pdo_fetchall('select p.id,title,p.video,p.like_count,m.merchname AS nickname,m.logo AS avatar from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id) '.$condition.' order by p.id desc limit 20',$params);
+        $pusher_list = pdo_fetchall('select p.id,title,p.video,p.like_count,m.merchname AS nickname,m.logo AS avatar from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id) '.$condition.' order by p.id desc limit 5',$params);
         if($pusher_list){
             foreach ($pusher_list as &$item){
                 $item['like_count'] = intval($item['like_count']);
