@@ -369,14 +369,18 @@ class Index_EweiShopV2Page extends AppMobilePage
         if(!$this->params['context']){
             app_error(1,'评论内容不能为空');
         }
-        pdo_insert($this->tb_forum_review,array(
+        $data = array(
             'uniacid'=>$this->uniacid,
             'openid'=>$this->openid,
             'forum_id'=>intval($this->params['forum_id']),
             'reply_id'=>intval($this->params['reply_id']),
             'context'=>$this->params['context'],
             'createtime'=>time()
-        ));
+        );
+        if (!empty($this->params['forumreplyid'])) {
+            $data['forumreplyid'] = intval($this->params['forumreplyid']);
+        }
+        pdo_insert($this->tb_forum_review,$data);
         $id = pdo_insertid();
         if($id > 0){
             $review_count = pdo_fetchcolumn('select review_count from '.tablename($this->tb_forum_review).' where id=:forumId',array(':forumId'=>$this->params['forum_id']));
@@ -569,9 +573,12 @@ class Index_EweiShopV2Page extends AppMobilePage
                         $item['is_prase'] = 1;
                     }
                 }
-                $condition = " where forum_id=:fid and r.uniacid = :uniacid and reply_id = {$item['id']}";
-                $item['child_review'] = pdo_fetchall('select r.id,r.context,r.prase_count,r.prase_list,r.createtime,m.avatar,m.nickname from '.tablename($this->tb_forum_review).' r left join '.tablename($this->tb_member).' m on(r.openid = m.openid)' .$condition,$params);
+                $condition = " where forum_id=:fid and r.uniacid = :uniacid and reply_id = {$item['id']} ";
+                $item['child_review'] = pdo_fetchall('select r.id,r.context,r.prase_count,r.prase_list,r.createtime,r.forumreplyid,m.avatar,m.nickname from '.tablename($this->tb_forum_review).' r left join '.tablename($this->tb_member).' m on(r.openid = m.openid)' .$condition,$params);
                 foreach ($item['child_review'] as &$v){
+                    if (!empty($v['forumreplyid'])) {
+                        $v['replyname'] = pdo_fetchcolumn("SELECT nickname FROM ".tablename($this->tb_member)." WHERE openid = (SELECT openid FROM ".tablename($this->tb_forum_review)." WHERE id = :id )",array(':id'=>$v['forumreplyid']));
+                    }
                     $v['createtime'] = date('m-d',$v['createtime']);
                     $v['is_prase'] = 0;
                     if($v['prase_list']){
@@ -603,6 +610,9 @@ class Index_EweiShopV2Page extends AppMobilePage
         $forum_info = pdo_fetch('select f.id,f.title,f.context,thumbs,f.createtime,recom_list,praise_list,m.id mid,m.avatar,m.nickname,m.fans_list,view_count,review_count,is_top,c.title source from '.tablename($this->tb_forum).' f left join '.tablename($this->tb_member).' m on(f.openid = m.openid) left join '.tablename($this->tb_forum_cate).' c on(c.id = f.cate) '.$condition.' limit 1',$params);
         if($forum_info){
             $forum_info['thumbs'] = $forum_info['thumbs'] ? iunserializer($forum_info['thumbs']) : array();
+            foreach ($forum_info['thumbs'] as $v) {
+                $forum_info['standard_thumbs'][] = m('common')->suoImg($v,220,230);
+            }
             $forum_info['recom_list'] = $forum_info['recom_list'] ? iunserializer($forum_info['recom_list']) : array();
             $forum_info['praise_list'] = $forum_info['praise_list'] ? iunserializer($forum_info['praise_list']) : array();
             $forum_info['praise_count'] = count($forum_info['praise_list']);
