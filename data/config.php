@@ -12,7 +12,7 @@ $config['db']['master']['host'] = '127.0.0.1';
 
 $config['db']['master']['username'] = 'zhongchou';
 
-$config['db']['master']['password'] = 'JB6TvquVFpswTClx';
+$config['db']['master']['password'] = 'zhongchou';
 
 $config['db']['master']['port'] = '3306';
 
