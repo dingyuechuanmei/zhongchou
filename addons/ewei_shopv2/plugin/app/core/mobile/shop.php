@@ -159,7 +159,14 @@ class Shop_EweiShopV2Page extends AppMobilePage
 		global $_W;
 		global $_GPC;
 		$merchid = $_GPC['merchid'] ? $_GPC['merchid'] : '';
-		$args = array('page' => $_GPC['page'], 'pagesize' => 10, 'isrecommand' => 1, 'order' => 'displayorder desc,createtime desc', 'by' => '','merchid' => $merchid);
+		$args = array(
+			'page' => $_GPC['page'],
+			'pagesize' => 10,
+			'order' => 'displayorder desc,createtime desc',
+			//'isrecommand' => 1,
+			'by' => '',
+			'merchid' => $merchid
+		);
 		$recommand = m('goods')->getList($args);
 
 		if (!empty($recommand['list'])) {
