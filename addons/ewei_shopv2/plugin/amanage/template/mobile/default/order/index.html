@@ -5,19 +5,11 @@
         <div class="fui-header-left">
             <a class="back"></a>
         </div>
-        <div class="title" id="test">订单管理</div>
+        <div class="title">订单管理</div>
         <div class="fui-header-right">
             <a class="btn-more">更多</a>
         </div>
     </div>
-    <script>
-        $(function(){
-            $('#test').click(function(){
-                alert(123);
-                wx.miniProgram.redirectTo({url: '/pages/index/index'})
-            })
-        })
-    </script>
     <!-- 顶部tab -->
     <div id="tab" class="fui-tab fui-tab-success fixed">
         {if $status==4 || $status==5}
