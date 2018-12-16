@@ -2,10 +2,17 @@
 
 <div class='fui-page fui-page-current'>
     <div class="fui-header fui-header-success">
-        <div class="fui-header-left"></div>
+        <div class="fui-header-left"><a class="setbtn" id="redirectminapp"><i class="icon icon-back"></i></a></div>
         <div class="title">工作台({$account['username']})</div>
         <div class="fui-header-right"></div>
     </div>
+    <script>
+        $(function(){
+            $('#redirectminapp').click(function(){
+                wx.miniProgram.navigateTo({url: '/pages/index/index'})
+            })
+        })
+    </script>
     <div class='fui-content navbar'>
 
         <div class="headinfo">
