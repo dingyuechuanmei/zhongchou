@@ -23,9 +23,9 @@ class Review_EweiShopV2Page extends PluginWebPage
             $condition .= ' and r.id=' . intval($_GPC['r_id']);
         }
         if($_GPC['reply_id'] !=''){
-            $condition.=' and reply_id = '.intval($_GPC['reply_id']);
+            $condition.=' and r.reply_id = '.intval($_GPC['reply_id']);
         }else{
-            $condition.=' and reply_id = 0';
+            $condition.=' and r.reply_id = 0';
         }
         if (!(empty($_GPC['keyword']))){
             $_GPC['keyword'] = trim($_GPC['keyword']);
@@ -33,7 +33,6 @@ class Review_EweiShopV2Page extends PluginWebPage
             $params[':keyword'] = '%' . $_GPC['keyword'] . '%';
         }
         $list = pdo_fetchall('select r.*,m.id mid,m.nickname,m.mobile,m.avatar,f.title,(select count(id) from '.tablename($this->tb_forum_review).' where reply_id = r.id) reply_count from '.tablename($this->tb_forum_review).' r left join '.tablename($this->tb_member).' m on(r.openid = m.openid) left join '.tablename($this->tb_forum).' f on(f.id = r.forum_id)' . $condition. '  order by r.id desc limit ' . (($pindex - 1) * $psize) . ',' . $psize, $params);
-
         $total = pdo_fetchcolumn('select count(*) from ' . tablename($this->tb_forum_review).' r ' . $condition, $params);
         $pager = pagination($total, $pindex, $psize);
         include $this->template();
@@ -52,7 +51,6 @@ class Review_EweiShopV2Page extends PluginWebPage
         $items = pdo_fetchall('select id from ' . tablename($this->tb_forum_review) . ' where id in( ' . $id . ' ) and uniacid=' . $_W['uniacid']);
         foreach ($items as $item ){
             pdo_delete($this->tb_forum_review, array('id' => $item['id']));
-            plog('raise.forum_review.delete', '删除论坛评论 ID: ' . $item['id']);
         }
         show_json(1, array('url' => referer()));
     }
