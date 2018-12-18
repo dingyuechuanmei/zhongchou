@@ -179,7 +179,6 @@ class Shop_EweiShopV2Page extends AppMobilePage
 
 			unset($item);
 		}
-
 		app_json(array('list' => $recommand['list'], 'pagesize' => $args['pagesize'], 'total' => $recommand['total'], 'page' => intval($_GPC['page'])));
 	}
 
@@ -342,6 +341,53 @@ class Shop_EweiShopV2Page extends AppMobilePage
 	{
 		$areas = m('common')->getAreas();
 		app_json(array('areas' => $areas));
+	}
+
+	/**
+	 * 获取个人商户商品列表
+	 */
+	public function get_merchant_goods()
+	{
+		global $_W;
+		global $_GPC;
+		$merchid = $_GPC['merchid'] ? $_GPC['merchid'] : '';
+		$pageSize = 10;
+		$args = array(
+			'page' => $_GPC['page'],
+			'pagesize' => $pageSize,
+			'order' => 'displayorder desc,createtime desc',
+			'isrecommand' => 1,								//默认获取推荐商品
+			'by' => '',
+			'merchid' => $merchid
+		);
+		$recommand = m('goods')->getList($args);
+
+		if (!empty($recommand['list'])) {
+			foreach ($recommand['list'] as &$item) {
+				$item['marketprice'] = (double) $item['marketprice'];
+				$item['minprice'] = (double) $item['minprice'];
+				$item['presellprice'] = (double) $item['presellprice'];
+				$item['productprice'] = (double) $item['productprice'];
+			}
+
+			unset($item);
+		}
+		$pageCount = ceil($recommand['total']/$pageSize);
+		app_json(array('list' => $recommand['list'], 'pagesize' => $args['pagesize'], 'total' => $recommand['total'], 'pageCount' => $pageCount));
+	}
+
+	/**
+	 * 获取商户信息
+	 */
+	public function get_merchant_info()
+	{
+		global $_W;
+		global $_GPC;
+		$merchid = $_GPC['merchid'];
+		$sql = "SELECT * FROM ".tablename('ewei_shop_merch_user')." WHERE uniacid = :uniacid AND id = :merchid";
+		$info = pdo_fetch($sql,array(':uniacid'=>$_W['uniacid'],':merchid'=>$merchid));
+		$info['logo'] = tomedia($info['logo']);
+		app_json(array('info'=>$info));
 	}
 }
 
