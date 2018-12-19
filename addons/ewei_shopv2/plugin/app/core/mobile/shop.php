@@ -351,15 +351,16 @@ class Shop_EweiShopV2Page extends AppMobilePage
 		global $_W;
 		global $_GPC;
 		$merchid = $_GPC['merchid'] ? $_GPC['merchid'] : '';
+		$type = $_GPC['type'] ? 'is'.$_GPC['type'] : 'isrecommand';
 		$pageSize = 10;
 		$args = array(
 			'page' => $_GPC['page'],
 			'pagesize' => $pageSize,
 			'order' => 'displayorder desc,createtime desc',
-			'isrecommand' => 1,								//默认获取推荐商品
 			'by' => '',
 			'merchid' => $merchid
 		);
+		$args[$type] = 1;
 		$recommand = m('goods')->getList($args);
 
 		if (!empty($recommand['list'])) {
@@ -377,7 +378,7 @@ class Shop_EweiShopV2Page extends AppMobilePage
 	}
 
 	/**
-	 * 获取商户信息
+	 * 获取商户信息和全部商品,新品总数
 	 */
 	public function get_merchant_info()
 	{
@@ -387,7 +388,42 @@ class Shop_EweiShopV2Page extends AppMobilePage
 		$sql = "SELECT * FROM ".tablename('ewei_shop_merch_user')." WHERE uniacid = :uniacid AND id = :merchid";
 		$info = pdo_fetch($sql,array(':uniacid'=>$_W['uniacid'],':merchid'=>$merchid));
 		$info['logo'] = tomedia($info['logo']);
-		app_json(array('info'=>$info));
+		$all = m('goods')->getList(array('merchid' => $merchid));
+		$new = m('goods')->getList(array('isnew'=>1,'merchid' => $merchid));
+		$isfavorite = pdo_fetchcolumn('select id from ' . tablename('ewei_shop_member_merch_favorite') . ' where uniacid=:uniacid and merchid=:merchid and openid=:openid and deleted = 0 limit 1', array(':uniacid' => $_W['uniacid'], ':openid' => $_W['openid'], ':merchid' => $merchid));
+		app_json(array('info'=>$info,'all_num'=>$all['total'],'new_num'=>$new['total'],'isfavorite'=>!empty($isfavorite) ? 1 : 0));
+	}
+
+	/**
+	 * 关注店铺
+	 */
+	public function favorite_merchant()
+	{
+		global $_W;
+		global $_GPC;
+		$merchid = intval($_GPC['merchid']);
+		if (empty($merchid)) {
+			app_error(AppError::$ParamsError);
+		}
+		$isfavorite = intval($_GPC['isfavorite']);
+		$merch = pdo_fetch('select * from ' . tablename('ewei_shop_merch_user') . ' where id=:id and uniacid=:uniacid limit 1', array(':id' => $merchid, ':uniacid' => $_W['uniacid']));
+
+		if (empty($merch)) {
+			app_error(AppError::$GoodsNotFound);
+		}
+
+		$data = pdo_fetch('select id,deleted from ' . tablename('ewei_shop_member_merch_favorite') . ' where uniacid=:uniacid and merchid=:merchid and openid=:openid limit 1', array(':uniacid' => $_W['uniacid'], ':openid' => $_W['openid'], ':merchid' => $merchid));
+		if (empty($data)) {
+			if (!empty($isfavorite)) {
+				$data = array('uniacid' => $_W['uniacid'], 'merchid' => $merchid, 'openid' => $_W['openid'], 'createtime' => time());
+				pdo_insert('ewei_shop_member_merch_favorite', $data);
+			}
+		}
+		else {
+			pdo_update('ewei_shop_member_merch_favorite', array('deleted' => $isfavorite ? 0 : 1), array('id' => $data['id'], 'uniacid' => $_W['uniacid']));
+		}
+
+		app_json(array('isfavorite' => $isfavorite == 1));
 	}
 }
 

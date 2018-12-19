@@ -482,7 +482,7 @@ class Index_EweiShopV2Page extends AppMobilePage
     //分页显示柴火众筹列表
     public function starter_list(){
         $this->deal_data();
-        $condition = ' where s.uniacid =:uniacid and s.status = 1 and s.del != 1 and s.aborttime > :time and s.refer_money < s.target_money';
+        $condition = ' where s.uniacid =:uniacid and s.status = 1 and s.isdel != 1 and s.aborttime > :time and s.refer_money < s.target_money';
         $params = array(':uniacid'=>$this->uniacid,':time'=>time());
         $category = intval($this->params['category']);
         if($category){
