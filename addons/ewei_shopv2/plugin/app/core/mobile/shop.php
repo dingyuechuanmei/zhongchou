@@ -391,6 +391,7 @@ class Shop_EweiShopV2Page extends AppMobilePage
 		$sql = "SELECT * FROM ".tablename('ewei_shop_merch_user')." WHERE uniacid = :uniacid AND id = :merchid";
 		$info = pdo_fetch($sql,array(':uniacid'=>$_W['uniacid'],':merchid'=>$merchid));
 		$info['logo'] = tomedia($info['logo']);
+		$info['background_img'] = tomedia($info['background_img']);
 		$all = m('goods')->getList(array('merchid' => $merchid));
 		$new = m('goods')->getList(array('isnew'=>1,'merchid' => $merchid));
 		$isfavorite = pdo_fetchcolumn('select id from ' . tablename('ewei_shop_member_merch_favorite') . ' where uniacid=:uniacid and merchid=:merchid and openid=:openid and deleted = 0 limit 1', array(':uniacid' => $_W['uniacid'], ':openid' => $_W['openid'], ':merchid' => $merchid));
