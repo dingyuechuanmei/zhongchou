@@ -374,6 +374,9 @@ class Shop_EweiShopV2Page extends AppMobilePage
 			unset($item);
 		}
 		$pageCount = ceil($recommand['total']/$pageSize);
+		if (empty($merchid)) {
+			$recommand['list'] = [];
+		}
 		app_json(array('list' => $recommand['list'], 'pagesize' => $args['pagesize'], 'total' => $recommand['total'], 'pageCount' => $pageCount));
 	}
 
@@ -395,7 +398,7 @@ class Shop_EweiShopV2Page extends AppMobilePage
 	}
 
 	/**
-	 * 关注店铺
+	 * 收藏店铺
 	 */
 	public function favorite_merchant()
 	{
@@ -424,6 +427,53 @@ class Shop_EweiShopV2Page extends AppMobilePage
 		}
 
 		app_json(array('isfavorite' => $isfavorite == 1));
+	}
+
+	/**
+	 * 已收藏店铺列表
+	 */
+	public function get_follow_list()
+	{
+		global $_W;
+		global $_GPC;
+		$pindex = max(1, intval($_GPC['page']));
+		$psize = 10;
+		$condition = ' and f.uniacid = :uniacid and f.openid=:openid and f.deleted=0';
+		$params = array(':uniacid' => $_W['uniacid'], ':openid' => $_W['openid']);
+		$sql = 'SELECT COUNT(*) FROM ' . tablename('ewei_shop_member_merch_favorite') . ' f where 1 ' . $condition;
+		$total = pdo_fetchcolumn($sql, $params);
+		$list = array();
+		$result = array(
+			'list'     => array(),
+			'total'    => $total,
+			'pagesize' => $psize
+		);
+
+		if (!empty($total)) {
+			$sql = 'SELECT f.id,f.merchid,m.merchname,m.logo FROM ' . tablename('ewei_shop_member_merch_favorite') . ' f ' . ' left join ' . tablename('ewei_shop_merch_user') . ' m on f.merchid = m.id ' . ' where 1 ' . $condition . ' ORDER BY `id` DESC LIMIT ' . (($pindex - 1) * $psize) . ',' . $psize;
+			$list = pdo_fetchall($sql, $params);
+			$list = set_medias($list, 'logo');
+		}
+
+		$result['list'] = $list;
+		app_json($result);
+
+	}
+
+	/**
+	 * 删除收藏店铺列表
+	 */
+	public function remove_follow()
+	{
+		global $_W;
+		global $_GPC;
+		$ids = $_GPC['ids'];
+		if (empty($ids) || !is_array($ids)) {
+			app_error(AppError::$ParamsError);
+		}
+		$sql = 'update ' . tablename('ewei_shop_member_merch_favorite') . ' set deleted=1 where openid=:openid and id in (' . implode(',', $ids) . ')';
+		pdo_query($sql, array(':openid' => $_W['openid']));
+		app_json();
 	}
 }
 
