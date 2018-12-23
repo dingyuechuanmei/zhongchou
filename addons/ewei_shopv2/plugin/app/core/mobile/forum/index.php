@@ -211,7 +211,7 @@ class Index_EweiShopV2Page extends AppMobilePage
                 if(is_array($fans_list)){
                     $member['fans_count'] = count($fans_list);
                     foreach ($fans_list as $key=>$val){
-                        if('sns_wa_ojIoH0e5g2N9vhWQQzbDyd_wWAb4' == $val['openid']){
+                        if($this->openid == $val['openid']){
                             $is_follow = 1;
                             break;
                         }
