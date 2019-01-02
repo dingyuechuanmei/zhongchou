@@ -795,4 +795,248 @@ class Order_EweiShopV2Page extends AppMobilePage
         show_json(1,array('address'=>$address,'express'=>$express_list));
     }
 
+    /**
+     * 订单详情
+     */
+    public function detail()
+    {
+        global $_W;
+        global $_GPC;
+        $id = intval($_GPC['id']);
+        $item = pdo_fetch('SELECT * FROM ' . tablename('ewei_shop_order') . ' WHERE id = :id and uniacid=:uniacid and merchid =:merchid ', array(':id' => $id, ':uniacid' => $_W['uniacid'],':merchid'=>$this->merchid));
+        $item['statusvalue'] = $item['status'];
+        $item['paytypevalue'] = $item['paytype'];
+        $order_goods = array();
+        if (0 < $item['sendtype'])
+        {
+            $order_goods = pdo_fetchall('SELECT orderid,goodsid,sendtype,expresssn,expresscom,express,sendtime FROM ' . tablename('ewei_shop_order_goods') . "\r\n" . '            WHERE orderid = ' . $id . ' and sendtime > 0 and uniacid=' . $_W['uniacid'] . ' and sendtype > 0 group by sendtype order by sendtime desc ');
+            foreach ($order_goods as $key => $value )
+            {
+                $order_goods[$key]['goods'] = pdo_fetchall('select g.id,g.title,g.thumb,og.sendtype,g.ispresell from ' . tablename('ewei_shop_order_goods') . ' og ' . ' left join ' . tablename('ewei_shop_goods') . ' g on g.id=og.goodsid ' . ' where og.uniacid=:uniacid and og.orderid=:orderid and og.sendtype=' . $value['sendtype'] . ' ', array(':uniacid' => $_W['uniacid'], ':orderid' => $id));
+            }
+            $item['sendtime'] = $order_goods[0]['sendtime'];
+        }
+        $shopset = m('common')->getSysset('shop');
+        if (empty($item))
+        {
+            $this->message('抱歉，订单不存在!', referer(), 'error');
+        }
+        if ($_W['ispost'])
+        {
+            pdo_update('ewei_shop_order', array('remark' => trim($_GPC['remark'])), array('id' => $item['id'], 'uniacid' => $_W['uniacid']));
+            plog('order.op.remarksaler', '订单保存备注  ID: ' . $item['id'] . ' 订单号: ' . $item['ordersn']);
+            $this->message('订单备注保存成功！', webUrl('order', array('op' => 'detail', 'id' => $item['id'])), 'success');
+        }
+        $member = m('member')->getMember($item['openid']);
+        $dispatch = pdo_fetch('SELECT * FROM ' . tablename('ewei_shop_dispatch') . ' WHERE id = :id and uniacid=:uniacid and merchid=0', array(':id' => $item['dispatchid'], ':uniacid' => $_W['uniacid']));
+        if (empty($item['addressid']))
+        {
+            $user = unserialize($item['carrier']);
+        }
+        else
+        {
+            $user = iunserializer($item['address']);
+            if (!(is_array($user)))
+            {
+                $user = pdo_fetch('SELECT * FROM ' . tablename('ewei_shop_member_address') . ' WHERE id = :id and uniacid=:uniacid', array(':id' => $item['addressid'], ':uniacid' => $_W['uniacid']));
+            }
+            $address_info = $user['address'];
+            $user['address'] = $user['province'] . ' ' . $user['city'] . ' ' . $user['area'] . ' ' . $user['street'] . ' ' . $user['address'];
+            $item['addressdata'] = array('realname' => $user['realname'], 'mobile' => $user['mobile'], 'address' => $user['address']);
+        }
+        $refund = pdo_fetch('SELECT * FROM ' . tablename('ewei_shop_order_refund') . ' WHERE orderid = :orderid and uniacid=:uniacid order by id desc', array(':orderid' => $item['id'], ':uniacid' => $_W['uniacid']));
+        $diyformfields = '';
+        if (p('diyform'))
+        {
+            $diyformfields = ',o.diyformfields,o.diyformdata';
+        }
+        $goods = pdo_fetchall('SELECT g.*, o.goodssn as option_goodssn, o.productsn as option_productsn,o.total,g.type,o.optionname,o.optionid,o.price as orderprice,o.realprice,o.changeprice,o.oldprice,o.commission1,o.commission2,o.commission3,o.commissions,o.seckill,o.seckill_taskid,o.seckill_roomid' . $diyformfields . ' FROM ' . tablename('ewei_shop_order_goods') . ' o left join ' . tablename('ewei_shop_goods') . ' g on o.goodsid=g.id ' . ' WHERE o.orderid=:orderid and o.uniacid=:uniacid', array(':orderid' => $id, ':uniacid' => $_W['uniacid']));
+        $is_merch = false;
+        foreach ($goods as &$r )
+        {
+            $r['seckill_task'] = false;
+            if ($r['seckill'])
+            {
+                $r['seckill_task'] = plugin_run('seckill::getTaskInfo', $r['seckill_taskid']);
+                $r['seckill_room'] = plugin_run('seckill::getRoomInfo', $r['seckill_taskid'], $r['seckill_roomid']);
+            }
+            if (!(empty($r['option_goodssn'])))
+            {
+                $r['goodssn'] = $r['option_goodssn'];
+            }
+            if (!(empty($r['option_productsn'])))
+            {
+                $r['productsn'] = $r['option_productsn'];
+            }
+            $r['marketprice'] = $r['orderprice'] / $r['total'];
+            if (p('diyform'))
+            {
+                $r['diyformfields'] = iunserializer($r['diyformfields']);
+                $r['diyformdata'] = iunserializer($r['diyformdata']);
+            }
+            if (!(empty($r['merchid'])))
+            {
+                $is_merch = true;
+            }
+        }
+        unset($r);
+        $item['goods'] = $goods;
+        $agents = array();
+        $condition = ' o.uniacid=:uniacid and o.deleted=0';
+        $paras = array(':uniacid' => $_W['uniacid']);
+        $totals = array();
+        $coupon = false;
+        if (com('coupon') && !(empty($item['couponid'])))
+        {
+            $coupon = com('coupon')->getCouponByDataID($item['couponid']);
+        }
+        $order_fields = false;
+        $order_data = false;
+        if (p('diyform'))
+        {
+            $diyform_set = p('diyform')->getSet();
+            foreach ($goods as $g )
+            {
+                if (!(empty($g['diyformdata'])))
+                {
+                    break;
+                }
+            }
+            if (!(empty($item['diyformid'])))
+            {
+                $orderdiyformid = $item['diyformid'];
+                if (!(empty($orderdiyformid)))
+                {
+                    $order_fields = iunserializer($item['diyformfields']);
+                    $order_data = iunserializer($item['diyformdata']);
+                }
+            }
+        }
+        if (com('verify'))
+        {
+            $verifyinfo = iunserializer($item['verifyinfo']);
+            if (!(empty($item['verifyopenid'])))
+            {
+                $saler = m('member')->getMember($item['verifyopenid']);
+                $saler['salername'] = pdo_fetchcolumn('select salername from ' . tablename('ewei_shop_saler') . ' where openid=:openid and uniacid=:uniacid limit 1 ', array(':uniacid' => $_W['uniacid'], ':openid' => $item['verifyopenid']));
+            }
+            if (!(empty($item['verifystoreid'])))
+            {
+                $store = pdo_fetch('select * from ' . tablename('ewei_shop_store') . ' where id=:storeid limit 1 ', array(':storeid' => $item['verifystoreid']));
+            }
+            if ($item['isverify'])
+            {
+                if (is_array($verifyinfo))
+                {
+                    if (empty($item['dispatchtype']))
+                    {
+                        foreach ($verifyinfo as &$v )
+                        {
+                            if ($v['verified'] || ($item['verifytype'] == 1))
+                            {
+                                $v['storename'] = pdo_fetchcolumn('select storename from ' . tablename('ewei_shop_store') . ' where id=:id limit 1', array(':id' => $v['verifystoreid']));
+                                if (empty($v['storename']))
+                                {
+                                    $v['storename'] = '总店';
+                                }
+                                $v['nickname'] = pdo_fetchcolumn('select nickname from ' . tablename('ewei_shop_member') . ' where openid=:openid and uniacid=:uniacid limit 1', array(':openid' => $v['verifyopenid'], ':uniacid' => $_W['uniacid']));
+                                $v['salername'] = pdo_fetchcolumn('select salername from ' . tablename('ewei_shop_saler') . ' where openid=:openid and uniacid=:uniacid limit 1', array(':openid' => $v['verifyopenid'], ':uniacid' => $_W['uniacid']));
+                            }
+                        }
+                        unset($v);
+                    }
+                }
+            }
+        }
+        $item['sendtime'] = date('Y-m-d H:i:s', $item['sendtime']);
+        $item['createtime'] = date('Y-m-d H:i:s', $item['createtime']);
+        $item['paytime'] = date('Y-m-d H:i:s', $item['paytime']);
+        $item['finishtime'] = date('Y-m-d H:i:s', $item['finishtime']);
+        foreach ($item['goods'] as &$row) {
+            $row['thumb'] = tomedia($row['thumb']);
+        }
+        unset($row);
+        show_json(1,array('item'=>$item,'user'=>$user,'member'=>$member));
+    }
+
+    public function changeexpress()
+    {
+        global $_W;
+        global $_GPC;
+        $orderid = intval($_GPC['id']);
+        if (empty($orderid))
+        {
+            $this->show('参数错误');
+        }
+        $item = $this->getOrder($orderid);
+        $changeexpress = 1;
+        $sendtype = intval($_GPC['sendtype']);
+        $edit_flag = 1;
+        if ($_W['ispost'])
+        {
+            $express = $_GPC['express'];
+            $expresscom = $_GPC['expresscom'];
+            $expresssn = trim($_GPC['expresssn']);
+            if (empty($expresssn))
+            {
+                show_json(0, '请填写快递单号');
+            }
+            $change_data = array();
+            $change_data['express'] = $express;
+            $change_data['expresscom'] = $expresscom;
+            $change_data['expresssn'] = $expresssn;
+            if (0 < $item['sendtype'])
+            {
+                if (empty($sendtype))
+                {
+                    if (empty($_GPC['bundles']))
+                    {
+                        show_json(0, '请选择您要修改的包裹');
+                    }
+                    $sendtype = intval($_GPC['bundles']);
+                }
+                $sendtype = explode(',', $sendtype);
+                if (is_array($sendtype))
+                {
+                    foreach ($sendtype as $key => $value )
+                    {
+                        pdo_update('ewei_shop_order_goods', $change_data, array('orderid' => $orderid, 'sendtype' => $value, 'uniacid' => $_W['uniacid']));
+                    }
+                }
+            }
+            else
+            {
+                pdo_update('ewei_shop_order', $change_data, array('id' => $orderid, 'uniacid' => $_W['uniacid']));
+            }
+            plog('order.op.changeexpress', '修改快递状态 ID: ' . $item['id'] . ' 订单号: ' . $item['ordersn'] . ' 快递公司: ' . $expresscom . ' 快递单号: ' . $expresssn);
+            show_json(1);
+        }
+        $sendgoods = array();
+        $bundles = array();
+        if (0 < $sendtype)
+        {
+            $sendgoods = pdo_fetchall('select g.id,g.title,g.thumb,og.sendtype,g.ispresell from ' . tablename('ewei_shop_order_goods') . ' og ' . ' left join ' . tablename('ewei_shop_goods') . ' g on g.id=og.goodsid ' . ' where og.uniacid=:uniacid and og.orderid=:orderid and og.sendtype=' . $sendtype . ' ', array(':uniacid' => $_W['uniacid'], ':orderid' => $item['id']));
+        }
+        else if (0 < $item['sendtype'])
+        {
+            $i = 1;
+            while ($i <= intval($item['sendtype']))
+            {
+                $bundles[$i]['goods'] = pdo_fetchall('select g.id,g.title,g.thumb,og.sendtype,g.ispresell from ' . tablename('ewei_shop_order_goods') . ' og ' . ' left join ' . tablename('ewei_shop_goods') . ' g on g.id=og.goodsid ' . ' where og.uniacid=:uniacid and og.orderid=:orderid and og.sendtype=' . $i . ' ', array(':uniacid' => $_W['uniacid'], ':orderid' => $item['id']));
+                $bundles[$i]['sendtype'] = $i;
+                if (empty($bundles[$i]['goods']))
+                {
+                    unset($bundles[$i]);
+                }
+                ++$i;
+            }
+        }
+        $address = iunserializer($item['address']);
+        if (!(is_array($address)))
+        {
+            $address = pdo_fetch('SELECT * FROM ' . tablename('ewei_shop_member_address') . ' WHERE id = :id and uniacid=:uniacid', array(':id' => $item['addressid'], ':uniacid' => $_W['uniacid']));
+        }
+        $express_list = m('express')->getExpressList();
+        show_json(1,array('address'=>$address,'express'=>$express_list));
+    }
 }
