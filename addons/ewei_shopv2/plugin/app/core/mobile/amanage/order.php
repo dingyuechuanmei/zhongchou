@@ -711,67 +711,7 @@ class Order_EweiShopV2Page extends AppMobilePage
                 show_json(0,'订单未付款，无法发货');
             }
         }
-        if ($_W['ispost'])
-        {
-            $expresssn = trim($_GPC['expresssn']);
-            if (empty($expresssn))
-            {
-                show_json(0, '请输入快递单号');
-            }
-            $express = trim($_GPC['express']);
-            $expresscom = trim($_GPC['expresscom']);
-            $time = time();
-            $data = array('sendtype' => (0 < $item['sendtype'] ? $item['sendtype'] : intval($_GPC['sendtype'])), 'express' => $express, 'expresscom' => $expresscom, 'expresssn' => $expresssn, 'sendtime' => $time);
-            $sendtype = intval($_GPC['sendtype']);
-            if (!(empty($sendtype)))
-            {
-                $goodsids = trim($_GPC['sendgoodsids']);
-                if (empty($goodsids))
-                {
-                    show_json(0, '请选择发货商品');
-                }
-                $ogoods = array();
-                $ogoods = pdo_fetchall('select sendtype from ' . tablename('ewei_shop_order_goods') . "\r\n" . '                    where orderid = ' . $item['id'] . ' and uniacid = ' . $_W['uniacid'] . ' order by sendtype desc ');
-                $senddata = array('sendtype' => $ogoods[0]['sendtype'] + 1, 'sendtime' => $data['sendtime']);
-                $data['sendtype'] = $ogoods[0]['sendtype'] + 1;
-                $goodsid = trim($_GPC['sendgoodsid']);
-                $goodsids = explode(',', $goodsids);
-                if ($goodsids)
-                {
-                    foreach ($goodsids as $key => $value )
-                    {
-                        pdo_update('ewei_shop_order_goods', $data, array('orderid' => $item['id'], 'goodsid' => $value, 'uniacid' => $_W['uniacid']));
-                    }
-                }
-                $send_goods = pdo_fetch('select * from ' . tablename('ewei_shop_order_goods') . "\r\n" . '                    where orderid = ' . $item['id'] . ' and sendtype = 0 and uniacid = ' . $_W['uniacid'] . ' limit 1 ');
-                if (empty($send_goods))
-                {
-                    $senddata['status'] = 2;
-                }
-                pdo_update('ewei_shop_order', $senddata, array('id' => $item['id'], 'uniacid' => $_W['uniacid']));
-            }
-            else
-            {
-                $data['status'] = 2;
-                pdo_update('ewei_shop_order', $data, array('id' => $item['id'], 'uniacid' => $_W['uniacid']));
-            }
-            if (!(empty($item['refundid'])))
-            {
-                $refund = pdo_fetch('select * from ' . tablename('ewei_shop_order_refund') . ' where id=:id limit 1', array(':id' => $item['refundid']));
-                if (!(empty($refund)))
-                {
-                    pdo_update('ewei_shop_order_refund', array('status' => -1, 'endtime' => $time), array('id' => $item['refundid']));
-                    pdo_update('ewei_shop_order', array('refundstate' => 0), array('id' => $item['id']));
-                }
-            }
-            if ($item['paytype'] == 3)
-            {
-                m('order')->setStocksAndCredits($item['id'], 1);
-            }
-            m('notice')->sendOrderMessage($item['id']);
-            plog('order.op.send', '订单发货 ID: ' . $item['id'] . ' 订单号: ' . $item['ordersn'] . ' <br/>快递公司: ' . $_GPC['expresscom'] . ' 快递单号: ' . $_GPC['expresssn']);
-            show_json(1);
-        }
+
         $noshipped = array();
         $shipped = array();
         if (0 < $item['sendtype'])
@@ -795,6 +735,213 @@ class Order_EweiShopV2Page extends AppMobilePage
         show_json(1,array('address'=>$address,'express'=>$express_list));
     }
 
+    public function send_post()
+    {
+        global $_W;
+        global $_GPC;
+        $orderid = intval($_GPC['id']);
+        if (empty($orderid))
+        {
+            show_json(0,'参数错误');
+        }
+        $item = $this->getOrder($orderid);
+        $expresssn = trim($_GPC['expresssn']);
+        if (empty($expresssn))
+        {
+            show_json(0, '请输入快递单号');
+        }
+        $express = trim($_GPC['express']);
+        $expresscom = trim($_GPC['expresscom']);
+        $time = time();
+        $data = array('sendtype' => (0 < $item['sendtype'] ? $item['sendtype'] : intval($_GPC['sendtype'])), 'express' => $express, 'expresscom' => $expresscom, 'expresssn' => $expresssn, 'sendtime' => $time);
+        $sendtype = intval($_GPC['sendtype']);
+        if (!(empty($sendtype)))
+        {
+            $goodsids = trim($_GPC['sendgoodsids']);
+            if (empty($goodsids))
+            {
+                show_json(0, '请选择发货商品');
+            }
+            $ogoods = array();
+            $ogoods = pdo_fetchall('select sendtype from ' . tablename('ewei_shop_order_goods') . "\r\n" . '                    where orderid = ' . $item['id'] . ' and uniacid = ' . $_W['uniacid'] . ' order by sendtype desc ');
+            $senddata = array('sendtype' => $ogoods[0]['sendtype'] + 1, 'sendtime' => $data['sendtime']);
+            $data['sendtype'] = $ogoods[0]['sendtype'] + 1;
+            $goodsid = trim($_GPC['sendgoodsid']);
+            $goodsids = explode(',', $goodsids);
+            if ($goodsids)
+            {
+                foreach ($goodsids as $key => $value )
+                {
+                    pdo_update('ewei_shop_order_goods', $data, array('orderid' => $item['id'], 'goodsid' => $value, 'uniacid' => $_W['uniacid']));
+                }
+            }
+            $send_goods = pdo_fetch('select * from ' . tablename('ewei_shop_order_goods') . "\r\n" . '                    where orderid = ' . $item['id'] . ' and sendtype = 0 and uniacid = ' . $_W['uniacid'] . ' limit 1 ');
+            if (empty($send_goods))
+            {
+                $senddata['status'] = 2;
+            }
+            pdo_update('ewei_shop_order', $senddata, array('id' => $item['id'], 'uniacid' => $_W['uniacid']));
+        }
+        else
+        {
+            $data['status'] = 2;
+            pdo_update('ewei_shop_order', $data, array('id' => $item['id'], 'uniacid' => $_W['uniacid']));
+        }
+        if (!(empty($item['refundid'])))
+        {
+            $refund = pdo_fetch('select * from ' . tablename('ewei_shop_order_refund') . ' where id=:id limit 1', array(':id' => $item['refundid']));
+            if (!(empty($refund)))
+            {
+                pdo_update('ewei_shop_order_refund', array('status' => -1, 'endtime' => $time), array('id' => $item['refundid']));
+                pdo_update('ewei_shop_order', array('refundstate' => 0), array('id' => $item['id']));
+            }
+        }
+        if ($item['paytype'] == 3)
+        {
+            m('order')->setStocksAndCredits($item['id'], 1);
+        }
+        m('notice')->sendOrderMessage($item['id']);
+        plog('order.op.send', '订单发货 ID: ' . $item['id'] . ' 订单号: ' . $item['ordersn'] . ' <br/>快递公司: ' . $_GPC['expresscom'] . ' 快递单号: ' . $_GPC['expresssn']);
+        show_json(1);
+    }
+
+    public function remarksaler()
+    {
+        global $_W;
+        global $_GPC;
+        $orderid = intval($_GPC['id']);
+        if (empty($orderid))
+        {
+            show_json(0,'参数错误');
+        }
+        $item = $this->getOrder($orderid);
+        show_json(1,array('item'=>$item));
+    }
+
+    public function remarksaler_post()
+    {
+        global $_W;
+        global $_GPC;
+        $orderid = intval($_GPC['id']);
+        if (empty($orderid))
+        {
+            show_json(0,'参数错误');
+        }
+        $item = $this->getOrder($orderid);
+        $remarksaler = trim($_GPC['remarksaler']);
+        pdo_update('ewei_shop_order', array('remarksaler' => $remarksaler), array('id' => $orderid, 'uniacid' => $_W['uniacid']));
+        plog('order.op.remarksaler', '订单备注 ID: ' . $item['id'] . ' 订单编号: ' . $item['ordersn'] . ' 备注内容: ' . $remarksaler);
+        show_json(1);
+    }
+
+    public function cancelsend()
+    {
+        global $_W;
+        global $_GPC;
+
+        $orderid = intval($_GPC['id']);
+        if (empty($orderid))
+        {
+            $this->show('参数错误');
+        }
+        $item = $this->getOrder($orderid);
+        if (($item['status'] != 2) && ($item['sendtype'] == 0))
+        {
+            show_json(0, '订单未发货，不需取消发货！');
+        }
+        $sendtype = intval($_GPC['sendtype']);
+
+        $remark = trim($_GPC['remark']);
+        if (!(empty($item['remarksend'])))
+        {
+            $remark = $item['remarksend'] . "\r\n" . $remark;
+        }
+        $data = array('sendtime' => 0, 'remarksend' => $remark);
+        if (0 < $item['sendtype'])
+        {
+            if (empty($sendtype))
+            {
+                if (empty($_GPC['bundles']))
+                {
+                    show_json(0, '请选择您要修改的包裹！');
+                }
+                $sendtype = trim($_GPC['bundles']);
+            }
+            $sendtype = explode(',', $sendtype);
+            if (is_array($sendtype))
+            {
+                foreach ($sendtype as $key => $value )
+                {
+                    $data['sendtype'] = 0;
+                    pdo_update('ewei_shop_order_goods', $data, array('orderid' => $item['id'], 'sendtype' => $value, 'uniacid' => $_W['uniacid']));
+                    $order = pdo_fetch('select sendtype from ' . tablename('ewei_shop_order') . ' where id = ' . $item['id'] . ' and uniacid = ' . $_W['uniacid'] . ' ');
+                    pdo_update('ewei_shop_order', array('sendtype' => $order['sendtype'] - 1, 'status' => 1), array('id' => $item['id'], 'uniacid' => $_W['uniacid']));
+                }
+            }
+        }
+        else
+        {
+            $data['status'] = 1;
+            pdo_update('ewei_shop_order', $data, array('id' => $item['id'], 'uniacid' => $_W['uniacid']));
+        }
+        if ($item['paytype'] == 3)
+        {
+            m('order')->setStocksAndCredits($item['id'], 2);
+        }
+        plog('order.op.sendcancel', '订单取消发货 ID: ' . $item['id'] . ' 订单号: ' . $item['ordersn'] . ' 原因: ' . $remark);
+        show_json(1);
+
+    }
+
+    /**
+     * 确认收货
+     */
+    public function finish()
+    {
+        global $_W;
+        global $_GPC;
+        $orderid = intval($_GPC['orderid']);
+        if (empty($orderid))
+        {
+            show_json(0, '参数错误');
+        }
+        $item = $this->getOrder($orderid);
+        pdo_update('ewei_shop_order', array('status' => 3, 'finishtime' => time()), array('id' => $item['id'], 'uniacid' => $_W['uniacid']));
+        if (p('ccard') && !(empty($item['ccardid'])))
+        {
+            p('ccard')->setBegin($item['id'], $item['ccardid']);
+        }
+        m('member')->upgradeLevel($item['openid']);
+        m('order')->setGiveBalance($item['id'], 1);
+        m('notice')->sendOrderMessage($item['id']);
+        com_run('printer::sendOrderMessage', $item['id']);
+        if (com('coupon'))
+        {
+            com('coupon')->sendcouponsbytask($item['id']);
+        }
+        if (!(empty($item['couponid'])))
+        {
+            com('coupon')->backConsumeCoupon($item['id']);
+        }
+        if (p('lineup'))
+        {
+            p('lineup')->checkOrder($item);
+        }
+        if (p('commission'))
+        {
+            p('commission')->checkOrderFinish($item['id']);
+        }
+        if (p('lottery'))
+        {
+            $res = p('lottery')->getLottery($item['openid'], 1, array('money' => $item['price'], 'paytype' => 2));
+            if ($res)
+            {
+                p('lottery')->getLotteryList($item['openid'], array('lottery_id' => $res));
+            }
+        }
+        plog('order.op.finish', '订单完成 ID: ' . $item['id'] . ' 订单号: ' . $item['ordersn']);
+        show_json(1);
+    }
     /**
      * 订单详情
      */
@@ -966,51 +1113,12 @@ class Order_EweiShopV2Page extends AppMobilePage
         $orderid = intval($_GPC['id']);
         if (empty($orderid))
         {
-            $this->show('参数错误');
+            show_json(0,'参数错误');
         }
         $item = $this->getOrder($orderid);
         $changeexpress = 1;
         $sendtype = intval($_GPC['sendtype']);
         $edit_flag = 1;
-        if ($_W['ispost'])
-        {
-            $express = $_GPC['express'];
-            $expresscom = $_GPC['expresscom'];
-            $expresssn = trim($_GPC['expresssn']);
-            if (empty($expresssn))
-            {
-                show_json(0, '请填写快递单号');
-            }
-            $change_data = array();
-            $change_data['express'] = $express;
-            $change_data['expresscom'] = $expresscom;
-            $change_data['expresssn'] = $expresssn;
-            if (0 < $item['sendtype'])
-            {
-                if (empty($sendtype))
-                {
-                    if (empty($_GPC['bundles']))
-                    {
-                        show_json(0, '请选择您要修改的包裹');
-                    }
-                    $sendtype = intval($_GPC['bundles']);
-                }
-                $sendtype = explode(',', $sendtype);
-                if (is_array($sendtype))
-                {
-                    foreach ($sendtype as $key => $value )
-                    {
-                        pdo_update('ewei_shop_order_goods', $change_data, array('orderid' => $orderid, 'sendtype' => $value, 'uniacid' => $_W['uniacid']));
-                    }
-                }
-            }
-            else
-            {
-                pdo_update('ewei_shop_order', $change_data, array('id' => $orderid, 'uniacid' => $_W['uniacid']));
-            }
-            plog('order.op.changeexpress', '修改快递状态 ID: ' . $item['id'] . ' 订单号: ' . $item['ordersn'] . ' 快递公司: ' . $expresscom . ' 快递单号: ' . $expresssn);
-            show_json(1);
-        }
         $sendgoods = array();
         $bundles = array();
         if (0 < $sendtype)
@@ -1037,6 +1145,176 @@ class Order_EweiShopV2Page extends AppMobilePage
             $address = pdo_fetch('SELECT * FROM ' . tablename('ewei_shop_member_address') . ' WHERE id = :id and uniacid=:uniacid', array(':id' => $item['addressid'], ':uniacid' => $_W['uniacid']));
         }
         $express_list = m('express')->getExpressList();
-        show_json(1,array('address'=>$address,'express'=>$express_list));
+        show_json(1,array('address'=>$address,'express'=>$express_list,'item'=>$item));
+    }
+
+    public function changeexpress_post(){
+        global $_W;
+        global $_GPC;
+        $orderid = intval($_GPC['id']);
+        if (empty($orderid))
+        {
+            show_json('参数错误');
+        }
+        $item = $this->getOrder($orderid);
+        $changeexpress = 1;
+        $sendtype = intval($_GPC['sendtype']);
+        $edit_flag = 1;
+        $express = $_GPC['express'];
+        $expresscom = $_GPC['expresscom'];
+        $expresssn = trim($_GPC['expresssn']);
+        if (empty($expresssn))
+        {
+            show_json(0, '请填写快递单号');
+        }
+        $change_data = array();
+        $change_data['express'] = $express;
+        $change_data['expresscom'] = $expresscom;
+        $change_data['expresssn'] = $expresssn;
+        if (0 < $item['sendtype'])
+        {
+            if (empty($sendtype))
+            {
+                if (empty($_GPC['bundles']))
+                {
+                    show_json(0, '请选择您要修改的包裹');
+                }
+                $sendtype = intval($_GPC['bundles']);
+            }
+            $sendtype = explode(',', $sendtype);
+            if (is_array($sendtype))
+            {
+                foreach ($sendtype as $key => $value )
+                {
+                    pdo_update('ewei_shop_order_goods', $change_data, array('orderid' => $orderid, 'sendtype' => $value, 'uniacid' => $_W['uniacid']));
+                }
+            }
+        }
+        else
+        {
+            pdo_update('ewei_shop_order', $change_data, array('id' => $orderid, 'uniacid' => $_W['uniacid']));
+        }
+        plog('order.op.changeexpress', '修改快递状态 ID: ' . $item['id'] . ' 订单号: ' . $item['ordersn'] . ' 快递公司: ' . $expresscom . ' 快递单号: ' . $expresssn);
+        show_json(1);
+
+    }
+
+    public function changeaddress()
+    {
+        global $_W;
+        global $_GPC;
+        $orderid = intval($_GPC['id']);
+        if (empty($orderid))
+        {
+            show_json(0,'参数错误');
+        }
+        $item = $this->getOrder($orderid);
+        $area_set = m('util')->get_area_config_set();
+        $new_area = intval($area_set['new_area']);
+        $address_street = intval($area_set['address_street']);
+        if (empty($item['addressid']))
+        {
+            $user = unserialize($item['carrier']);
+        }
+        else
+        {
+            $user = iunserializer($item['address']);
+            if (!(is_array($user)))
+            {
+                $user = pdo_fetch('SELECT * FROM ' . tablename('ewei_shop_member_address') . ' WHERE id = :id and uniacid=:uniacid', array(':id' => $item['addressid'], ':uniacid' => $_W['uniacid']));
+            }
+            $address_info = $user['address'];
+            $user_address = $user['address'];
+            $user['address'] = $user['province'] . ' ' . $user['city'] . ' ' . $user['area'] . ' ' . $user['street'] . ' ' . $user['address'];
+            $item['addressdata'] = $oldaddress = array('realname' => $user['realname'], 'mobile' => $user['mobile'], 'address' => $user['address']);
+        }
+
+        show_json(1,array('user'=>$user));
+    }
+
+    public function changeaddress_post(){
+        global $_W;
+        global $_GPC;
+        $orderid = intval($_GPC['id']);
+        if (empty($orderid))
+        {
+            show_json(0,'参数错误');
+        }
+        $item = $this->getOrder($orderid);
+        $area_set = m('util')->get_area_config_set();
+        $new_area = intval($area_set['new_area']);
+        $address_street = intval($area_set['address_street']);
+        if (empty($item['addressid']))
+        {
+            $user = unserialize($item['carrier']);
+        }
+        else
+        {
+            $user = iunserializer($item['address']);
+            if (!(is_array($user)))
+            {
+                $user = pdo_fetch('SELECT * FROM ' . tablename('ewei_shop_member_address') . ' WHERE id = :id and uniacid=:uniacid', array(':id' => $item['addressid'], ':uniacid' => $_W['uniacid']));
+            }
+            $address_info = $user['address'];
+            $user_address = $user['address'];
+            $user['address'] = $user['province'] . ' ' . $user['city'] . ' ' . $user['area'] . ' ' . $user['street'] . ' ' . $user['address'];
+            $item['addressdata'] = $oldaddress = array('realname' => $user['realname'], 'mobile' => $user['mobile'], 'address' => $user['address']);
+        }
+        $realname = $_GPC['realname'];
+        $mobile = $_GPC['mobile'];
+        $province = $_GPC['province'];
+        $city = $_GPC['city'];
+        $area = $_GPC['area'];
+        $street = $_GPC['street'];
+        $changead = intval($_GPC['changead']);
+        $address = trim($_GPC['address']);
+        if (empty($realname))
+        {
+            $ret = '请填写收件人姓名！';
+            show_json(0, $ret);
+        }
+        if (empty($mobile))
+        {
+            $ret = '请填写收件人手机！';
+            show_json(0, $ret);
+        }
+        if ($changead)
+        {
+            if ($province == '请选择省份')
+            {
+                $ret = '请选择省份！';
+                show_json(0, $ret);
+            }
+            if (empty($address))
+            {
+                $ret = '请填写详细地址！';
+                show_json(0, $ret);
+            }
+        }
+        $address_array = iunserializer($item['address']);
+        $address_array['realname'] = $realname;
+        $address_array['mobile'] = $mobile;
+        if ($changead)
+        {
+            $address_array['province'] = $province;
+            $address_array['city'] = $city;
+            $address_array['area'] = $area;
+            $address_array['street'] = $street;
+            $address_array['address'] = $address;
+        }
+        else
+        {
+            $address_array['province'] = $user['province'];
+            $address_array['city'] = $user['city'];
+            $address_array['area'] = $user['area'];
+            $address_array['street'] = $user['street'];
+            $address_array['address'] = $user_address;
+        }
+        $address_array = iserializer($address_array);
+        pdo_update('ewei_shop_order', array('address' => $address_array), array('id' => $orderid, 'uniacid' => $_W['uniacid']));
+        plog('order.op.changeaddress', '修改收货地址 ID: ' . $item['id'] . ' 订单号: ' . $item['ordersn'] . ' <br>原地址: 收件人: ' . $oldaddress['realname'] . ' 手机号: ' . $oldaddress['mobile'] . ' 收件地址: ' . $oldaddress['address'] . '<br>新地址: 收件人: ' . $realname . ' 手机号: ' . $mobile . ' 收件地址: ' . $province . ' ' . $city . ' ' . $area . ' ' . $address);
+        m('notice')->sendOrderChangeMessage($item['openid'], array('title' => '订单收货地址', 'orderid' => $item['id'], 'ordersn' => $item['ordersn'], 'olddata' => $oldaddress['address'], 'data' => $province . $city . $area . $address, 'type' => 0), 'orderstatus');
+        show_json(1);
+
     }
 }
