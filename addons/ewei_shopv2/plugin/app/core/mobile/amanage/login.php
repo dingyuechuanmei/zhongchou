@@ -32,4 +32,33 @@ class Login_EweiShopV2Page extends AppMobilePage
         }
         app_json($account);
     }
+
+    public function weixin_login()
+    {
+        global $_W;
+        global $_GPC;
+        if (empty($_GPC['openid']))
+        {
+            app_error(1, '未获取到当前用户信息，请刷新重试');
+        }
+        $roleuser = pdo_fetch('SELECT id,status,accountid FROM' . tablename('ewei_shop_merch_user') . 'WHERE openid=:openid AND uniacid=:uniacid LIMIT 1', array(':openid' => $_GPC['openid'], ':uniacid' => $_W['uniacid']));
+        if (empty($roleuser))
+        {
+            app_error(1, '当前用户不存在');
+        }
+        if (empty($roleuser['status']))
+        {
+            app_error(1, '此用户暂时无法登录管理后台');
+        }
+        $account = pdo_get("ewei_shop_merch_account",array('id'=>$roleuser['accountid']));
+        if (!($account))
+        {
+            app_error(1, '当前账号不存在');
+        }
+        if (empty($account['status']))
+        {
+            app_error(1, '此账号暂时无法登录管理后台');
+        }
+        app_json($account);
+    }
 }

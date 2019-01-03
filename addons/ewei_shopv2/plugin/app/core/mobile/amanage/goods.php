@@ -63,4 +63,70 @@ class Goods_EweiShopV2Page extends AppMobilePage
         $pageCount = ceil($total/$psize);
         show_json(1, array('total' => $total, 'list' => $list, 'pageCount' => $pageCount));
     }
+
+    public function status()
+    {
+        global $_W;
+        global $_GPC;
+        $id = intval($_GPC['id']);
+        $ids = trim($_GPC['ids']);
+        if (empty($id))
+        {
+            if (!(empty($ids)) && strexists($ids, ','))
+            {
+                $id = $ids;
+            }
+        }
+        $items = pdo_fetchall('SELECT id,title FROM ' . tablename('ewei_shop_goods') . ' WHERE id in( ' . $id . ' ) AND merchid='.$this->merchid.' AND uniacid=' . $_W['uniacid']);
+        foreach ($items as $item )
+        {
+            pdo_update('ewei_shop_goods', array('status' => intval($_GPC['status'])), array('id' => $item['id']));
+            plog('goods.edit', (('修改商品状态<br/>ID: ' . $item['id'] . '<br/>商品名称: ' . $item['title'] . '<br/>状态: ' . $_GPC['status']) == 1 ? '上架' : '下架'));
+        }
+        show_json(1);
+    }
+
+    public function delete()
+    {
+        global $_W;
+        global $_GPC;
+        $id = intval($_GPC['id']);
+        $ids = trim($_GPC['ids']);
+        if (empty($id))
+        {
+            if (!(empty($ids)) && strexists($ids, ','))
+            {
+                $id = $ids;
+            }
+        }
+        $items = pdo_fetchall('SELECT id,title FROM ' . tablename('ewei_shop_goods') . ' WHERE id in( ' . $id . ' ) AND merchid='.$this->merchid.' AND uniacid=' . $_W['uniacid']);
+        foreach ($items as $item )
+        {
+            pdo_update('ewei_shop_goods', array('deleted' => 1), array('id' => $item['id']));
+            plog('goods.delete', '删除商品 ID: ' . $item['id'] . ' 商品名称: ' . $item['title'] . ' ');
+        }
+        show_json(1);
+    }
+
+    public function restore()
+    {
+        global $_W;
+        global $_GPC;
+        $id = intval($_GPC['id']);
+        $ids = trim($_GPC['ids']);
+        if (empty($id))
+        {
+            if (!(empty($ids)) && strexists($ids, ','))
+            {
+                $id = $ids;
+            }
+        }
+        $items = pdo_fetchall('SELECT id,title FROM ' . tablename('ewei_shop_goods') . ' WHERE id in( ' . $id . ' ) AND merchid='.$this->merchid.' AND uniacid=' . $_W['uniacid']);
+        foreach ($items as $item )
+        {
+            pdo_update('ewei_shop_goods', array('deleted' => 0, 'status' => 0), array('id' => $item['id']));
+            plog('goods.restore', '从回收站恢复商品<br/>ID: ' . $item['id'] . '<br/>商品名称: ' . $item['title']);
+        }
+        show_json(1);
+    }
 }
