@@ -129,4 +129,96 @@ class Goods_EweiShopV2Page extends AppMobilePage
         }
         show_json(1);
     }
+
+    public function detail()
+    {
+        global $_W;
+        global $_GPC;
+        $id = intval($_GPC['id']);
+        $merchid = intval($this->merchid);
+        if (!(empty($id)))
+        {
+            $item = pdo_fetch('SELECT * FROM ' . tablename('ewei_shop_goods') . ' WHERE id = :id and uniacid = :uniacid and merchid=:merchid', array(':id' => $id, ':uniacid' => $_W['uniacid'],':merchid'=>$merchid));
+            if (!(empty($item['thumb'])))
+            {
+                $thumb = array_merge(array($item['thumb']), iunserializer($item['thumb_url']));
+                for ($i=0;$i<count($thumb);$i++) {
+                    $piclist[$i] = tomedia($thumb[$i]);
+                }
+            }
+            show_json(1,array('item'=>$item,'thumb'=>$thumb,'piclist'=>$piclist));
+        }
+        show_json(0,'商品信息错误');
+    }
+
+    public function post()
+    {
+        global $_W;
+        global $_GPC;
+        $id = intval($_GPC['id']);
+        $merchid = intval($this->merchid);
+        if (!(empty($id)))
+        {
+            $item = pdo_fetch('SELECT * FROM ' . tablename('ewei_shop_goods') . ' WHERE id = :id and uniacid = :uniacid and merchid=:merchid', array(':id' => $id, ':uniacid' => $_W['uniacid'],':merchid'=>$merchid));
+        }
+        $data = array('title' => trim($_GPC['title']),'merchid'=>$merchid, 'subtitle' => trim($_GPC['subtitle']), 'unit' => trim($_GPC['unit']), 'status' => intval($_GPC['status']), 'showtotal' => intval($_GPC['showtotal']), 'cash' => intval($_GPC['cash']), 'invoice' => intval($_GPC['invoice']), 'isnodiscount' => intval($_GPC['isnodiscount']), 'nocommission' => intval($_GPC['nocommission']), 'isrecommand' => intval($_GPC['isrecommand']), 'isnew' => intval($_GPC['isnew']), 'ishot' => intval($_GPC['ishot']), 'issendfree' => intval($_GPC['issendfree']), 'totalcnf' => intval($_GPC['totalcnf']), 'dispatchtype' => intval($_GPC['dispatchtype']), 'showlevels' => trim($_GPC['showlevels']), 'showgroups' => trim($_GPC['showgroups']), 'buylevels' => trim($_GPC['buylevels']), 'buygroups' => trim($_GPC['buygroups']), 'maxbuy' => intval($_GPC['maxbuy']), 'minbuy' => intval($_GPC['minbuy']), 'usermaxbuy' => intval($_GPC['usermaxbuy']), 'diypage' => intval($_GPC['diypage']), 'displayorder' => intval($_GPC['displayorder']));
+        if (empty($item))
+        {
+            $data['type'] = intval($_GPC['type']);
+        }
+        $thumbs = explode(',',trim($_GPC['thumbs'],','));
+        if (is_array($thumbs))
+        {
+            $thumb_url = array();
+            foreach ($thumbs as $th )
+            {
+                $thumb_url[] = trim($th);
+            }
+            $data['thumb'] = save_media($thumb_url[0]);
+            unset($thumb_url[0]);
+            $data['thumb_url'] = serialize(m('common')->array_images($thumb_url));
+        }
+        if (empty($item['hasoption']))
+        {
+            $data['hasoption'] = 0;
+            $data['marketprice'] = trim($_GPC['marketprice']);
+            $data['productprice'] = trim($_GPC['productprice']);
+            $data['costprice'] = trim($_GPC['costprice']);
+            $data['total'] = intval($_GPC['total']);
+            $data['weight'] = trim($_GPC['weight']);
+            $data['goodssn'] = trim($_GPC['goodssn']);
+            $data['productsn'] = trim($_GPC['productsn']);
+        }
+        $result = array();
+        if (!(empty($item)))
+        {
+            pdo_update('ewei_shop_goods', $data, array('id' => $item['id'], 'uniacid' => $_W['uniacid']));
+            plog('goods.edit', '编辑商品 ID: ' . $id . '<br>' . ((!(empty($data['nocommission'])) ? '是否参与分销 -- 否' : '是否参与分销 -- 是')));
+        }
+        else
+        {
+            $data['createtime'] = time();
+            $data['uniacid'] = $_W['uniacid'];
+            pdo_insert('ewei_shop_goods', $data);
+            $id = pdo_insertid();
+            $result['id'] = $id;
+            plog('goods.add', '添加商品 ID: ' . $id . '<br>' . ((!(empty($data['nocommission'])) ? '是否参与分销 -- 否' : '是否参与分销 -- 是')));
+        }
+        if (!(empty($item['hasoption'])))
+        {
+            $sql = 'update ' . tablename('ewei_shop_goods') . ' g set' . "\r\n" . '            g.minprice = (select min(marketprice) from ' . tablename('ewei_shop_goods_option') . ' where goodsid = ' . $id . '),' . "\r\n" . '            g.maxprice = (select max(marketprice) from ' . tablename('ewei_shop_goods_option') . ' where goodsid = ' . $id . ')' . "\r\n" . '            where g.id = ' . $id . ' and g.hasoption=1';
+            pdo_query($sql);
+        }
+        else
+        {
+            pdo_query('delete from ' . tablename('ewei_shop_goods_option') . ' where goodsid=' . $id);
+            $sql = 'update ' . tablename('ewei_shop_goods') . ' set minprice = marketprice,maxprice = marketprice where id = ' . $id . ' and hasoption=0;';
+            pdo_query($sql);
+        }
+        $sqlgoods = 'SELECT id,title,thumb,marketprice,productprice,minprice,maxprice,isdiscount,isdiscount_time,isdiscount_discounts,sales,total,description,merchsale FROM ' . tablename('ewei_shop_goods') . ' where id=:id and uniacid=:uniacid limit 1';
+        $goodsinfo = pdo_fetch($sqlgoods, array(':id' => $id, ':uniacid' => $_W['uniacid']));
+        $goodsinfo = m('goods')->getOneMinPrice($goodsinfo);
+        pdo_update('ewei_shop_goods', array('minprice' => $goodsinfo['minprice'], 'maxprice' => $goodsinfo['maxprice']), array('id' => $id, 'uniacid' => $_W['uniacid']));
+        show_json(1, $result);
+    }
 }
