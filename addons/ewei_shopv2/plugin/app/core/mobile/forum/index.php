@@ -425,6 +425,12 @@ class Index_EweiShopV2Page extends AppMobilePage
         if(!$this->params['title'] || !( $leng > 3 && $leng < 18)){
             app_error(1,'标题在 3 ~ 18 字内');
         }
+        if(!$this->params['tel'] || (strlen($this->params['tel']) < 11)){
+            app_error(1,'请输入合法的手机号');
+        }
+        if(!$this->params['address']){
+            app_error(1,'请选择地理位置');
+        }
         if(!$this->params['cate']){
             app_error(1,'请选择版块');
         }
@@ -457,6 +463,8 @@ class Index_EweiShopV2Page extends AppMobilePage
             'uniacid'=>$this->uniacid,
             'openid'=>$this->openid,
             'title'=>$this->params['title'],
+            'address' => $this->params['address'],
+            'tel' => $this->params['tel'],
             'cate'=>$this->params['cate'],
             'context'=>$this->params['context'],
             'thumbs'=>$thumbs,
@@ -607,7 +615,7 @@ class Index_EweiShopV2Page extends AppMobilePage
         }
         $condition = ' where f.id=:fid and f.uniacid = :uniacid';
         $params = array(':fid'=>$this->params['forum_id'],':uniacid'=>$this->uniacid);
-        $forum_info = pdo_fetch('select f.id,f.title,f.context,thumbs,f.createtime,recom_list,praise_list,m.id mid,m.avatar,m.nickname,m.fans_list,view_count,review_count,is_top,c.title source from '.tablename($this->tb_forum).' f left join '.tablename($this->tb_member).' m on(f.openid = m.openid) left join '.tablename($this->tb_forum_cate).' c on(c.id = f.cate) '.$condition.' limit 1',$params);
+        $forum_info = pdo_fetch('select f.id,f.title,f.tel,f.address,f.context,thumbs,f.createtime,recom_list,praise_list,m.id mid,m.avatar,m.nickname,m.fans_list,view_count,review_count,is_top,c.title source from '.tablename($this->tb_forum).' f left join '.tablename($this->tb_member).' m on(f.openid = m.openid) left join '.tablename($this->tb_forum_cate).' c on(c.id = f.cate) '.$condition.' limit 1',$params);
         if($forum_info){
             $forum_info['thumbs'] = $forum_info['thumbs'] ? iunserializer($forum_info['thumbs']) : array();
             foreach ($forum_info['thumbs'] as $v) {
@@ -645,6 +653,7 @@ class Index_EweiShopV2Page extends AppMobilePage
             pdo_update($this->tb_forum,"view_count = view_count + 1",array('id'=>$forum_info['id']));
             unset($forum_info['view_count']);
             unset($forum_info['fans_list']);
+            $forum_info['context'] = str_replace(' ','&ensp;',$forum_info['context']);
             app_json(array('forum_info'=>$forum_info));
         }else{
             app_error(1,'暂无数据');

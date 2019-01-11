@@ -360,7 +360,15 @@ class Shop_EweiShopV2Page extends AppMobilePage
 			'by' => '',
 			'merchid' => $merchid
 		);
-		$args[$type] = 1;
+		if ($type != 'issale' && $type != 'isprice') {
+			$args[$type] = 1;
+		} else {
+			if ($type == 'issale') {
+				$args['order'] = 'sales desc';
+			} elseif ($type == 'isprice') {
+				$args['order'] = 'minprice asc';
+			}
+		}
 		$recommand = m('goods')->getList($args);
 
 		if (!empty($recommand['list'])) {
@@ -377,7 +385,7 @@ class Shop_EweiShopV2Page extends AppMobilePage
 		if (empty($merchid)) {
 			$recommand['list'] = [];
 		}
-		app_json(array('list' => $recommand['list'], 'pagesize' => $args['pagesize'], 'total' => $recommand['total'], 'pageCount' => $pageCount));
+		app_json(array('list' => $recommand['list'], 'pagesize' => $args['pagesize'], 'total' => $recommand['total'], 'pageCount' => $pageCount,'args'=>$args));
 	}
 
 	/**

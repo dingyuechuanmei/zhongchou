@@ -620,7 +620,7 @@ class Index_EweiShopV2Page extends AppMobilePage
     //获取创匠众推幻灯片
     public function get_pusher_banner(){
         $this->deal_data();
-        $banner_list = pdo_fetchall('select bannername,link,thumb from '.tablename($this->tb_pusher_banner).' where enabled =:enabled and uniacid=:uniacid order by displayorder desc ',array(':enabled'=>0,':uniacid'=>$this->uniacid));
+        $banner_list = pdo_fetchall('select bannername,link,thumb from '.tablename($this->tb_pusher_banner).' where enabled =:enabled and uniacid=:uniacid order by displayorder desc ',array(':enabled'=>1,':uniacid'=>$this->uniacid));
         if($banner_list){
             foreach ($banner_list as &$item){
                 $item['thumb'] = $item['thumb'] ? tomedia($item['thumb']) : '';
