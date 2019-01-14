@@ -599,7 +599,7 @@ function tpl_form_field_video($name, $value = '', $options = array()) {
 	$options['direct'] = true;
 	$options['multi'] = false;
 	$options['type'] = 'video';
-	$options['fileSizeLimit'] = intval($GLOBALS['_W']['setting']['upload']['audio']['limit']) * 1024;
+	$options['fileSizeLimit'] = intval($GLOBALS['_W']['config']['upload']['video']['limit']) * 1024;
 	$s = '';
 	if (!defined('TPL_INIT_VIDEO')) {
 		$s = '

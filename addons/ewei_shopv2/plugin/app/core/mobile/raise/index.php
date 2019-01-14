@@ -603,11 +603,12 @@ class Index_EweiShopV2Page extends AppMobilePage
         }
         $page = $this->params['page'] ? intval($this->params['page']) : 1;
         //$pusher_list = pdo_fetchall('select p.id,title,p.video,p.like_count,m.nickname,m.avatar from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_member).' m on(p.pusher = m.openid) '.$condition.' order by p.like_count desc limit '.(($page-1) * $this->psize).','.$this->psize,$params);
-        $pusher_list = pdo_fetchall('select p.id,title,p.video,p.like_count,m.merchname AS nickname,m.logo AS avatar from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id) '.$condition.' order by p.id desc limit 5',$params);
+        $pusher_list = pdo_fetchall('select p.id,title,p.video,p.video_cover,p.like_count,m.merchname AS nickname,m.logo AS avatar from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id) '.$condition.' order by p.id desc limit 5',$params);
         if($pusher_list){
             foreach ($pusher_list as &$item){
                 $item['like_count'] = intval($item['like_count']);
                 $item['video'] = $item['video'] ? tomedia($item['video']) : '';
+                $item['video_cover'] = $item['video_cover'] ? tomedia($item['video_cover']) : '';
                 $item['like_count'] = $item['like_count'] < 0 ? 0 :$item['like_count'];
                 $item['avatar'] = $item['avatar'] ? tomedia($item['avatar']) : '';
             }
@@ -647,6 +648,7 @@ class Index_EweiShopV2Page extends AppMobilePage
             $index_info['middle_icon'] = $index_info['middle_icon'] ? tomedia($index_info['middle_icon']) : '';
             $index_info['right_icon'] = $index_info['right_icon'] ? tomedia($index_info['right_icon']) : '';
             $index_info['video_url'] = $index_info['video_url'] ? tomedia($index_info['video_url']) : '';
+            $index_info['video_cover'] = $index_info['video_cover'] ? tomedia($index_info['video_cover']) : '';
             $config = m('common')->getSysset('lexin');
             if (empty($config['zhongchou'])) {
                 unset($index_info['center_appid']);

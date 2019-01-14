@@ -1489,5 +1489,30 @@ class Common_EweiShopV2Model
 		//缩略完
 		return $_W['siteroot'].'attachment/images/'.$_W['uniacid'].'/forumlist/'.md5($final_path).'.'.$mime_type;
 	}
+
+	/**
+	 * 安装ffmpeg获取视频封面(第一帧)
+	 */
+	public function getCoverImages($video){
+		global $_W;
+		$videoPath = IA_ROOT.'/attachment/'.$video;
+		if (is_file($videoPath)) {
+			$path = IA_ROOT.'/attachment/images/'.$_W['uniacid'].'/videocover/';
+			if (!(is_dir($path)))
+			{
+				load()->func('file');
+				mkdirs($path);
+			}
+			$file = md5(base64_encode($video)) . '.jpg';
+			$file_path = $path.$file;
+			if (!(is_file($file_path)))
+			{
+				$command = "/usr/local/ffmpeg/bin/ffmpeg -i {$videoPath} -ss 00:00:01 -f image2 -s 320x240 {$file_path}";
+				exec($command);
+			}
+			return 'images/'.$_W['uniacid'].'/videocover/'.$file;
+		}
+		return '';
+	}
 }
 ?>

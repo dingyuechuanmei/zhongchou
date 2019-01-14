@@ -67,6 +67,7 @@ class Pusher_EweiShopV2Page extends MerchWebPage
                 //'pusher' => $_GPC['pusher'],
                 'category' => intval($_GPC['category']),
                 'video' => $_GPC['video'],
+                'video_cover' => m('common')->getCoverImages($_GPC['video']),
                 'shop_url' => $_GPC['shop_url'],
                 'like_count' => 0,
                 'ifshow' => intval($_GPC['ifshow']),

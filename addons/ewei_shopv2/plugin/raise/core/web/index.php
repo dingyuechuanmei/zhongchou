@@ -37,6 +37,7 @@ class Index_EweiShopV2Page extends PluginWebPage
                 'right_path'=>trim($_GPC['right_path']),
                 'right_appid'=>trim($_GPC['right_appid']),
                 'video_url'=>trim($_GPC['video_url']),
+                'video_cover' => m('common')->getCoverImages($_GPC['video_url']),
                 'raise_intro'=>m('common')->html_images($_GPC['raise_intro'])
             );
             if($raise_index){

@@ -50,7 +50,9 @@ class Pusher_EweiShopV2Page extends AppMobilePage
         foreach ($list as &$value) {
             $value['member'] = pdo_get("ewei_shop_member",array('openid'=>$value['pusher']),array('nickname','avatar'));
             $value['ifshowval'] = $value['ifshow'] == 1 ? '显示' : '隐藏';
+            $value['video_cover'] = tomedia($value['video_cover']);
         }
+        unset($value);
         $pageCount = ceil($total/$psize);
         show_json(1, array('total' => $total, 'list' => $list,'pageCount'=>$pageCount ));
     }
@@ -135,7 +137,8 @@ class Pusher_EweiShopV2Page extends AppMobilePage
             'title' 	=> trim($_GPC['title']),
             'pusher' 	=> $_GPC['pusher'],
             'category' 	=> intval($_GPC['category']),
-            'video' 	=> trim($_GPC['video']),
+            'video' => trim($_GPC['video']),
+            'video_cover' => m('common')->getCoverImages($_GPC['video']),
             'shop_url' 	=> $_GPC['shop_url'],
             'like_count'=> 0,
             'ifshow' 	=> intval($_GPC['ifshow']),
@@ -151,6 +154,25 @@ class Pusher_EweiShopV2Page extends AppMobilePage
             plog('raise.pusher.add', '添加众推 ID: ' . pdo_insertid());
         }
         show_json(1);
+    }
+
+
+    public function getCoverImages($fileUrl){
+        $result = array();
+        $filePath = '/data/wwwroot/zhongchouchuangke/attachment/'.$fileUrl;
+        if(!empty($filePath)){
+            if(is_file($filePath)){
+                $result = $this->execCommandLine($filePath);
+            }
+        }
+        return $result;
+    }
+
+    public function execCommandLine($file){
+        $filename = '/data/wwwroot/zhongchouchuangke/attachment/images/73/2019/01/'.md5($file).'123.jpg';
+        $command = "/usr/local/ffmpeg/bin/ffmpeg -i {$file} -ss 00:00:01 -f image2 -s 320x240 {$filename}";
+        exec($command,$arr);
+        return array('filename'=>$filename,'command'=>$command,'arr'=>$arr);
     }
 
 }

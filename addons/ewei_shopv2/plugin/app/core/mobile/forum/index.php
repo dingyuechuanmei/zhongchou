@@ -93,7 +93,7 @@ class Index_EweiShopV2Page extends AppMobilePage
             app_error(1,'参数错误');
         }
         $page = $this->params['page'] ? intval($this->params['page']) : 1;
-        $list = pdo_fetchall('select f.id,r.id rid,title,thumbs,review_count from '.tablename($this->tb_forum_review).' r left join '.tablename($this->tb_forum).' f on(r.forum_id = f.id) where r.openid=:openid order by r.id desc limit '.(($page-1) * $this->psize).','.$this->psize,array(':openid'=>$this->params['openid_']));
+        $list = pdo_fetchall('select f.id,r.id rid,title,thumbs,review_count from '.tablename($this->tb_forum_review).' r left join '.tablename($this->tb_forum).' f on(r.forum_id = f.id) where r.openid=:openid AND r.reply_id = 0 order by r.id desc limit '.(($page-1) * $this->psize).','.$this->psize,array(':openid'=>$this->params['openid_']));
         if($list){
             foreach ($list as &$val){
                 $val['favorite'] = pdo_fetchcolumn("select count(*) from ".tablename($this->tb_favorite)." where forum_id=:forumId ",array(":forumId"=>$val['id']));
@@ -224,7 +224,7 @@ class Index_EweiShopV2Page extends AppMobilePage
             //总收藏数
             $member['total_favorite'] = pdo_fetchcolumn("select count(*) from ".tablename($this->tb_favorite).' where openid =:openid',$params);
             //总评论数
-            $member['total_review'] = pdo_fetchcolumn("select count(*) from ".tablename($this->tb_forum_review).' where openid =:openid',$params);
+            $member['total_review'] = pdo_fetchcolumn("select count(*) from ".tablename($this->tb_forum_review).' where openid =:openid and reply_id=0',$params);
             if($member['follow_list']){
                 $follow_list = iunserializer($member['follow_list']);
                 if(is_array($follow_list)){
@@ -618,9 +618,6 @@ class Index_EweiShopV2Page extends AppMobilePage
         $forum_info = pdo_fetch('select f.id,f.title,f.tel,f.address,f.context,thumbs,f.createtime,recom_list,praise_list,m.id mid,m.avatar,m.nickname,m.fans_list,view_count,review_count,is_top,c.title source from '.tablename($this->tb_forum).' f left join '.tablename($this->tb_member).' m on(f.openid = m.openid) left join '.tablename($this->tb_forum_cate).' c on(c.id = f.cate) '.$condition.' limit 1',$params);
         if($forum_info){
             $forum_info['thumbs'] = $forum_info['thumbs'] ? iunserializer($forum_info['thumbs']) : array();
-            foreach ($forum_info['thumbs'] as $v) {
-                $forum_info['standard_thumbs'][] = m('common')->suoImg($v,220,230);
-            }
             $forum_info['recom_list'] = $forum_info['recom_list'] ? iunserializer($forum_info['recom_list']) : array();
             $forum_info['praise_list'] = $forum_info['praise_list'] ? iunserializer($forum_info['praise_list']) : array();
             $forum_info['praise_count'] = count($forum_info['praise_list']);
@@ -716,9 +713,9 @@ class Index_EweiShopV2Page extends AppMobilePage
         if($forum_list){
             foreach($forum_list as &$item){
                 $item['thumbs'] = $item['thumbs'] ? iunserializer($item['thumbs']) : array();
-                foreach ($item['thumbs'] as $v) {
+                /*foreach ($item['thumbs'] as $v) {
                     $item['standard_thumbs'][] = m('common')->suoImg($v,220,230);
-                }
+                }*/
                 $params = array(':fid'=>$item['id'],':uniacid'=>$this->uniacid);
                 $item['review_list'] = pdo_fetchall('select r.id,r.context,r.prase_count,r.prase_list,r.createtime,m.avatar,m.nickname from '.tablename($this->tb_forum_review).' r left join '.tablename($this->tb_member).' m on(r.openid = m.openid) where forum_id=:fid and r.uniacid = :uniacid and reply_id = 0 order by id desc limit 2',$params);
             }
