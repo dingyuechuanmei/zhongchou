@@ -53,6 +53,9 @@
 <div class='panel panel-default' style='border:none;'>
     <div class="feed-activity-list">
         {loop $plugins_list $plugin}
+        <?php
+        if ($plugin['name'] == '店铺装修') unset($plugin)
+        ?>
         {ifp $plugin['identity']}
         <div class="feed-element" onclick="location.href='{php echo merchUrl($plugin['identity'])}'">
                     <span class="pull-left">

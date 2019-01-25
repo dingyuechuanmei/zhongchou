@@ -156,23 +156,4 @@ class Pusher_EweiShopV2Page extends AppMobilePage
         show_json(1);
     }
 
-
-    public function getCoverImages($fileUrl){
-        $result = array();
-        $filePath = '/data/wwwroot/zhongchouchuangke/attachment/'.$fileUrl;
-        if(!empty($filePath)){
-            if(is_file($filePath)){
-                $result = $this->execCommandLine($filePath);
-            }
-        }
-        return $result;
-    }
-
-    public function execCommandLine($file){
-        $filename = '/data/wwwroot/zhongchouchuangke/attachment/images/73/2019/01/'.md5($file).'123.jpg';
-        $command = "/usr/local/ffmpeg/bin/ffmpeg -i {$file} -ss 00:00:01 -f image2 -s 320x240 {$filename}";
-        exec($command,$arr);
-        return array('filename'=>$filename,'command'=>$command,'arr'=>$arr);
-    }
-
 }

@@ -7,18 +7,18 @@
 
 
 {ifp 'shop.adv|shop.nav|shop.notice|shop.banner|shop.sort'}
-<div class='menu-header'>首页</div>
+<!--<div class='menu-header'>首页</div>
 <ul>
     {ifp 'shop.adv'}<li {if $_W['action'] == 'shop.adv'} class="active" {/if}><a href="{php echo merchUrl('shop/adv')}">幻灯片</a></li>{/if}
     {ifp 'shop.nav'}<li {if $_W['action'] == 'shop.nav'} class="active" {/if}><a href="{php echo merchUrl('shop/nav')}">导航图标</a></li>{/if}
     {ifp 'shop.notice'}<li {if $_W['action'] == 'shop.notice'} class="active" {/if}><a href="{php echo merchUrl('shop/notice')}">公告管理</a></li>{/if}
     {ifp 'shop.cube'}<li {if $_W['action'] == 'shop.cube'} class="active" {/if}><a href="{php echo merchUrl('shop/cube')}">魔方推荐</a></li>{/if}
     {ifp 'shop.banner'}<li {if $_W['action'] == 'shop.banner'} class="active" {/if}><a href="{php echo merchUrl('shop/banner')}">广告</a></li>{/if}
-    <!--
+    &lt;!&ndash;
     {ifp 'shop.recommand'}<li {if $_W['action'] == 'shop.recommand'} class="active" {/if}><a href="{php echo merchUrl('shop/recommand')}">商品推荐</a></li>{/if}
     {ifp 'shop.sort'}<li {if $_W['action'] == 'shop.sort'} class="active" {/if}><a href="{php echo merchUrl('shop/sort')}">排版设置</a></li>{/if}
-    -->
-</ul>
+    &ndash;&gt;
+</ul>-->
 {/if}
 
 {ifp 'shop.dispatch|shop.comment|shop.refundaddress'}

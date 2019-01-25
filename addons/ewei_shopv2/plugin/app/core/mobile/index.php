@@ -31,13 +31,13 @@ class Index_EweiShopV2Page extends AppMobilePage
 
 		if (empty($noset)) {
 			$arr['sysset'] = array(
-	'shopname'    => $_W['shopset']['shop']['name'],
-	'shoplogo'    => $_W['shopset']['shop']['logo'],
-	'description' => $_W['shopset']['shop']['description'],
-	'share'       => $_W['shopset']['share'],
-	'texts'       => array('credit' => $_W['shopset']['trade']['credittext'], 'money' => $_W['shopset']['trade']['moneytext']),
-	'isclose'     => $_W['shopset']['app']['isclose']
-	);
+				'shopname'    => $_W['shopset']['shop']['name'],
+				'shoplogo'    => $_W['shopset']['shop']['logo'],
+				'description' => $_W['shopset']['shop']['description'],
+				'share'       => $_W['shopset']['share'],
+				'texts'       => array('credit' => $_W['shopset']['trade']['credittext'], 'money' => $_W['shopset']['trade']['moneytext']),
+				'isclose'     => $_W['shopset']['app']['isclose']
+			);
 			$arr['sysset']['share']['logo'] = tomedia($arr['sysset']['share']['logo']);
 			$arr['sysset']['share']['icon'] = tomedia($arr['sysset']['share']['icon']);
 			$arr['sysset']['share']['followqrcode'] = tomedia($arr['sysset']['share']['followqrcode']);

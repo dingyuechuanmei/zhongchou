@@ -593,6 +593,9 @@ class Index_EweiShopV2Page extends AppMobilePage
     
     //分页获取创匠众推页面
     public function get_pusher_list(){
+        global $_GPC;
+        $pageSize = 5;
+        $page = $_GPC['page'];
         $this->deal_data();
         $condition = ' where p.uniacid=:uniacid AND p.ifshow=1 ';
         $params = array(':uniacid'=>$this->uniacid);
@@ -602,20 +605,20 @@ class Index_EweiShopV2Page extends AppMobilePage
             $params[':category'] = $category;
         }
         $page = $this->params['page'] ? intval($this->params['page']) : 1;
-        //$pusher_list = pdo_fetchall('select p.id,title,p.video,p.like_count,m.nickname,m.avatar from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_member).' m on(p.pusher = m.openid) '.$condition.' order by p.like_count desc limit '.(($page-1) * $this->psize).','.$this->psize,$params);
-        $pusher_list = pdo_fetchall('select p.id,title,p.video,p.video_cover,p.like_count,m.merchname AS nickname,m.logo AS avatar from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id) '.$condition.' order by p.id desc limit 5',$params);
-        if($pusher_list){
-            foreach ($pusher_list as &$item){
-                $item['like_count'] = intval($item['like_count']);
-                $item['video'] = $item['video'] ? tomedia($item['video']) : '';
-                $item['video_cover'] = $item['video_cover'] ? tomedia($item['video_cover']) : '';
-                $item['like_count'] = $item['like_count'] < 0 ? 0 :$item['like_count'];
-                $item['avatar'] = $item['avatar'] ? tomedia($item['avatar']) : '';
-            }
-            app_json(array('pusher_list'=>$pusher_list));
-        }else{
-            app_error(1,'暂无数据');
+        //$pusher_list = pdo_fetchall('select p.id,title,p.video,p.like_count,m.nickname,m.avatar from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_member).' m on(p.pusher = m.openid) '.$condition.' order by p.like_count desc limit '.(($page-1) * $pageSize).','.$pageSize,$params);
+        $sql = 'select p.id,title,p.video,p.video_cover,p.like_count,m.merchname AS nickname,m.logo AS avatar from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id) '.$condition.' order by p.like_count desc limit '.($page-1) * $pageSize.','.$pageSize;
+        $pusher_list = pdo_fetchall($sql,$params);
+        $total = pdo_fetchcolumn('select count(*) from '.tablename($this->tb_pusher).' p inner join '.tablename($this->tb_merch).' m on(p.merchid = m.id) '.$condition,$params);
+        foreach ($pusher_list as &$item){
+            $item['like_count'] = intval($item['like_count']);
+            $item['video'] = $item['video'] ? tomedia($item['video']) : '';
+            $item['video_cover'] = $item['video_cover'] ? tomedia($item['video_cover']) : '';
+            $item['like_count'] = $item['like_count'] < 0 ? 0 :$item['like_count'];
+            $item['avatar'] = $item['avatar'] ? tomedia($item['avatar']) : '';
         }
+        $pageCount = ceil($total/$pageSize);
+        app_json(array('pusher_list'=>$pusher_list,'pageCount'=>$pageCount));
+
     }
     
     //获取创匠众推幻灯片
@@ -651,11 +654,11 @@ class Index_EweiShopV2Page extends AppMobilePage
             $index_info['video_cover'] = $index_info['video_cover'] ? tomedia($index_info['video_cover']) : '';
             $config = m('common')->getSysset('lexin');
             if (empty($config['zhongchou'])) {
-                unset($index_info['center_appid']);
-                unset($index_info['center_icon']);
-                unset($index_info['center_intro']);
-                unset($index_info['center_name']);
-                unset($index_info['center_path']);
+                unset($index_info['right_appid']);
+                unset($index_info['right_icon']);
+                unset($index_info['right_intro']);
+                unset($index_info['right_name']);
+                unset($index_info['right_path']);
             }
             app_json(array('index_info'=>$index_info));
         }else{

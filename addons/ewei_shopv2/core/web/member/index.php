@@ -118,7 +118,7 @@ class Index_EweiShopV2Page extends WebPage
 		$levelname = array();
 		foreach ($levels as $l ) 
 		{
-			$levelname[] = $l['levelname'];
+			$levelname[$l['id']] = $l['levelname'];
 		}
 		$levelname[0] = '普通等级';
 		ksort($levelname);

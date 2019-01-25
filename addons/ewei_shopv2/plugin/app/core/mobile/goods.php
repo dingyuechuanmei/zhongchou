@@ -378,7 +378,7 @@ class Goods_EweiShopV2Page extends AppMobilePage
 			$goods['services'][] = '保修';
 		}
 
-		$goods['labelname'] = json_decode($goods['labelname'], true);
+		$goods['labelname'] = iunserializer($goods['labelname']);
 		$goods['labelstyle'] = pdo_fetch('SELECT id,uniacid,style FROM ' . tablename('ewei_shop_goods_labelstyle') . ' WHERE uniacid=' . $uniacid);
 		$goods['isfavorite'] = m('goods')->isFavorite($id);
 		$goods['cartcount'] = m('goods')->getCartCount();

@@ -29,6 +29,21 @@
                 {/if}
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">商户背景</label>
+            <div class="col-sm-9 col-xs-12">
+                {ifp 'sysset.shop.edit'}
+                {php echo tpl_form_field_image('background_img',$item['background_img'],'../addons/ewei_shopv2/static/images/nopic.jpg',array('dest_dir'=>'merch/'.$_W['merchid']))}
+                <span class="help-block">商户logo 建议尺寸 380 * 100</span>
+                {else}
+                {if empty($item['background_img'])}
+                <img src="../addons/ewei_shopv2/static/images/nopic.jpg" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+                {else}
+                <img src="{php echo tomedia($item['background_img'])}" onerror="this.src='../addons/ewei_shopv2/static/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+                {/if}
+                {/if}
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="col-sm-2 control-label must">主营项目</label>

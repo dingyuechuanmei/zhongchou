@@ -25,7 +25,9 @@ class Index_EweiShopV2Page extends AppMobilePage
         global $_W;
         $info = pdo_get("ewei_shop_merch_user",array('id'=>$this->merchid));
         $info['filename'] = $info['logo'];
+        $info['backfilename'] = $info['background_img'];
         $info['logo'] = !empty($info['logo']) ? tomedia($info['logo']) : '/static/images/nopic.jpg';
+        $info['background_img'] = !empty($info['background_img']) ? tomedia($info['background_img']) : '/static/images/nopic.jpg';
         app_json(array('info'=>$info));
     }
 
@@ -48,6 +50,7 @@ class Index_EweiShopV2Page extends AppMobilePage
         $data['desc'] = $shopdesc;
         $data['status'] = $shopclose;
         $data['logo'] = $shoplogo;
+        $data['background_img'] = trim($_GPC['background_img']);
         pdo_update("ewei_shop_merch_user",$data,array('id'=>$this->merchid));
         plog('merch.shop.edit', '修改系统设置-商城设置');
         show_json(1);

@@ -1441,7 +1441,7 @@ class Create_EweiShopV2Page extends AppMobilePage
 			$sql = 'SELECT id as goodsid,title,type, weight,total,issendfree,isnodiscount, thumb,marketprice,cash,isverify,verifytype,' . ' goodssn,productsn,sales,istime,timestart,timeend,' . ' usermaxbuy,minbuy,maxbuy,unit,buylevels,buygroups,deleted,' . ' status,deduct,manydeduct,`virtual`,discounts,deduct2,ednum,edmoney,edareas,diyformtype,diyformid,diymode,' . ' dispatchtype,dispatchid,dispatchprice,merchid,merchsale,cates,' . ' isdiscount,isdiscount_time,isdiscount_discounts, virtualsend,' . ' buyagain,buyagain_islong,buyagain_condition, buyagain_sale' . ' FROM ' . tablename('ewei_shop_goods') . ' where id=:id and uniacid=:uniacid  limit 1';
 			$data = pdo_fetch($sql, array(':uniacid' => $uniacid, ':id' => $goodsid));
 			if (empty($data['status']) || !empty($data['deleted'])) {
-				app_error(AppError::$GoodsNotFound, $data['title'] . '<br/> 已下架!');
+				app_error(AppError::$GoodsNotFound, $data['title'] . ' 已下架!');
 			}
 
 			$rank = intval($_SESSION[$goodsid . '_rank']);
@@ -1486,13 +1486,13 @@ class Create_EweiShopV2Page extends AppMobilePage
 
 			if (0 < $data['minbuy']) {
 				if ($goodstotal < $data['minbuy']) {
-					app_error(AppError::$OrderCreateMinBuyLimit, $data['title'] . '<br/> ' . $data['minbuy'] . $unit . '起售!');
+					app_error(AppError::$OrderCreateMinBuyLimit, $data['title'] . $data['minbuy'] . $unit . '起售!');
 				}
 			}
 
 			if (0 < $data['maxbuy']) {
 				if ($data['maxbuy'] < $goodstotal) {
-					app_error(AppError::$OrderCreateOneBuyLimit, $data['title'] . '<br/> 一次限购 ' . $data['maxbuy'] . $unit . '!');
+					app_error(AppError::$OrderCreateOneBuyLimit, $data['title'] . '一次限购 ' . $data['maxbuy'] . $unit . '!');
 				}
 			}
 
@@ -1500,23 +1500,23 @@ class Create_EweiShopV2Page extends AppMobilePage
 				$order_goodscount = pdo_fetchcolumn('select ifnull(sum(og.total),0)  from ' . tablename('ewei_shop_order_goods') . ' og ' . ' left join ' . tablename('ewei_shop_order') . ' o on og.orderid=o.id ' . ' where og.goodsid=:goodsid and  o.status>=1 and o.openid=:openid  and og.uniacid=:uniacid ', array(':goodsid' => $data['goodsid'], ':uniacid' => $uniacid, ':openid' => $openid));
 
 				if ($data['usermaxbuy'] <= $order_goodscount) {
-					app_error(AppError::$OrderCreateMaxBuyLimit, $data['title'] . '<br/> 最多限购 ' . $data['usermaxbuy'] . $unit . '!');
+					app_error(AppError::$OrderCreateMaxBuyLimit, $data['title'] . ' 最多限购 ' . $data['usermaxbuy'] . $unit . '!');
 				}
 			}
 
 			if (!empty($data['is_task_goods'])) {
 				if ($data['task_goods']['total'] < $goodstotal) {
-					app_error(AppError::$OrderCreateMaxBuyLimit, $data['title'] . '<br/> 任务活动优惠限购 ' . $data['task_goods']['total'] . $unit . '!');
+					app_error(AppError::$OrderCreateMaxBuyLimit, $data['title'] . ' 任务活动优惠限购 ' . $data['task_goods']['total'] . $unit . '!');
 				}
 			}
 
 			if ($data['istime'] == 1) {
 				if (time() < $data['timestart']) {
-					app_error(AppError::$OrderCreateTimeNotStart, $data['title'] . '<br/> 限购时间未到!');
+					app_error(AppError::$OrderCreateTimeNotStart, $data['title'] . ' 限购时间未到!');
 				}
 
 				if ($data['timeend'] < time()) {
-					app_error(AppError::$OrderCreateTimeEnd, $data['title'] . '<br/> 限购时间已过!');
+					app_error(AppError::$OrderCreateTimeEnd, $data['title'] . ' 限购时间已过!');
 				}
 			}
 
@@ -1527,7 +1527,7 @@ class Create_EweiShopV2Page extends AppMobilePage
 				$buylevels = explode(',', $data['buylevels']);
 
 				if (!in_array($levelid, $buylevels)) {
-					app_error(AppError::$OrderCreateMemberLevelLimit, '您的会员等级无法购买<br/>' . $data['title'] . '!');
+					app_error(AppError::$OrderCreateMemberLevelLimit, '您的会员等级无法购买' . $data['title'] . '!');
 				}
 			}
 
@@ -1535,7 +1535,7 @@ class Create_EweiShopV2Page extends AppMobilePage
 				$buygroups = explode(',', $data['buygroups']);
 
 				if (!in_array($groupid, $buygroups)) {
-					app_error(AppError::$OrderCreateMemberGroupLimit, '您所在会员组无法购买<br/>' . $data['title'] . '!');
+					app_error(AppError::$OrderCreateMemberGroupLimit, '您所在会员组无法购买' . $data['title'] . '!');
 				}
 			}
 
@@ -1545,7 +1545,7 @@ class Create_EweiShopV2Page extends AppMobilePage
 				if (!empty($option)) {
 					if ($option['stock'] != -1) {
 						if (empty($option['stock'])) {
-							app_error(AppError::$OrderCreateStockError, $data['title'] . '<br/>' . $option['title'] . ' 库存不足!');
+							app_error(AppError::$OrderCreateStockError, $data['title'] .  $option['title'] . ' 库存不足!');
 						}
 					}
 
@@ -1584,7 +1584,7 @@ class Create_EweiShopV2Page extends AppMobilePage
 
 				if ($data['stock'] != -1) {
 					if (empty($data['stock'])) {
-						app_error(AppError::$OrderCreateStockError, $data['title'] . '<br/> 库存不足!');
+						app_error(AppError::$OrderCreateStockError, $data['title'] . ' 库存不足!');
 					}
 				}
 			}
@@ -1781,7 +1781,7 @@ class Create_EweiShopV2Page extends AppMobilePage
 				app_error(AppError::$OrderCreateNoDispatch, $nodispatch_array['nodispatch']);
 			}
 		}
-
+		$totalprice -= $deductenough;
 		$totalprice += $dispatch_price;
 		if ($saleset && empty($saleset['dispatchnodeduct'])) {
 			$deductprice2 += $dispatch_price;
