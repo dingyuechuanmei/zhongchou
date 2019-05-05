@@ -1,0 +1,54 @@
+@import "../common.wxss";
+button{
+  font-size:11pt;
+  font-family:inherit;
+}
+.page{
+  font-size: 28rpx;
+}
+.borderno{
+  border-bottom: none !important;
+}
+.address{
+  background: white;
+  padding: 0 20rpx;
+}
+.address_parent{
+  display: flex;
+  border-bottom:2rpx solid #d9d9d9;
+  padding:10rpx 0;
+}
+.left{
+  width: 150rpx;
+}
+.modify_address{
+  padding:20rpx;
+  position:relative;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-box-align:center;
+  align-items:center;
+  margin-top:20rpx;
+  border-top: 2rpx solid #d9d9d9;
+  background: white;
+}
+.right{
+  text-align: right;
+  flex: 1;
+}
+.select_address{
+  display: flex;
+  background: white;
+  padding:10rpx 20rpx;
+}
+.detail_address{
+  border-bottom: 2rpx solid #d9d9d9;
+}
+.rightwidth{
+  width: 100%;
+  margin-left: 20rpx;
+}
+.save{
+  margin:30rpx 20rpx;
+}

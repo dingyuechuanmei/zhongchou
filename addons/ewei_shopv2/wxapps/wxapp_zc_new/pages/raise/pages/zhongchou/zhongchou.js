@@ -7,7 +7,15 @@ Page({
     approot: t.globalData.approot,
     is_merch:0,
     cur_id: 20,
-    jia:0
+    jia:0,
+    swiper: {
+      imgUrls: [],
+      indicatorDots: true,
+      indicatorActiveColor: '#ff6749',
+      autoplay: true,
+      interval: 5000,
+      duration: 1000
+    },
   },
   topitem: function(e) {
     var me = this
@@ -53,6 +61,24 @@ Page({
   },
   onLoad: function (options) {
     var me = this
+    // 获取banner图
+    a.post('raise.get_pusher_banner', {}, function (json) {
+      if (json.error != 0) {
+        me.setData({
+          'swiper.imgUrls': []
+        })
+      } else {
+        var imgsTmp = json.banner_list
+        var imgs = []
+        for (var i = imgsTmp.length - 1; i >= 0; i--) {
+          imgs.push(imgsTmp[i].thumb)
+        }
+        me.data.swiper.imgUrls = imgs
+        me.setData({
+          'swiper.imgUrls': imgs
+        })
+      }
+    });
     // 获取数据顶部分类
     a.post('raise.get_starter_category_all', {}, function (json) {
       topitem = [];

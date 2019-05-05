@@ -209,6 +209,7 @@ class Index_EweiShopV2Page extends AppMobilePage
     
     //个人中心
     public function center(){
+        global $_W;
         $this->deal_data();
         //$this -> openid = 'sns_wa_ojIoH0dhaUzFmQSzG03Jd2X3MdEo';
         $member = pdo_get($this->tb_member,array('openid'=>$this->openid,'uniacid'=>$this->uniacid),array('id','nickname','avatar','mobile','credit2'));
@@ -230,7 +231,10 @@ class Index_EweiShopV2Page extends AppMobilePage
         $postal_money = pdo_fetchcolumn($sql,$params);
         $refer_money = $refer_money - $money <= 0 ?  0 : $refer_money - $money;
         $postal_money = $postal_money - $money <= 0 ? 0 : $postal_money - $money;
-        app_json(array('member'=>$member,'starter_count'=>$starter_count,'join_count'=>$help_count,'merch'=>$merch,'refer_money'=>round($refer_money,2),'postal_money'=>round($postal_money,2),'raise_service'=>$config['raise_service']));
+        //会员等级
+        $level = m('member')->getLevel($this->openid);
+        $levelname = empty($level['id']) ? (empty($_W['shopset']['shop']['levelname']) ? '普通会员' : $_W['shopset']['shop']['levelname']) : $level['levelname'];
+        app_json(array('member'=>$member,'starter_count'=>$starter_count,'join_count'=>$help_count,'merch'=>$merch,'refer_money'=>round($refer_money,2),'postal_money'=>round($postal_money,2),'raise_service'=>$config['raise_service'],'levelname'=>$levelname));
     }
     
     //发起众筹

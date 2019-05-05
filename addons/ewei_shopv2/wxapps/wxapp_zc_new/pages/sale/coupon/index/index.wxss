@@ -107,7 +107,6 @@
 
 .coupon-index-list-right {
   width: 160rpx;
-  height: 240rpx;
   display: block;
   margin: auto;
   color: #fff;

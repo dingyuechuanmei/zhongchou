@@ -1,0 +1,271 @@
+<view class='page'>
+  <view class='top'>
+    <view class='top_left'>
+      <view class='top_left_up'>
+        <text wx:if='{{item.status == 0}}'>
+          <text wx:if='{{item.paytype == 3}}'>等待卖家发货</text>
+          <text wx:else>等待买家付款</text>
+        </text>
+        <text wx:elif='{{item.status == 1}}'>
+          <text wx:if="{{item.isverify == 1}}">等待买家使用</text>
+          <text wx:elif="{{item.addressid == ''}}">等待买家取货</text>
+          <text wx:else>
+            <text wx:if='{{item.sendtype > 0}}'>卖家部分发货</text>
+            <text wx:else>等待卖家发货</text>
+          </text>
+        </text>
+        <text wx:elif='{{item.status == 2}}'>等待买家收货</text>
+        <text wx:elif='{{item.status == 3}}'>交易已完成</text>
+        <text wx:elif='{{item.status == -1}}'>订单已关闭</text>
+      </view>
+      <view class='top_left_lower'>订单金额(含运费):¥{{item.price}}</view>
+    </view>
+    <image src='/static/images/workbench/money.png'></image>
+  </view>
+  <!--订单状态-->
+  <view class='order_status'>
+    <view class='status_group'>
+      <view>订单编号:</view>
+      <view class='status_center'></view>
+      <view class='color3'>{{item.ordersn}}</view>
+    </view>
+    <view class='status_group'>
+      <view>订单状态:</view>
+      <view class='status_center'></view>
+      <view class='label-danger'>
+        <text wx:if='{{item.status == 0}}'>
+          <text wx:if='{{item.paytype == 3}}'>待发货</text>
+          <text wx:else>待付款</text>
+        </text>
+        <text wx:elif='{{item.status == 1}}'>
+          <text wx:if="{{item.isverify == 1}}">待使用</text>
+          <text wx:elif="{{item.addressid == ''}}">待取货</text>
+          <text wx:else>
+            <text wx:if='{{item.sendtype > 0}}'>部分发货</text>
+            <text wx:else>待发货</text>
+          </text>
+        </text>
+        <text wx:elif='{{item.status == 2}}'>待收货</text>
+        <text wx:elif='{{item.status == 3}}'>交易完成</text>
+        <text wx:elif='{{item.status == -1}}'>已关闭</text>
+      </view>
+    </view>
+    <view class='status_group'>
+      <view>支付状态:</view>
+      <view class='status_center'></view>
+      <view>
+        <text wx:if='{{item.paytype == 0}}'>未支付</text>
+        <text wx:elif='{{item.paytype == 1}}'>余额支付</text>
+        <text wx:elif='{{item.paytype == 11}}'>后台付款</text>
+        <text wx:elif='{{item.paytype == 21}}'>微信支付</text>
+        <text wx:elif='{{item.paytype == 22}}'>支付宝支付</text>
+        <text wx:elif='{{item.paytype == 23}}'>银联支付</text>
+        <text wx:elif='{{item.paytype == 3}}'>货到付款</text>
+      </view>
+    </view>
+    <view class='status_group'>
+      <view>配送方式:</view>
+      <view class='status_center'></view>
+      <view class='color3'>
+        <text wx:if='{{item.isverify == 1}}'>线下核销</text>
+        <text wx:elif='{{item.addressid != ""}}'>快递</text>
+        <text wx:elif='{{item.isvirtualsend != "" || item.virtual}}'>自动发货</text>
+        <text wx:elif='{{item.dispatchtype}}'>自提</text>
+        <text wx:else>其他</text>
+      </view>
+    </view>
+  </view>
+  <!--发货信息-->
+  <block wx:if='{{item.expresssn && item.status>=2 && item.addressid}}'>
+    <!--地址标题-->
+    <view class='address_title'>
+      <view class='address_title_left'>
+        <image src='/static/images/icon/location.png'></image>
+        <view>发货信息</view>
+      </view>
+      <view class='address_title_right' data-id='{{item.id}}' bindtap='changeexpress'>修改\t></view>
+    </view>
+    <!--详细地址-->
+    <view class='address_detail'>
+      <view class='address_detail_row'>
+        <view class='detail_row_left'>快递公司:</view>
+        <view class='status_center'></view>
+        <view class='detail_row_right'>
+          {{item.expresscom == '' ? '其他快递' : item.expresscom}}
+        </view>
+      </view>
+      <view class='address_detail_row'>
+        <view class='detail_row_left'>快递单号:</view>
+        <view class='status_center'></view>
+        <view class='detail_row_right'>{{item.expresssn}}</view>
+      </view>
+      <view class='address_detail_row bordernone'>
+        <view class='detail_row_left'>发货时间:</view>
+        <view class='status_center'></view>
+        <view class='detail_row_right'>{{item.sendtime}}</view>
+      </view>
+  </view>
+  </block>
+  <!--收件信息-->
+  <block wx:if='{{item.addressid}}'>
+    <!--地址标题-->
+    <view class='address_title'>
+      <view class='address_title_left'>
+        <image src='/static/images/icon/location.png'></image>
+        <view>收件信息</view>
+      </view>
+      <view class='address_title_right' data-id='{{item.id}}' bindtap='modifyaddress'>修改\t></view>
+    </view>
+    <!--详细地址-->
+    <view class='address_detail'>
+      <view class='address_detail_row'>
+        <view class='detail_row_left'>收件人:</view>
+        <view class='status_center'></view>
+        <view class='detail_row_right'>{{user.realname}}</view>
+      </view>
+      <view class='address_detail_row'>
+        <view class='detail_row_left'>联系电话:</view>
+        <view class='status_center'></view>
+        <view class='detail_row_right'>{{user.mobile}}</view>
+      </view>
+      <view class='address_detail_row bordernone'>
+        <view class='detail_row_left'>收货地址:</view>
+        <view class='status_center'></view>
+        <view class='detail_row_right'>{{user.address}}</view>
+      </view>
+    </view>
+  </block>
+  <!--发票-->
+  <view class='invoice' wx:if='{{item.invoicename}}'>
+    <view>发票抬头</view>
+    <view class='status_center'></view>
+    <view>{{item.invoicename}}</view>
+  </view>
+  <!--会员标题-->
+  <view class='address_title'>
+    <view class='address_title_left'>
+      <image src='/static/images/icon/card.png'></image>
+      <view>会员信息</view>
+    </view> 
+  </view>
+  <!--会员信息-->
+  <view class='vipinfo' bindtap='memberDetail' data-id='{{member.id}}'>
+    <view class='vipleft'>
+      <image src='{{ member.avatar || "/static/images/nopic.jpg"}}'></image>
+    </view>
+    <view class='vipright'>
+      <view class='title'>{{member.nickname ? member.nickname : '未更新'}}</view>
+      <view class='subtitle'>
+        <view class='total'>手机号: {{member.mobile ? member.mobile : '未设置'}}</view>
+        <view class='total'>微信号: {{member.weixin ? member.weixin : '未设置'}}</view>
+      </view>
+    </view>
+    <image src='{{arrow}}' class='memberdetail'></image>
+  </view>
+  <!--订单商品-->
+  <view class='address_title'>
+    <view class='address_title_left'>
+      <image src='/static/images/icon/gifts.png'></image>
+      <view>订单商品</view>
+    </view>
+    <view class='address_title_right subtitle'>(价格单位: 元)</view>
+  </view>
+  <view class='vipinfo' wx:for="{{item.goods}}" wx:for-item="og">
+    <view class='vipleft ordergoodsleft'>
+      <image src='{{og.thumb || "/static/images/nopic.jpg"}}'></image>
+    </view>
+    <view class='vipright'>
+      <view class='title'>{{og.title}}</view>
+      <view>规格:{{item.optionname}}</view>
+      <view class='subtitle'>
+        <view class='total'>单价/数量:{{og.marketprice}}x{{og.total}}</view>
+        <view class='total'>
+          <text wx:if='{{item.ispackage != 0}}'>
+            商品价格:￥{{og.marketprice}}
+          </text>
+          <text wx:else>
+            折扣前/后:{{og.orderprice}}/{{og.realprice}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--商品小计-->
+  <view class='address_detail spxj'>
+    <view class='address_detail_row'>
+      <view class='detail_row_left'>商品小计</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>￥{{item.goodsprice}}</view>
+    </view>
+    <view class='address_detail_row'>
+      <view class='detail_row_left'>运费</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>￥{{item.olddispatchprice}}</view>
+    </view>
+    <view class='address_detail_row' wx:if='{{item.discountprice > 0}}'>
+      <view class='detail_row_left'>会员折扣</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>-￥{{item.discountprice}}</view>
+    </view>
+    <view class='address_detail_row' wx:if='{{item.deductprice > 0}}'>
+      <view class='detail_row_left'>积分抵扣</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>-￥{{item.deductprice}}</view>
+    </view>
+    <view class='address_detail_row' wx:if='{{item.deductenough > 0}}'>
+      <view class='detail_row_left'>商城满额立减</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>-￥{{item.deductenough}}</view>
+    </view>
+        <view class='address_detail_row' wx:if='{{item.merchdeductenough > 0}}'>
+      <view class='detail_row_left'>商户满额立减</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>-￥{{item.merchdeductenough}}</view>
+    </view>
+    <view class='address_detail_row' wx:if='{{item.couponprice > 0}}'>
+      <view class='detail_row_left'>优惠券优惠</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>-￥{{item.couponprice}}</view>
+    </view>
+    <view class='address_detail_row' wx:if='{{item.isdiscountprice > 0}}'>
+      <view class='detail_row_left'>促销优惠</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>-￥{{item.isdiscountprice}}</view>
+    </view>
+    <view class='address_detail_row' wx:if='{{item.buyagainprice > 0}}'>
+      <view class='detail_row_left'>重复购买优惠</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>-￥{{item.buyagainprice}}</view>
+    </view>
+    <view class='address_detail_row' wx:if='{{item.seckilldiscountprice > 0}}'>
+      <view class='detail_row_left'>秒杀优惠</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>-￥{{item.seckilldiscountprice}}</view>
+    </view>
+    <view class='address_detail_row bordernone'>
+      <view class='detail_row_left'>实付费(含运费)</view>
+      <view class='status_center'></view>
+      <view class='detail_row_right'>￥{{item.price}}</view>
+    </view>
+  </view>
+  <!--下单时间-->
+  <view class='order_date'>
+    <view class='order_date_parent' wx:if="{{item.status>=0}}">
+      <view class='order_date_left'>下单时间:</view>
+      <view class='color6'>{{item.createtime}}</view>
+    </view>
+    <view class='order_date_parent' wx:if="{{item.status>=1}}">
+      <view class='order_date_left'>支付时间:</view>
+      <view class='color6'>{{item.paytime}}</view>
+    </view>
+    <view class='order_date_parent' wx:if="{{item.status>=2 || (item.status == 1 && item.sendtype > 0)}}">
+      <view class='order_date_left'>商家发货:</view>
+      <view class='color6'>{{item.sendtime}}</view>
+    </view>
+    <view class='order_date_parent' wx:if="{{item.status>=3}}">
+      <view class='order_date_left'>完成时间:</view>
+      <view class='color6'>{{item.finishtime}}</view>
+    </view>
+  </view>
+  <view class='more_settings'>更多设置请至PC端后台</view>
+</view>

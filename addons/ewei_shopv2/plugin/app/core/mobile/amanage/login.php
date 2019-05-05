@@ -61,4 +61,16 @@ class Login_EweiShopV2Page extends AppMobilePage
         }
         app_json($account);
     }
+
+    /**
+     * 客服电话
+     */
+    public function getTel()
+    {
+        global $_W;
+        $tel = '';
+        $raise_set = m('common')->getSysset('lexin');
+        $tel = $raise_set['customer_service_number'];       //客服电话
+        show_json(0,array('tel'=>$tel));
+    }
 }

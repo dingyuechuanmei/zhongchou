@@ -34,7 +34,7 @@
     </view>
     
     <view class='program_detail'>
-      <view class='title border_bottom'>项目详情<navigator wx:if="{{starter.category == 20}}" url='/pages/index/index?merchid={{starter.merchid}}' style='position:absolute;right:10px;display:inline;'><text class="dianpucolor">购物支持</text></navigator></view>
+      <view class='title border_bottom'>项目详情<navigator wx:if="{{starter.category == 20}}" url='/pages/index/merchant/index?merchid={{starter.merchid}}' style='position:absolute;right:10px;display:inline;'><text class="dianpucolor">购物支持</text></navigator></view>
       <view class='text' style='max-height:{{afull}};'>
       {{starter.content}}
       </view>
@@ -77,7 +77,8 @@
       <view class='list'>
         <view class='item' wx:for='{{help_list}}' wx:key="">
           <view>
-            <image src='{{approot}}wxapp_attr/2@3x.png'></image>
+            <!-- <image src='{{approot}}wxapp_attr/2@3x.png'></image>火把图标 -->
+            <image src='{{item.avatar}}'></image>
             <view class='name'>{{item.nickname}}</view>
             <view class='price'>
             支持了<text class='orange'>{{item.money}}</text>

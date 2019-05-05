@@ -1,3 +1,4 @@
+<import src="../components/cpt_swiper.wxml"/>
 <view class='container'>
   <view class='zhongchou'>
     <view class='topbar'>
@@ -7,8 +8,13 @@
          </view>
       </view>
     </view>
-    <view class='zhongchou_list'>
-      <view class='zhongchou_item' bindtap='zhongchouitemdetail' wx:for='{{starter_list}}' data-id='{{item.id}}'>
+    <!--众推横幅-->
+    <view style='margin-top:20rpx;'>
+      <template is="swiper" data="{{swiper:swiper}}"/>
+    </view>
+    <!--众推列表-->
+    <view class='zhongchou_list' bindtap='zhongchouitemdetail' wx:for='{{starter_list}}' data-id='{{item.id}}'>
+      <view class='zhongchou_item'>
         <view class='person'>
           <image src='{{item.avatar}}'></image>
           <view class='name'>{{item.nickname}}</view>
@@ -41,8 +47,15 @@
 
       </view>
     </view>
-
-    <view class='startzhongchou' bindtap='startzhongchou'>发起微客</view>
-  
+    <view class="no-data-tip zwdd" wx:if="{{starter_list.length==0}}">
+      <image mode="aspectFit" src="/static/images/workbench/list.png"></image>
+      <view>暂无相关信息哦~</view>
+    </view>
+    <view class="jzwb" wx:if="{{!hasMoreData}}">
+      <view class="hx"></view>
+      <view class="wz">加载完毕</view>
+      <view class="hx"></view>
+    </view>
   </view>
+  <view class='startzhongchou' bindtap='startzhongchou'>发起微客</view>
 </view>

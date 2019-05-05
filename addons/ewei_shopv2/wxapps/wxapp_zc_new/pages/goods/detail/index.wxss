@@ -1,3 +1,8 @@
+@import '/static/css/iconfont.wxss';
+
+video{
+  width: 100%;
+}
 .picker-modal {
   background: #fefefe;
   height: 260px;
@@ -154,7 +159,7 @@ picker-view-column {
 }
 
 .fui-detail-group .fui-cell .price {
-  font-size: 40rpx;
+  font-size: 34rpx;
   color: #fd5454;
   line-height: 56rpx;
   font-weight: bold;
@@ -169,8 +174,8 @@ picker-view-column {
 }
 
 .fui-detail-group .fui-cell .name {
-  padding: 30rpx 0 20rpx;
-  font-size: 30rpx;
+  padding-top: 30rpx;
+  font-size: 32rpx;
 }
 
 .fui-detail-group .fui-cell .share {
@@ -216,8 +221,8 @@ picker-view-column {
 }
 
 .goods-subtitle text {
-  font-size: 26rpx;
-  padding: 20rpx 0;
+  font-size: 28rpx;
+  padding-top: 20rpx;
 }
 
 .row-time {
@@ -246,7 +251,11 @@ picker-view-column {
   white-space: nowrap;
   overflow: hidden;
 }
-
+.address{
+  font-size: 24rpx;
+  color: #c0c0c0;
+  padding-bottom:16rpx;
+}
 .fui-sale-group .fui-according-header .text .title {
   font-weight: bold;
 }
@@ -613,8 +622,11 @@ picker-view-column {
   font-size: 26rpx;
 }
 
+.money{
+  font-size: 24rpx;
+}
 .option-picker .option-picker-cell.goodinfo .info-price .price {
-  font-size: 33rpx;
+  font-size: 28rpx;
 }
 
 .option-picker .option-picker-cell.goodinfo .info-titles {
@@ -1193,14 +1205,7 @@ picker-view-column {
 }
 
 
-@import '/static/css/iconfont.wxss';
-@import '/resource/css/foxui.wxss';
-@import '/resource/css/style.wxss';
-@import '/resource/css/foxui.diy.wxss';
-@import '/resource/css/swiper.min.wxss';
-@import '/resource/css/fontawesome.min.wxss';
 
-@import '/resource/css/template.wxss';
 
 image {
   width:100%;

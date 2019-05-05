@@ -192,7 +192,7 @@ Page({
           return void a.alert("地址没有选择!");
         e.setData({
           submit: true
-        }),
+        }), 
           a.post("order/create/submit", s, function (t) {
             if (e.setData({
               submit: false

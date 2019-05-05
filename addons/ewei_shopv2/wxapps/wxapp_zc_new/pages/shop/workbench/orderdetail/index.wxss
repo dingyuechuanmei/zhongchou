@@ -1,0 +1,164 @@
+@import "../common.wxss";
+.color3{
+  color: #333;
+}
+.color6{
+  color: #666;
+}
+.bordernone{
+  border-bottom: none !important;
+}
+.page{
+  font-size: 28rpx;
+  padding-bottom: 140rpx;
+}
+.top{
+  background: #1ab394;
+  padding:20rpx 0;
+  display: flex;
+}
+.top_left{
+  width: 100%;
+  margin-left: 20rpx;
+  color: #fff;
+}
+.top_left_up{
+  font-weight:bold;
+  font-size:32rpx;
+}
+.top_left_lower{
+  padding-top: 6rpx;
+}
+.top image{
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+}
+.order_status{
+  margin-top: 20rpx;
+  color: #999;
+  padding: 10rpx 0;
+  background: white;
+  border-top: 2rpx solid #d9d9d9;
+  border-bottom: 2rpx solid #d9d9d9;
+}
+.status_group{
+  display: flex;
+  align-items:center;
+  padding:6rpx 20rpx;
+}
+.status_center{
+  flex: 1;
+}
+.label-danger{
+  background: #ef4f4f;
+  color: #fff;
+  height:40rpx;
+  line-height:40rpx;
+  padding:0 16rpx;
+  border-radius:20rpx;
+}
+.address_title{
+  margin-top:20rpx;
+  background:white;
+  border-top:2rpx solid #d9d9d9;
+  padding: 10rpx 20rpx;
+  display: flex;
+}
+.address_title_left{
+  display: flex;
+}
+.address_title_right{
+  flex:1;
+  text-align:right;
+  color: #1ab394;
+}
+.address_title_left image{
+  width: 40rpx;
+  height: 40rpx;
+}
+.address_title_left view{
+  margin-left: 10rpx;
+}
+.address_detail{
+  background: white;
+  padding:0 20rpx;
+  border-bottom: 2rpx solid #d9d9d9;
+}
+.address_detail_row{
+  display: flex;
+  border-bottom: 1rpx solid #d9d9d9;
+  padding: 14rpx 0;
+}
+.detail_row_right{
+  width: 80%;
+  text-align: right;
+}
+.invoice{
+  background: white;
+  border-bottom: 2rpx solid #d9d9d9;
+  border-top: 2rpx solid #d9d9d9;
+  margin-top: 20rpx;
+  padding: 10rpx 20rpx;
+  display: flex;  
+}
+.vipinfo{
+  background:white;
+  display:flex;
+  padding:15rpx 20rpx;
+  border-bottom: 2rpx solid #d9d9d9;
+}
+.vipleft{
+  margin-right:20rpx;
+}
+.memberdetail{
+  width: 14rpx;
+  height: 20rpx;
+}
+.ordergoodsleft{
+  margin-top: 16rpx; 
+}
+.vipright{
+  width: 100%;
+}
+.title{
+  margin-top:10rpx;
+}
+.subtitle{
+  color: #888;
+}
+.subtitle .total{
+  width: 50%;
+  display: inline-block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.spxj{
+  margin-top: 20rpx;
+  border-top: 2rpx solid #d9d9d9;
+  border-bottom: 2rpx solid #d9d9d9;
+}
+.spxj .detail_row_right{
+  width: auto;
+}
+.order_date{
+  margin-top:20rpx;
+  background:white;
+  padding:10rpx 20rpx;
+  border-top:2rpx solid #d9d9d9;
+}
+.order_date_parent{
+  display: flex;
+  padding: 10rpx 0;
+}
+.order_date_left{
+  color: #999;
+  margin-right: 30rpx;
+}
+.more_settings{
+  margin-top:50rpx;
+  text-align:center;
+  color:#888;
+  font-size:28rpx;
+}

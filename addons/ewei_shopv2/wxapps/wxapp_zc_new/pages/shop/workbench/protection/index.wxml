@@ -1,0 +1,111 @@
+<view class="page">
+    <view class="head">
+      <view bindtap="selectednavbar" style="border-bottom:2rpx solid {{selectedindex==index?'#1ab394':'#fff'}}" class="topnav" data-index="{{index}}" wx:for="{{topnav}}">
+        <view style="color:{{selectedindex==index?'#1ab394':''}}">{{item.name}}</view>
+      </view>
+    </view>
+    <view class="main">
+      <!--搜索框-->
+      <view class='search_order_abroad'>
+        <view class='search_order'>
+          <view>
+            <image src='/static/images/icon/search.png'></image>
+          </view>
+          <view class='search_select'>
+            <picker value="{{index}}" range="{{search}}">
+              <view>{{search[0]}}</view>
+              <image src='/static/images/icon/listsort.png'></image>
+            </picker>
+          </view>
+          <view class='search_input'>
+            <input placeholder='输入关键字...'></input>
+          </view>
+        </view>
+        <view class='search_text'>搜索</view>
+      </view>
+      <!--订单信息-->
+      <view class='merch_order' wx:for="{{orderList}}">
+        <view class='merchname'>
+          <image src='/static/images/icon/shop.png'></image>
+          <view>{{item.merchname}}</view>
+        </view>
+        <view class='order_info'>
+          <!--订单号-->
+          <view class='order_ye' data-id='{{item.id}}' bindtap='orderdetail'>
+            <view class='order_yezf'><text>{{item.paytype}}</text></view>
+            <view class='width100'>
+              <view class='order_num'>{{item.ordersn}}</view>
+              <view class='order_date'>{{item.createtime}}</view>
+            </view>
+            <view><image src='{{arrow}}'></image></view>
+          </view>
+          <!--商品信息-->
+          <view class='goods_info' wx:for="{{item.goods}}" wx:for-item="g">
+            <view class='goods_img'>
+              <image src="{{g.thumb || '/static/images/nopic.jpg'}}"></image>
+            </view>
+            <view class='width100'>
+              <view class='color4'>{{g.title || '无'}}</view>
+              <view class='color8'>规格: {{g.optiontitle||"无"}} 编码: {{g.goodssn||"无"}}</view>
+            </view>
+            <view class='goods_price'>
+              <view>
+                ￥<text>{{g.realprice/g.total}}</text>
+              </view>
+              <view class='goods_num'> x{{g.total}}</view>
+            </view>
+          </view>
+          <!--订单状态-->
+          <view class='order_info_list'>
+            <view class='order_list_row'>
+              <view class='color6'>订单状态</view>
+              <view class='order_list_row_right text-danger'>
+                <text>{{item.status}}</text>
+              </view>
+            </view>
+            <view class='order_list_row' wx:if="{{selectedindex == 0}}">
+              <view class='color6'>维权状态</view>
+              <view class='order_list_row_right color3'>
+                <text wx:if="{{item.rtype=='0'}}">退款申请</text>
+                <text wx:if="{{item.rtype=='1'}}">退款申请</text>
+                <text wx:if="{{item.rtype=='2'}}">退款申请</text>
+                <text wx:if="{{item.refundstate=='4'}}">(客户退回物品)</text>
+              </view>
+            </view>
+            <view class='order_list_row'>
+              <view class='color6'>店铺名称</view>
+              <view class='order_list_row_right color3'>{{item.merchname}}</view>
+            </view>
+            <view class='order_list_row'>
+              <view class='color6'>买家昵称</view>
+              <view class='order_list_row_right color3'>{{item.nickname||'未更新'}}</view>
+            </view>
+            <view class='order_list_row'>
+              <view class='color6'>配送方式</view>
+              <view class='order_list_row_right text-success'>{{item.dispatchname}}</view>
+            </view>
+          </view>
+          <!--支付金额-->
+          <view class='actual_payment'>
+            共<text class='text-success'>{{item.goodscount}}</text>个商品,实付:<text class='text-success'>￥{{item.price}}</text>
+          </view>
+          <!--订单处理-->
+          <view class='order_button'>
+            <button wx:if="{{selectedindex == 0}}" size='mini' type='primary' style='background:#1ab394;border: 1rpx solid #1ab394;' data-id='{{item.id}}' bindtap='protectiondetail'>维权详情</button>
+            <button wx:if="{{selectedindex == 0}}" size='mini' type='primary' style='background:#1ab394;border: 1rpx solid #1ab394;' data-id="{{item.id}}" bindtap='deliverGoods' >确认发货</button>
+            <button size='mini' style='background:#f7f7f7;border: 1rpx solid #dfdfdf;' bindtap='remark'>备注</button>
+            <button size='mini' style='background:#f7f7f7;border: 1rpx solid #dfdfdf;' bindtap='orderdetail' data-id='{{item.id}}'>查看详情</button>
+          </view>
+        </view>
+      </view>
+      <view class="no-data-tip zwdd" wx:if="{{orderList.length==0}}">
+        <image mode="aspectFit" src="/static/images/workbench/list.png"></image>
+        <view>您暂无相关订单哦~</view>
+      </view>
+      <view class="jzwb" wx:if="{{!hasMoreData}}">
+        <view class="hx"></view>
+        <view class="wz">加载完毕</view>
+        <view class="hx"></view>
+      </view>
+    </view>
+</view>

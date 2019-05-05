@@ -1,0 +1,35 @@
+<view class='container'>
+  <form bindsubmit="formSubmit">
+  <view class='header border_solid' bindtap='changeLogo'>
+    <view class='logo'>商城logo</view>
+    <image class='logoimg'  src='{{logo}}'></image>
+  </view>
+  <view class='header border_solid background' bindtap='changeBackgroundImg'>
+    <view class='logo'>商城背景</view>
+    <image class='logoimg'  src='{{background_img}}'></image>
+  </view>
+  <view class='content border_solid'>
+    <view class='name'>
+      <view>商城名称</view>
+      <view class='right'>
+        <input placeholder='请输入商城名称' value='{{info.merchname}}' name='shopname'></input>
+      </view>
+    </view>
+    <view class='desc'>
+      <view>商城简介</view>
+      <view class='desc_right'>
+        <textarea maxlength='100' rows="3" placeholder='请输入商城简介' value='{{info.desc}}' name='shopdesc'></textarea>
+      </view>
+    </view>
+  </view>
+  <view class='footer border_solid'>
+    <view class='left'>开启商城</view>
+    <view class='right'>
+      <switch color='#1ab394' name='shopclose' checked='{{info.status}}' ></switch>
+    </view>
+  </view>
+  <view class='save'>
+    <button form-type='submit' style='background:#1ab394' type='primary'>保存设置</button>
+  </view>
+  </form>
+</view>

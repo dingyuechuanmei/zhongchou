@@ -1,0 +1,156 @@
+@import "../common.wxss";
+@import "../navbar/index.wxss";
+.color3 {
+  color: #333;
+}
+.color4 {
+  color: #444;
+}
+.color6 {
+  color: #666;
+}
+.color8 {
+  color: #888;
+}
+.width100 {
+  width: 100%;
+}
+.page {
+    padding-bottom: 140rpx;
+    font-size: 28rpx;
+}
+.head {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #fff;
+}
+
+.topnav {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    font-size: 26rpx;
+    padding: 20rpx 0;
+}
+image {
+    width: 40rpx;
+    height: 40rpx;
+}
+.main{
+  margin-top: 100rpx;
+}
+.no-data-tip image{
+  width: 120rpx;
+  height: 120rpx;
+}
+/*
+------------------
+搜索框
+------------------
+*/
+.search_order_abroad{
+  display: flex;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+.search_order{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin-right: 30rpx;
+  padding-left: 8rpx;
+  background-color: white;
+  border-radius: 10rpx;
+}
+.search_input{
+  width:100%;
+  text-align:center;
+  padding: 10rpx 0;
+}
+.search_text{
+  margin-top: 10rpx;
+}
+/*
+------------------
+财务记录
+------------------
+*/
+.merch_finance{
+  padding: 10rpx 20rpx;
+  margin-top: 20rpx; 
+  background-color: white;
+}
+.order_ye{
+  display:flex;
+  overflow: hidden;
+  align-items:center;
+  padding:10rpx 0;
+}
+.order_ye .order_yezf{
+  width:180rpx;
+  margin-right:20rpx;
+}
+.order_ye .order_yezf text{
+  border-radius: 20rpx;
+  padding: 0 20rpx;
+  font-size: 24rpx;
+  background: #d9d9d9;
+  color: #333;
+}
+.order_ye .order_num{
+  color:#666;
+  height:36rpx;
+  line-height:36rpx;
+}
+.order_ye .order_date{
+  font-size:24rpx;
+  height:36rpx;
+  line-height:36rpx;
+  color:#888;
+}
+.order_ye image{
+  width: 14rpx;
+  height: 20rpx;
+}
+.order_info_list{
+  border-top: 1px solid #d9d9d9;
+  padding: 10rpx 0;
+  line-height:46rpx;
+}
+.order_list_row{
+  display: flex;
+}
+.order_list_row_right{
+  flex:1;
+  text-align:right;
+}
+.actual_payment{
+  padding:20rpx 0;
+  text-align:right;
+  border-top:1px solid #d9d9d9;
+}
+.applypay{
+  text-align:right;
+  padding:30rpx 20rpx;
+}
+/*
+-------------
+待审核.......
+-------------
+*/
+.finance_other{
+  border-bottom: 1px solid #d9d9d9;
+}
+.finance_other .order_info_list{
+  border-top: none;
+}

@@ -1,0 +1,66 @@
+@import "../common.wxss";
+button{
+  font-size:11pt;
+  font-family:inherit;
+}
+.page{
+  font-size: 28rpx;
+}
+.status{
+  padding:0 20rpx;
+  background:white;
+}
+.title{
+  padding: 20rpx;
+  color: #888;
+}
+.top{
+  background:white;
+  padding:0 20rpx;
+  border-top:1px solid #d9d9d9;
+  border-bottom:1px solid #d9d9d9;
+}
+.parentcommon{
+  height: 80rpx;
+  line-height:100rpx;
+  border-bottom:1px solid #d9d9d9;
+  display: flex;
+}
+.parentcommon view{
+  display: inline-block;
+  overflow: hidden;
+}
+.parentcommon .lastcommon{
+  flex: 1;
+  text-align: right;
+}
+.firstcommon{
+  width: 20%;
+  color: #333;
+}
+.color8{
+  color: #888;
+}
+.bordernone{
+  border-bottom: none !important;
+}
+.express{
+  height: 80rpx;
+  line-height:100rpx;
+  border-bottom:1px solid #d9d9d9
+}
+.express view, picker ,input{
+  display: inline-block;
+}
+.button{
+  margin: 30rpx 20rpx 0 20rpx;
+}
+.reject_detail{
+  width:100%;
+  padding:20rpx;
+  background:white;
+}
+.agree_refund view{
+  color: #888;
+  margin: 20rpx;
+}

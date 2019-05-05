@@ -1,0 +1,124 @@
+@import "../common.wxss";
+@import "../navbar/index.wxss";
+.page {
+    font-size: 28rpx;
+}
+.main{
+  margin-top: 20rpx;
+}
+.no-data-tip image{
+  width: 120rpx;
+  height: 120rpx;
+}
+/*
+------------------
+搜索框
+------------------
+*/
+.search_order_abroad{
+  display: flex;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+.search_order{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin-right: 30rpx;
+  padding-left: 8rpx;
+  background-color: white;
+  border-radius: 10rpx;
+}
+.search_input{
+  width:100%;
+  text-align:center;
+  padding: 10rpx 0;
+}
+.search_text{
+  margin-top: 10rpx;
+}
+.search_order image{
+  width: 40rpx;
+  height: 40rpx;
+}
+/*
+------------------
+商品
+------------------
+*/
+.goods{
+  background: white;
+  margin-top: 20rpx;
+  border-bottom:2rpx solid #d9d9d9;
+  display:flex;
+  padding:20rpx;
+  position:relative;
+}
+.goods .video_cover{
+  border-radius: 10rpx;
+}
+.goods_info{
+  width: 100%;
+  margin-left:20rpx;
+  margin-top: 16rpx;
+}
+.goodsprice{
+  color: #fe5455;
+}
+.total{
+  color: #888;
+  width:200rpx;
+  display:inline-block;
+}
+.goods_choice{
+  position:absolute;
+  bottom:20rpx;
+  right:20rpx;
+}
+.goods_choice image{
+  width: 70rpx;
+  height: 40rpx;
+}
+.choice_frame{
+  height: 60rpx;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12rpx;
+  color: #fff;
+  padding: 8rpx 8rpx 8rpx;
+  display: flex;
+  font-size: 24rpx;
+  bottom:20rpx;
+  right:100rpx;
+}
+.choice_frame view{
+  width:80rpx;
+  line-height:50rpx;
+  text-align:center;
+}
+.pushadd {
+    position: fixed;
+    right: 20rpx;
+    bottom: 200rpx;
+    width: 80rpx;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    opacity: 0.6;
+    background: #eee;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 27rpx;
+    padding: 0;
+}
+
+.pushadd image {
+    width: 80rpx;
+    height: 80rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

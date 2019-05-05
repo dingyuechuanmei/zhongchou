@@ -11,7 +11,7 @@
       <view class='title' data-id='{{item.id}}' bindtap='toPostDetail'>{{item.title}}</view>
       <view>
         <view class='img-list'>
-          <image wx:for='{{item.thumbs}}' wx:for-item='thumbs_item' src='{{thumbs_item}}' data-imgs="{{item.thumbs}}" data-img="{{thumbs_item}}" bindtap='bro_imgs'></image>
+          <image wx:for='{{item.thumbs}}' wx:for-index="idx" wx:for-item='thumbs_item' src='{{thumbs_item}}' data-imgs="{{item.thumbs}}" data-img="{{idx}}" bindtap='bro_imgs'></image>
         </view>
       </view>
 

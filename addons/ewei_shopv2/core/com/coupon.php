@@ -57,7 +57,7 @@ class Coupon_EweiShopV2ComModel extends ComModel
 			pdo_update('ewei_shop_creditshop_log', array('status' => 3), array('id' => $logid));
 		}
 	}
-	public function taskposter($member, $couponid, $couponnum) 
+	public function taskposter($member, $couponid, $couponnum,$merchid)
 	{
 		global $_W;
 		global $_GPC;
@@ -74,9 +74,9 @@ class Coupon_EweiShopV2ComModel extends ComModel
 		$i = 1;
 		while ($i <= $couponnum) 
 		{
-			$couponlog = array('uniacid' => $_W['uniacid'], 'openid' => $member['openid'], 'logno' => m('common')->createNO('coupon_log', 'logno', 'CC'), 'couponid' => $couponid, 'status' => 1, 'paystatus' => -1, 'creditstatus' => -1, 'createtime' => time(), 'getfrom' => 3);
+			$couponlog = array('uniacid' => $_W['uniacid'], 'openid' => $member['openid'], 'logno' => m('common')->createNO('coupon_log', 'logno', 'CC'), 'couponid' => $couponid,'merchid'=>$merchid ,'status' => 1, 'paystatus' => -1, 'creditstatus' => -1, 'createtime' => time(), 'getfrom' => 3);
 			pdo_insert('ewei_shop_coupon_log', $couponlog);
-			$data = array('uniacid' => $_W['uniacid'], 'openid' => $member['openid'], 'couponid' => $couponid, 'gettype' => 3, 'gettime' => time(), 'nocount' => 1);
+			$data = array('uniacid' => $_W['uniacid'], 'openid' => $member['openid'], 'couponid' => $couponid,'merchid'=>$merchid , 'gettype' => 3, 'gettime' => time(), 'nocount' => 1);
 			pdo_insert('ewei_shop_coupon_data', $data);
 			++$i;
 		}

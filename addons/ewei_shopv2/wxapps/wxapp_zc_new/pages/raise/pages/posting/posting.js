@@ -1,6 +1,10 @@
 var t = getApp(),
     a = t.requirejs("core");
-var me 
+var me
+var QQMapWX = t.requirejs("qqmap-wx-jssdk");
+var qqmapsdk = new QQMapWX({
+  key: 'ZWXBZ-GJZLX-CX74Y-Z7B4O-MEAHS-TOBE6'//申请的开发者秘钥key
+});
 Page({
   data: {
     user: {
@@ -8,22 +12,29 @@ Page({
       content: '',
       post_img: [],
       good_img: [],
-      plate: ''
+      plate: '',
+      tel: ''
     },
     goods_list: [],
     chooseImagecount: 9,
     detail: {
       imagelist: [],
       tmpchooseImage: [],
-    }
+    },
+    address: '',
+    arrow: t.globalData.approot + 'wxapp_attr/you.png'
   },
   inputTitle: function(e) {
-    getInoutValue(e,'title')
+    this.getInoutValue(e,'title')
   },
   inputContent: function (e) {
-    getInoutValue(e, 'content')
+    this.getInoutValue(e, 'content')
+  },
+  inputTel: function (e) {
+    this.getInoutValue(e, 'tel')
   },
   chooseImg: function() {
+    var me = this
     wx.chooseImage({
       count: me.data.chooseImagecount, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -97,6 +108,7 @@ Page({
     })
   },
   chooseModel: function(e) {
+    var me = this
     var cate_list = me.data.cate_list
     for (var i = cate_list.length - 1; i >= 0; i--) {
       cate_list[i].state = ''
@@ -110,6 +122,7 @@ Page({
     })
   },
   surebtn: function() {
+    var me = this
     if (!me.data.user.title || me.data.user.title.length < 3 || me.data.user.title.length > 30) {
       wx.showModal({
         content: '帖子标题在3~30个字之内',
@@ -119,6 +132,18 @@ Page({
     if (!me.data.user.content || me.data.user.content.length < 5 || me.data.user.content.length > 5000) {
       wx.showModal({
         content: '帖子内容在5~5000个字之内',
+      })
+      return
+    }
+    if (!me.data.address) {
+      wx.showModal({
+        content: '请选择位置',
+      })
+      return
+    }
+    if (!me.data.user.tel || me.data.user.tel.length < 11) {
+      wx.showModal({
+        content: '请输入合法的手机号',
       })
       return
     }
@@ -137,6 +162,8 @@ Page({
     var pushdata = {
       title: me.data.user.title,
       context: me.data.user.content,
+      address: me.data.address,
+      tel: me.data.user.tel,
       cate: me.data.user.plate,
       thumbs: me.data.detail.imagelist.join(','),
       tecom_good: tecom_good.join(',')
@@ -153,6 +180,7 @@ Page({
   },
   onShow: function() {
      // 获取子集返回的值
+    var me = this
     wx.getStorage({
       key: 'goods_list',
       success: function (res) {
@@ -172,7 +200,7 @@ Page({
     })
   },
   onLoad: function (options) {
-    me = this
+    var me = this
     // 获取分类列表
     a.post('forum.forum_cate', {}, function (json) {
       if (json.error != 0) {
@@ -189,15 +217,83 @@ Page({
         })
       }
     });
+    /**
+     * 获取用户地理位置
+     */
+    wx.getSetting({
+      success(res){
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              me.getLocation()
+            },
+            fail() {
+              wx.showModal({
+                title: '提示',
+                content: '请开启地理位置授权',
+              })
+              setTimeout(function(){
+                wx.navigateBack({
+                  delta: 1
+                })
+              },1500)
+            }
+          })
+        } else {
+          me.getLocation()
+        }
+      }
+    })
+
+  },
+  /**
+   * 选择位置
+   */
+  chooseLocation: function() {
+    var that = this
+    wx.chooseLocation({
+      success(res){
+        that.setData({
+          address: res.address+res.name
+        })
+      }
+    })
+  },
+  getLocation: function() {
+    var me = this
+    wx.getLocation({
+      success: function (res) {
+        qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          success: function (res) {
+            me.setData({
+              address: res.result.address_component.province + res.result.address_component.city + res.result.formatted_addresses.recommend //res.result.address 
+            })
+          },
+          fail: function (res) {
+            console.log('获取当前地址失败');
+          }
+        });
+      },
+    })
+  },
+  getInoutValue: function (e, inputname) {
+    var inputnameTmp = inputname
+    inputname = 'user.' + inputname
+    this.data.user[inputnameTmp] = e.detail.value
   }
 })
 
 //获取input的值
-function getInoutValue(e,inputname) {
-  var inputnameTmp = inputname
-  inputname = 'user.' + inputname
-  me.data.user[inputnameTmp] = e.detail.value
-}
+// function getInoutValue(e,inputname) {
+//   var inputnameTmp = inputname
+//   inputname = 'user.' + inputname
+//   me.data.user[inputnameTmp] = e.detail.value
+// }
 
 // 数值去重
 function ArrayHeavy(arr) {

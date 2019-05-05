@@ -75,7 +75,6 @@ App({
         e.post("wxapp/login", {
           code: o.code
         }, function (o) {
-          // console.log(o);
           return o.error ? void e.alert("获取用户登录态失败1:" + o.message) : o.isclose && i && "function" == typeof i ? void i(o.closetext, true) : void wx.getUserInfo({
             success: function (i) {
               a = i.userInfo,
@@ -181,13 +180,8 @@ App({
       diyitem = that_data.diyitems[i];
       switch (diyitem.id) {
         case 'audio':
-          console.log('audio');
-          // console.log(diyitem);
           continue;
         case 'video':
-          console.log('video');
-          // console.log(diyitem);
-
           if (diyitem.params.loopplay == 1) {
             that.data.diyitems[i].params.loopplay = true;
           } else {
@@ -205,72 +199,38 @@ App({
           } else {
             that.data.diyitems[i].params.mutedplay = false;
           }
-          // console.log(diyitem);
           continue;
         case 'notice':
-          console.log('notice');
-          // console.log(diyitem);
           continue;
         case 'tabbar':
-          console.log('tabbar');
-          // console.log(diyitem);
-
           that.data.diyitems[i].diyitem_data_len = This.getJsonObjLength(diyitem.data);
           continue;
         case 'listmenu':
-          console.log('listmenu');
-          // console.log(diyitem);
           continue;
         case 'richtext':
-          console.log('richtext');
-
           richtext += base.decode(diyitem.params.content);
-
-          // console.log(richtext);
-
           template += richtext;
-
           continue;
         case 'title':
-          console.log('title');
-          // console.log(diyitem);
           continue;
         case 'line':
-          console.log('line');
-          // console.log(diyitem);
           continue;
         case 'blank':
-          console.log('blank');
-          // console.log(diyitem);
           continue;
         case 'menu':
-          console.log('menu');
-          // console.log(diyitem);
-
           that.data.diyitems[i].style.background = diyitem.style.background = '#ffffff' ? "" : diyitem.style.background;
           that.data.diyitems[i].style.pagenum = diyitem.style.pagenum > 0 ? diyitem.style.pagenum : 8;
           that.data.diyitems[i].diyitem_data_len = This.getJsonObjLength(diyitem.data);
-
           continue;
         case 'menu2':
-          console.log('menu2');
-          // console.log(diyitem);
           continue;
         case 'picture':
-          console.log('picture');
-          // console.log(diyitem);
           continue;
         case 'banner':
-          console.log('banner');
-          // console.log(diyitem);
           continue;
         case 'picturew':
-          console.log('picturew');
-          // console.log(diyitem);
-
           var fui_cube_padding = "", fui_cube_right_padding = "", fui_cube_right2_padding = "";
           var diyitem_data_len = This.getJsonObjLength(diyitem.data);
-
           if (diyitem_data_len == 1) {
             fui_cube_padding = "padding:" + diyitem.style.paddingtop + "px " + diyitem.style.paddingleft + "px";
           } else if (diyitem_data_len == 2) {
@@ -283,52 +243,33 @@ App({
           that.data.diyitems[i].style.fui_cube_right_padding = fui_cube_right_padding;
           that.data.diyitems[i].style.fui_cube_right2_padding = fui_cube_right2_padding;
           that.data.diyitems[i].diyitem_data_len = This.getJsonObjLength(diyitem.data);
-
           that.data.diyitems[i].data = arrayToNewArray(that.data.diyitems[i].data);
-
-          console.log(that.data.diyitems[i].data);
-
           continue;
         case 'pictures':
-          console.log('pictures');
-          // console.log(diyitem);
-
           that.data.diyitems[i].diyitem_data_len = This.getJsonObjLength(diyitem.data);
-
           continue;
         case 'icongroup':
-          console.log('icongroup');
-          // console.log(diyitem);
-
           var bordertop = "", borderbottom = "";
-
           if (diyitem.params.bordertop == 1) {
             bordertop = "border-top: 1px solid " + diyitem.style.bordercolor;
           } else {
             bordertop = "border-top: none;";
           }
-
           if (diyitem.params.borderbottom == 1) {
             bordertop = "border-bottom: 1px solid " + diyitem.style.bordercolor;
           } else {
             bordertop = "border-bottom: none;";
           }
-
           that.data.diyitems[i].params.bordertop = bordertop;
           that.data.diyitems[i].params.borderbottom = borderbottom;
-
           continue;
         case 'goods':
-          console.log('goods');
           continue;
         case 'search':
-          console.log('search');
           continue;
         case 'fixedsearch':
-          console.log('fixedsearch');
           continue;
         default:
-          console.log('未知 = ' + that_data.diyitems[i].id);
       }
     }
 
@@ -388,6 +329,64 @@ App({
     } else {
       return false;
     }
+  },
+  /**
+   * 获取商户id
+   */
+  getMerchId: function () {
+    var merchid = wx.getStorageSync('merchid');
+    if (!this.isEmpty(merchid)) {
+      return merchid;
+    } else {
+      wx.redirectTo({
+        url: '/pages/shop/workbench/login/index'
+      })
+    }
+  },
+  //商户工作台tab
+  merchantTabOnLoad: function (_this) {
+    var a = this;
+    function e(o) {
+      var a = !1, e = _this.route || _this.__route__ || null;
+      for (var t in o.navs) o.navs[t].url === "/" + e ? a = o.navs[t].active = !0 : o.navs[t].active = !1;
+      a && _this.setData({
+        _navbar: o
+      });
+    }
+    var t = {}
+    t.navs = [
+      {
+        logo: "/static/images/workbench/tabglf.png",
+        logo2: "/static/images/workbench/tabgl.png",
+        title: "管理",
+        title_color: "#34aaff",
+        title_color2: "#888",
+        url: "/pages/shop/workbench/admin/index",
+        active: true
+      }, {
+        logo: "/static/images/workbench/tabdnf.png",
+        logo2: "/static/images/workbench/tabdn.png",
+        title: "订单",
+        title_color: "#34aaff",
+        title_color2: "#888",
+        url: "/pages/shop/workbench/order/index"
+      }, {
+        logo: "/static/images/workbench/tabddf.png",
+        logo2: "/static/images/workbench/tabdd.png",
+        title: "财务",
+        title_color: "#34aaff",
+        title_color2: "#888",
+        url: "/pages/shop/workbench/finance/index"
+      }, {
+        logo: "/static/images/workbench/tabmyf.png",
+        logo2: "/static/images/workbench/tabmy.png",
+        title: "设置",
+        title_color: "#34aaff",
+        title_color2: "#888",
+        url: "/pages/shop/workbench/set/index"
+      }
+    ];
+    e(t);
   },
   globalData: {
     appid: "	wx2c2d379a1806d40f",

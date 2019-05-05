@@ -3,7 +3,7 @@
   <view class='index'>
     <import src="../components/cpt_swiper.wxml" />
     <template is="swiper" data="{{swiper:swiper}}" />
-    <view class='bigtitle div_4'>
+    <view class="bigtitle {{index_info.right_icon ? 'div_4' : 'div_3'}}">
       <form class='item' bindsubmit="formSubmit" data-classify='zhongtui' data-appid="{{index_info.left_appid}}" data-path="{{index_info.left_path}}" report-submit='true' style='padding:20rpx {{index_info.center_appid!=undefined? "0":"31rpx"}};'>
         <view>
           <view class='image' bindtap='formSubmit' data-classify='zhongtui' data-appid="{{index_info.left_appid}}" data-path="{{index_info.left_path}}">
@@ -26,7 +26,7 @@
           </view>
         </view>
       </form>
-      <form class='item' bindsubmit="formSubmit" data-classify='zhongtui' data-appid="{{index_info.center_appid}}" data-path="{{index_info.center_path}}" report-submit='true' style='display:{{index_info.center_appid!=undefined? "block":"none"}};'>
+      <form class='item' bindsubmit="formSubmit" data-classify='zhongtui' data-appid="{{index_info.center_appid}}" data-path="{{index_info.center_path}}" report-submit='true'>
         <view>
           <view class='image' bindtap='formSubmit' data-classify='zhongtui' data-appid="{{index_info.center_appid}}" data-path="{{index_info.center_path}}">
             <image src='{{index_info.center_icon}}'></image>
@@ -37,7 +37,7 @@
           </view>
         </view>
       </form>
-      <form class='item' bindsubmit="formSubmit" data-classify='zhongchou' data-appid="{{index_info.right_appid}}" data-path="{{index_info.right_path}}" report-submit='true'style='padding:20rpx {{index_info.center_appid!=undefined? "0":"31rpx"}};' >
+      <form class='item' bindsubmit="formSubmit" data-classify='zhongchou' data-appid="{{index_info.right_appid}}" data-path="{{index_info.right_path}}" report-submit='true' style='padding:20rpx 31rpx}};'  wx:if="{{index_info.right_icon}}">
         <view>
           <view class='image' bindtap='formSubmit' data-classify='zhongchou' data-appid="{{index_info.right_appid}}" data-path="{{index_info.right_path}}">
             <image src='{{index_info.right_icon}}'></image>
@@ -51,8 +51,14 @@
     </view>
     <view class='introducetheraise'>
       <view class='title'>微客介绍</view>
-      <view class='video'>
-        <video id="myVideo" wx:if="{{index_info.video_url != ''}}" src="{{index_info.video_url}}" initial-time='1' controls></video>
+      <view class='video posterimg' wx:if="{{index_info.video_url != ''}}">
+        <video class="videostyle" id="first"  wx:if="{{index_info.videoshow}}" src="{{index_info.video_url}}" initial-time='1' controls></video>
+        <block wx:if='{{!index_info.videoshow}}'>
+        <image class="videostyle" data-index="first" bindtap="videoPlay" src='{{index_info.video_cover}}'></image>
+        <view class='videoplay'>
+          <view  bindtap="videoPlay" data-index="first" class='triangle_border_right'></view>
+        </view>
+        </block>
       </view>
       <view class='info' style='text-indent: 30rpx;'>
         <view class="wxParse">
@@ -61,11 +67,17 @@
       </view>
     </view>
     <view class='zhongtui'>
-      <view class='zhongtui_list'>
-        <view class='zhongtui_item' wx:for='{{pusher_list}}'>
+      <view class='zhongtui_list' wx:if='{{pusher_list.length > 0}}'>
+        <view class='zhongtui_item' wx:for='{{pusher_list}}' index="index">
           <view class='posterimg'>
-            <video id="myVideo" src="{{item.video}}" initial-time='1' controls></video>
-            <view class='title'>{{item.title}}</view>
+            <video wx:if='{{item.videoshow}}' class="videostyle" id="video-{{index}}" src="{{item.video}}" controls></video>
+            <block wx:if='{{!item.videoshow}}'>
+              <image class="videostyle"  bindtap="videoPlay" data-index="{{index}}" src='{{item.video_cover}}'></image>
+              <view class='title'>{{item.title}}</view>
+              <view class='videoplay'>
+                <view  bindtap="videoPlay" data-index="{{index}}" class='triangle_border_right'></view>
+              </view>
+            </block>
           </view>
           <view class='author' bindtap='zhongtuiitemdetail' data-id='{{item.id}}'>
             <image src='{{item.avatar}}'></image>
@@ -78,6 +90,14 @@
         </view>
       </view>
     </view>
+    <view class="jzwb" wx:if="{{!hasMoreData}}">
+      <view class="hx"></view>
+      <view class="wz">更多内容,敬请期待</view>
+      <view class="hx"></view>
+    </view>
+    <button bindtap="redirectToWm" class="backhome">
+        <image src="{{wmimg}}"></image>
+    </button>
   </view>
 </view>
 <!-- 修改页面的授权 -->

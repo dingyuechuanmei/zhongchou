@@ -62,7 +62,7 @@ swiper .slide-image {
 .dynamic-list > .item .info .r {line-height: 72rpx; color: #db384b;}
 .dynamic-list > .item .title {font-size: 36rpx; line-height: 100rpx;padding: 0 30rpx;}
 .dynamic-list > .item .img-list {box-sizing: border-box; padding-left: 15rpx;}
-.dynamic-list > .item .img-list image {width: 220rpx; height: 230rpx; margin-left: 15rpx; margin-bottom: 10rpx;}
+.dynamic-list > .item .img-list image {width: 220rpx; height: 200rpx; margin-left: 20rpx; margin-bottom: 10rpx; border-radius: 10rpx;}
 .dynamic-list > .item .browse-comment {padding-right: 30rpx; margin-top: 20rpx; margin-bottom: 20rpx; color: #777;}
 .dynamic-list > .item .browse-comment image {width: 35rpx; height: 35rpx; margin-left: 30rpx;}
 .dynamic-list > .item .browse-comment text {display: inline-block; line-height: 35rpx;font-size: 24rpx; margin-left: 5rpx;}

@@ -1,0 +1,11 @@
+<view class='page'>
+  <form bindsubmit="formSubmit">
+  <view class='remark'>取消原因</view>
+  <view class='remark_text' >
+    <textarea maxlength='-1'placeholder='请输入取消发货原因' name='remark'></textarea>
+  </view>
+  <view class='button'>
+    <button form-type='submit' style='background:#1ab394' type='primary'>保存</button>
+  </view>
+  </form>
+</view>

@@ -14,10 +14,16 @@ image {vertical-align: top;}
 #db384d;line-height: 38rpx;padding: 0 15rpx; border-radius: 21rpx; box-sizing: border-box; vertical-align: top;}
 .container > .info .user .istop {vertical-align: top; color: #db384d; display: inline-block;}
 .container > .info .r {padding: 0rpx 20rpx; line-height: 46rpx; text-align: center; color: #fff; background: #db384d; border-radius: 23rpx;margin-top: 7rpx; font-size: 24rpx;}
-.container > .title {padding: 30rpx; font-size: 32rpx; background: #fff;}
-.container > .text {padding: 0 30rpx 30rpx 30rpx; color: #777; background: #fff;}
-.container > .img-list {background: #fff; padding-left: 15rpx;}
-.container > .img-list image {width: 220rpx; height: 230rpx; margin-left: 15rpx; margin-bottom: 20rpx;}
+.container > .title {padding: 30rpx; font-size: 36rpx; background: #fff;}
+.container > .text {padding: 0 30rpx 30rpx 30rpx; font-size: 36rpx; color: #777; background: #fff;}
+.container > .img-list {background: #fff;}
+.img-list-margin{
+  padding: 0 20rpx;
+}
+.container > .img-list image{
+  width: 100%;
+  margin-bottom:20rpx;
+}
 .container > .report {padding: 10rpx 30rpx 30rpx 30rpx; text-align: right; background: #fff; color: #777; position: relative;}
 .container > .report::after {content: ''; position: absolute; width: 690rpx; height: 1px; background: #f0f0f0; left: 30rpx; top: auto; bottom: 0;}
 
@@ -105,3 +111,27 @@ image {vertical-align: top;}
 .comment-back .input1 view.r {margin-right: 40rpx;}
 .comment-back .input1 > image {margin-top: 15rpx; margin-left: 40rpx; margin-right: 0;}
 .comment-back .theinput input {width: 710rpx; height: 60rpx; border: 1px solid #f0f0f0; border-radius: 10rpx; margin: 20rpx auto; padding-left: 10rpx;}
+.address{
+  background: white;
+  padding: 0 20rpx;
+}
+.address-top{
+  display: flex;
+  align-items: center;
+  padding-bottom: 20rpx;
+}
+.address .left-img{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+.address .right-img{
+  width: 14rpx;
+  height: 14rpx;
+}
+.address input{
+  border-bottom: none;
+}
+.address-right{
+  flex: 1;
+}

@@ -406,5 +406,18 @@ Page({
   },
   onShareAppMessage: function () {
     return e.onShareAppMessage("/pages/goods/detail/index?id=" + this.data.options.id)
+  },
+  openMerch: function () {
+    var merchid = this.data.goods.merchid
+    console.log(merchid)
+    if (merchid > 0) {
+      wx.navigateTo({
+        url: '/pages/index/merchant/index?merchid='+merchid,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/index/index?merchid='+merchid,
+      })
+    }
   }
 })

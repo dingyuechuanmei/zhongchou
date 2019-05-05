@@ -1,0 +1,38 @@
+<view class="page">
+  <form bindsubmit="formSubmit">
+  <view class='top'>
+    <view class='parentcommon'>
+      <view class='firstcommon'>收件人:</view>
+      <view class='color6'>{{address.realname}}</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>联系电话:</view>
+      <view class='color6'>{{address.mobile}}</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>收货地址:</view>
+      <view class='color6'>{{address.province}} {{address.city}} {{address.area}}</view>
+    </view>
+    <view class='parentcommon bordernone'>
+      <view class='firstcommon'>详细地址:</view>
+      <view class='color6'>{{address.address}}</view>
+    </view>
+  </view>
+  <!--中-->
+  <view class='content top'>
+    <view class='express'>
+      <view class='.firstcommon'>快递公司:</view>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{express}}"range-key="name">
+        <view class='color6 express_select'>{{express[index].name}}</view>
+      </picker>
+    </view>
+    <view class='express bordernone'>
+      <view class='firstcommon'>快递单号:</view>
+      <input name='expresssn' placeholder='请输入快递单号' value='{{item.expresssn}}' ></input>
+    </view>
+  </view>
+  <view class='button'>
+    <button style='background:#1ab394' type='primary' form-type='submit'>确定</button>
+  </view>
+  </form>
+</view>

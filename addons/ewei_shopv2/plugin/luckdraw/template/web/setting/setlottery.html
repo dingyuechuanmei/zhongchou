@@ -1,0 +1,87 @@
+{template '_header'}
+
+<div class="page-heading"> <h2>商城关闭设置</h2> </div>
+
+<form action="" method="post" class="form-horizontal form-validate" enctype="multipart/form-data" >
+
+
+
+    <div class="form-group">
+
+        <label class="col-sm-2 control-label">活动状态</label>
+
+        <div class="col-sm-9 col-xs-12">
+
+            {ifp 'sysset.close.edit'}
+
+            <label class="radio-inline">
+
+                <input type="radio" name="isopen" value='1' {if $set['isopen']==1}checked{/if} /> 开启
+
+            </label>
+
+            <label class="radio-inline">
+
+                <input type="radio" name="isopen" value='0' {if $set['isopen']==0}checked{/if} /> 关闭
+
+            </label>
+
+
+
+            {else}
+
+
+
+            <div class='form-control-static'>{if $set['isopen']==0}关闭{else}开启{/if}</div>
+
+            {/if}
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <label class="col-sm-2 control-label">抽奖规则说明</label>
+
+        <div class="col-sm-9 col-xs-12">
+
+            {ifp 'lottery.setting.edit|lottery.setting.add'}
+            {if !empty($detail)}
+            {php echo tpl_ueditor('info',unserialize($detail['info']),array('height'=>'300'))}
+            {else}
+            {php echo tpl_ueditor('info','暂无说明',array('height'=>'300'))}
+            {/if}
+            {/if}
+
+        </div>
+
+    </div>
+
+
+
+    <div class="form-group">
+
+        <label class="col-sm-2 control-label"></label>
+
+        <div class="col-sm-9 col-xs-12">
+
+            {ifp 'sysset.close.edit'}
+
+            <input type="submit" value="提交" class="btn btn-primary"  />
+
+            {/if}
+
+        </div>
+
+    </div>
+
+
+
+
+
+</form>
+
+
+
+{template '_footer'}

@@ -3,7 +3,8 @@ var t = getApp(),
 
 Page({
   data: {
-    user: {}
+    user: {},
+    approot: t.globalData.approot,
   },
   bindPickerChange: function (e) {
     var me = this

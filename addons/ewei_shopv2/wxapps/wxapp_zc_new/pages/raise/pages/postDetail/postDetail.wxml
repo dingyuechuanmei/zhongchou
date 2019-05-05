@@ -10,9 +10,21 @@
     <view class='r' bindtap='isfocus' data-mid='{{forum_info.mid}}'>{{forum_info.is_follow}}</view>
   </view>
   <view class='title'>{{forum_info.title}}</view>
-  <view class='text'>{{forum_info.context}}</view>
+  <view class='text'><text decode="{{true}}">{{forum_info.context}}</text></view>
   <view class='img-list'>
-    <image wx:for="{{forum_info.thumbs}}" src='{{item}}' data-src="{{item}}" bindtap='picshow'></image>
+    <view class='img-list-margin' wx:for="{{forum_info.thumbs}}" wx:for-index="idx"  data-src="{{idx}}" bindtap='picshow'>
+      <image src='{{item}}' mode='widthFix'></image>
+    </view>
+  </view>
+  <view class='address'>
+    <view class='address-top' bindtap='tel' wx:if='{{forum_info.tel}}'>
+      <image class='left-img' src='/static/images/icon-red/tel.png'></image>
+      <view style='color:#34aaff'>{{forum_info.tel}}</view>
+    </view>
+    <view class='address-top' wx:if='{{forum_info.address}}'>
+      <image class='left-img' src='/static/images/icon-red/location.png'></image>
+      <view class='address-right' style='color:#999'>{{forum_info.address}}</view>
+    </view>
   </view>
   <view class='report' bindtap='report'>举报</view>
   <!--热门商品  -->
@@ -97,10 +109,11 @@
           </view>
           <view class='more-title' data-idx='{{index}}' wx:if='{{item.child_review.length && child_index == item.child_review.length -1 }}' wx:for="{{item.child_review}}" wx:for-item='child_item' wx:for-index='child_index' bindtap='lookmore'>{{child_item.nickname}}等人<text>共有{{item.child_review.length}}条回复</text> </view>
           <view class='more {{item.isdis ? "":"hide"}}'>
-            <view class='more-reply' wx:for="{{item.child_review}}" wx:for-item='child_item' wx:for-index='child_index'>
+            <view class='more-reply' wx:for="{{item.child_review}}" wx:for-item='child_item' wx:for-index='child_index' data-forumreplyid='{{item.id}}' data-id='{{child_item.id}}' data-nickname='{{child_item.nickname}}' bindtap='mutualReply'>
               <image src='{{child_item.avatar}}'></image>
               <text class='nick nick2'>{{child_item.nickname}}</text>
               <view class='text'>
+                <text style="color:#777" wx:if="{{child_item.forumreplyid !=0}}">回复@{{child_item.replyname}}: </text>
                 {{child_item.context}}
               </view>
               <view class='bottom'>

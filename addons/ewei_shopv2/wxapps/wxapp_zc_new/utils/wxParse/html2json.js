@@ -165,11 +165,13 @@ function html2json(html, bindName) {
             if (node.tag !== tag) console.error('invalid state: mismatch end tag');
 
             //当有缓存source资源时于于video补上src资源
+            /*
+            注释原因:解析富文本视频时会报错
             if(node.tag === 'video' && results.source){
                 node.attr.src = results.source;
                 delete result.source;
             }
-            
+            */
             if (bufArray.length === 0) {
                 results.nodes.push(node);
             } else {

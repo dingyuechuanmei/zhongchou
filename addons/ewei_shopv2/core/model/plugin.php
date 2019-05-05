@@ -75,17 +75,7 @@ class Plugin_EweiShopV2Model
 			$cv['plugins'] = $ps;
 		}
 		unset($cv);
-        /**
-         * 隐藏应用
-         */
-        $hide = ['人人分销','积分商城','人人拼团','全民股东','区域代理','收银台','兑换中心','游戏营销','快速购买','全民社区','任务中心','整点秒杀','活动海报','积分签到','砍价活动','消息群发','文章营销'];
-        foreach ($list as $k=>$v) {
-            foreach ($v['plugins'] as $kk=>$vv) {
-                if(in_array($vv['name'],$hide)){
-                    unset($list[$k]['plugins'][$kk]);
-                }
-            }
-        }
+
 		return $list;
 	}
 	public function getName($identity = '') 

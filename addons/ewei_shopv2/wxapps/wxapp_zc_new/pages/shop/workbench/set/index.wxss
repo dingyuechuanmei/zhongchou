@@ -1,0 +1,75 @@
+@import "../common.wxss";
+@import "../navbar/index.wxss";
+page{
+  font-size: 30rpx;
+}
+.set_title{
+  height:60rpx;
+  line-height:80rpx;
+  padding-left:20rpx;
+  color:#888;
+}
+.border_solid {
+  margin-top: 20rpx;
+  padding:20rpx;
+  border-top: 1px solid #d9d9d9;
+  border-bottom:1px solid #d9d9d9;
+  background: white;
+}
+.bindvip{
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-box-align:center;
+  align-items:center;
+}
+.flex{
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-box-align:center;
+  align-items:center;
+  line-height: 60rpx;
+}
+.bindvip .userimg{
+  display: inline-block;
+}
+.bindvip .userimg image{
+  border-radius: 10rpx;
+}
+.bindvip .username{
+  display: inline-block;
+  margin-left: 30rpx;
+}
+.bindvip .username .isbind{
+  background:#1ab394;
+  font-size:24rpx;
+  color:#fff;
+  padding:0 10rpx;
+}
+.account{
+  margin-left: 30rpx;
+  overflow: hidden;
+}
+.dlzh{
+  width: 400rpx;
+}
+.input_width{
+  width: 500rpx;
+}
+.bkxg{
+  text-align: right;
+  flex: 1;
+}
+.border_bot{
+  border-bottom: 1px solid #d9d9d9;
+}
+.button{
+  margin: 20rpx 20rpx 0 20rpx;
+}
+.more_settings{
+  margin:50rpx 0 180rpx 0;
+  text-align:center;
+  color:#888;
+  font-size:28rpx;
+}

@@ -3,7 +3,7 @@ if (!(defined('IN_IA')))
 {
 	exit('Access Denied');
 }
-class LotteryModel extends PluginModel 
+class LotteryModel extends PluginModel
 {
 	public function getGoods($param = '') 
 	{

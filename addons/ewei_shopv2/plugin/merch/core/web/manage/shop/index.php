@@ -16,7 +16,7 @@ class Index_EweiShopV2Page extends MerchWebPage
 		unset($value);
 		$order_ok = $order;
 		$merchid = $_W['merchid'];
-        $wx_app_path = 'pages/index/index?merchid='.$merchid;
+        $wx_app_path = 'pages/index/merchant/index?merchid='.$merchid;
         $qrcode = m('qrcode')->createMinAppQrcode($wx_app_path);
         include $this->template();
 	}

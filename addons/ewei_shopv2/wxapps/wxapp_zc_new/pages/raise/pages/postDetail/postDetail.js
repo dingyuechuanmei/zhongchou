@@ -67,7 +67,8 @@ Page({
   replyPost: function () {
     me.setData({
       inputdis: [false, true, false],
-      reply_id: 0
+      reply_id: 0,
+      forumreplyid: null,
     })
   },
   replyPost2: function (e) {
@@ -77,11 +78,19 @@ Page({
       inputdis: [false, false, true],
       review_list: review_list,
       reply_id: e.currentTarget.dataset.id,
+      forumreplyid:null,
       placeholder:'写回复',
     })
-
-
-
+  },
+  //互相回复
+  mutualReply: function (e) {
+    var data = e.currentTarget.dataset
+    me.setData({
+      inputdis: [false, false, true],
+      reply_id: data.forumreplyid,
+      forumreplyid: data.id,
+      placeholder: '回复 '+data.nickname+':',
+    })
   },
   reply1: function (e) {
     me.setData({
@@ -95,6 +104,9 @@ Page({
       forum_id: me.data.id,
       reply_id: me.data.reply_id,
       context: value
+    }
+    if (me.data.forumreplyid != null && me.data.forumreplyid != undefined) {
+      pushdata.forumreplyid = me.data.forumreplyid
     }
     a.post('forum.review_posts', pushdata, function (json) {
       if (!json.error) {
@@ -186,10 +198,18 @@ Page({
   // 图片放大
   picshow: function (e) {
     var that = this
-    var cur_url = e.currentTarget.dataset.src
+    var idx = e.currentTarget.dataset.src
     wx.previewImage({
-      current: cur_url,
+      current: that.data.forum_info.thumbs[idx],
       urls: that.data.forum_info.thumbs,
+    })
+  },
+  /**
+ * 拨打电话
+ */
+  tel: function () {
+    wx.makePhoneCall({
+      phoneNumber: this.data.forum_info.tel,
     })
   }
 

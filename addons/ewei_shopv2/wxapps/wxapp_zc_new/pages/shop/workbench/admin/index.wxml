@@ -1,0 +1,84 @@
+<include src="../navbar/index.wxml"></include>
+<view class="page">
+  <view bindtap="tzhy" class="logs_header">
+      <view class="logs_img">
+          <image class="logs_imgs" src="{{info.logo}}"></image>
+          <view class="logs_name">
+              <view class="logs_name1">{{info.merchname}}</view>
+              <view class="logs_name2">{{info.desc}}</view>
+          </view>
+      </view>
+      <image class="blackjt" src="/static/images/icon-white/setting.png"  bindtap="modifyInfo"></image>
+  </view>
+  <view class="logs_content border_solid">
+      <view bindtap="wallet" class="content_left">
+          <view class="content_left1">
+              <text class="content_font">{{info.today_count}}</text>
+              <text class="content_coll">个</text>
+          </view>
+          <view class="content_integral">今日订单</view>
+      </view>
+      <view bindtap="wdyhq" class="content_left">
+          <view class="content_middle">
+              <text class="content_font">{{info.today_price}}</text>
+              <text class="content_coll">元</text>
+          </view>
+          <view class="content_integral">今日成交</view>
+      </view>
+  </view>
+  <view class="content_order_top border_solid" bindtap="allOder">
+    <image src="/static/images/icon/order.png"></image>
+    <text class="order_admin">订单管理</text>
+    <text class="order_all">全部\t></text>
+  </view>
+  <view class="content_order_sort">
+    <view class="order_left" bindtap="allOder">
+      <image src='/static/images/workbench/dfh.png'></image>
+      <view class="order_left_text">待发货</view>
+      <view><text class='content_left1'>{{info.status1}}</text>\t笔</view>
+    </view>
+    <view class="order_left" bindtap="allOder" data-id='1'>
+      <image src='/static/images/workbench/dfk.png'></image>
+      <view class="order_left_text">待付款</view>
+      <view><text class='content_left1'>{{info.status0}}</text>\t笔</view>
+    </view>
+    <view class="order_left" bindtap="protection">
+      <image src='/static/images/workbench/wkdd.png'></image>
+      <view class="order_left_text">维权订单</view>
+      <view><text class='content_left1'>{{info.status4}}</text>\t笔</view>
+    </view>
+  </view>
+  <view class="content_order_top border_solid">
+    <image src="/static/images/icon/shop.png"></image>
+    <text class="order_admin">商城管理</text>
+  </view>
+  <view class="content_order_sort">
+    <view class="order_left" bindtap='goodslist'>
+      <image src='/static/images/workbench/spgl.png'></image>
+      <view class="order_left_text">商品管理</view>
+      <view class='shop_content_num'><text class='content_left1'>{{info.goodscount}}</text>\t笔      </view>
+    </view>
+    <view class="order_left" bindtap='financeManage'>
+      <image src='/static/images/workbench/cwgl.png'></image>
+      <view class="order_left_text">财务管理</view>
+      <view class='shop_content_num'></view>
+    </view>
+    <view class="order_left" bindtap="modifyInfo">
+      <image src='/static/images/workbench/dpsz.png'></image>
+      <view class="order_left_text">店铺设置</view>
+      <view class='shop_content_num'></view>
+    </view>
+  </view>
+  <view class="content_order_top border_solid">
+    <image src="/static/images/icon/home2.png"></image>
+    <text class="order_admin">插件管理</text>
+  </view>
+  <view class="content_order_sort" bindtap='pushlist'>
+    <view class="order_left">
+      <image src='/static/images/workbench/ztgl.png'></image>
+      <view class="order_left_text">众推管理</view>
+      <view class='shop_content_num'></view>
+    </view>
+  </view>
+  <view class='more_settings'>更多设置请至PC端后台</view>
+</view>

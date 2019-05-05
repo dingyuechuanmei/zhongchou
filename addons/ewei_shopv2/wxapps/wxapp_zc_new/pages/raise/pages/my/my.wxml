@@ -29,6 +29,14 @@
         <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
       </view>
     </view>
+    <view class='item item21' bindtap='item215'>
+      <image src='/static/images/workbench/wkdd.png'></image>
+      <text class='title'>充值记录</text>
+      <view class='r'>
+        <text class='num'></text>
+        <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
+      </view>
+    </view>
     <view class='item item3' bindtap='item3'>
       <image src='{{approot}}wxapp_attr/03@3x.png'></image>
       <text class='title'>我的订单</text>
@@ -45,33 +53,30 @@
         <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
       </view>
     </view>
-    <view class='item item21' bindtap='item21'>
-      <image src='/static/images/icon/like.png'></image>
-      <text class='title'>我的关注</text>
+    <view class='item item21' bindtap='follow'>
+      <image src='/static/images/workbench/dpsc.png'></image>
+      <text class='title'>店铺收藏</text>
       <view class='r'>
         <text class='num'></text>
         <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
       </view>
     </view>
-      <view class='item item21' bindtap='item215'>
-      <image src='/static/images/icon/like.png'></image>
-      <text class='title'>充值记录</text>
+    <view class='item item21' bindtap='item21'>
+      <image src='/static/images/workbench/spsc.png'></image>
+      <text class='title'>商品收藏</text>
       <view class='r'>
         <text class='num'></text>
         <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
       </view>
     </view>
     <view class='item item22' bindtap='item22'>
-      <image src='/static/images/icon/footprint.png'></image>
+      <image src='/static/images/workbench/wdzj.png'></image>
       <text class='title'>我的足迹</text>
       <view class='r'>
         <text class='num'></text>
         <image class='youimage' src='{{approot}}wxapp_attr/you.png'></image>
       </view>
     </view>
-
-
-
     <view class='item item11' bindtap='item11'>
       <image src='../../resource/image/fabu.png'></image>
       <text class='title'>我的发布</text>
@@ -81,7 +86,7 @@
       </view>
     </view>
     <view class='item item12' bindtap='item12' data-id='{{member.id}}'>
-      <image src='../../resource/image/comment.png'></image>
+      <image src='/static/images/workbench/wdpl.png'></image>
       <text class='title'>我的评论</text>
       <view class='r'>
         <text class='num'></text>
@@ -109,7 +114,7 @@
 </block>
   
     <view class='item item6' bindtap='item6'>
-      <image src='{{approot}}wxapp_attr/06@3x.png'></image>
+      <image src='/static/images/workbench/shrz.png'></image>
       <text class='title'>商家入驻</text>
       <view class='r'>
         <text class='num'></text>
@@ -118,7 +123,7 @@
     </view>
 		
 		<view class='item item6' bindtap='my_shop' wx:if="{{merch}}">
-      <image src='{{approot}}wxapp_attr/06@3x.png'></image>
+      <image src='/static/images/workbench/dpsz.png'></image>
       <text class='title'>我的店铺</text>
       <view class='r'>
         <text class='num'></text>
@@ -127,7 +132,7 @@
     </view>
 
     <view class='item item23' bindtap='item23'>
-      <image src='{{approot}}wxapp_attr/06@3x.png'></image>
+      <image src='/static/images/workbench/shdl.png'></image>
       <text class='title'>商家登录</text>
       <view class='r'>
         <text class='num'></text>

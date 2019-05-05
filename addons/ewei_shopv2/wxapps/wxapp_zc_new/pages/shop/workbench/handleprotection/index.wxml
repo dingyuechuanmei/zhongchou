@@ -1,0 +1,39 @@
+<view class="page">
+  <form bindsubmit="formSubmit">
+  <view class='parentcommon status'>
+      <view class='firstcommon'>处理方式</view>
+      <view class='color8 lastcommon'>退款</view>
+  </view>
+  <view class='title'>处理结果(单选)</view>
+  <view class='top'>
+    <radio-group bindchange="radioChange">
+    <view class='parentcommon'>
+      <radio value="-1"/>
+      <view class='color8'>驳回申请</view>
+    </view>
+    <view class='parentcommon'>
+      <radio value="1"/>
+      <view class='color8'>同意退款</view>
+    </view>
+    <view class='parentcommon bordernone'>
+      <radio value="2"/>
+      <view class='color8'>手动退款</view>
+    </view>
+    </radio-group>
+  </view>
+  <view wx:if="{{radioIndex==-1}}">
+    <view class='title'>驳回原因</view>
+    <textarea class='reject_detail' placeholder='请输入驳回原因' name='refundcontent'></textarea>
+  </view>
+  <view class='agree_refund' wx:if="{{radioIndex==2}}">
+    <view>微信支付方式： 会返回到相应的的支付渠道(如零钱或银行卡)</view>
+    <view>其他支付方式： 会返回到微信钱包(需商户平台余额充足)</view>
+    <view>如有余额抵扣： 会返回金额到商城用户余额</view>
+    <view>如有积分抵扣： 会返回积分到商城用户积分</view>
+    <view>手动退款： 订单会完成退款处理，您用其他方式进行退款</view>
+  </view>
+  <view class='button'>
+    <button style='background:#1ab394' type='primary' form-type='submit'>提交</button>
+  </view>
+  </form>
+</view>

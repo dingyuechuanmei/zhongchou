@@ -1,0 +1,154 @@
+<view class='page'>
+  <form bindsubmit="formSubmit">
+  <!--商品名称-->
+  <view class='top'>
+    <view class='top_text'>
+      <view class='top_left top_title'>商品名称</view>
+      <textarea placeholder='请输入商品名称' name='title' value='{{item.title}}'></textarea>
+    </view>
+    <view class='top_text'>
+      <view class='top_left'>副标题</view>
+      <input placeholder='请输入商品副标题' name='subtitle' value='{{item.subtitle}}'></input>
+    </view>
+    <view class='top_text'>
+      <view class='top_left'>单位</view>
+      <input placeholder='请输入商品单位' name='unit' value='{{item.unit}}'></input>
+    </view>
+  </view>
+  <!--上传图片-->
+  <view class='uploadimg'>
+    <view class='upimg' wx:for="{{piclist}}">
+      <image class='img' src='{{piclist[index]}}'></image>
+      <view class='del' data-idx='{{index}}' bindtap='removegoodsimg'>
+        <image src='/pages/raise/resource/image/del.png'></image>
+      </view>
+    </view>
+    <view class='upimg' bindtap='uploadgoods'>
+      <image class='img' src='/pages/raise/resource/image/add-img.png'></image>
+      <view class='del delbacknone'>
+        <image src=''></image>
+      </view>
+    </view>
+    <view class='color8'>首张图片为商品主图</view>
+  </view>
+  <!--商品类型-->
+  <view class='category'>
+    <view class='category_top'>
+      <view class='category_left'>商品类型</view>
+      <picker class='category_center' bindchange="bindPickerChangeType" value="{{index}}" range="{{type}}">
+        <view>{{type[index]}}</view>
+      </picker>
+      <view><image src='{{arrow}}'></image></view>
+    </view>
+    <view class='attribute'>
+      <view class='attribute_left'>商品属性</view>
+      <view class='attribute_right'>
+        <checkbox-group bindchange="checkboxChange" class='attribute_group'>
+          <label class="weui-cell weui-check__label" style="border:none" wx:for="{{checkboxItems}}" wx:key="value">
+              <checkbox checked="{{item.checked}}" class="weui-check" value="{{item.value}}"></checkbox>
+              <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                  <icon class="weui-icon-checkbox_circle" size="23" type="circle" wx:if="{{!item.checked}}"></icon>
+                  <icon class="weui-icon-checkbox_success" size="23" type="success" wx:if="{{item.checked}}"></icon>
+              </view>
+              <view class="weui-cell__bd">{{item.name}}</view>
+          </label>
+        </checkbox-group>
+      </view>
+    </view>
+  </view>
+  <view class='spec_tips'>多规格商品PC端可添加</view>
+  <!--商品价格-->
+  <view class='set_price'>
+    <view class='price_prent'>
+      <view class='category_left'>原价</view>
+      <input placeholder='请输入商品原价' name='productprice' value='{{item.productprice}}'></input>
+    </view>
+    <view class='price_prent'>
+      <view class='category_left'>现价</view>
+      <input placeholder='请输入商品现价' name='marketprice' value='{{item.marketprice}}'></input>
+    </view>
+    <view class='price_prent borderno'>
+      <view class='category_left'>成本价</view>
+      <input placeholder='请输入商品成本价' name='costprice' value='{{item.costprice}}'></input>
+    </view>
+  </view>
+  <!--商品库存-->
+  <view class='goods_stock'>
+    <view class='stock_parent'>
+      <view class='category_left'>库存</view>
+      <input placeholder='请输入商品库存' name='total' value='{{item.total}}'></input>
+    </view>
+    <view class='stock_parent'>
+      <view class='category_left'>库存设置</view>
+      <picker class='category_center' bindchange="bindPickerChangeStock" value="{{stockIndex}}" range="{{stock}}">
+        <view>{{stock[stockIndex]}}</view>
+      </picker>
+      <view><image src='{{arrow}}'></image></view>
+    </view>
+    <view class='stock_parent'>
+      <view class='category_left'>显示库存</view>
+      <switch class='set_stock' color='#1ab394' name='showtotal' checked='{{item.showtotal == 1}}'></switch>
+    </view>
+    <view class='stock_parent'>
+      <view class='category_left'>商品重量</view>
+      <input placeholder='请输入商品重量' name='weight' value='{{item.weight}}'></input>
+    </view>
+    <view class='stock_parent'>
+      <view class='category_left'>商品编码</view>
+      <input placeholder='请输入商品编码' name='goodssn' value='{{item.goodssn}}'></input>
+    </view>
+    <view class='stock_parent borderno'>
+      <view class='category_left'>商品条码</view>
+      <input placeholder='请输入商品条码' name='productsn' value='{{item.productsn}}'></input>
+    </view>
+  </view>
+  <!--商品限购-->
+  <view class='spec_tips'>商品限购(0为不限)</view>
+  <view class='set_price'>
+    <view class='price_prent'>
+      <view class='category_left'>单次最多购</view>
+      <input class='category_center' placeholder='单次最多购买数量' name='maxbuy' value='{{item.maxbuy}}'></input>
+      <view>件</view>
+    </view>
+    <view class='price_prent'>
+      <view class='category_left'>单次最低购</view>
+      <input  class='category_center' placeholder='单次最低购买数量' name='minbuy' value='{{item.minbuy}}'></input>
+      <view>件</view>
+    </view>
+    <view class='price_prent borderno'>
+      <view class='category_left'>会员总限购</view>
+      <input class='category_center' placeholder='会员总限购买数量' name='usermaxbuy' value='{{item.usermaxbuy}}'></input>
+      <view>件</view>
+    </view>
+  </view>
+  <!--货到付款-->
+  <view class='goods_stock'>
+    <view class='stock_parent'>
+      <view class='category_left'>货到付款</view>
+      <switch class='set_stock' color='#1ab394' name='cash' checked="{{item.cash == 2}}"></switch>
+    </view>
+    <view class='stock_parent borderno'>
+      <view class='category_left'>发票</view>
+      <switch class='set_stock' color='#1ab394' name='invoice' checked="{{item.invoice == 1}}"></switch>
+    </view>
+  </view>
+  <!--商品上架-->
+  <view class='goods_stock'>
+    <view class='stock_parent borderno'>
+      <view class='category_left'>商品上架</view>
+      <switch class='set_stock' color='#1ab394' name='status' checked="{{item.status == 1}}"></switch>
+    </view>
+  </view>
+  <!--商品排序-->
+  <view class='goods_stock'>
+    <view class='price_prent borderno'>
+      <view class='category_left'>商品排序</view>
+      <input placeholder='数字越大，排名越靠前' name='displayorder' value='{{item.displayorder}}'></input>
+    </view>
+  </view>
+  <view class='button'>
+    <button style='background:#1ab394' form-type='submit' type='primary' bindtap='handleprotection'>保存</button>
+  </view>
+  </form>
+  <view class='more_settings'>更多设置请至PC端后台</view>
+</view>

@@ -161,7 +161,7 @@ class My_EweiShopV2Page extends AppMobilePage
 			unset($row['backcredit']);
 			unset($row['backredpack']);
 			unset($row['bgcolor']);
-			unset($row['merchid']);
+			//unset($row['merchid']);
 			unset($row['settitlecolor']);
 			unset($row['titlecolor']);
 			unset($row['past']);

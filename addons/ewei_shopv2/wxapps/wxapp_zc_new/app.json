@@ -3,6 +3,7 @@
     "pages/raise/pages/index/index",
     "pages/member/withdraw/zongcou",
     "pages/member/withdraw/index",
+    "pages/index/merchant/index",
     "pages/index/index",
     "pages/index/oneShops",
     "pages/raise/pages/my/my",
@@ -60,6 +61,7 @@
     "pages/member/info/index",
     "pages/member/bind/index",
     "pages/member/favorite/index",
+    "pages/member/follow/index",
     "pages/member/history/index",
     "pages/member/recharge/index",
     "pages/member/log/index",
@@ -79,7 +81,28 @@
     "pages/diypage/exchange/index",
     "pages/diypage/member/index",
     "pages/shop/manage/index",
-    "pages/raise/pages/activity/index"
+    "pages/raise/pages/activity/index",
+    "pages/shop/workbench/login/index",
+    "pages/shop/workbench/admin/index",
+    "pages/shop/workbench/admin/modifyInfo",
+    "pages/shop/workbench/navbar/index",
+    "pages/shop/workbench/order/index",
+    "pages/shop/workbench/finance/index",
+    "pages/shop/workbench/set/index",
+    "pages/shop/workbench/delivergoods/index",
+    "pages/shop/workbench/remark/index",
+    "pages/shop/workbench/protection/index",
+    "pages/shop/workbench/protectiondetail/index",
+    "pages/shop/workbench/handleprotection/index",
+    "pages/shop/workbench/orderdetail/index",
+    "pages/shop/workbench/modifyaddress/index",
+    "pages/shop/workbench/goodslist/index",
+    "pages/shop/workbench/goodsadd/index",
+    "pages/shop/workbench/pushlist/index",
+    "pages/shop/workbench/pushadd/index",
+    "pages/shop/workbench/cancelsend/index",
+    "pages/shop/workbench/apply_withdrow/index",
+    "pages/shop/workbench/memberdetail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -116,5 +139,10 @@
   "navigateToMiniProgramAppIdList": [
     "wx2c2d379a1806d40f",
     "wx8edec291eba5f4b6"
-  ]
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于显示社区地理位置"
+    }
+  }
 }

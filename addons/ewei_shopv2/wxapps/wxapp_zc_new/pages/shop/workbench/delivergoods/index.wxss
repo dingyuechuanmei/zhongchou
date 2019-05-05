@@ -1,0 +1,51 @@
+@import "../common.wxss";
+button{
+  font-size:11pt;
+  font-family:inherit;
+}
+.page{
+  font-size: 28rpx;
+}
+.top{
+  background:white;
+  margin-top:20rpx;
+  padding:0 20rpx;
+  border-top:1px solid #d9d9d9;
+  border-bottom:1px solid #d9d9d9;
+}
+.parentcommon{
+  height: 80rpx;
+  line-height:100rpx;
+  border-bottom:1px solid #d9d9d9
+}
+.parentcommon view{
+  display: inline-block;
+  overflow: hidden;
+}
+.firstcommon{
+  width: 150rpx;
+  color: #333;
+
+}
+.color6{
+  color: #666;
+}
+.bordernone{
+  border-bottom: none !important;
+}
+.express{
+  height: 80rpx;
+  line-height:100rpx;
+  border-bottom:1px solid #d9d9d9;
+  display: flex;
+  align-items: center;
+}
+.express picker{
+  width: 100%;
+}
+.express_select{
+  margin-left: 30rpx;
+}
+.button{
+  margin: 30rpx 20rpx 0 20rpx;
+}

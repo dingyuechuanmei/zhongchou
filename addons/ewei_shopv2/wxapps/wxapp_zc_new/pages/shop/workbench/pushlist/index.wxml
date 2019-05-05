@@ -1,0 +1,50 @@
+<view class="page" bindtap='isframe'>
+    <view class='main'>
+      <!--搜索-->
+      <view class='search_order_abroad'>
+        <view class='search_order'>
+          <view>
+            <image src='/static/images/icon/search.png'></image>
+          </view>
+          <view class='search_input'>
+            <input placeholder='输入关键字...' value='{{value}}' bindconfirm="search"></input>
+          </view>
+        </view>
+        <view class='search_text'>搜索</view>
+      </view>
+      <!--商品-->
+      <view class='goods' wx:for="{{pusherList}}">
+        <view>
+          <image class='video_cover' src="{{item.video_cover || '/static/images/nopic.jpg'}}"></image>
+        </view>
+        <view class='goods_info'>
+          <view>{{item.title}}</view>
+          <view>
+            <text class='total'>点赞: {{item.like_count}}</text>
+            <text class='total'>状态: {{item.ifshowval}}</text>
+          </view>
+        </view>
+        <view class='goods_choice' data-id="{{item.id}}" bindtap='showFrame'>
+          <image src='/static/images/workbench/dian.png'></image>
+        </view>
+        <view class='choice_frame' wx:if="{{item.frame}}">
+          <view data-id='{{item.id}}' bindtap='pushedit'>编辑</view>
+          <view data-id='{{item.id}}' data-status='{{item.ifshow}}' bindtap='status'>{{item.ifshow == 1 ? '隐藏' : '显示'}}</view>
+          <view data-id='{{item.id}}' bindtap='delete'>删除</view>
+        </view>
+      </view>
+      <!--提示-->
+      <view class="no-data-tip zwdd" wx:if="{{pusherList.length==0}}">
+        <image mode="aspectFit" src="/static/images/workbench/list.png"></image>
+        <view>您暂无众推哦~</view>
+      </view>
+      <view class="jzwb" wx:if="{{!hasMoreData}}">
+        <view class="hx"></view>
+        <view class="wz">加载完毕</view>
+        <view class="hx"></view>
+      </view>
+      <button bindtap="pushadd" class="pushadd">
+        <image src="/static/images/workbench/add.jpg"></image>
+      </button>
+    </view>
+</view>

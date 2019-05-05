@@ -1,0 +1,230 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+swiper{
+  height: 100vh;
+}
+page{
+	background-color: #F7F7F7;
+}
+.pull-right{
+	float:right;
+}
+.pull-left{
+	float:left;
+}
+.clearfix:after{
+	content: '';
+	display:block;
+	height:0;
+	visibility: hidden;
+	clear:both;
+}
+.background-img {
+    background-repeat:no-repeat; 
+    background-size: 100% 100%;
+    height: 200rpx;
+}
+.logoleft{
+  width: 140rpx;
+  height: 140rpx;
+  padding:30rpx 0 0 10rpx;
+}
+.logoleft image{
+  border-radius: 10rpx;
+  border: 4rpx #fff solid;
+}
+.logoleft image{
+  width: 100%;
+  height: 100%
+}
+.logotext{
+  color: #f4f4f4;
+  font-size: 24rpx;
+  margin:60rpx 0 0 20rpx;
+}
+.logotext .title{
+  font-size: 28rpx; 
+}
+.tab{
+  float: left;
+  width: 25%;
+  text-align: center;
+  padding: 10rpx 0;
+}
+.topTabSwiper{
+  border-top: 1px solid #ccc;
+  zoom: 1;
+  font-size: 24rpx;
+}
+.topTabSwiper .tab{
+    height: 100rpx;
+    line-height: 50rpx;
+}
+.topTabSwiper .tab image{
+  width: 40rpx;
+  height: 40rpx;
+}
+.topTabSwiper .tab .shopimg{
+  width: 50rpx;
+  height: 50rpx;
+}
+.topTabSwiper:after{
+  content: "";
+  clear: both;
+  display: block;
+}
+.tabBorer{
+  color: #f00;
+  border-bottom: 1px #f00 solid;
+}
+.swiper{
+  width: 100%;
+}
+.shopTabSwiper{
+  border-bottom: 1px solid #ccc;
+  zoom: 1;
+  font-size: 24rpx;
+  height: 70rpx;
+}
+.shoptab{
+  float: left;
+  width: 20%;
+  text-align: center;
+  padding: 10rpx 0;
+  height: 50rpx;
+  line-height: 60rpx;
+}
+.shop{
+  line-height: 70rpx;
+  font-size: 28rpx; 
+  border-bottom: 1px #e6e6e6 solid;
+  padding: 0 20rpx;
+}
+.shop .shopfirst{
+  margin-top: 10rpx;
+}
+/*商品列表*/
+.goods{
+  width: 40%;
+  height: 470rpx;
+  background: #fff;
+  margin: 20rpx 10rpx 0 20rpx;
+  border:16rpx #fff solid;
+  float: left;
+  font-size:24rpx;
+}
+.goods image{
+  width: 100%;
+  height: 320rpx;
+}
+.goods .title{
+  margin-top:30rpx;
+  height:60rpx;
+}
+.goods .title text{
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+.goods .price{
+  margin-top:10rpx;
+  color: red;
+}
+.goods .price text{
+  font-size: 30rpx;
+}
+.goodslist{
+  font-size: 24rpx;
+  margin: 20rpx;
+  border-bottom:1px #e6e6e6 solid;
+  height: 180rpx;
+}
+.goodslist .listleft{
+  width:150rpx;
+  height:160rpx;
+}
+.goodslist .listleft image{
+  width: 100%;
+  height: 100%;
+}
+.goodslist .listright{
+  width:500rpx;
+  margin-left:25px;
+  margin-top:10rpx;
+}
+.goodslist .listright .title{
+  height: 50rpx;
+}
+.goodslist .listright .title text{
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+.goodslist .listright .price{
+  margin-top: 60rpx;
+  color: red;
+}
+.goodslist .listright .price text{
+  font-size: 30rpx;
+}
+
+/*悬浮窗样式*/
+.likeShop {
+    position: fixed;
+    right: 20rpx;
+    bottom: 250rpx;
+    width: 80rpx;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    background: #eee;
+    opacity: 0.6;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 27rpx;
+    padding: 0;
+}
+
+.likeShop image {
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.backhome {
+    position: fixed;
+    right: 20rpx;
+    bottom: 145rpx;
+    width: 80rpx;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    opacity: 0.6;
+    background: #eee;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 27rpx;
+    padding: 0;
+}
+
+.backhome image {
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

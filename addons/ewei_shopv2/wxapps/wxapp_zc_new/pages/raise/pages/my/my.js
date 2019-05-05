@@ -133,15 +133,18 @@ Page({
     urlto('../../../member/history/index')
   },
   item23: function () {
-    urlto('../../../shop/manage/index')
+    //urlto('../../../shop/manage/index')
+    urlto('../../../shop/workbench/login/index')
   },
   item215: function () {
     urlto('/pages/member/log/index')
   },
 	my_shop: function () {
-    urlto('/pages/index/index?merchid=' + this.data.merch.id)
+    urlto('/pages/index/merchant/index?merchid=' + this.data.merch.id)
 	},
-
+  follow: function () {
+    urlto('/pages/member/follow/index')
+  },
   personalinformation:function() {
     urlto('../personalinformation/personalinformation')
   },
@@ -212,7 +215,6 @@ setTimeout(function(){
       'itemArray[2].num': json.member.credit2,
       merch: json.merch
     })
-    console.log(json.member.isopen);
   })
 },500)
  
@@ -221,7 +223,6 @@ setTimeout(function(){
     var e = this;
     var that = this;
     a.get("member", {}, function (r) {
-        console.log(r)
       that.setData({
         isss:r.id,
         menus: r.menus,
@@ -240,7 +241,6 @@ setTimeout(function(){
   },
   // 获取用户信息
   getUserInfo: function (e) {
-    console.log(e)
     t.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

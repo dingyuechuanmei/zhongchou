@@ -216,12 +216,17 @@ class Goods_EweiShopV2Page extends AppMobilePage
 		$goods['thumbs'] = set_medias($thumbs);
 		if (!empty($goods['thumbs']) && is_array($goods['thumbs'])) {
 			$new_thumbs = array();
-
+			$detail_thumbs = array();
 			foreach ($goods['thumbs'] as $i => $thumb) {
-				$new_thumbs[] = $thumb;
+				if ($i > 2) {
+					$detail_thumbs[] = $thumb;
+				} else {
+					$new_thumbs[] = $thumb;
+				}
 			}
 
 			$goods['thumbs'] = $new_thumbs;
+			$goods['detail_thumbs'] = $detail_thumbs;
 		}
 
 		$specs = pdo_fetchall('select * from ' . tablename('ewei_shop_goods_spec') . ' where goodsid=:goodsid and  uniacid=:uniacid order by displayorder asc', array(':goodsid' => $id, ':uniacid' => $_W['uniacid']));

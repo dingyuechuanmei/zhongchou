@@ -25,7 +25,7 @@
       <view class="fui-cell" wx:if="{{!goods.seckillinfo}}">
         <view class="fui-cell-text price">
           <view class="text-danger">
-            ￥
+            <text class="money">￥</text>
             <block wx:if="{{goods.ispresell > 0 && (goods.preselltimeend == 0 || goods.preselltimeend > now)}}">{{goods.presellprice}}</block>
             <block wx:else>
               <block wx:if="{{goods.minprice == goods.maxprice}}">{{goods.minprice}}</block>
@@ -84,11 +84,13 @@
           </block>
         </view>
       </view>
-      <view style='margin-left:20rpx;'>
-          <text wx:if="{{goods.province != '请选择省份' && goods.city != '请选择城市'}}">{{goods.province}} {{goods.city}}</text>
+      <view class="fui-cell">
+          <view class="fui-cell-text"  class='address'>
+            <text wx:if="{{goods.province != '请选择省份' && goods.city != '请选择城市'}}">所在地: {{goods.province}} {{goods.city}}</text>
+          </view>
       </view>
     </view>
-    <view class="fui-cell-group fui-cell-click  fui-sale-group" style="margin-top:0" wx:if="{{goods.ispresell == 1 && goods.preselltimestart < now && (goods.preselltimeend > now || goods.preselltimeend == 0)}}">
+    <view class="fui-cell-group fui-cell-click  fui-sale-group  nomargin" wx:if="{{goods.ispresell == 1 && goods.preselltimestart < now && (goods.preselltimeend > now || goods.preselltimeend == 0)}}">
       <view class="fui-list">
         <view class="fui-list-media">
           <view class="fui-cell-text">
@@ -107,7 +109,7 @@
       </view>
     </view>
     <block wx:if="{{goods.seckillinfo == false}}">
-      <view style="margin-top:0" class="fui-cell-group  fui-sale-group" wx:if="{{goods.buyagain > 0}}">
+      <view class="fui-cell-group  fui-sale-group  nomargin" wx:if="{{goods.buyagain > 0}}">
         <view class="fui-cell">
           <view class="fui-cell-text" style="white-space: normal;">此商品二次购买 可享受 <span class="text-danger">{{goods.buyagain}}</span> 折优惠
             <view wx:if="{{goods.buyagain_sale == 0}}">二次购买的时候 不与其他优惠共享</view>
@@ -115,14 +117,14 @@
         </view>
       </view>
       <block wx:if="{{goods.isdiscount == 0 || (goods.isdiscount != 0 && goods.isdiscount_time < now)}}">
-        <view style="margin-top:0" class="fui-cell-group  fui-sale-group" wx:if="{{goods.memberprice == '' && goods.memberprice != goods.minprice && goods.levelbuy == 0}}">
+        <view class="fui-cell-group  fui-sale-group  nomargin" wx:if="{{goods.memberprice == '' && goods.memberprice != goods.minprice && goods.levelbuy == 0}}">
           <view class="fui-cell">
             <view class="fui-cell-text" style="white-space: normal;">您的会员等级是 <span class="text-danger">{{goods.memberprice.levelname}}</span> 可享受 <span class="text-danger">￥{{goods.memberprice.price}}</span> 的价格</view>
           </view>
         </view>
       </block>
     </block>
-    <view class="fui-cell-group fui-cell-click  fui-sale-group" style="margin-top:0" bindtap="cityPicker" data-class="city-picker" id="city-picker" data-tap="active" wx:if="{{goods.citys.length > 0}}">
+    <view class="fui-cell-group fui-cell-click  fui-sale-group nomargin" bindtap="cityPicker" data-class="city-picker" id="city-picker" data-tap="active" wx:if="{{goods.citys.length > 0}}">
       <view class="fui-cell">
         <view class="fui-cell-text">不配送区域:
           <block wx:for="{{goods.citys}}" wx:for-index="idx">{{item}},</block>
@@ -130,7 +132,7 @@
         <view class="fui-cell-remark"></view>
       </view>
     </view>
-    <view style="margin-top:0" class="fui-cell-group fui-option-group" wx:if="{{goods.hasServices || goods.labelname}}">
+    <view class="fui-cell-group fui-option-group nomargin" wx:if="{{goods.hasServices || goods.labelname}}">
       <view class="goods-label-demo">
         <view class="goods-label-list {{!goods.labelstyle.style ? 'goods-label-style1' : ''}}{{goods.labelstyle.style == 1 ? 'goods-label-style2' : ''}}{{goods.labelstyle.style == 2 ? 'goods-label-style3' : ''}}{{goods.labelstyle.style == 3 ? 'goods-label-style4' : ''}}{{goods.labelstyle.style == 4 ? 'goods-label-style5' : ''}}">
           <block wx:if="{{goods.cash == 2}}">
@@ -159,7 +161,7 @@
             <text class="{{goods.labelstyle.style < 2 ? 'cl-3 cl-4 cl-2' : ''}}">7天退换</text>
           </block>
           <block wx:for="{{goods.labelname}}" wx:for-index="idx">
-            <image src="{{icons.labelGreen}}" style="{{goods.labelstyle.style == 0 || goods.labelstyle == false ? 'display:none;' : ''}}width:26rpx;height:26rpx;"></image>
+            <image src="{{icons.labelGreen}}" style="{{goods.labelstyle.style == 0 || goods.labelstyle == false ? '' : 'display:none;'}}width:26rpx;height:26rpx;"></image>
             <image src="{{icons.labelRed}}" style="{{goods.labelstyle.style == 1 ? '' : 'display:none;'}}width:26rpx;height:26rpx;"></image>
             <text class="{{goods.labelstyle.style < 2 ? 'cl-3 cl-4 cl-2' : ''}}">{{item}}</text>
           </block>
@@ -167,7 +169,7 @@
         </view>
       </view>
     </view>
-    <view data-tap="{{active}}" bindtap="selectPicker" class="fui-cell-group fui-cell-click" data-buytype="select" data-class="select-picker" wx:if="{{goods.canbuy}}">
+    <view data-tap="{{active}}" bindtap="selectPicker" class="fui-cell-group fui-cell-click  nomargin" data-buytype="select" data-class="select-picker" wx:if="{{goods.canbuy}}">
       <view class="fui-cell">
         <view class="fui-cell-text option-selector">
           <block wx:if="{{goods.spec_titles}}">请选择 {{goods.spec_titles}}等</block>
@@ -188,8 +190,8 @@
         </view>
       </view>
     </view>
-    <view class="fui-cell-group fui-shop-group">
-      <navigator class="fui-list" open-type="reLaunch" url="/pages/index/index?merchid={{goods.merchid}}">
+    <view class="fui-cell-group fui-shop-group nomargin">
+      <view class="fui-list" bindtap='openMerch'>
         <view class="fui-list-media">
           <image src="{{goods.shopdetail.logo}}"></image>
         </view>
@@ -197,9 +199,9 @@
           <view class="title">{{goods.shopdetail.shopname}}</view>
           <view class="subtitle" wx:if="{{goods.shopdetail.description}}">{{goods.shopdetail.description}}</view>
         </view>
-      </navigator>
+      </view>
     </view>
-    <view class="fui-cell-group" wx:if="{{goods.params.length > 0 || (goods.getComments && commentObj.list.length > 0)}}">
+    <view class="fui-cell-group nomargin"  wx:if="{{goods.params.length == 0 && goods.getComments && commentObj.list.length > 0}}">
       <view class="title">
         <view class="fui-tab fui-tab-danger" id="tab">
           <view bindtap="goodsTab" class="item {{info}}" data-tap="info">商品详情</view>
@@ -208,11 +210,8 @@
         </view>
       </view>
     </view>
-    <view class="fui-cell-group" wx:if="{{goods.params.length == 0 && goods.getComments && commentObj.list.length > 0}}">
-      <view class="fui-list">
-        <view class="title">商品详情</view>
-      </view>
-    </view>
+
+      <view class='fui-loading empty' style='margin:0 auto;margin-top:10rpx;color:#ef4f4f;'><view class='text'>图文详情</view></view>
     <view class="goods-detail-info {{info}}">
       <view class="wxParse">
         <template is="wxParse" data="{{wxParseData:wxParseData.nodes}}" />
@@ -406,12 +405,12 @@
       </view>
       <view class="label">收藏</view>
     </view>
-    <navigator open-type="reLaunch" class="nav-item external" url="/pages/index/index?merchid={{goods.merchid}}">
+    <view class="nav-item external" bindtap='openMerch'>
       <view class="icon icon-shop">
         <!-- <image class="icon20" src="{{icons.store}}"></image> -->
       </view>
       <view class="label">店铺</view>
-    </navigator>
+    </view>
     <navigator open-type="switchTab" url="/pages/member/cart/index" class="nav-item cart-item" id="menucart">
       <view class="badge {{goods.cartount <= 0 ? 'out' : 'in'}}" wx:if="{{goods.cartcount}}">{{goods.cartcount}}</view>
       <view class="icon icon-cart">

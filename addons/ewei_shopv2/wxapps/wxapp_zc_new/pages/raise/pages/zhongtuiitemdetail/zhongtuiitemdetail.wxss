@@ -6,19 +6,7 @@ page {
 .zhongtuiitemdetail .zhongtui_item {
   margin-bottom: 120rpx;
 }
-.zhongtuiitemdetail .zhongtui_item .posterimg {
-  position: relative;
-}
-.zhongtuiitemdetail .zhongtui_item .posterimg::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, .4);
-  position: absolute;
-  left: 0;
-  top: 0;
-}
+
 .zhongtuiitemdetail .zhongtui_item .posterimg image {
   width: 100%;
 }

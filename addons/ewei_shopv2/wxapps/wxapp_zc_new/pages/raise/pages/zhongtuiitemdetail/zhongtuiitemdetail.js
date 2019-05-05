@@ -52,9 +52,9 @@ Page({
   },
   redToMerchShop:function(){
     var that = this;
-    console.log(this.data.merchid)
     wx.navigateTo({
-      url: '/pages/index/index?merchid=' + that.data.merchid,
+      //url: '/pages/index/index?merchid=' + that.data.merchid,
+      url: '/pages/index/merchant/index?merchid=' + that.data.merchid,
     })
   }
 })

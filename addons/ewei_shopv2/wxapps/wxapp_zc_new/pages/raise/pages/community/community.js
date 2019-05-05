@@ -70,14 +70,14 @@ Page({
       url: '../userSpace/userSpace?id=' + t.getCache('userinfo').id
     })
   },
-  onShow: function() {
-    var pushdata = {
-      page: me.data.postPage,
-      keyword: '',
-      cate: ''
-    }
-    me.getForumList(pushdata, me,true)
-  },
+  // onShow: function() {
+  //   var pushdata = {
+  //     page: me.data.postPage,
+  //     keyword: '',
+  //     cate: ''
+  //   }
+  //   me.getForumList(pushdata, me,true)
+  // },
   onLoad: function() {
     me = this
     header.init.apply(this, [])
@@ -99,6 +99,12 @@ Page({
           'swiper.imgUrls': imgs 
         })
       }
+      var pushdata = {
+        page: me.data.postPage,
+        keyword: '',
+        cate: ''
+      }
+      me.getForumList(pushdata, me,true)
     });
     // 获取分类列表
     a.post('forum.forum_cate', {}, function (json) {
@@ -167,7 +173,7 @@ Page({
     var imgs = e.currentTarget.dataset.imgs;
     var img = e.currentTarget.dataset.img;
     wx.previewImage({
-      current:img,
+      current:imgs[img],
       urls: imgs,
     })
   }

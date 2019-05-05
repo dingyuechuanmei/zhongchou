@@ -1,0 +1,48 @@
+<include src="../navbar/index.wxml"></include>
+<view class='container'>
+  <form bindsubmit="formSubmit">
+  <view class='set_title'>商城用户</view>
+  <view class='bindvip border_solid'>
+    <view class='userimg'>
+      <image src="{{info.member_avatar || '/static/images/nopic.jpg'}}"></image>
+    </view>
+    <view class='username'>
+      <view>{{info.member_nickname || '暂无'}}</view>
+      <view class='isbind'>{{info.openid != '' ? '已绑定' : '未绑定'}}</view>
+    </view>
+  </view>
+  <view class='set_title'>操作员设置</view>
+  <view class='border_solid flex'>
+    <view>登录账号</view>
+    <view class='account dlzh'>{{info.uname}}</view>
+    <view class='bkxg'>不可修改</view>
+  </view>
+  <view class='border_solid'>
+    <view class='flex border_bot'>
+      <view>真实姓名</view>
+      <view class='account input_width'><input placeholder='请输入真实姓名' name='realname' value='{{info.realname}}'></input></view>
+    </view>
+    <view class='flex'>
+      <view>手机号码</view>
+      <view class='account input_width'><input placeholder='请输入手机号码' name='mobile' value='{{info.mobile}}'></input></view>
+    </view>
+  </view>
+  <view class='border_solid'>
+    <view class='flex border_bot'>
+      <view>修改密码</view>
+      <view class='account input_width'><input name='password' password='true' placeholder='请输入密码(不输入则不修改)' ></input></view>
+    </view>
+    <view class='flex'>
+      <view>重复密码</view>
+      <view class='account input_width'><input name='password2' password='true' placeholder='请重复输入密码' ></input></view>
+    </view>
+  </view>
+  <view class='button'>
+    <button form-type='submit' style='background:#1ab394' type='primary'>保存设置</button>
+  </view>
+  <view class='button' bindtap='logout'>
+    <button type='warn'>退出登录</button>
+  </view>
+  <view class='more_settings'>更多设置请至PC端后台</view>
+  </form>
+</view>

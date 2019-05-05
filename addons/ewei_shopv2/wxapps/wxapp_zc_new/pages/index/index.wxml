@@ -13,7 +13,7 @@
 
     <view id="recommand" wx:if="{{storeRecommand}}">
       <view class="fui-line" style="background: #f2f2f2;">
-        <view class="text text-danger">店铺推荐</view>
+        <view class="text text-danger">全部商品</view>
       </view>
       <view class="fui-goods-group block border">
         <block wx:for="{{storeRecommand}}" wx:for-index="idx"  wx:key="">

@@ -1,0 +1,92 @@
+<view class="page">
+  <view class="head">
+    <view bindtap="selectednavbar" style="border-bottom:2rpx solid {{selectedindex==index?'#1ab394':'#fff'}}" class="topnav" data-index="{{index}}" wx:for="{{topnav}}">
+      <view style="color:{{selectedindex==index?'#1ab394':''}}">{{item.name}}</view>
+    </view>
+  </view>
+  <view class="main">
+    <form bindsubmit="formSubmit">
+    <view class='memberinfo' wx:if='{{selectedindex == 0}}'>
+      <!--会员头像-->
+      <view class='membertop'>
+        <image src='{{member.avatar}}'></image>
+        <view class='member_nickname'>{{member.nickname}}</view>
+      </view>
+      <view class='group'>
+        <view class='level leveltop'>
+          <view class='levelleft'>会员等级</view>
+          <picker class='levelcenter' bindchange="bindPickerChangeLevels" value="{{levelsIndex }}" range="{{levels}}" range-key="levelname">
+            <view class='color6 express_select'>{{levels[levelsIndex].levelname}}</view>
+          </picker>
+          <image src='{{arrow}}'></image>
+        </view>
+        <!--会员分组-->
+        <view class='level'>
+          <view class='levelleft'>会员分组</view>
+          <picker class='levelcenter' bindchange="bindPickerChangeGroups" value="{{groupsIndex}}" range="{{groups}}"range-key="groupname">
+            <view class='color6 express_select'>{{groups[groupsIndex].groupname}}</view>
+          </picker>
+          <image src='{{arrow}}'></image>
+        </view>
+      </view>
+      <!--会员余额-->
+      <view class='group'>
+        <view class='level leveltop'>
+          <view class='levelleft'>余额</view>
+          <view>{{member.credit2}}</view>
+        </view>
+        <view class='level'>
+          <view class='levelleft'>积分</view>
+          <view>{{member.credit1}}</view>
+        </view>
+      </view>
+      <!--真实姓名-->
+      <view class='group'>
+        <view class='level leveltop'>
+          <view class='levelleft'>真实姓名</view>
+          <input placeholder='请输入真实姓名' value='{{member.realname}}' name='realname'></input>
+        </view>
+        <view class='level leveltop'>
+          <view class='levelleft'>手机号</view>
+          <input placeholder='请输入手机号' value='{{member.mobile}}' name='mobile'></input>
+        </view>
+        <view class='level'>
+          <view class='levelleft'>微信号</view>
+          <input placeholder='请输入微信号' value='{{member.weixin}}' name='weixin'></input>
+        </view>
+      </view>
+      <!--黑名单-->
+      <view class='group level blacklist'>
+        <view>黑名单</view>
+        <switch class='blacklistswitch' color='#1ab394' name='isblack' checked='{{member.isblack == 1}}' ></switch>
+      </view>
+      <view class='remarks'>
+        <view class='levelleft remarksleft'>备注</view>
+        <textarea placeholder='请输入商品备注' value='{{member.content}}' name='content'></textarea>
+      </view>
+      <view class='group level'>
+        <view class='levelleft'>注册时间</view>
+        <view>{{member.createtime}}</view>
+      </view>
+      <view class='button'>
+        <button style='background:#1ab394' type='primary' form-type='submit'>确定</button>
+      </view>
+    </view>
+    </form>
+    <view wx:if='{{selectedindex == 1}}' class='group'>
+      <view class='level leveltop'>
+        <view class='levelleft'>成交订单数</view>
+        <view><text class='color6'>{{member.self_ordercount}}</text>单</view>
+      </view>
+      <view class='level leveltop'>
+        <view class='levelleft'>成交总金额</view>
+        <view><text class='color6'>{{member.self_ordermoney}}</text> 元</view>
+      </view>
+      <view class='level'>
+        <view class='levelleft'>最后下单</view>
+        <view class='color6'>{{member.last_ordertime}}</view>
+      </view>
+    </view>
+    <view class='more_settings'>更多设置请至PC端后台</view>
+  </view>
+</view>

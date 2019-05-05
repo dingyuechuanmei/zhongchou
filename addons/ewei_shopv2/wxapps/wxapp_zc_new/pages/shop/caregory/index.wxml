@@ -29,10 +29,10 @@
     </view>
 <view class="category-ceontet-right weui-flex__item">
       <scroll-view scroll-y="true" class="scroll-view_H" style="height:100%;">
-        <view class="content-right-item" >
-          <view class="" style="width:100%;display:block;" wx:if="{{set.level > 1 && advimg}}">
+        <view class="content-right-item"   wx:for='{{category}}' wx:for-item='cateitem' wx:if="{{selector == 0 ? category[0].id == cateitem.id : selector == cateitem.id}}">
+          <view class="" style="width:100%;display:block;" wx:if="{{set.level > 1 && selector != 0 && cateitem.advimg}}">
             <navigator url="url" class="swipe external" id="advurl">
-              <image mode="widthFix" id="advimg" src="{{advimg}}"></image>
+              <image mode="widthFix" id="advimg" src="{{cateitem.advimg}}"></image>
             </navigator>
           </view>
           <block wx:if="{{set.level == 1}}">
@@ -63,7 +63,7 @@
                 <view class="text">所有商品</view>
               </navigator>
               <block wx:if="{{set.level == 2}}">
-                <block wx:for="{{child}}" wx:for-index="idx">
+                <block wx:for="{{selector == 0 ? recommands : cateitem.child}}" wx:for-index="idx">
                   <navigator class="fui-icon-col {{set.level >= item.level ? 'block' : 'none'}}" url="/pages/goods/index/index?cate={{item.id}}">
                     <view class="icon radius">
                       <image src="{{item.thumb}}"></image>

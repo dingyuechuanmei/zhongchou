@@ -1,0 +1,64 @@
+<view class="page">
+  <view class='parentcommon status'>
+      <view class='firstcommon'>维权状态</view>
+      <view class='color8 lastcommon'>等待客户退回物品</view>
+  </view>
+  <view class='title'>维权信息</view>
+  <view class='top'>
+    <view class='parentcommon'>
+      <view class='firstcommon'>维权类型</view>
+      <view class='color8 lastcommon'>{{refund.rtype_text}}</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>退款金额</view>
+      <view class='color8 lastcommon'>{{refund.applyprice}}(元)</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>退还积分</view>
+      <view class='color8 lastcommon'>{{refund.deductcreditq || 0}}(个)</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>维权原因</view>
+      <view class='color8 lastcommon'>{{refund.reason}}</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>维权说明</view>
+      <view class='color8 lastcommon'>{{refund.content}}</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>维权编号</view>
+      <view class='color8 lastcommon'>{{refund.refundno}}</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>订单编号</view>
+      <view class='color8 lastcommon'>{{item.ordersn}}</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>订单金额</view>
+      <view class='color8 lastcommon'>￥{{item.price}}</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>买家</view>
+      <view class='color8 lastcommon'>{{member.nickname}}</view>
+    </view>
+    <view class='parentcommon'>
+      <view class='firstcommon'>付款时间</view>
+      <view class='color8 lastcommon'>{{item.paytime}}</view>
+    </view>
+    <view class='parentcommon bordernone'>
+      <view class='firstcommon'>付款方式</view>
+      <view class='color8 lastcommon'>
+        <text wx:if='{{item.paytype == 0}}'>未支付</text>
+        <text wx:if='{{item.paytype == 1}}'>余额支付</text>
+        <text wx:if='{{item.paytype == 11}}'>后台付款</text>
+        <text wx:if='{{item.paytype == 21}}'>微信支付</text>
+        <text wx:if='{{item.paytype == 22}}'>支付宝支付</text>
+        <text wx:if='{{item.paytype == 23}}'>银联支付</text>
+        <text wx:if='{{item.paytype == 3}}'>货到付款</text>
+      </view>
+    </view>
+  </view>
+  <view class='button'>
+    <button style='background:#1ab394' type='primary' bindtap='handleprotection'>处理</button>
+  </view>
+</view>

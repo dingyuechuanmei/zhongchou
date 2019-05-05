@@ -1,0 +1,64 @@
+@import "../common.wxss";
+button{
+  font-size:11pt;
+  font-family:inherit;
+}
+.page{
+  font-size: 28rpx;
+  padding-bottom: 140rpx;
+}
+.content{
+  background:white;
+  margin-top:20rpx;
+  padding:0 20rpx;
+  border-top:1rpx solid #d9d9d9;
+}
+.content_parent{
+  display:flex;
+  padding:14rpx 0;
+  border-bottom:1rpx solid #d9d9d9;
+}
+.content_left{
+  width: 150rpx;
+}
+.content_textarea{
+  margin-top: 12rpx;
+}
+.content_parent textarea{
+  height: 120rpx;
+}
+.content_parent switch{
+  flex: 1;
+  text-align: right;
+}
+.borderno{
+  border-bottom: none;
+}
+.category_center{
+  flex: 1;
+}
+
+.button{
+  margin: 50rpx 20rpx 0 20rpx;
+}
+.more_settings{
+  margin-top:50rpx;
+  text-align:center;
+  color:#888;
+  font-size:28rpx;
+}
+video{
+  width: 100%;
+}
+.upload_video{
+  display: flex;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid #d9d9d9;
+}
+.upload_video .upload_center{
+  flex: 1;
+}
+.upload_video image{
+  width: 14rpx;
+  height: 20rpx;
+}

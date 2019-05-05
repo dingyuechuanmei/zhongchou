@@ -470,7 +470,8 @@ class Index_EweiShopV2Page extends AppMobilePage
 
 		$sql .= ' and status=1 order by displayorder desc';
 		$category = pdo_fetchall($sql, $param);
-		app_json(array('list' => $category));
+		$isopen = pdo_fetchcolumn('SELECT isopen FROM ' . tablename('ewei_shop_luckdraw_default') . ' WHERE uniacid =:uniacid LIMIT 1', array(':uniacid' => $_W['uniacid']));
+		app_json(array('list' => $category,'isopen'=>$isopen));
 	}
 
 	public function getlist()

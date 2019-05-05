@@ -1,0 +1,105 @@
+@import "../common.wxss";
+@import "../navbar/index.wxss";
+.page {
+    font-size: 28rpx;
+    padding-bottom: 140rpx;
+}
+.head {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #fff;
+}
+.topnav {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    font-size: 26rpx;
+    padding: 20rpx 0;
+}
+.main{
+  margin-top: 100rpx;
+}
+.membertop{
+  display: flex;
+  align-items: center;
+  background: white;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+  padding: 20rpx 20rpx;
+}
+.membertop image{
+  border-radius: 10rpx;
+}
+.member_nickname{
+  margin-left: 20rpx;
+}
+.group{
+  margin-top: 20rpx;
+  background: white;
+  padding: 0 20rpx;
+  line-height: 80rpx;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+}
+.group image{
+  width: 14rpx;
+  height: 20rpx;
+}
+.level{
+  display: flex;
+  align-items: center;
+}
+.leveltop{
+  border-bottom: 1rpx solid #d9d9d9;
+}
+.levelleft{
+  width: 150rpx;
+}
+.levelcenter{
+  flex: 1;
+}
+.blacklist{
+  padding: 20rpx;
+}
+.blacklistswitch{
+  flex: 1;
+  text-align: right;
+}
+.remarks{
+  display: flex;
+  margin-top: 20rpx;
+  background: white;
+  padding: 10rpx 20rpx 0 20rpx;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+}
+.remarks textarea{
+  height: 150rpx;
+}
+.remarksleft{
+  margin-top: 14rpx;
+}
+button{
+  font-size:11pt;
+  font-family:inherit;
+}
+.button{
+  margin: 30rpx 20rpx 0 20rpx;
+}
+.color6{
+  color: #666;
+}
+.more_settings{
+  margin-top:50rpx;
+  text-align:center;
+  color:#888;
+  font-size:28rpx;
+}

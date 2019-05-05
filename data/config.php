@@ -98,7 +98,7 @@ $config['upload']['audio']['limit'] = 5000;
 
 $config['upload']['video']['extentions'] = array('rm', 'rmvb', 'wmv', 'avi', 'mpg', 'mpeg', 'mp4','mov');
 
-$config['upload']['video']['limit'] = 40000;
+$config['upload']['video']['limit'] = 200000;
 
 
 

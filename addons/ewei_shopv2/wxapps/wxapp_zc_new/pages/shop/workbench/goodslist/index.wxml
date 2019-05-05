@@ -1,0 +1,60 @@
+<view class="page">
+    <!--选项卡-->
+    <view class="head">
+      <view bindtap="selectednavbar" style="border-bottom:2rpx solid {{selectedindex==index?'#1ab394':'#fff'}}" class="topnav" data-index="{{index}}" wx:for="{{topnav}}">
+        <view style="color:{{selectedindex==index?'#1ab394':''}}">{{item.name}}</view>
+      </view>
+    </view>
+    <view class='main'>
+      <!--搜索-->
+      <view class='search_order_abroad'>
+        <view class='search_order'>
+          <view>
+            <image src='/static/images/icon/search.png'></image>
+          </view>
+          <view class='search_input'>
+            <input placeholder='输入关键字...' value='{{value}}' bindconfirm="search"></input>
+          </view>
+        </view>
+        <view class='search_text'>搜索</view>
+      </view>
+      <!--商品-->
+      <view class='goods' wx:for="{{goodsList}}">
+        <view>
+          <image class='goodsimg' src="{{item.thumb || '/static/images/nopic.jpg'}}"></image>
+        </view>
+        <view class='goods_info'>
+          <view>{{item.title}}</view>
+          <view class='goodsprice'>￥{{item.minprice}}</view>
+          <view>
+            <text class='total'>库存: {{item.total}}</text>
+            <text class='total'>销量: {{item.sales}}</text>
+          </view>
+        </view>
+        <view class='goods_choice' data-id="{{item.id}}" bindtap='showFrame'>
+          <image src='/static/images/workbench/dian.png'></image>
+        </view>
+        <view class='choice_frame' wx:if="{{item.frame}}">
+          <view data-id='{{item.id}}' bindtap='goodsedit'>编辑</view>
+          <view wx:if="{{selectedindex==0 || selectedindex==1}}" data-id='{{item.id}}' data-status='0' bindtap='status'>下架</view>
+          <view wx:if="{{selectedindex==2}}" data-id='{{item.id}}' data-status='1' bindtap='status' >上架</view>
+          <view wx:if="{{selectedindex==3}}" data-id='{{item.id}}' bindtap='restore'>还原</view>
+          <view wx:if="{{selectedindex!=3}}"  data-id='{{item.id}}' bindtap='delete'>删除</view>
+          <view wx:if="{{selectedindex==0 || selectedindex==1}}" data-id='{{item.id}}' bindtap='view'>查看</view>
+        </view>
+      </view>
+      <!--提示-->
+      <view class="no-data-tip zwdd" wx:if="{{goodsList.length==0}}">
+        <image mode="aspectFit" src="/static/images/workbench/list.png"></image>
+        <view>您暂无商品哦~</view>
+      </view>
+      <view class="jzwb" wx:if="{{!hasMoreData}}">
+        <view class="hx"></view>
+        <view class="wz">加载完毕</view>
+        <view class="hx"></view>
+      </view>
+      <button bindtap="goodsadd" class="goodsadd">
+        <image src="/static/images/workbench/add.jpg"></image>
+      </button>
+    </view>
+</view>

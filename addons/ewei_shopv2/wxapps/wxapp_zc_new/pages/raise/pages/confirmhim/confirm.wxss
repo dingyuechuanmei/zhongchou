@@ -10,16 +10,16 @@ page {
   height: 110rpx;
   background: #fff;
   box-sizing: border-box;
-  padding: 0 30rpx;
   position: relative;
+  padding: 0 30rpx;
 }
 .item input {
   display: inline-block;
   vertical-align: top;
   height: 110rpx;
   line-height: 110rpx;
-  margin-left: 30rpx;
   width: 80%;
+  margin-left: 10rpx;
 }
 .item image {
   width: 40rpx;

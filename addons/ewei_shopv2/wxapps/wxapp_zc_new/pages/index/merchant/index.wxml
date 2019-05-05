@@ -1,0 +1,86 @@
+<import src="list.wxml" />
+<view calss="merchant container">
+    <view class="background-img" style="background-image: url('{{info.background_img != '' ? info.background_img : background_img}}')">
+      <view class="logoleft pull-left">
+        <image src='{{info.logo}}'></image>
+      </view>
+      <view class='logotext pull-left'>
+        <view class='title'>{{info.merchname}}</view>
+        <view>公告: {{info.desc}}</view>
+      </view>
+    </view>
+    <view class='topTabSwiper'>
+      <view class='tab  {{currentData == "recommand" ? "tabBorer" : ""}}'  data-current = "recommand" bindtap='checkCurrent'>
+        <image data-current = "recommand" bindtap='checkCurrent' src='{{currentData == "recommand" ? recommend_select : recommend_default}}'></image>
+        <view data-current = "recommand" bindtap='checkCurrent'>推荐</view>
+      </view>
+      <view class='tab  {{currentData == "all" ? "tabBorer" : ""}}'  data-current = "all" bindtap='checkCurrent'>
+        <view data-current = "all" bindtap='checkCurrent'>{{all_num}}</view>
+        <view data-current = "all" bindtap='checkCurrent'>全部商品</view>
+      </view>
+      <view class='tab  {{currentData == "new" ? "tabBorer" : ""}}'  data-current = "new" bindtap='checkCurrent'>
+        <view data-current = "new" bindtap='checkCurrent'>{{new_num}}</view>
+        <view data-current = "new" bindtap='checkCurrent'>上新</view>
+      </view>
+      <view class='tab  {{currentData == "shop" ? "tabBorer" : ""}}'  data-current = "shop" bindtap='checkCurrent'>
+        <image class='shopimg' data-current = "shop" bindtap='checkCurrent' src='{{currentData == "shop" ? shop_select : shop_default}}'></image>
+        <view data-current = "shop" bindtap='checkCurrent'>店铺简介</view>
+      </view>
+    </view>
+  <view class='swiper'>
+    <!--推荐-->
+    <view hidden="{{currentData!='recommand'}}">
+      <template is="merchantShopList" data="{{contentList}}" />
+    </view>
+    <!--全部商品-->
+    <view hidden="{{currentData!='all'}}">
+      <view class='shopTabSwiper'>
+          <view class='shoptab  {{shopcurrentData == "sale" ? "tabBorer" : ""}}'  data-current = "sale" bindtap='shopCheckCurrent'>销量</view>
+          <view class='shoptab  {{shopcurrentData == "price" ? "tabBorer" : ""}}'  data-current = "price" bindtap='shopCheckCurrent'>价格</view>
+          <view class='shoptab  {{shopcurrentData == "hot" ? "tabBorer" : ""}}'  data-current = "hot" bindtap='shopCheckCurrent'>热卖</view>
+          <view class='shoptab  {{shopcurrentData == "discount" ? "tabBorer" : ""}}'  data-current = "discount" bindtap='shopCheckCurrent'>促销</view>
+          <view class='shoptab  {{shopcurrentData == "sendfree" ? "tabBorer" : ""}}'  data-current = "sendfree" bindtap='shopCheckCurrent'>包邮</view>
+      </view>
+      <view>
+          <view hidden="{{shopcurrentData!='sale'}}">
+            <template is="{{listStyle == 0 ? 'merchantShopListVertical' : 'merchantShopList' }}" data="{{contentList}}" />
+          </view>
+          <view hidden="{{shopcurrentData!='price'}}">
+            <template is="{{listStyle == 0 ? 'merchantShopListVertical' : 'merchantShopList' }}" data="{{contentList}}" />
+          </view>
+          <view hidden="{{shopcurrentData!='hot'}}">
+            <template is="{{listStyle == 0 ? 'merchantShopListVertical' : 'merchantShopList' }}" data="{{contentList}}" />
+          </view>
+          <view hidden="{{shopcurrentData!='discount'}}">
+            <template is="{{listStyle == 0 ? 'merchantShopListVertical' : 'merchantShopList' }}" data="{{contentList}}" />
+          </view>
+          <view hidden="{{shopcurrentData!='sendfree'}}">
+            <template is="{{listStyle == 0 ? 'merchantShopListVertical' : 'merchantShopList' }}" data="{{contentList}}" />
+          </view>
+      </view>
+    </view>
+    <!--上新-->
+    <view hidden="{{currentData!='new'}}">
+      <view><template is="{{listStyle == 0 ? 'merchantShopListVertical' : 'merchantShopList' }}" data="{{contentList}}" /></view>
+    </view>
+    <!--店铺简介-->
+    <view hidden="{{currentData!='shop'}}">
+      <view class='shop shopfirst' bindtap='tel'>联系电话:  <text style='color:#34aaff'>{{info.tel ? info.tel : info.mobile}}</text></view>
+      <view class='shop'><text>联系地址:  {{info.address}}</text></view>
+      <view class='shop'><text>店铺介绍:  {{info.desc}}</text></view>
+    </view>
+    <block wx:if="{{currentData == 'recommand'}}">
+      <button bindtap="favoriteMerchant" class="likeShop" >
+        <image src="/static/images/icon{{isfavorite == 1 ? '-red' : ''}}/like.png"></image>
+      </button>
+      <button bindtap="backHome" class="backhome">
+        <image src="/static/images/icon/home2.png"></image>
+      </button>
+    </block>
+    <block wx:elif="{{currentData != 'shop'}}">
+      <button bindtap="typesetting" class="backhome">
+        <image src="/static/images/icon/{{listStyle == 0 ? 'list' : 'app'}}.png"></image>
+      </button>
+    </block>
+  </view>
+</view>

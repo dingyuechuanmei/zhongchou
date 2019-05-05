@@ -1,12 +1,15 @@
 @import "../../resource/css/app.wxss";
-
+@import "../components/components.wxss";
+page{
+  background: #f2f2f2;
+}
 .zhongchou {
+  padding-bottom: 120rpx;
 }
 .zhongchou .topbar {
   background: #fff;
 }
 .zhongchou .topbar .item view {
-  display: inline-block;
   height: 110rpx;
   line-height: 110rpx;
   position: relative;
@@ -28,7 +31,7 @@
   background: #ff6749;
 }
 .zhongchou .zhongchou_list {
-  padding-bottom: 120rpx;
+  
 }
 .zhongchou .zhongchou_item {
   margin-top: 20rpx;
@@ -114,7 +117,7 @@
 .zhongchou .zhongchou_item .div_3 .item:nth-child(3) {
   text-align: right;
 }
-.zhongchou .startzhongchou {
+.startzhongchou {
   position: fixed;
   left: 0;
   top: auto;
@@ -127,4 +130,30 @@
   font-size: 32rpx;
   background: #ff6749;
   z-index: 9999;
+}
+
+.no-data-tip {
+    padding: 150rpx 0;
+    text-align: center;
+    color: #888;
+}
+.jzwb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    height: 80rpx;
+}
+.hx {
+    width: 200rpx;
+    height: 1px;
+    background: #d5d5d5;
+}
+.wz {
+    margin: 0 20rpx;
+}
+.hx {
+    width: 200rpx;
+    height: 1px;
+    background: #d5d5d5;
 }

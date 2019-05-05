@@ -18,7 +18,17 @@
     </view>
   </view>
   <image class='add-img' src='../../resource/image/add-img.png' bindtap='addGood'></image>
-  <view class='bg-line'></view>
+  <view class='address'>
+    <view class='address-top' bindtap='chooseLocation'>
+      <image class='left-img' src='/static/images/icon-red/location.png'></image>
+      <view class='address-center'>{{address || '请选择地理位置'}}</view>
+      <image class='right-img' src='{{arrow}}'></image>
+    </view>
+    <view class='address-top'>
+      <image class='left-img' src='/static/images/icon-red/tel.png'></image>
+      <input maxlength='11' placeholder='请输入您的电话号码' type='number' bindinput='inputTel'></input>
+    </view>
+  </view>
   <view class='title'>添加到版块</view>
   <view class='model-list'>
     <text class='{{item.state}}' wx:for='{{cate_list}}' data-id='{{item.id}}' bindtap='chooseModel'>{{item.title}}</text>

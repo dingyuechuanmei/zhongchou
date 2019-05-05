@@ -1,0 +1,178 @@
+<include src="../navbar/index.wxml"></include>
+<view class="page">
+  <view class="head">
+      <view bindtap="selectednavbar" style="border-bottom:2rpx solid {{selectedindex==index?'#1ab394':'#fff'}}" class="topnav" data-index="{{index}}" wx:for="{{topnav}}">
+          <view style="color:{{selectedindex==index?'#1ab394':''}}">{{item.name}}</view>
+      </view>
+  </view>
+  <view class="main">
+    <!--搜索框-->
+    <view class='search_order_abroad'>
+      <view class='search_order'>
+        <view>
+          <image src='/static/images/icon/search.png'></image>
+        </view>
+        <view class='search_input'>
+          <input placeholder='输入关键字...' value='{{value}}' bindconfirm="search"></input>
+        </view>
+      </view>
+      <view class='search_text'>搜索</view>
+    </view>
+    <!--可提现-->
+    <block wx:if="{{selectedindex == 0}}">
+      <view class='merch_finance' wx:for="{{financeList}}" >
+        <!--订单号-->
+        <view class='order_ye'>
+          <view class='order_yezf'>
+            <text wx:if="{{item.merchapply==0}}">等待</text>
+            <text wx:if="{{item.merchapply==-1}}">提交申请</text>
+            <text wx:if="{{item.merchapply==1}}">拒绝申请</text>
+            <text wx:if="{{item.merchapply==2}}">通过申请</text>
+            <text wx:if="{{item.merchapply==3}}">完成打款</text>
+          </view>
+          <view class='width100'>
+            <view class='order_num'>{{item.ordersn}}</view>
+            <view class='order_date'>{{item.finishtime}}</view>
+          </view>
+          <view><image src='{{arrow}}'></image></view>
+        </view>
+        <!--订单状态-->
+        <view class='order_info_list'>
+          <view class='order_list_row'>
+            <view class='color6'>商品总额</view>
+            <view class='order_list_row_right color3'>{{item.goodsprice}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>订单总额</view>
+            <view class='order_list_row_right color3'>{{item.orderprice}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>快递金额</view>
+            <view class='order_list_row_right color3'>{{item.dispatchprice}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>订单改价金额</view>
+            <view class='order_list_row_right color3'>{{item.changeprice}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>积分抵扣金额</view>
+            <view class='order_list_row_right color3'>{{item.deductprice}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>余额抵扣金额</view>
+            <view class='order_list_row_right color3'>{{item.deductcredit2}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>会员折扣金额</view>
+            <view class='order_list_row_right color3'>{{item.discountprice}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>总促销金额</view>
+            <view class='order_list_row_right color3'>{{item.isdiscountprice}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>满减金额</view>
+            <view class='order_list_row_right color3'>{{item.deductenough}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>实际支付金额</view>
+            <view class='order_list_row_right color3'>{{item.price}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>商户促销金额</view>
+            <view class='order_list_row_right color3'>{{item.merchisdiscountprice}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>商户满减金额</view>
+            <view class='order_list_row_right color3'>{{item.merchdeductenough}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>商户优惠券金额</view>
+            <view class='order_list_row_right color3'>{{item.merchcouponprice}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>分销佣金</view>
+            <view class='order_list_row_right color3'>{{item.commission}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>秒杀优惠</view>
+            <view class='order_list_row_right color3'>{{item.seckilldiscountprice}}</view>
+          </view>
+        </view>
+        <!--可提现金额-->
+        <view class='actual_payment'>
+          可提现<text class='text-primary'>{{item.realprice}}</text>,抽成:<text class='text-danger'>{{item.payrate}}%</text>,抽成后:<text class='text-success'>￥{{item.realpricerate}}</text>
+        </view>
+      </view>
+      <!--申请提现-->
+      <view class='applypay' wx:if="{{financeList.length>0}}">
+        <button size='mini' type='primary' bindtap='applyWithdrow' style='background:#1ab394;border: 1rpx solid #1ab394;'>申请提现</button>
+      </view>
+    </block>
+    <!--其他选项卡-->
+    <block wx:elif="{{selectedindex==1 || selectedindex==2  || selectedindex==3  || selectedindex==4}}">
+      <view class='merch_finance finance_other' wx:for="{{financeList}}">
+        <view class='order_info_list'>
+          <view class='order_list_row'>
+            <view class='color6'>申请单号</view>
+            <view class='order_list_row_right color3'>{{item.applyno}}</view>
+          </view>
+          <view class='order_list_row'>
+            <view class='color6'>申请订单个数</view>
+            <view class='order_list_row_right color3'>{{item.ordernum}}</view>
+          </view>
+          <block wx:if="{{selectedindex==2 || selectedindex==3 || selectedindex==4}}">
+            <view class='order_list_row'>
+              <view class='color6'>通过申请订单个数</view>
+              <view class='order_list_row_right color3'>{{item.passordernum}}</view>
+            </view>
+            <view class='order_list_row'>
+              <view class='color6'>通过申请金额</view>
+              <view class='order_list_row_right color3'>{{item.passrealprice}}</view>
+            </view>
+            <view class='order_list_row'>
+              <view class='color6'>抽成后金额</view>
+              <view class='order_list_row_right color3'>{{item.passrealpricerate}}</view>
+            </view>
+            <view class='order_list_row' wx:if="{{selectedindex==3}}">
+              <view class='color6'>实际打款金额</view>
+              <view class='order_list_row_right color3'>399.00</view>
+            </view>
+          </block>
+          <view class='order_list_row'>
+            <view class='color6'>提现方式</view>
+            <view class='order_list_row_right color3'>{{item.applytype == 0 ? '微信钱包' : (item.applytype == 2 ? '支付宝' : '银行卡')}}</view>
+          </view>
+          <view class='order_list_row' wx:if="{{selectedindex == 1}}">
+            <view class='color6'>申请时间</view>
+            <view class='order_list_row_right color3'>{{item.applytime}}</view>
+          </view>
+          <view class='order_list_row' wx:if="{{selectedindex == 2}}">
+            <view class='color6'>审核时间</view>
+            <view class='order_list_row_right color3'>{{item.checktime}}</view>
+          </view>
+          <view class='order_list_row' wx:if="{{selectedindex == 3}}">
+            <view class='color6'>打款时间</view>
+            <view class='order_list_row_right color3'>{{item.paytime}}</view>
+          </view>
+          <view class='order_list_row' wx:if="{{selectedindex == 4}}">
+            <view class='color6'>无效时间</view>
+            <view class='order_list_row_right color3'>{{item.invalidtime}}</view>
+          </view>
+        </view>
+        <view class='actual_payment'>
+          申请金额<text class='text-primary'>{{item.realprice}}</text>,抽成:<text class='text-danger'>{{item.payrate}}%</text>,抽成后:<text class='text-success'>￥{{item.realpricerate}}</text>
+        </view>
+      </view>
+    </block>
+    <view class="no-data-tip zwdd" wx:if="{{financeList.length==0}}">
+      <image mode="aspectFit" src="/static/images/workbench/list.png"></image>
+      <view>您暂无相关记录哦~</view>
+    </view>
+    <view class="jzwb" wx:if="{{!hasMoreData}}">
+      <view class="hx"></view>
+      <view class="wz">加载完毕</view>
+      <view class="hx"></view>
+    </view>
+  </view>
+</view>

@@ -78,6 +78,7 @@
   width: 200rpx;
   height: 100%;
   background: #f8f8f8;
+  padding-bottom:120rpx;
 }
 
 .content-left-item {

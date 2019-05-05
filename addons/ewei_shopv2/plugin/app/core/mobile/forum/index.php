@@ -39,6 +39,11 @@ class Index_EweiShopV2Page extends AppMobilePage
         if($member && $member['follow_list']){
             $list = iunserializer($member['follow_list']);
             if(is_array($list)){
+                foreach ($list as &$v) {
+                    $member = m('member')->getMember($v['openid']);
+                    $v['id'] = $member['id'];
+                }
+                unset($v);
                 app_json(array('list'=>$list));
             }
         }
@@ -61,6 +66,10 @@ class Index_EweiShopV2Page extends AppMobilePage
         if($member && $member['fans_list']){
             $list = iunserializer($member['fans_list']);
             if(is_array($list)){
+                foreach ($list as &$v) {
+                    $member = m('member')->getMember($v['openid']);
+                    $v['id'] = $member['id'];
+                }
                 app_json(array('list'=>$list));
             }
         }
@@ -89,11 +98,13 @@ class Index_EweiShopV2Page extends AppMobilePage
      */
     public function review_list(){
         $this->deal_data();
-        if(empty($this->params['openid_'])){
+        if(empty($this->params['userid'])){
             app_error(1,'参数错误');
         }
         $page = $this->params['page'] ? intval($this->params['page']) : 1;
-        $list = pdo_fetchall('select f.id,r.id rid,title,thumbs,review_count from '.tablename($this->tb_forum_review).' r left join '.tablename($this->tb_forum).' f on(r.forum_id = f.id) where r.openid=:openid AND r.reply_id = 0 order by r.id desc limit '.(($page-1) * $this->psize).','.$this->psize,array(':openid'=>$this->params['openid_']));
+        $member = m('member')->getMember($this->params['userid']);
+        $openid = $member['openid'];
+        $list = pdo_fetchall('select f.id,r.id rid,title,thumbs,review_count from '.tablename($this->tb_forum_review).' r left join '.tablename($this->tb_forum).' f on(r.forum_id = f.id) where r.openid=:openid AND r.reply_id = 0 order by r.id desc limit '.(($page-1) * $this->psize).','.$this->psize,array(':openid'=>$openid));
         if($list){
             foreach ($list as &$val){
                 $val['favorite'] = pdo_fetchcolumn("select count(*) from ".tablename($this->tb_favorite)." where forum_id=:forumId ",array(":forumId"=>$val['id']));
@@ -113,11 +124,13 @@ class Index_EweiShopV2Page extends AppMobilePage
      */
     public function favorite_list(){
         $this->deal_data();
-        if(empty($this->params['openid_'])){
+        if(empty($this->params['userid'])){
             app_error(1,'参数错误');
         }
         $page = $this->params['page'] ? intval($this->params['page']) : 1;
-        $list = pdo_fetchall('select f.id,r.id fid,title,thumbs,review_count from '.tablename($this->tb_favorite).' r left join '.tablename($this->tb_forum).' f on(r.forum_id = f.id) where r.openid=:openid order by r.id desc limit '.(($page-1) * $this->psize).','.$this->psize,array(':openid'=>$this->params['openid_']));
+        $member = m('member')->getMember($this->params['userid']);
+        $openid = $member['openid'];
+        $list = pdo_fetchall('select f.id,r.id fid,title,thumbs,review_count from '.tablename($this->tb_favorite).' r left join '.tablename($this->tb_forum).' f on(r.forum_id = f.id) where r.openid=:openid order by r.id desc limit '.(($page-1) * $this->psize).','.$this->psize,array(':openid'=>$openid));
         if($list){
             foreach ($list as &$val){
                 $val['favorite'] = pdo_fetchcolumn("select count(*) from ".tablename($this->tb_favorite)." where forum_id=:forumId ",array(":forumId"=>$val['id']));
@@ -136,11 +149,13 @@ class Index_EweiShopV2Page extends AppMobilePage
      */
     public function posts_list(){
         $this->deal_data();
-        if(empty($this->params['openid_'])){
+        if(empty($this->params['userid'])){
             app_error(1,'参数错误');
         }
         $page = $this->params['page'] ? intval($this->params['page']) : 1;
-        $list = pdo_fetchall('select id,title,thumbs,review_count from '.tablename($this->tb_forum).' where openid=:openid order by id desc limit '.(($page-1) * $this->psize).','.$this->psize,array(':openid'=>$this->params['openid_']));
+        $member = m('member')->getMember($this->params['userid']);
+        $openid = $member['openid'];
+        $list = pdo_fetchall('select id,title,thumbs,review_count from '.tablename($this->tb_forum).' where openid=:openid order by id desc limit '.(($page-1) * $this->psize).','.$this->psize,array(':openid'=>$openid));
         if($list){
             foreach ($list as &$val){
                 $val['favorite'] = pdo_fetchcolumn("select count(*) from ".tablename($this->tb_favorite)." where forum_id=:forumId ",array(":forumId"=>$val['id']));
@@ -453,7 +468,7 @@ class Index_EweiShopV2Page extends AppMobilePage
             $list = pdo_fetchall("select id,title as name,thumb as img,marketprice as price from ".tablename($this->tb_goods)." where id in ($goodsIn)");
             if($list && is_array($list)){
                 foreach ($list as &$row){
-                    $row['img'] = 'https://xiaochengxu.bmwtech.cn/attachment/'.$row['img'];
+                    $row['img'] = $row['img'];
                 }
                 unset($row);
                 $tecom_good = iserializer($list);
@@ -477,9 +492,9 @@ class Index_EweiShopV2Page extends AppMobilePage
             $forum_count = pdo_fetchcolumn("select forum_count from ".tablename($this->tb_forum_cate)." where id=:id ",array(":id"=>$this->params['cate']));
             $forum_count++;
             pdo_update($this->tb_forum_cate,array('forum_count'=>$forum_count),array('id'=>$this->params['cate']));
-            app_json(array('id'=>$id,'msg'=>'发帖成功'));
+            app_json(0,'发布成功');
         }else{
-            app_error(1,'发帖失败!');
+            app_error(1,'发布失败!');
         }
     }
     
@@ -619,6 +634,12 @@ class Index_EweiShopV2Page extends AppMobilePage
         if($forum_info){
             $forum_info['thumbs'] = $forum_info['thumbs'] ? iunserializer($forum_info['thumbs']) : array();
             $forum_info['recom_list'] = $forum_info['recom_list'] ? iunserializer($forum_info['recom_list']) : array();
+            if (!empty($forum_info['recom_list'])) {
+                foreach ($forum_info['recom_list'] as &$v) {
+                    $v['img'] = tomedia($v['img']);
+                }
+                unset($v);
+            }
             $forum_info['praise_list'] = $forum_info['praise_list'] ? iunserializer($forum_info['praise_list']) : array();
             $forum_info['praise_count'] = count($forum_info['praise_list']);
             $forum_info['fans_list'] = $forum_info['fans_list'] ? iunserializer($forum_info['fans_list']) : array();
@@ -709,7 +730,7 @@ class Index_EweiShopV2Page extends AppMobilePage
         if($this->params['cate'] !='' && $this->params['cate'] !=0){
             $condition.=' and f.cate = '.intval($this->params['cate']);
         }
-        $forum_list = pdo_fetchall('select f.id,m.id mid,m.avatar,m.nickname,m.mobile,f.title,thumbs,view_count,review_count,is_top,c.title source from '.tablename($this->tb_forum).' f left join '.tablename($this->tb_member).' m on(f.openid = m.openid) left join '.tablename($this->tb_forum_cate).' c on(c.id = f.cate) '.$condition.' order by f.is_top desc,f.id desc limit '.(($page-1) * $this->psize).','.$this->psize,$params);
+        $forum_list = pdo_fetchall('select f.id,m.id mid,m.avatar,m.nickname,m.mobile,f.title,f.tel,thumbs,view_count,review_count,is_top,c.title source from '.tablename($this->tb_forum).' f left join '.tablename($this->tb_member).' m on(f.openid = m.openid) left join '.tablename($this->tb_forum_cate).' c on(c.id = f.cate) '.$condition.' order by f.is_top desc,f.id desc limit '.(($page-1) * $this->psize).','.$this->psize,$params);
         if($forum_list){
             foreach($forum_list as &$item){
                 $item['thumbs'] = $item['thumbs'] ? iunserializer($item['thumbs']) : array();
@@ -730,20 +751,21 @@ class Index_EweiShopV2Page extends AppMobilePage
      */
     public function recom_good(){
         $this->deal_data();
+        $psize = 10;
         $page = $this->params['page'] ? intval($this->params['page']) : 1;
         $condition = "";
         if($this->params['keyword']){
             $condition = " and title like '%".$this->params['keyword']."%'";
         }
-        $goods_list = pdo_fetchall('select id,title,thumb,marketprice from '.tablename($this->tb_goods).' where uniacid=:uniacid '.$condition.' and status = 1 order by id desc limit '.(($page-1) * $this->psize).','.$this->psize,array(':uniacid'=>$this->uniacid));
+        $goods_list = pdo_fetchall('select id,title,thumb,marketprice from '.tablename($this->tb_goods).' where uniacid=:uniacid '.$condition.' and status = 1 and deleted = 0 and total > 0 order by id desc limit '.(($page-1) * $psize).','.$psize,array(':uniacid'=>$this->uniacid));
+        $total = pdo_fetchcolumn('select count(*) from '.tablename($this->tb_goods).' where uniacid = :uniacid'.$condition.' and status = 1 and deleted = 0 and total > 0',array(':uniacid'=>$this->uniacid));
+        $pageCount = ceil($total/$psize);
         if($goods_list){
             foreach($goods_list as &$item){
                 $item['thumb'] = tomedia($item['thumb']);
             }
-            app_json(array('goods_list'=>$goods_list));
-        }else{
-            app_error(1,'暂无商品数据');
         }
+        app_json(array('goods_list'=>$goods_list,'pageCount'=>$pageCount,'total'=>$total));
     }
     
     /**

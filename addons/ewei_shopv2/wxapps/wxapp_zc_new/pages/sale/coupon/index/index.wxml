@@ -46,8 +46,8 @@
             </div>
           </view>
           <view class="fui-list-media coupon-index-list-right">
-            <view class="forth0 circle coupon-list-canvas">
-              <canvas canvas-id="coupon-{{item.id}}" style="width:300px; height:150px" wx:if="{{!item.isdisa}}">
+            <view class="forth0 circle coupon-list-canvas"  wx:if="{{!item.isdisa}}">
+              <canvas canvas-id="coupon-{{item.id}}">
                 <view style="padding-top: 35rpx">剩余</view>
                 <view>{{item.lastratio}}%</view>
               </canvas>

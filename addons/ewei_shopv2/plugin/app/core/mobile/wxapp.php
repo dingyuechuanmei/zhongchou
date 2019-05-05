@@ -131,6 +131,49 @@ class Wxapp_EweiShopV2Page extends Page
 
 		app_json(array('uniacid' => $member['uniacid'], 'openid' => $member['openid'], 'id' => $member['id'], 'nickname' => $member['nickname'], 'avatarUrl' => tomedia($member['avatar'])), $member['openid']);
 	}
+	public function memberInfo()
+	{
+		global $_GPC, $_W;
+		if (stripos($_GPC['openid'],'sns_wa_sns_wa_') === false) {
+			$openid = $_GPC['openid'];
+		} else {
+			$openid = substr($_GPC['openid'],7,strlen($_GPC['openid'])-1);
+		}
+
+		$res = m('member')->getMember($openid);
+		if($res){
+			if($_GPC['avatar']){
+				$data['avatar']=$_GPC['avatar'];
+			}
+			if($_GPC['nickname']){
+				$data['nickname']=$_GPC['nickname'];
+			}
+			if($_GPC['gender']){
+				$data['gender']=$_GPC['gender'];
+			}
+			if($_GPC['province']){
+				$data['province']=$_GPC['province'];
+			}
+			if($_GPC['city']){
+				$data['city']=$_GPC['city'];
+			}
+			pdo_update('ewei_shop_member', $data, array('openid' =>$openid));
+			$user=m('member')->getMember($openid);
+			app_json(array('user'=>$user));
+		}else{
+			$data['openid']=$_GPC['openid'];
+			$data['avatar']=$_GPC['avatar'];
+			$data['nickname']=$_GPC['nickname'];
+			$data['gender']=$_GPC['gender'];
+			$data['province']=$_GPC['province'];
+			$data['city']=$_GPC['city'];
+			$data['uniacid']=$_W['uniacid'];
+			$data['createtime']=time();
+			pdo_insert('ewei_shop_member',$data);
+			$user = m('member')->getMember($openid);
+			app_json(array('user'=>$user));
+		}
+	}
 }
 
 ?>

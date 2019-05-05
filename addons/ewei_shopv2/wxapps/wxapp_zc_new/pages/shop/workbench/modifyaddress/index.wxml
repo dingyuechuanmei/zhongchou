@@ -1,0 +1,41 @@
+<view class='page'>
+  <form bindsubmit="formSubmit">
+  <view class='address'>
+    <view class='address_parent'>
+      <view class='left'>收件人:</view>
+      <input placeholder='请输入收件人' name='realname' value='{{user.realname}}' ></input>
+    </view>
+    <view class='address_parent'>
+      <view class='left'>联系电话:</view>
+      <input placeholder='请输入联系电话' name='mobile' value='{{user.mobile}}'></input>
+    </view>
+    <view class='address_parent borderno'>
+      <view class='left'>收货地址:</view>
+      <view>{{user.address}}</view>
+    </view>
+  </view>
+  <view class='modify_address'>
+    <view class='left'>修改地址</view>
+    <view class='right'>
+      <switch color='#1ab394' name='changead' bindchange='modifyAddress'></switch>
+    </view>
+  </view>
+  <block wx:if="{{ischecked}}">
+  <view class='select_address'>
+    <view class='left'>选择地区:</view>
+    <view class='rightwidth'>
+      <picker bindchange="bindRegionChange" mode="region" name="picker" value="{{region}}">
+        <view>{{region[0]}}\t{{region[1]}}\t{{region[2]}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class='select_address detail_address'>
+    <view class='left'>详细地址:</view>
+    <input class='rightwidth' name='address' value='' placeholder='请输入详细地址' ></input>
+  </view>
+  </block>
+  <view class='save'>
+    <button style='background:#1ab394' type="primary"  form-type='submit'>保存</button>
+  </view>
+  </form>
+</view>

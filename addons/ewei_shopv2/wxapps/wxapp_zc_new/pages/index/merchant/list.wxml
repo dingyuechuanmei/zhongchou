@@ -1,0 +1,22 @@
+<!--商品列表大图横排-->
+<template name="merchantShopList">
+  <view class="goods" wx:for="{{contentList}}" bindtap="goodsDetail" data-id="{{item.id}}">
+    <image src="{{item.thumb}}"></image>
+    <view class='title'><text>{{item.title}}</text></view>
+    <view class='price'>￥<text>{{item.minprice}}</text></view>
+  </view>
+  <view style='clear:both'></view>
+  <view class='fui-loading empty'><view class='text'>没有更多数据了</view></view>
+</template>
+<!--商品列表小图竖排-->
+<template name="merchantShopListVertical">
+  <view class='goodslist' wx:for="{{contentList}}" bindtap="goodsDetail" data-id="{{item.id}}">
+    <view class='listleft pull-left'><image src='{{item.thumb}}'></image></view>
+    <view class='listright pull-left'>
+      <view class='title'><text>{{item.title}}</text></view>
+      <view class='price'>￥<text>{{item.minprice}}</text></view>
+    </view>    
+  </view>
+  <view style='clear:both'></view>
+  <view class='fui-loading empty'><view class='text'>没有更多数据了</view></view>
+</template>

@@ -1,0 +1,72 @@
+
+<div class="form-group">
+    <label class="col-sm-2 control-label must">活动名称</label>
+    <div class="col-sm-9 col-xs-12">
+        <input type="text" name="luckdraw_title" class="form-control" value="{$item['luckdraw_title']}" data-rule-required="true" />
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label must">消耗金额</label>
+    <div class="col-sm-9 col-xs-12">
+        <input type="text" name="luckdraw_consume" class="form-control" value="{$item['luckdraw_consume']}" data-rule-required="true" />
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label must">活动详情页背景图</label>
+    <div class="col-sm-9 col-xs-12">
+        {ifp 'lottery.edit'}
+        <div class="input-group">
+            <input type="text" id="lottery_banner" class="form-control" name="luckdraw_banner" value="{if !empty($item['luckdraw_banner'])}{$item['luckdraw_banner']}{else}{/if}">
+            <span class="input-group-addon" style="padding: 0px;"><img src="{if !empty($item['luckdraw_banner'])}{$item['luckdraw_banner']}{else}{$thumb}{/if}" id="showbanner" width="34px" height="34px"></span>
+            <span class="input-group-addon btn" data-toggle="selectImg" data-input="#lottery_banner" data-img="#showbanner" data-full="1">选择图片</span>
+        </div>
+        {else}
+        <div class='form-control-static'><img src="{if !empty($item['luckdraw_banner'])}{$item['luckdraw_banner']}{else}{$thumb}{/if}"  width="34px" height="34px"></div>
+        {/if}
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">是否默认</label>
+    <div class="col-sm-9 col-xs-12">
+        {ifp 'lottery.edit'}
+        <label class="radio-inline">
+            <input type="radio" name="is_default" value="1" {if $item['is_default']==1}checked{/if} /> 是
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="is_default" value="0" {if $item['is_default']==0}checked{/if} /> 否
+        </label>
+        {else}
+        <div class='form-control-static'>{if $item['is_default']==0}禁用{else}启用{/if}</div>
+        {/if}
+    </div>
+</div>
+
+
+<script type="application/javascript">
+    function task_change(obj) {
+        var task_type = $('#task_select').val();
+        var task_div = '';
+        var option_div = '';
+        if(task_type==1){
+            task_div = '<div class="row"><div class="col-sm-4 col-xs-4 "><div class="input-group"><span class="input-group-addon">满</span><input type="number" class="form-control" name="pay_money" placeholder="0"> <span class="input-group-addon">元</span></div>'
+                    +'</div><div class="col-sm-4 col-xs-4 "><div class="input-group"><span class="input-group-addon">抽</span><input type="number" class="form-control" name="pay_num" placeholder="0"> <span class="input-group-addon">次</span></div></div>'
+                    +'<div class="col-sm-4 col-xs-4 "><div class="input-group"><select class="input-sm form-control input-s-sm inline" name="pay_type" id="pay_select"><option value="0" >全部消费</option><option value="1">付款后</option><option value="2">完成订单后</option></select></div></div></div>';
+        }
+        if(task_type==2){
+            task_div = '<div class="row"><div class="col-sm-4 col-xs-4"><div class="input-group"><span class="input-group-addon">满</span><input type="number" class="form-control" name="sign_day" placeholder="0"><span class="input-group-addon">天</span></div>'
+                    +'</div><div class="col-sm-4 col-xs-4"><div class="input-group"><span class="input-group-addon">抽</span><input type="number" class="form-control" name="sign_num" placeholder="0"><span class="input-group-addon">次</span></div></div></div>';
+        }
+        if(task_type==3){
+            option_div = '<option value="0">所有任务</option>{loop $tasklist $key $task}<option value="{$task['id']}">{$task['title']}</option>{/loop}';
+            task_div = '<div class="row"><div class="col-sm-4 col-xs-4"><div class="input-group"><span class="input-group-addon">抽</span><input type="number" class="form-control" name="poster_num" placeholder="0"><span class="input-group-addon">次</span></div></div><div class="col-sm-4 col-xs-4"><select id="poster_select" class="input-sm form-control input-s-sm inline" name="poster_id">'+option_div+'</select></div></div>';
+        }
+        if(task_type==4){
+            task_div = '<div class="row"><div class="col-sm-4 col-xs-4"><div class="input-group"><span class="input-group-addon">抽</span><input type="number" class="form-control" name="other_num" placeholder="0"><span class="input-group-addon">次</span></div></div><div class="col-sm-4 col-xs-4"><input type="text" class="form-control" name="other_content"></div></div>';
+        }
+        $('#task_show').empty();
+        $('#task_show').append(task_div);
+        return;
+    }
+</script>
